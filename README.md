@@ -45,7 +45,7 @@ Installation
 The Facets package is installed using the standard Python 'distutils' package.
 Enter the following command while in the top-level Facets source directory:
 
-   python setup.py install
+    python setup.py install
 
 This will perform a normal install of the Facets package into your Python
 installation.
