@@ -43,7 +43,7 @@ Download
 
 The Facets package is available at:
 
-    http://dmorrill.com/downloads
+    https://github.com/davidmorrill/facets
 
 License
 -------
