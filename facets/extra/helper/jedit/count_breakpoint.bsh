@@ -1,0 +1,8 @@
+// Macro to set a counting Python breakpoint on the current line of the file.
+
+buffer.addMarker( 'q', textArea.getCaretPosition() );
+buffer.updateMarkersFile( view );
+
+exec( "python.exe fbibp.py \"" + buffer.getPath() + "\" #" + 
+      (textArea.getCaretLine() + 1) );
+

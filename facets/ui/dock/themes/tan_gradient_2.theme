@@ -1,0 +1,7 @@
+theme = gradient_theme(
+    '3',
+    'H11L11S30~H11L30S30|l42',
+    'H11L23S30~H11L48S22|l42',
+    'H11L17S30~H11L48S22|l42',
+    'l5s57'
+)

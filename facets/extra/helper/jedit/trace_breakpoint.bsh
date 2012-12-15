@@ -1,0 +1,16 @@
+// Macro to set a counting Python breakpoint on the current line of the file.
+
+lines = textArea.getSelectedLines();
+buffer.addMarker( 'q', textArea.getLineStartOffset( lines[0] ) );
+buffer.updateMarkersFile( view );
+
+start = lines[0];
+end   = lines[ lines.length - 1 ];
+if ( start == end ) {
+    trace = "@" + (start + 1);
+} else {
+    trace = "@" + (start + 1) + "," + (end + 1);    
+}
+
+exec( "python.exe fbibp.py \"" + buffer.getPath() + "\" \"" + trace + "\"" ); 
+

@@ -1,0 +1,6 @@
+theme = square_theme(
+    'H11l4S24',
+    'H11L30S30',
+    'H11L22S30',
+    'l14s50'
+) 

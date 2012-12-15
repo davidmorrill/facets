@@ -1,0 +1,27 @@
+#-------------------------------------------------------------------------------
+# Facets UI Demos for use with the tools framework:
+#-------------------------------------------------------------------------------
+Advanced
+  HLS Color Editor:     facets.extra.demo.ui.Advanced.HLSColorEditor_demo.HLSColorEditorDemo
+  Color Palette Editor: facets.extra.demo.ui.Advanced.ColorPaletteEditor_demo.ColorPaletteEditorDemo
+  Drag and Drop:        facets.extra.demo.ui.Advanced.DNDEditor_demo.DNDEditorDemo
+  List Canvas Editor:   facets.extra.demo.ui.Advanced.ListCanvasEditor_demo.ListCanvasEditorDemo
+  Derived Image Editor: facets.extra.demo.ui.Advanced.HLSADerivedImageEditor_demo.HLSADerivedImageEditorDemo
+  File System Editor:   facets.extra.demo.ui.Advanced.FileSystemEditor_demo.FileSystemEditorDemo
+  Range Slider Editor:  facets.extra.demo.ui.Advanced.RangeSliderEditor_demo.RangeSliderEditorDemo
+  Control Grabber:      facets.extra.demo.ui.Advanced.ControlGrabber.ControlGrabber
+  Property Sheet:       facets.extra.demo.ui.Advanced.PropertySheetEditor_demo.PropertySheetEditorDemo
+  Array View:           facets.extra.demo.ui.Advanced.NumPy_array_grid_editor_demo.NumpyArrayDemo
+  VIP Shell:            facets.extra.demo.ui.Advanced.VIPShellEditor_demo.VIPShellDemo
+Graphics and Animation
+  Animated Boxes:       facets.extra.demo.ui.Graphics_and_Animation.Animated_control_editor.AnimatedControl
+  Animated Colors:      facets.extra.demo.ui.Graphics_and_Animation.Animation_color_demo.AnimationColorDemo
+  Animation Lab:        facets.extra.demo.ui.Graphics_and_Animation.Animation_Lab.AnimationLab
+  Cover Page:           facets.extra.demo.ui.Graphics_and_Animation.Cover_page.CoverPage
+  Drawable Canvas:      facets.extra.demo.ui.Graphics_and_Animation.Drawable_canvas_editor_demo.DrawableCanvasEditorDemo
+  Equations:            facets.extra.demo.ui.Graphics_and_Animation.Equations.Equations
+  LED:                  facets.extra.demo.ui.Graphics_and_Animation.LED_control.LEDControl
+  Travelers:            facets.extra.demo.ui.Graphics_and_Animation.Animation_demo.AnimationDemo
+  Tweener:              facets.extra.demo.ui.Graphics_and_Animation.Animation_tweener_demo.AnimationTweenerDemo
+  Twixter:              facets.extra.demo.ui.Graphics_and_Animation.Twixter.Twixter
+#-- EOF ------------------------------------------------------------------------

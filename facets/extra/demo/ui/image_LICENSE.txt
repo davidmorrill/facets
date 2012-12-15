@@ -1,0 +1,17 @@
+The icons are mostly derived work from other icons. As such they are licensed
+accordingly to the original license:
+
+Project                 License                   File
+--------------------------------------------------------------------------------
+Facets                  BSD 3-Clause              .../facets/LICENSE.txt
+
+Unless stated in this file, icons are the work of David C. Morrill, and are
+released under a 3 clause BSD license.
+
+Files and orginal authors:
+--------------------------------------------------------------------------------
+.../facets/extra/demo/ui/:
+                 demo.jpg | David C. Morrill
+
+.../facets/extra/demo/ui/images/demo.zip/:
+                 *.png    | David C. Morrill

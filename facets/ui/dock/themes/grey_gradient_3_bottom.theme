@@ -1,0 +1,38 @@
+theme = DockWindowTheme(
+    use_theme_color     = False,
+    splitter_open_close = False,
+    tabs_at_top         = False,
+    tabs_are_full_width = True,
+    tab_spacing         = 1,
+    engraved_text       = True,
+    tab_background      = None,
+    tab                 = Theme( '@facets:tab_transparent2b?L25a50|L90',
+                                 label = ( -1, 0 ) ),
+    vertical_splitter   = Theme( '@facets:vertical_splitter2' ),
+    horizontal_splitter = Theme( '@facets:horizontal_splitter2' ),
+    vertical_drag       = Theme( '@facets:vertical_drag2' ),
+    horizontal_drag     = Theme( '@facets:horizontal_drag2' ),
+    tab_selected = Theme(
+        '@facets:tab_gradient2b?H21L15S45~H21L30S50|l42',
+        label   = ( 0, 0, -4, 3 ),
+        content = ( 2, 0 )
+    ),
+    tab_active = Theme(
+        '@facets:tab_gradient2b?H58L15S30~H58L48S22|l42',
+        label   = ( 0, 0, -4, 3 ),
+        content = ( 2, 0 )
+    ),
+    tab_inactive = Theme(
+        '@facets:tab_gradient2b?L29~L40|l42',
+        label   = ( 0, 0, -4, 3 ),
+        content = ( 2, 0 )
+    ),
+    tab_hover = Theme(
+        '@facets:tab_gradient2b?L23~L34|l42',
+        label   = ( 0, 0, -4, 3 ),
+        content = ( 2, 0 )
+    ),
+    images = DockWindowImages(
+        close_tab = '@facets:close_tab?s80'
+    )
+)

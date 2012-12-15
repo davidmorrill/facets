@@ -1,0 +1,43 @@
+// Macro to toggle a Python breakpoint on the current line of the file.
+
+line       = textArea.getCaretLine();
+has_marker = (buffer.getMarkerAtLine( line ) != null);
+prefix     = "+";
+text       = "";
+lines      = textArea.getSelectedLines();
+if ( (lines.length == 1) && 
+     (line == lines[0])  &&
+     (textArea.getSelectedText() != null) ) {
+    text = textArea.getSelectedText();
+    if ( !has_marker ) {
+        buffer.addMarker( 'q', textArea.getCaretPosition() );
+        buffer.updateMarkersFile( view );
+    }
+} else {
+    if ( has_marker ) {
+        prefix = "-";
+    }
+    buffer.addOrRemoveMarker( 'q', textArea.getCaretPosition() );
+    buffer.updateMarkersFile( view );
+}
+
+command = ("python.exe fbibp.py \"" + buffer.getPath() + "\" " + prefix +
+           (line + 1));
+
+if ( text != "" ) {
+    text     = StringList.split( text, "\"" ).join( "\\\"" );
+    command += "[" + text + "]";
+}    
+
+exec( command );
+
+// command = "python.exe fbibp.py \"" + buffer.getPath() + "\" ";
+// 
+// markers = buffer.getMarkers();
+// for ( i = 0; i < markers.size(); i++ ) {
+//     line = textArea.getLineOfOffset( markers.elementAt( i ).getPosition() );
+//     command += (line + 1);
+//     command += " ";
+// }
+// 
+// exec( command );

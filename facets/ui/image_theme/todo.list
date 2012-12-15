@@ -1,0 +1,17 @@
+--------------------------------------------------------------------------------
+Theme Package To Do List
+--------------------------------------------------------------------------------
+
+- Make sure the graphics adapter object's 'text_color' attribute has been set to
+  the correct theme text color before calling the ThemeCell 'paint' method.
+  
+- Make sure the graphics adapter object's 'font' attribute has been set to the
+  associated control's 'font' before calling the ThemeCell 'paint' method.
+  
+- Make sure the graphics adapter object's 'text_background_color' attribute has
+  been set 'None' before calling the ThemeCell 'paint' method.
+
+- Make sure the graphics adapter objects clipping region has been set to the
+  ThemeCell's 'bounds' before calling the ThemeCell 'paint' method.
+  
+#-- EOF ------------------------------------------------------------------------

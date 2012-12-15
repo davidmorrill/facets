@@ -1,0 +1,62 @@
+# The standard FBI debugger tools:
+#-------------------------------------------------------------------------------
+FBI
+    Breakpoints:           facets.extra.tools.breakpoints.Breakpoints
+    Data Watch:            facets.extra.tools.data_watch.DataWatch
+    FBI Viewer:            facets.extra.tools.fbi_viewer.FBIViewer
+    FBI Buttons:           facets.extra.tools.fbi_buttons.FBIButtons
+    Local Variables:       facets.extra.tools.local_variables.LocalVariables
+    Local Variables Shell: facets.extra.tools.local_variables_shell.LocalVariablesShell
+    Stack Frames:          facets.extra.tools.stack_frames.StackFrames
+--------------------------------------------------------------------------------
+VIP Shell:                 facets.extra.tools.vip_shell.VIPShell
+Select DockWindow Theme:   facets.extra.tools.select_dock_window_theme.SelectDockWindowTheme
+Application Monitor:       facets.extra.tools.app_monitor.AppMonitor
+Class Browser:             facets.extra.tools.class_browser.ClassBrowser
+Clipboard:                 facets.extra.tools.clipboard.Clipboard
+Control
+    Control Flasher:       facets.extra.tools.control_flasher.ControlFlasher
+    Control Grabber:       facets.extra.tools.control_grabber.ControlGrabber
+    Control Stack:         facets.extra.tools.control_stack.ControlStack
+Cross Reference:           facets.extra.tools.cross_reference.CrossReference
+Event Monitor:             facets.extra.tools.event_monitor.EventMonitor
+Favorites Browser:         facets.extra.tools.favorites_browser.FavoritesBrowser
+File
+    File Browser:          facets.extra.tools.file_browser.FileBrowser
+    File Sieve:            facets.extra.tools.file_sieve.FileSieve
+    File Search:           facets.extra.tools.file_search.FileSearch
+    File Space:            facets.extra.tools.file_space.FileSpace
+    File Stack:            facets.extra.tools.file_stack.FileStack
+    Directory Stack:       facets.extra.tools.directory_stack.DirectoryStack
+Heap Browser:              facets.extra.tools.heap_browser.HB_HeapBrowser
+Image
+    Image Browser:         facets.extra.tools.image_browser.ImageBrowser
+    Image Library Viewer:  facets.extra.tools.image_library_viewer.ImageLibraryViewer
+    Image Theme Editor:    facets.extra.tools.image_theme_editor.ImageThemeEditor
+    Image Transformer:     facets.extra.tools.image_transformer.ImageTransformer
+    Image Zoomer:          facets.extra.tools.image_zoomer.ImageZoomer
+Listener:                  facets.extra.tools.listener.Listener
+--------------------------------------------------------------------------------
+Logger:                    facets.extra.tools.logger.Logger
+Log File:                  facets.extra.tools.log_file.LogFile
+Log Object:                facets.extra.helper.debug.LogObject
+--------------------------------------------------------------------------------
+Object Source:             facets.extra.tools.object_source.ObjectSource
+Object Viewer:             facets.extra.tools.object_viewer.ObjectViewer
+--------------------------------------------------------------------------------
+Print Object:              facets.extra.tools.print_object.PrintObject
+--------------------------------------------------------------------------------
+Profiler:                  facets.extra.tools.profiler.Profiler
+Profile Viewer:            facets.extra.tools.profile_viewer.ProfileViewer
+--------------------------------------------------------------------------------
+Syntax Checker:            facets.extra.tools.syntax_checker.SyntaxChecker
+Stdout:                    facets.extra.tools.stdout.Stdout
+Traceback Viewer:          facets.extra.tools.traceback_viewer.TracebackViewer
+Facet DB:                  facets.extra.tools.facet_db.FacetDB
+UI Debugger:               facets.extra.tools.ui_debugger.UIDebugger
+Universal Inspector:       facets.extra.tools.universal_inspector.UniversalInspector
+View Tester:               facets.extra.tools.view_tester.ViewTester
+Wiretap:                   facets.extra.tools.wiretap.Wiretap
+
+#File Monitor:             facets.extra.tools.file_monitor.FileMonitor
+#-- EOF ------------------------------------------------------------------------

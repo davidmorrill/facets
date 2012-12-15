@@ -1,0 +1,7 @@
+// Macro to remove all Python breakpoints from a file.
+
+buffer.removeAllMarkers();
+buffer.updateMarkersFile( view );
+
+exec( "python.exe fbibp.py \"" + buffer.getPath() + "\"" );
+

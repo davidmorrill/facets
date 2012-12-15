@@ -1,0 +1,105 @@
+#-------------------------------------------------------------------------------
+# The standard Facets developer tools:
+#-------------------------------------------------------------------------------
+
+Control
+    Control Flasher:      facets.extra.tools.control_flasher.ControlFlasher
+    Control Grabber:      facets.extra.tools.control_grabber.ControlGrabber
+    Control Stack:        facets.extra.tools.control_stack.ControlStack
+
+Debug
+    Application Monitor:  facets.extra.tools.app_monitor.AppMonitor
+    Breakpoints:          facets.extra.tools.breakpoints.Breakpoints
+    Event Monitor:        facets.extra.tools.event_monitor.EventMonitor
+    FBI Viewer:           facets.extra.tools.fbi_viewer.FBIViewer
+    Heap Browser:         facets.extra.tools.heap_browser.HB_HeapBrowser
+    Instance Monitor:     facets.extra.tools.instance_monitor.InstanceMonitor
+    Listener:             facets.extra.tools.listener.Listener
+    Traceback Viewer:     facets.extra.tools.traceback_viewer.TracebackViewer
+    UI Debugger:          facets.extra.tools.ui_debugger.UIDebugger
+    Wiretap:              facets.extra.tools.wiretap.Wiretap
+
+Develop
+    Class Browser:        facets.extra.tools.class_browser.ClassBrowser
+    Cross Reference:      facets.extra.tools.cross_reference.CrossReference
+    Facet DB:             facets.extra.tools.facet_db.FacetDB
+    View Tester:          facets.extra.tools.view_tester.ViewTester
+    VIP Shell:            facets.extra.tools.vip_shell.VIPShell
+
+File
+    Directory Stack:      facets.extra.tools.directory_stack.DirectoryStack
+    Favorites Browser:    facets.extra.tools.favorites_browser.FavoritesBrowser
+    File Browser:         facets.extra.tools.file_browser.FileBrowser
+    File Search:          facets.extra.tools.file_search.FileSearch
+    File Select:          facets.extra.tools.file_select.FileSelect
+    File Sieve:           facets.extra.tools.file_sieve.FileSieve
+    File Space:           facets.extra.tools.file_space.FileSpace
+    File Stack:           facets.extra.tools.file_stack.FileStack
+
+Fun
+    Puzzle:               facets.extra.tools.puzzle.Puzzle
+
+Image
+    Collage:              facets.extra.tools.collage.Collage
+    Image Browser:        facets.extra.tools.image_browser.ImageBrowser
+    Image Collector:      facets.extra.tools.image_collector.ImageCollector
+    Image Knife:          facets.extra.tools.image_knife.ImageKnife
+    Image Library Selector: facets.extra.tools.image_library_selector.ImageLibrarySelector
+    Image Library Viewer: facets.extra.tools.image_library_viewer.ImageLibraryViewer
+    Image Palette:        facets.extra.tools.image_palette.ImagePalette
+    Theme Sampler:        facets.extra.tools.theme_sampler.ThemeSampler
+    Image Selector:       facets.extra.tools.image_selector.ImageSelector
+    Image Theme Editor:   facets.extra.tools.image_theme_editor.ImageThemeEditor
+    Image Tiler:          facets.extra.tools.image_tiler.ImageTiler
+    Image Transformer:    facets.extra.tools.image_transformer.ImageTransformer
+    Image Zoomer:         facets.extra.tools.image_zoomer.ImageZoomer
+    Light Table:          facets.extra.tools.light_table.LightTable
+    Theme Editor:         facets.extra.tools.theme_editor.ThemeEditor
+    Theme Layout:         facets.extra.tools.theme_layout.ThemeLayout
+
+Log
+    Logger:               facets.extra.tools.logger.Logger
+    Log File:             facets.extra.tools.log_file.LogFile
+    Log Object:           facets.extra.helper.debug.LogObject
+    Stdout:               facets.extra.tools.stdout.Stdout
+
+Object
+    Object Source:        facets.extra.tools.object_source.ObjectSource
+    Object Viewer:        facets.extra.tools.object_viewer.ObjectViewer
+    Print Object:         facets.extra.tools.print_object.PrintObject
+    Universal Inspector:  facets.extra.tools.universal_inspector.UniversalInspector
+
+Profile
+    Profiler:             facets.extra.tools.profiler.Profiler
+    Profile Viewer:       facets.extra.tools.profile_viewer.ProfileViewer
+
+Python
+    Script:               facets.extra.tools.script.Script
+    Use Script:           facets.extra.tools.use_script.UseScript
+    Definitions:          facets.extra.tools.definitions.Definitions
+    Syntax Checker:       facets.extra.tools.syntax_checker.SyntaxChecker
+    AST Viewer:           facets.extra.tools.ast_viewer.ASTViewer
+    JSON Viewer:          facets.extra.tools.json_viewer.JSONViewer
+    Token Viewer:         facets.extra.tools.token_viewer.TokenViewer
+    Unrefed:              facets.extra.tools.unrefed.Unrefed
+
+Text
+    Text:                 facets.extra.tools.text_file.TextFile
+    Text Collector:       facets.extra.tools.text_collector.TextCollector
+    Text Editor:          facets.extra.tools.text_editor.TextEditor
+    Email:                facets.extra.tools.email_tool.Email
+    Markdown:             facets.extra.tools.markdown.Markdown
+    Markdown HTML:        facets.extra.tools.markdown.MarkdownHTML
+
+User
+    Animation Station:    facets.extra.tools.animation_station.AnimationStation
+    Clipboard:            facets.extra.tools.clipboard.Clipboard
+    Drop Zone:            facets.extra.tools.drop_zone.DropZone
+    Presentation:         facets.extra.tools.presentation.Presentation
+    Select DockWindow Theme: facets.extra.tools.select_dock_window_theme.SelectDockWindowTheme
+    Template:             facets.extra.tools.template.Template
+
+#-- Unused ---------------------------------------------------------------------
+#HTML Viewer:             facets.extra.tools.html_viewer.HTMLViewer
+#File Monitor:            facets.extra.tools.file_monitor.FileMonitor
+#-- EOF ------------------------------------------------------------------------

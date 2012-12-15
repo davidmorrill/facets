@@ -1,0 +1,8 @@
+theme = square_theme( 
+    'l25S10~L5S8|l36L60', 
+    'L3S10~L20S8|l36L60',
+    'l5S10~L15S8|l36L60',
+    'H94l25s53~H94l5s27|L71', 
+    'inactive', 
+    'hover'
+)

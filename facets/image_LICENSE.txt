@@ -1,0 +1,107 @@
+The icons are mostly derived work from other icons. As such they are
+licensed accordingly to the original license:
+
+Project                 License                   File
+----------------------------------------------------------------------------
+CP (Crystal Project)    LGPL                      image_LICENSE_CP.txt
+Eclipse                 Eclipse Public License    image_LICENSE_Eclipse.txt
+Enthought               BSD 3-Clause              LICENSE.txt
+GV (Gael Varoquaux)     Public Domain             N/A
+Nuvola                  LGPL                      image_LICENSE_Nuvola.txt
+OOo                     LGPL                      image_LICENSE_OOo.txt
+
+Unless stated in this file, icons are the work of Enthought, and are
+released under a 3 clause BSD license.
+
+Files and orginal authors:
+----------------------------------------------------------------------------
+enthought/developer/images:
+                    disabled_ui.png | Nuvola
+                         object.png | GV
+                             ui.png | Nuvola
+enthought/developer/editors/images:
+                            add.png | CP
+                          clear.png | CP
+                          clone.png | GV
+                          close.png | CP
+                 default_active.png | Enthought
+                 default_canvas.png | Enthought
+                  default_hover.png | Enthought
+               default_inactive.png | Enthought
+                           drag.png | GV
+                        feature.png | OOo
+                           load.png | Eclipse
+                       maximize.png | CP
+                       minimize.png | CP
+                           save.png | Eclipse
+enthought/developer/features/images:
+           connect_drag_feature.png | GV
+           connect_file_feature.png | GV
+           connect_from_feature.png | Enthought
+         connect_linked_feature.png | Eclipse
+         connect_object_feature.png | Nuvola
+             connect_to_feature.png | Enthought
+       connect_unlinked_feature.png | Eclipse
+            connections_feature.png | Eclipse
+             debug_dock_feature.png | GV
+           debug_object_feature.png | GV
+               debug_ui_feature.png | GV
+           debug_window_feature.png | GV
+                   drag_feature.png | Nuvola
+              drag_file_feature.png | Nuvola
+               dragdrop_feature.png | Nuvola
+                   drop_feature.png | Nuvola
+              drop_file_feature.png | Nuvola
+         no_connections_feature.png | Eclipse
+                options_feature.png | CP
+             popup_menu_feature.png | GV
+                   save_feature.png | GV
+                   tool_feature.png | Nuvola
+enthought/developer/helper/images:
+                   fbi_clear_bp.png | Nuvola
+                         fbi_go.png | GV
+                       fbi_next.png | GV
+                       fbi_quit.png | GV
+                 fbi_restore_bp.png | GV
+                     fbi_return.png | GV
+                       fbi_step.png | GV
+                           gbox.png | Enthought
+enthought/developer/tools/images:
+                          class.png | Eclipse
+                      clipboard.png | GV
+                           drop.png | GV
+                         method.png | Nuvola
+                         module.png | Eclipse
+                        package.png | GV
+             photo_frame_active.png | Enthought
+              photo_frame_hover.png | Enthought
+           photo_frame_inactive.png | Enthought
+                        refresh.png | GV
+                            run.png | Nuvola
+                 start_profiler.png | GV
+                  stop_profiler.png | GV
+enthought/developer/tools/vet/images:
+                         action.png | Nuvola
+                          class.png | Eclipse
+                           code.png | GV
+                         editor.png | GV
+                        editors.png | GV
+                       function.png | GV
+                          group.png | Eclipse
+                        handler.png | Eclipse
+                           item.png | Eclipse
+                          label.png | Eclipse
+                           menu.png | Eclipse
+                 menu_separator.png | GV
+                         method.png | Nuvola
+                        methods.png | Eclipse
+                         module.png | Eclipse
+             object_with_facets.png | GV
+                        objects.png | CP
+                        package.png | GV
+                      separator.png | Eclipse
+                      templates.png | Eclipse
+                          facet.png | GV
+                           view.png | Eclipse
+examples/demo/tools:
+                 facets_ui_demo.jpg | Enthought

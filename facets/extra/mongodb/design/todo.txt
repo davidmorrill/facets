@@ -1,0 +1,127 @@
+--------------------------------------------------------------------------------
+MongoDB features to implement:
+--------------------------------------------------------------------------------
+- Add logging support.
+- Allow schema changes to be based off of class version and time stamp by
+  maintaining a version tuple of the form: ( version, major, minor, timestamp ).
+  The class version is definined by a __version__ class attribute which should
+  be an int n ( n, 0, 0 ), float f ( int( f ), f - int( f ), 0 ) or tuple t. If
+  not defined, the version is ( 1, 0, 0 ). Provide a facet helper function 
+  version( class or instance ) that returns a Version object that supports
+  version comparison.
+- Make sure the MongoDB database is correctly updated when new base classes get
+  injected into the middle of an existing class hierarchy.
+- Make sure index changes are added/removed correctly.
+- Make sure existing objects get copied correctly when a class changes 
+  collections.
+- Provide better handling of the 'sort' argument to the 'all' and 'iterall' 
+  methods.
+- Provide some kind of mechanism for locking the database during updates?
+- Allow new DBxxx facets to be added externally (e.g. allow the load/save
+  handlers to be defined directly on the facets).
+- HasFacets should be able to do static listener setup for 
+  on_facet_change('+/-metadata') case (including subclasses).
+  
+--------------------------------------------------------------------------------
+Implemented MongoDB features:
+--------------------------------------------------------------------------------
+- Wrote documentation.
+- Correctly handle loading instances for a class that has removed database
+  facets.
+- Verified that setting nested DBObjects values (foo.bar[i].baz = 1) update the 
+  database correctly.
+- Verified that setting nested DBObject values (foo.bar.baz.zork = 1) update the 
+  database correctly.
+- Added way to specify regular expressions in a query string.
+- Changed the MongoDB 'network_timeout' facet to be more UI friendly.
+- Allow setting the base type for a DBRef facet.
+- Allow setting the base type for a DBLink facet.
+- Added ability to automatically launch the MongoDB database server if it is not
+  already running on 'localhost'.
+- Provided a mechanism to configure MongoDB database information via external 
+  information saved in the Facets database.
+- Created an iterator form of the 'all' method: iterall
+- Allow DBLinks values, for defining lists of MongoDBObjects owned by the
+  containing object but whose elements are not loaded until referenced (subtype
+  of DBRefs).
+- Allow setting the base type for a DBRefs facet.
+- Allow setting the base type for a DBLinks facet.
+- Allow DBLink values, which is a MongoDBObject object owned by the containing
+  object but whose value is not loaded until referenced (subtype of DBRef).
+- Allow DBRefs values, which are lists of separately loaded/persisted 
+  MongoDBObject values which are not owned by the reference holder.
+- Allow setting the base class type for DBObject facets to something other than
+  the default MongoDBObject.
+- Allow setting the base class type for DBObjects facets.
+- Made sure that fetching objects returns the currently instantiated version of
+  the same object rather than a new copy.
+- Provide additional query/fetch mechanisms:
+  $lt, $lte, $gt, $gte, $ne, $in, $nin, $or, $not, $mod, $exists, $all, $size,
+  $slice, $elemMatch, name.index, name1.name2, /.../.
+  DBPerson().all( "(name == 'Joe') and (age > 20)" )
+* $lt:         name <  value
+* $lte:        name <= value
+* $gt:         name >  value
+* $gte:        name >= value
+* $ne:         name != value
+* $nin:        name !=/not in [ value1, value2, ... ]  (translate 'not in' to '!=')
+* $in:         name ==/in [ value1, value2, ... ]  (translate 'in' to '==') 
+* $all:        name == { value1, value2, ... }
+* $not:        !expr                               (translate 'not' to '!')
+* $or:         expr | expr                         (translate 'or'  to '|')
+*              expr1 & expr2                       (translate 'and' to '&')
+* $mod:        (name % value1) == value2
+* $exists:     name.exists
+* $size:       name.size
+  $slice:      name[ i: j ]                        (not part of a search)
+* name1.name2: name1.name2
+* name.index:  name[ index ]
+* $elemMatch:  name( expr )
+- Added an 'all' method on MongoDBObject to allow retrieving all matching 
+  objects.
+- Provide a mechanism to delete objects stored in the MongoDB database.
+- Allow DBRef values, which are separately loaded/persisted MongoDBObject values
+  which are not owned by the reference holder.
+- Provide a mechanism for creating indices on facets. Index attributes are:
+  - ascending (1) or descending (-1)
+  - unique (or not)
+  - compound (multiple facets)
+  - dropDups (drop duplicate values when creating an index on a collection with
+    existing documents).
+  Use metadata: index = value, where value can be:
+    - True: Create non-unique ascending index
+    - 'unique': Create unique ascending index
+    - 'ascending: Create non-unique ascending index
+    - 'decending': Create non-unique decending index
+    - 'name': Create ascending non-unique index which is compound on any other
+      facet with the same name. 
+    - 'n': Determines the order of the facet within a compound key with the same
+      name.
+    - Combination: For example 'unique ascending foo 1'
+- Provide a 'load' method on MongoDBObject that loads the complete object
+  matching a partial set of values specified (returns the object if successful 
+  and None if not). For example: person = DBPerson( name = 'Joe' ).load()
+- Do we need to explicitly create an index for '_id'? (No, one seems to be 
+  created automatically).
+- Allow DBObject values, which are MongoDBObject values owned by the reference
+  holder.
+- Allow DBObjects values, which are lists of MongoDBObject values owned by the
+  reference holder.
+- Allow retrieving instances of a specfic class or subclass.
+- Added 'subtypes' information to the MongoDB database to allow locating valid 
+  subtypes of a specified MongoDBObject class.
+- Allow MongoDBObject instances to be associated with a specific MongoDB object.
+
+--------------------------------------------------------------------------------
+Implementation notes:
+--------------------------------------------------------------------------------
+- To prevent loading a DBRef value when the owning object is loaded, the value
+  does not trigger a facet change notification event. This could cause issues
+  with code that depends upon such notifications being generated, such as
+  setting up change listeners. Switching to the new 'notify' system may fix this
+  if the 'new' value is implemented as a property (so it only 'touches' the
+  facet value if requested by a change handler).
+- There is currently no way to know if a DBRef/DBRefs object is referenced by
+  another object in the database. No reference count are other mechanism is in
+  place.
+#-- EOF ------------------------------------------------------------------------

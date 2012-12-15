@@ -1,0 +1,8 @@
+theme = gradient_theme( 
+    '',
+    'l12~L28|l42', 
+    'L20~L40|l42',
+    'L14~L34|l42', 
+    'l20s~l8s|L64',
+    'active'
+)

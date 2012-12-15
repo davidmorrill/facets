@@ -1,0 +1,4 @@
+// Macro to clear all currently defined breakpoints on all files:
+
+exec( "python.exe fbibp.py" );
+
