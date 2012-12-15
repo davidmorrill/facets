@@ -51,11 +51,9 @@ License
 The Facets package is available under a BSD style license. Refer to the
 LICENSE.md file for more information.
 
-Contact
--------
+Videos
+------
 
-If you encounter any problems using the Facets package, or have any comments
-or suggestions about the package, please contact the primary author:
+There are a number of Facets related videos available at:
 
-   David C. Morrill (david dot morrill at gmail dot com)
-
+    http://www.youtube.com/user/FacetsTV
