@@ -41,9 +41,7 @@ installation options.
 Download
 --------
 
-The Facets package is available at:
-
-    <https://github.com/davidmorrill/facets>
+The Facets package is available at: <https://github.com/davidmorrill/facets>
 
 License
 -------
@@ -55,5 +53,4 @@ Videos
 ------
 
 There are a number of Facets related videos available at:
-
-    <http://www.youtube.com/user/FacetsTV>
+<http://www.youtube.com/user/FacetsTV>
