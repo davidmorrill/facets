@@ -57,5 +57,5 @@ Contact
 If you encounter any problems using the Facets package, or have any comments
 or suggestions about the package, please contact the primary author:
 
-   David C. Morrill (david.morrill@gmail.com)
+   David C. Morrill (david dot morrill at gmail dot com)
 
