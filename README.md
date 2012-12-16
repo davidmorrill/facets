@@ -73,6 +73,13 @@ installing Facets, you can try these by running:
 Click on any item in the **Demos** section to run the corresponding demo and to
 view/edit/re-run its source code.
 
+Documentation
+-------------
+
+Online documentation for Facets can be viewed at:
+<http://davidmorrill.github.com/facets/>. This is a work-in-progress and does
+not provide complete documentation for the project yet.
+
 Videos
 ------
 
