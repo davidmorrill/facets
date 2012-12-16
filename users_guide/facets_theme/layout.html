@@ -1,0 +1,42 @@
+{#
+    sphinxdoc/layout.html
+    ~~~~~~~~~~~~~~~~~~~~~
+
+    Sphinx layout template for the sphinxdoc theme.
+
+    :copyright: Copyright 2007-2011 by the Sphinx team, see AUTHORS.
+    :license: BSD, see LICENSE for details.
+#}
+{% extends "basic/layout.html" %}
+
+{# put the sidebar before the body #}
+{% block sidebar1 %}{{ sidebar() }}{% endblock %}
+{% block sidebar2 %}{% endblock %}
+
+{% block header %}
+<div class="header">
+  <img src="{{ pathto('_static/logo.jpg', 1) }}">
+</div>
+{% endblock %}
+
+{% block sidebarsearch %}
+{{ super() }}
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="{{ pathto('_static/blogger.png', 1) }}" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="{{ pathto('_static/youtube.png', 1) }}" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="{{ pathto('_static/fb_logo.png', 1) }}" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="{{ pathto('_static/github.png', 1) }}" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+{% endblock %}
+
