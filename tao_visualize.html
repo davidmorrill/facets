@@ -1,0 +1,393 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Visualize &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Animate" href="tao_animate.html" />
+    <link rel="prev" title="Notify" href="tao_notify.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tao_animate.html" title="Animate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tao_notify.html" title="Notify"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" accesskey="U">Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Visualize</a><ul>
+<li><a class="reference internal" href="#defining-a-model">Defining a Model</a></li>
+<li><a class="reference internal" href="#the-default-user-interface">The Default User Interface</a></li>
+<li><a class="reference internal" href="#defining-a-user-interface">Defining a User Interface</a></li>
+<li><a class="reference internal" href="#adding-an-editor">Adding an Editor</a></li>
+<li><a class="reference internal" href="#separating-the-model-and-view">Separating the Model and View</a></li>
+<li><a class="reference internal" href="#defining-multiple-views">Defining Multiple Views</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tao_notify.html"
+                        title="previous chapter">Notify</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tao_animate.html"
+                        title="next chapter">Animate</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="visualize">
+<span id="tao-visualize"></span><h1>Visualize</h1>
+<p>Facets can support a wide variety of programming styles and approaches, but is
+particularly adept at <em>model-based</em> programming.</p>
+<p>In model-based programming, applications are created by defining one or more
+classes which together model the salient aspects of the application domain.
+As you&#8217;ll see, Facets ability to <em>validate</em>, <em>initialize</em>, <em>delegate</em> and
+<em>notify</em> are all well suited to building systems using this approach.</p>
+<p>The ability of end users to visualize, interact with and edit the contents of
+a model often creates the need for providing some kind of graphical user
+interface (GUI). Over the years, several approaches for creating user interfaces
+for model-based systems have evolved, such as the well-known MVC (Model, View,
+Controller) design pattern.</p>
+<p>Facets supports many of these UI design styles, including the author&#8217;s personal
+favorite: Model View-Model, where the user interface itself has its own set of
+models which reflect the specialized user interface domain. By far the largest
+portion of the Facets package is devoted to providing a wide variety of tools
+for constructing user interfaces for application models.</p>
+<p>In this introductory section however, we are only going to provide a brief
+glimpse into the Facets approach to user interface construction.</p>
+<div class="section" id="defining-a-model">
+<h2>Defining a Model</h2>
+<p>For this we will use a very simple model, that of a steam operated generator
+or engine with a temperature sensor and an overall system status:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Generator</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="o">-</span><span class="mf">273.15</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mf">100.0</span> <span class="p">)</span>
+    <span class="n">status</span>      <span class="o">=</span> <span class="n">Property</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span> <span class="s">&#39;temperature&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_status</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">if</span> <span class="mf">95.0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;=</span> <span class="mf">120.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;Normal&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;Too low&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mf">95.0</span> <span class="k">else</span> <span class="s">&#39;Too high&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this model we&#8217;ve used the Range facet to model the Celsius temperature
+scale, and the Property facet and the Facets change notification system to
+derive the system status from the current temperature.</p>
+</div>
+<div class="section" id="the-default-user-interface">
+<h2>The Default User Interface</h2>
+<p>At this point it&#8217;s interesting to note that we already have a basic user
+interface defined for our generator model, as you can see by adding the
+following statement to the end of the code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This creates a new Generator model and displays its default user interface:</p>
+<img alt="_images/tao_visualize0.jpg" src="_images/tao_visualize0.jpg" />
+<p>Every Facets class or model has a <em>default</em> user interface that can be
+synthesized on demand in situations where one is not explicitly defined. In many
+cases, such as this one, the resulting UI is not exactly what we want, but it&#8217;s
+worth knowing that Facets has enough information about objects that it can
+create default user interfaces for them on the fly if necessary.</p>
+</div>
+<div class="section" id="defining-a-user-interface">
+<h2>Defining a User Interface</h2>
+<p>But for this example let&#8217;s say we want to explicitly create a simple user
+interface that shows both the current system temperature and status:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Generator</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="o">-</span><span class="mf">273.15</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mf">100.0</span> <span class="p">)</span>
+    <span class="n">status</span>      <span class="o">=</span> <span class="n">Property</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;temperature&#39;</span> <span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;status&#39;</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;readonly&#39;</span> <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span> <span class="s">&#39;temperature&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_status</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">if</span> <span class="mf">95.0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;=</span> <span class="mf">120.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;Normal&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;Too low&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mf">95.0</span> <span class="k">else</span> <span class="s">&#39;Too high&#39;</span><span class="p">)</span>
+
+<span class="n">Generator</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Running this we see:</p>
+<img alt="_images/tao_visualize1.jpg" src="_images/tao_visualize1.jpg" />
+<p>Since we don&#8217;t have an actual generator or engine connected to our model, we&#8217;ve
+allowed the temperature section of the user interface to be represented by a
+slider control so we can manually adjust the temperature of our model for
+testing purposes.</p>
+<p>Notice that what we&#8217;ve done is to:</p>
+<ul class="simple">
+<li>Add a class level View object, called <em>view</em>, containing two Item objects: one
+for the <em>temperature</em> facet, and one for the <em>status</em> facet.</li>
+<li>Create a new Generator instance and call its <em>edit_facets</em> method.</li>
+</ul>
+<p>The View and Item objects together describe the user interface we are creating.
+The View object represents the overall user interface, and all other user
+interface elements are contained within the View. The Item objects represent
+the parts of our model to include in the user interface.</p>
+<p>The call to the Generator model&#8217;s <em>edit_facets</em> method creates the user
+interface and displays it to the user.</p>
+<p>Now, if you&#8217;ve done user interface programming before, you&#8217;ve probably noticed
+that nowhere in the code do we explicitly create any UI <em>widgets</em> or <em>controls</em>
+and wire them up to the data parts of our model. Instead, we describe what we
+want to appear in the user interface using View and Item objects and Facets does
+the rest. This is very much in line with model-based development, with the user
+interface simply referencing the elements of the model that should appear in the
+UI.</p>
+<p>Of course, as you can see from the screen shot, widgets do get created. This is
+the main purpose of Item objects:</p>
+<ul class="simple">
+<li>Describe what model attributes appear in the UI.</li>
+<li>Describe how the model attributes are rendered or edited.</li>
+</ul>
+<p>In this case, the Item objects only describe what model attributes to include in
+the user interface. We are relying on another Facets feature to specify what
+kind of controls or editors should be used. Every facet (such as Range) has a
+default <em>editor</em> associated with it. Unless overridden, this is the editor used
+in a user interface when an attribute of that type is included.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>Editor</em> is the standard term used in Facets to refer to the widget or
+control used to view, interact with or modify an object attribute. Facets
+comes with dozens of predefined editors and you can easily create your own.
+You&#8217;ll be hearing a lot more about editors as you go through this manual.</p>
+</div>
+<p>In the case of a Range facet, the default editor is a RangeEditor, which is a
+type of slider control shown in the top half of the screen shot. The Property
+editor, being very generic, uses a TextEditor as its default editor. Some
+editors, such as the TextEditor, support more than one usage style. In this case
+we&#8217;ve indicated the editor should use the <em>readonly</em> style, since we don&#8217;t want
+the user to change the system status directly.</p>
+</div>
+<div class="section" id="adding-an-editor">
+<h2>Adding an Editor</h2>
+<p>Looking at the previous screen shot closely, you&#8217;ll notice the tooltip indicates
+the slider range is from -273.15 to 1000.0, which agrees with our model
+definition. Facets automatically gleans this information from our Range facet
+declaration and uses it when creating the RangeEditor for the temperature. This
+is actually a nice feature, but in this case, since we are not likely to
+encounter temperatures anywhere near the actual extremes supported by the model,
+it might be better to restrict the slider to a smaller range.</p>
+<p>We do this by modifying our <em>temperature</em> Item to include an explicit editor
+specification:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Item</span><span class="p">(</span> <span class="s">&#39;temperature&#39;</span><span class="p">,</span>
+      <span class="n">editor</span> <span class="o">=</span> <span class="n">RangeEditor</span><span class="p">(</span> <span class="n">low</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mf">200.0</span> <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Now when we run the example, we see:</p>
+<img alt="_images/tao_visualize3.jpg" src="_images/tao_visualize3.jpg" />
+<p>Much better! So now we&#8217;ve seen an example of including explicit editor
+information in an Item. Here we&#8217;ve done it simply to modify the default range of
+the slider, but we could just as easily have replaced the slider with a
+completely different type of editor.</p>
+</div>
+<div class="section" id="separating-the-model-and-view">
+<h2>Separating the Model and View</h2>
+<p>Because our model and associated user interface are so simple, we have included
+both of them in the same class definition. Adherents of the MVC design
+methodology may be shaking their heads and muttering &#8220;tsk, tsk&#8221; since we&#8217;ve
+combined the model and view in a single class. So in our next bit of code, we&#8217;ll
+redo the example using separate model and view classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Generator</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="o">-</span><span class="mf">273.15</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="mf">100.0</span> <span class="p">)</span>
+    <span class="n">status</span>      <span class="o">=</span> <span class="n">Property</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span> <span class="s">&#39;temperature&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_status</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">if</span> <span class="mf">95.0</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;=</span> <span class="mf">120.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;Normal&#39;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s">&#39;Too low&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span> <span class="o">&lt;</span> <span class="mf">95.0</span> <span class="k">else</span> <span class="s">&#39;Too high&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">GeneratorStatus</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">Generator</span><span class="p">,</span> <span class="p">()</span> <span class="p">)</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;object.model.temperature&#39;</span><span class="p">,</span>
+              <span class="n">editor</span> <span class="o">=</span> <span class="n">RangeEditor</span><span class="p">(</span> <span class="n">low</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mf">200.0</span> <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;object.model.status&#39;</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;readonly&#39;</span> <span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">GeneratorStatus</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A quick glance shows this to be very similar to the original code, but now we
+have separate Generator and GeneratorStatus classes, with the GeneratorStatus
+class defining the view, or user interface, for its associated Generator <em>model</em>
+instance. Two other things to note are:</p>
+<ul class="simple">
+<li>Use of an Instance facet to define a reference to a Generator model instance.</li>
+<li>Use of more complex object attribute references in the Item objects, such as
+<tt class="docutils literal"><span class="pre">'object.model.temperature'</span></tt>.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You might wonder why we wrote <tt class="docutils literal"><span class="pre">'object.model.temperature'</span></tt> instead of
+<tt class="docutils literal"><span class="pre">'model.temperature'</span></tt>. Items always reference fully qualified object
+attributes. As a shortcut, references of the form <tt class="docutils literal"><span class="pre">'foo'</span></tt> are automatically
+translated to <tt class="docutils literal"><span class="pre">'object.foo</span></tt>&#8216;, where <tt class="docutils literal"><span class="pre">'object'</span></tt> refers to the the default
+object for the view. In cases where we want to provide a reference like
+<tt class="docutils literal"><span class="pre">'model.temperature'</span></tt>, we need to fully qualify the reference as
+<tt class="docutils literal"><span class="pre">'object.model.temperature'</span></tt>, which can be read as <em>the temperature
+attribute of the model object of the default view object</em>.</p>
+<p class="last">This seemingly unnecessary extra level of qualification is needed because a
+single view can actually edit attributes from a set of several different
+objects, referred to as the view&#8217;s <em>context</em>. We&#8217;ll be discussing view
+contexts in more detail in later chapters.</p>
+</div>
+<p>So now we have a cleaner MVC style set of classes which did not take much
+refactoring to create.</p>
+</div>
+<div class="section" id="defining-multiple-views">
+<h2>Defining Multiple Views</h2>
+<p>Of course, we can create any number of different views for the same model. In
+the next example we&#8217;ll extend our GeneratorStatus class to include a new
+<em>executive_view</em> which only shows the current system status:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">GeneratorStatus</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">Generator</span><span class="p">,</span> <span class="p">()</span> <span class="p">)</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;object.model.temperature&#39;</span><span class="p">,</span>
+              <span class="n">editor</span> <span class="o">=</span> <span class="n">RangeEditor</span><span class="p">(</span> <span class="n">low</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="mf">200.0</span> <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;object.model.status&#39;</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;readonly&#39;</span> <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="n">executive_view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;object.model.status&#39;</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;readonly&#39;</span> <span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="n">GeneratorStatus</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">(</span> <span class="n">view</span> <span class="o">=</span> <span class="s">&#39;executive_view&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>which results in a view like:</p>
+<img alt="_images/tao_visualize2.jpg" src="_images/tao_visualize2.jpg" />
+<p>We could have split this new view out into a separate view class as well if we
+wanted.</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary</h2>
+<p>At this point, saying we have only scratched the surface of the <em>visualize</em>
+capabilities of Facets would be a massive understatement. But we&#8217;ll leave
+detailed exploration of Facets visualization tools to later chapters. The main
+points we wanted to cover in this brief introduction are that creating user
+interfaces in Facets:</p>
+<ul class="simple">
+<li>Is at a much higher level than traditional user interface toolkits like Qt or
+wxWindows.</li>
+<li>Is a direct extension of Facets model-centric approach.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tao_animate.html" title="Animate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tao_notify.html" title="Notify"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" >Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

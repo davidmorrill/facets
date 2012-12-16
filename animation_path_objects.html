@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Path Objects &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Animation System" href="animation_system.html" />
+    <link rel="next" title="Tweener Objects" href="animation_tweener_objects.html" />
+    <link rel="prev" title="Animation Objects" href="animation_objects.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="animation_tweener_objects.html" title="Tweener Objects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="animation_objects.html" title="Animation Objects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" accesskey="U">The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Path Objects</a><ul>
+<li><a class="reference internal" href="#path">Path</a></li>
+<li><a class="reference internal" href="#linearintpath">LinearIntPath</a></li>
+<li><a class="reference internal" href="#linear2dintpath">Linear2DIntPath</a></li>
+<li><a class="reference internal" href="#manhattan2dintpath">Manhattan2DIntPath</a></li>
+<li><a class="reference internal" href="#spiral2dintpath">Spiral2DIntPath</a></li>
+<li><a class="reference internal" href="#ricochet2dintpath">Ricochet2DIntPath</a></li>
+<li><a class="reference internal" href="#snake2dintpath">Snake2DIntPath</a></li>
+<li><a class="reference internal" href="#overshoot2dintpath">Overshoot2DIntPath</a></li>
+<li><a class="reference internal" href="#boundspath">BoundsPath</a></li>
+<li><a class="reference internal" href="#textpath">TextPath</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation_objects.html"
+                        title="previous chapter">Animation Objects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="animation_tweener_objects.html"
+                        title="next chapter">Tweener Objects</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="path-objects">
+<span id="animation-path-objects"></span><h1>Path Objects</h1>
+<p>As previously described, a <em>path</em> object defines or computes all of the
+intermediate values of an animation between its begin and end values. The
+Facets animation system includes the following predefined path classes and
+objects:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class or object</th>
+<th class="head">Module</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Path</td>
+<td><a class="reference internal" href="src/path.html"><em>facets.animation.path</em></a></td>
+</tr>
+<tr class="row-odd"><td>LinearPath</td>
+<td><a class="reference internal" href="src/path.html"><em>facets.animation.path</em></a></td>
+</tr>
+<tr class="row-even"><td>Linear</td>
+<td><a class="reference internal" href="src/path.html"><em>facets.animation.path</em></a></td>
+</tr>
+<tr class="row-odd"><td>LinearIntPath</td>
+<td><a class="reference internal" href="src/linear_int_path.html"><em>facets.animation.linear_int_path</em></a></td>
+</tr>
+<tr class="row-even"><td>LinearInt</td>
+<td><a class="reference internal" href="src/linear_int_path.html"><em>facets.animation.linear_int_path</em></a></td>
+</tr>
+<tr class="row-odd"><td>Linear2DIntPath</td>
+<td><a class="reference internal" href="src/linear_2d_int_path.html"><em>facets.animation.linear_2d_int_path</em></a></td>
+</tr>
+<tr class="row-even"><td>Linear2DInt</td>
+<td><a class="reference internal" href="src/linear_2d_int_path.html"><em>facets.animation.linear_2d_int_path</em></a></td>
+</tr>
+<tr class="row-odd"><td>Manhattan2DIntPath</td>
+<td><a class="reference internal" href="src/manhattan_2d_int_path.html"><em>facets.animation.manhattan_2d_int_path</em></a></td>
+</tr>
+<tr class="row-even"><td>Spiral2DIntPath</td>
+<td><a class="reference internal" href="src/spiral_2d_int_path.html"><em>facets.animation.spiral_2d_int_path</em></a></td>
+</tr>
+<tr class="row-odd"><td>Ricochet2DIntPath</td>
+<td><a class="reference internal" href="src/ricochet_2d_int_path.html"><em>facets.animation.ricochet_2d_int_path</em></a></td>
+</tr>
+<tr class="row-even"><td>Snake2DIntPath</td>
+<td><a class="reference internal" href="src/snake_2d_int_path.html"><em>facets.animation.snake_2d_int_path</em></a></td>
+</tr>
+<tr class="row-odd"><td>Overshoot2DIntPath</td>
+<td><a class="reference internal" href="src/overshoot_2d_int_path.html"><em>facets.animation.overshoot_2d_int_path</em></a></td>
+</tr>
+<tr class="row-even"><td>BoundsPath</td>
+<td><a class="reference internal" href="src/bounds_path.html"><em>facets.animation.bounds_path</em></a></td>
+</tr>
+<tr class="row-odd"><td>TextPath</td>
+<td><a class="reference internal" href="src/text_path.html"><em>facets.animation.text_path</em></a></td>
+</tr>
+<tr class="row-even"><td>Text</td>
+<td><a class="reference internal" href="src/text_path.html"><em>facets.animation.text_path</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="path">
+<h2>Path</h2>
+<p><strong>Path</strong> is the base class from which all other path types derive. It is a
+concrete class that implements a simple linearly interpolated path between a
+start floating point value and an end floating point value. To emphasize this,
+<strong>LinearPath</strong> is provided as a synonym for <strong>Path</strong>. The same module also
+defines a <strong>Linear</strong> attribute which is a predefined and reusable instance of
+<strong>LinearPath</strong>.</p>
+<p>The only facet defined by <strong>Path</strong> is:</p>
+<dl class="docutils">
+<dt>modified: Event</dt>
+<dd>The event fired when one of the parameters defining the path is modified. This
+facet is not used by the <strong>Path</strong> base class, since it has no parameters, but
+is provided for use by subclasses.</dd>
+</dl>
+<p>The only public method defined by the class is:</p>
+<dl class="docutils">
+<dt>at( v0, v1, t )</dt>
+<dd>Returns the value along the path at time <em>t</em> for a path whose start value is
+<em>v0</em>, and whose end value is <em>v1</em>.</dd>
+</dl>
+<p>The <em>at</em> method is the function that computes all of the intermediate values
+that form the path and so should always be overridden in any subclass. As with
+<em>tweener</em> classes, the value for the time <em>t</em> is always in the range from 0.0 to
+1.0, with 0.0 representing the start of the animation, and 1.0 representing the
+end. The time range is indpendent of the actual length of time of any animation
+using the path because the animation system handles any necessary conversion
+between the normalized <em>[ 0.0, 1.0 ]</em> time range and the animation time.</p>
+<p>The type of value passed for <em>v0</em> and <em>v1</em> and returned by the <em>at</em> method vary
+from one path class to the next, depending upon the type of data the path is
+intended to work with. The only requirement is that <em>v0</em>, <em>v1</em> and the result
+all be of the same type. In the case of the base <strong>Path</strong> class, all of the
+values are expected to be floating point values.</p>
+</div>
+<div class="section" id="linearintpath">
+<h2>LinearIntPath</h2>
+<p><strong>LinearIntPath</strong> is similar to the base <strong>Path</strong> class but performs linear
+interpolation on integer, not floating point, values. The main difference is
+that <strong>LinearIntPath</strong> uses rounding instead of truncation in its calculations.
+The same module also defines a <strong>LinearInt</strong> attribute which contains a
+predefined and reusable instance of <strong>LinearIntPath</strong> for your convenience.</p>
+</div>
+<div class="section" id="linear2dintpath">
+<h2>Linear2DIntPath</h2>
+<p>The <strong>Linear2DIntPath</strong> class performs linear interpolation on tuples with two
+integer values, which are commonly used to represent the position or size of 2D
+objects on a display. The same module also defines a <strong>Linear2DInt</strong> attribute
+containing a predefined and reusable instance of <strong>Linear2DIntPath</strong>.</p>
+<p>For this class, and all of the 2D related path classes that follow, we
+illustrate the type of path each class creates using a plot showing various
+points along the computed path. For a <strong>Linear2DIntPath</strong> object, the plot is:</p>
+<img alt="_images/path_linear.jpg" src="_images/path_linear.jpg" />
+<p>The plots are all screen shots captured from the <em>Animation Lab</em> demo in the
+<em>Graphics and Animation</em> section of the Facets UI demo using the setup shown
+below:</p>
+<img alt="_images/path_setup.jpg" src="_images/path_setup.jpg" />
+<p>We also encourage you to try the demo to become more familiar with how paths
+work. Using the demo you can try all of the 2D related path classes as well as
+create your own custom 2D paths.</p>
+</div>
+<div class="section" id="manhattan2dintpath">
+<h2>Manhattan2DIntPath</h2>
+<p>The <strong>Manhattan2DIntPath</strong> is another 2D integer tuple path. It computes its
+path like a car traveling the streets of Manhattan. That is, it first travels
+horizontally from its start point until it is vertically above or below its end
+point, and then travels vertically to reach its final destination, as
+illustrated in the following plot:</p>
+<img alt="_images/path_manhattan.jpg" src="_images/path_manhattan.jpg" />
+</div>
+<div class="section" id="spiral2dintpath">
+<h2>Spiral2DIntPath</h2>
+<p>A <strong>Spiral2DIntPath</strong> is a 2D integer tuple path that follows a <em>spiral</em> path
+between its start and end points. The shape of the spiral path is controlled by
+a single facet:</p>
+<dl class="docutils">
+<dt>scale: Range( 0.0, 1.25, 0.5 )</dt>
+<dd>The scaling factor used to calculate the center point of the spiral path.</dd>
+</dl>
+<p>A sample of the type of paths it can generate are shown in the following
+figure, which shows plots for two different values of <em>scale</em>:</p>
+<img alt="_images/path_spiral.jpg" src="_images/path_spiral.jpg" />
+</div>
+<div class="section" id="ricochet2dintpath">
+<h2>Ricochet2DIntPath</h2>
+<p>A <strong>Ricochet2DIntPath</strong> is another 2D integer tuple path. In this case it is one
+that attempts to simulate an object <em>ricocheting</em> off of an imaginary obstacle.
+The two facets that control its behavior are:</p>
+<dl class="docutils">
+<dt>angle: Range( 0, 45, 38 )</dt>
+<dd>The angle (in degrees) of the ricochet, with 0 meaning no ricochet.</dd>
+<dt>offset: Range( 0.2, 0.8, 0.5 )</dt>
+<dd>The fraction of the distance along the path the ricochet point is at right
+angles to.</dd>
+</dl>
+<p>Some sample plots showing the paths it can generate are shown below:</p>
+<img alt="_images/path_ricochet.jpg" src="_images/path_ricochet.jpg" />
+</div>
+<div class="section" id="snake2dintpath">
+<h2>Snake2DIntPath</h2>
+<p>A <strong>Snake2DIntPath</strong> path is a 2D integer tuple path that tries to mimic sinuous
+(actually sinusoidal) movement between its start and end points. The following
+two facets control its behavior:</p>
+<dl class="docutils">
+<dt>scale: Range( 0.0, 1.0, 0.18 )</dt>
+<dd>The scaling factor used to scale the snake path width (i.e. amplitude).</dd>
+<dt>cycles: Range( 1, 5, 1 )</dt>
+<dd>The number of cycles to create in moving from the start to end points.</dd>
+</dl>
+<p>Some sample plots using different facet values are shown below:</p>
+<img alt="_images/path_snake.jpg" src="_images/path_snake.jpg" />
+</div>
+<div class="section" id="overshoot2dintpath">
+<h2>Overshoot2DIntPath</h2>
+<p>The <strong>Overshoot2DIntPath</strong> path is a 2D integer tuple path that tries to
+simulate a moving object that overshoots its target and has to travel back along
+its original path to reach its final destination. It has a single control facet:</p>
+<dl class="docutils">
+<dt>amount: Range( 0.0, 1.0, 0.10 )</dt>
+<dd>The amount of <em>overshoot</em> as a fraction of the distance between the start and
+end point.</dd>
+</dl>
+<p>The following shows some sample plots created using different values for
+<em>amount</em>:</p>
+<img alt="_images/path_overshoot.jpg" src="_images/path_overshoot.jpg" />
+</div>
+<div class="section" id="boundspath">
+<h2>BoundsPath</h2>
+<p>The <strong>BoundsPath</strong> class is a path that performs linear interpolation on a tuple
+of four integers, often used to represent the <em>(x,y,dx,dy)</em> bounds (i.e.
+position and size) of a <strong>Control</strong> object.</p>
+</div>
+<div class="section" id="textpath">
+<h2>TextPath</h2>
+<p>A <strong>TextPath</strong> class performs a simple string transform from its start string
+value to its end string value. The transform is performed by first deleting all
+of the characters in the start string, working from last to first, and once the
+start string has been deleted, adds the characters in the end string from first
+to last. The net effect is intended to simulate a user at a keyboard deleting
+their current text and then typing something new.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="animation_tweener_objects.html" title="Tweener Objects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="animation_objects.html" title="Animation Objects"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" >The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

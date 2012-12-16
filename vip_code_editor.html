@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Using the Code Editor &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="Shell Commands" href="vip_shell_commands.html" />
+    <link rel="prev" title="The VIP Shell" href="vip_shell.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_shell_commands.html" title="Shell Commands"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_shell.html" title="The VIP Shell"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Using the Code Editor</a><ul>
+<li><a class="reference internal" href="#keyboard-commands">Keyboard Commands</a></li>
+<li><a class="reference internal" href="#special-shell-variables">Special Shell Variables</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_shell.html"
+                        title="previous chapter">The VIP Shell</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_shell_commands.html"
+                        title="next chapter">Shell Commands</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-the-code-editor">
+<span id="vip-code-editor"></span><h1>Using the Code Editor</h1>
+<p>The code editor is where you enter Python code or shell commands to be executed.
+When entering Python code, you can enter any amount of text, ranging from a
+single Python expression up to a complete Python module containing thousands of
+lines of code.</p>
+<p>Unlike some Python interpreter shells, the VIP Shell does not restrict you to
+entering a single line of code at a time. You have a complete text editor at
+your disposal for entering as much code as you like. The only restriction is
+that you must press the <em>Ctrl-Enter</em> key rather than just the <em>Enter</em> key when
+you want your code to be executed.</p>
+<p>The reason for this should be fairly obvious. Since you can enter any number of
+lines of code at once, the <em>Enter</em> key performs the function it normally
+performs in a text editor. That is, it simply inserts a new line and allows you
+to keep entering text. In order to preserve this standard editor behavior, the
+shell&#8217;s <em>execute</em> action has been moved to the <em>Ctrl-Enter</em> key. This may take a
+bit of getting used to, but after a short break-in period this should quickly
+become second nature to you.</p>
+<p>In addition to entering Python code, you can also enter <em>shell commands</em>. Shell
+commands always start with a leading forward slash character (&#8216;/&#8217;) and perform
+shell specific actions. We&#8217;ll be discussing all of the various shell commands in
+later sections.</p>
+<p>We should also note that you can freely mix shell commands and executable
+Python code within the code editor, as shown in the following example:</p>
+<div class="highlight-python"><pre>/t
+items = []
+for i in xrange( 100000 ):
+    items.append( i )
+/t
+items = []
+for i in xrange( 1000000 ):
+    items.append( i )</pre>
+</div>
+<p>In this example, we are trying to find out if the performance of appending to a
+list is roughly linear with respect to the size of the list. So we have created
+two short Python blocks, one which appends to an initially empty list 100,000
+items, and another which appends 1,000,000 items.</p>
+<p>Before each of these Python code blocks we have inserted a <em>/t</em> (Execution Time)
+shell command which times how long it takes to execute the immediately following
+Python code block.</p>
+<p>When we press the <em>Ctrl-Enter</em> key, the VIP Shell parses the contents of the
+code editor buffer into its constituent shell commands and Python code blocks,
+and executes each in turn. The results of the execution are then displayed in
+the shell&#8217;s history items area, as shown below:</p>
+<img alt="_images/vip_code_editor1.jpg" src="_images/vip_code_editor1.jpg" />
+<p>Some additional things worth noting are:</p>
+<ul class="simple">
+<li>The contents of the code editor buffer where we entered the shell commands and
+Python code blocks has been copied to a <em>Command</em> item in the history items
+area of the shell.</li>
+<li>The result of measuring the execution time of each Python code block has been
+added to the history items list as two <em>Error output</em> items (the /t command
+sends its output to <em>stderr</em>).</li>
+<li>The code editor buffer we entered the shell commands and Python code into has
+been cleared.</li>
+</ul>
+<p>The history items list can contain quite a few different types of data, such
+as <em>Command</em> and <em>Error output</em> items, which we&#8217;ll be discussing in more detail
+in the section on history items.</p>
+<p>The fact that the code editor buffer is cleared after executing the commands is
+normal. The shell does so in order to prepare the editor for the next command or
+code you want to enter. But don&#8217;t worry, if you want to edit or change your code
+and retry it, it&#8217;s easy to reload the code back into the editor by:</p>
+<ul class="simple">
+<li>Right clicking the history item entry containing the commands or code you want
+to re-edit.</li>
+<li>Pressing the <em>Ctrl-Up arrow</em> key while the code editor had keyboard focus.
+Each time you press <em>Ctrl-Up arrow</em> it recalls the next oldest command you
+entered. Similarly, you can press the <em>Ctrl-Down arrow</em> key to recall the next
+newest command if you go too far back in the history items list. You&#8217;ll note
+as you do this that the corresponding <em>Command</em> item in the history list is
+highlighted as you cycle through the history.</li>
+</ul>
+<p>If the command or code you execute has a syntax error or generates an exception,
+the code editor buffer is not cleared automatically. The erroneous code remains
+in the code editor buffer to allow you to correct the code and retry execution.</p>
+<p>If you don&#8217;t like the <em>auto-clear</em> behavior of the editor, you can change it
+using one of the <em>status bar</em> tool icons we&#8217;ll be discussing in the section on
+using the status bar.</p>
+<div class="section" id="keyboard-commands">
+<h2>Keyboard Commands</h2>
+<p>The code editor provides are number of useful commands and actions available
+through the following keyboard shortcuts:</p>
+<dl class="docutils">
+<dt><strong>Ctrl-Enter</strong></dt>
+<dd>Executes the contents of the code editor as a series of one or more Python
+code blocks or shell commands.</dd>
+<dt><strong>Ctrl-Shift-Enter</strong></dt>
+<dd>Inserts a new blank line after the current line with the same indenting.</dd>
+<dt><strong>Ctrl-Tab</strong></dt>
+<dd>Performs code completion based on the text preceding the cursor.</dd>
+<dt><strong>Ctrl-Up</strong></dt>
+<dd>Copies the previous history command into the code editor.</dd>
+<dt><strong>Ctrl-Down</strong></dt>
+<dd>Copies the next history command into the code editor.</dd>
+<dt><strong>Ctrl-Shift-Up</strong></dt>
+<dd>Moves the contents of the current line up one line.</dd>
+<dt><strong>Ctrl-Shift-Down</strong></dt>
+<dd>Moves the contents of the current line down one line.</dd>
+<dt><strong>Alt-Ctrl-Shift-Up</strong></dt>
+<dd>Copies the previous history item into the code editor.</dd>
+<dt><strong>Alt-Ctrl-Shift-Down</strong></dt>
+<dd>Copies the next history item into the code editor.</dd>
+<dt><strong>Ctrl-Delete</strong></dt>
+<dd>Deletes all hidden history items.</dd>
+<dt><strong>Ctrl-Shift-Delete</strong></dt>
+<dd>Deletes all history items.</dd>
+<dt><strong>Ctrl-B</strong></dt>
+<dd>Hides the bottommost history item and its related items.</dd>
+<dt><strong>Ctrl-Shift-B</strong></dt>
+<dd>Unhides the bottommost hidden history item and its related items.</dd>
+<dt><strong>Ctrl-F</strong></dt>
+<dd>Finds the currently selected text, or symbol near the current cursor
+position if no text is selected.</dd>
+<dt><strong>Ctrl-N</strong></dt>
+<dd>Finds the next occurrence of the current search string.</dd>
+<dt><strong>Ctrl-O</strong></dt>
+<dd>Displays the shell options dialog.</dd>
+<dt><strong>Ctrl-P</strong></dt>
+<dd>Finds the previous occurrence of the current search string.</dd>
+<dt><strong>Ctrl-Q</strong></dt>
+<dd>Copies all code editor text to the system clipboard and then deletes it from
+the editor&#8217;s buffer.</dd>
+<dt><strong>Ctrl-S</strong></dt>
+<dd>Saves the current contents of the code editor to a file.</dd>
+<dt><strong>Ctrl-Shift-S</strong></dt>
+<dd>Saves the current contents of the code editor to a file after prompting you
+for the name of the file.</dd>
+<dt><strong>Ctrl-T</strong></dt>
+<dd>Creates a new, empty code editor tab.</dd>
+<dt><strong>Ctrl-Shift-T</strong></dt>
+<dd>Creates a new code editor tab containing a copy of the current code editor&#8217;s
+text.</dd>
+<dt><strong>F2</strong></dt>
+<dd>Same as Ctrl-S.</dd>
+<dt><strong>F3</strong></dt>
+<dd>Toggles the filter bar on or off.</dd>
+<dt><strong>F4</strong></dt>
+<dd>Toggles the status line on or off.</dd>
+</dl>
+</div>
+<div class="section" id="special-shell-variables">
+<h2>Special Shell Variables</h2>
+<p>In addition to whatever values you define by executing or importing Python code,
+the shell also provides two additional values you can access and use within the
+code editor:</p>
+<dl class="docutils">
+<dt><strong>_</strong></dt>
+<dd><p class="first">The underscore variable is always bound to the most recent result returned
+by the shell. Normally this occurs as the result of evaluating a Python
+expression, but it can also be set in other ways, such as by clicking on an
+underlined value link in an <em>Exception</em> or <em>CalledFrom</em> item.</p>
+<p>For example, if you evaluate the expression:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;Hello world!&#39;</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>the shell displays the result:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;Hello&#39;</span>
+</pre></div>
+</div>
+<p>Now, if you evaluate:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">_</span> <span class="o">+</span> <span class="s">&#39; and goodbye&#39;</span>
+</pre></div>
+</div>
+<p>the shell displays:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="s">&#39;Hello and good-bye&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt><strong>__</strong></dt>
+<dd><p class="first">The double underscore variable provides access to the shell history items.
+Each history item has an associated numeric <em>id</em>. You can use the <em>__</em>
+variable to retrieve the value of a particular shell item by using the shell
+item&#8217;s id as the index of <em>__</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can display shell item ids by toggling the <em>id decorator</em> on. The ids
+display in square brackets on the left side of the top line of each shell
+item.</p>
+</div>
+<p>For example, continuing on from our previous example for the <em>_</em> variable,
+the last result displayed might look like:</p>
+<img alt="_images/vip_ids2.jpg" src="_images/vip_ids2.jpg" />
+<p>We could then further manipulate this result as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__</span><span class="p">[</span><span class="mi">129</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;...&#39;</span>
+</pre></div>
+</div>
+<p>which would display:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&#39;Hello and good-bye...&#39;</span>
+</pre></div>
+</div>
+<p>You can also retrieve multiple history item values using standard Python
+slice notation. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">__</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The result is a list containing the values of the shell items whose ids are
+in the specified range.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p>You can use the <em>__</em> variable to retrieve the value of any shell history
+item (or items), not just results. In each case the value returned is
+appropriate for the type of shell item referenced.</p>
+<p class="last">For example, a <em>Command</em> item returns the text of its Python code or
+shell command. Any file or directory item returns its fully qualified
+file or path name, and so on.</p>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_shell_commands.html" title="Shell Commands"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_shell.html" title="The VIP Shell"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

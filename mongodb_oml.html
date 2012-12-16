@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>The MongoDB OML &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="A Complete MongoDB OML Example" href="mongodb_example.html" />
+    <link rel="prev" title="VIPShell" href="tool_vip_shell.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mongodb_example.html" title="A Complete MongoDB OML Example"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_vip_shell.html" title="VIPShell"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_vip_shell.html"
+                        title="previous chapter">VIPShell</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mongodb_example.html"
+                        title="next chapter">A Complete MongoDB OML Example</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-mongodb-oml">
+<h1>The MongoDB OML</h1>
+<p>The MongoDB OML (Object Management Layer) is a Facets package that allows you
+to persist, query, update and delete collections and hierarchies of Facets-based
+objects in an external MongoDB database using a very simple and straightforward
+Facets and Python based programming model. In fact, the model is basically the
+standard Facets model with a small number of new classes and facet types added.</p>
+<p>In case you are not already familiar with it, MongoDB is one of the more
+popular examples of the new class of schema-less, document oriented databases
+that have sprung up over the last few years. Because these databases are not
+based on the relational model which has dominated the database landscape for
+the last several decades, this relatively new category of database is sometimes
+referred to as a <em>No SQL</em> database.</p>
+<p>Because of its schema-less, document centric design, MongoDB is well suited for
+use as a persistent storage layer for object oriented applications. Combined
+with the metadata and change notification framework that Facets provides, the
+MongoDB OML provides a very simple and natural framework for implementing
+object oriented applications with a persistent object storage system.</p>
+<p>There are many examples of using a relational database as the storage mechanism
+for object oriented applications. The software layer used to map objects to a
+relational database is often referred to as an <em>ORM</em> (<em>Object Relational Mapping
+(or Model</em>)). Because MongoDB is not based on the relational model, we have
+instead chosen to call the software layer an <em>OML</em> (<em>Object Mapping Layer</em>).</p>
+<p>There are a wide variety of techniques for saving and restoring Python objects
+to external storage of some sort, some available as part of the core Python
+application, and some as separately installable packages. While we will not
+attempt to compare and contrast all of the available approaches, in this section
+we will present some of the more compelling reasons for using the MongoDB OML,
+and then let you make you own decision about which approach or package to use.</p>
+<dl class="docutils">
+<dt><strong>It&#8217;s easy to use</strong></dt>
+<dd>For the most part, using the MongoDB OML is no different than using the
+rest of the Facets package. If you are already comfortable with the Facets
+style of programming, then using MongoDB OML requires almost no effort. The
+complete example presented in the next section helps illustrates this point
+quite effectively we think.</dd>
+<dt><strong>It supports large amounts of data</strong></dt>
+<dd>MongoDB is a real database, and as a result can easily support storing and
+retrieving huge amounts of data without requiring that all of the data
+first be loaded into memory.</dd>
+<dt><strong>It supports object-oriented query</strong></dt>
+<dd>Individual objects or collections of objects can be easily retrieved from
+a MongoDB using a very simple and straightforward Facets and Python based
+query mechanism. This can be a very important feature when dealing with
+extremely large object collections.</dd>
+<dt><strong>It&#8217;s fast</strong></dt>
+<dd>One of the reasons for choosing MongoDB over some of the other new <em>No SQL</em>
+databases is its reputation for being very fast at storing and retrieving
+data.</dd>
+<dt><strong>It&#8217;s flexible and easy to set up</strong></dt>
+<dd>Another noteworthy characteristic of MongoDB is its relative ease in setting
+up and administering a database. The MongoDB OML extends this by making use
+of the database almost completely transparent to the developer as well.</dd>
+</dl>
+<p>If this brief introduction to the MongoDB OML and its feature set have got you
+in the least bit interested, please continue on with some of the more in
+depth sections, starting with a complete, multi-tool, MongoDB-based application
+example.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_example.html">A Complete MongoDB OML Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_installing.html">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_mongodbobject.html">The MongoDBObject Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_facets.html">MongoDB OML Facets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_mongodb.html">The MongoDB Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_indexes.html">Defining Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mongodb_limitations.html">Limitations of the MongoDB OML</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mongodb_example.html" title="A Complete MongoDB OML Example"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_vip_shell.html" title="VIPShell"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

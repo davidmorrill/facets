@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>History Items &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="Using the Status Bar" href="vip_status_bar.html" />
+    <link rel="prev" title="Shell Commands" href="vip_shell_commands.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_status_bar.html" title="Using the Status Bar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_shell_commands.html" title="Shell Commands"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">History Items</a><ul>
+<li><a class="reference internal" href="#level-of-detail-lod">Level of Detail (LOD)</a></li>
+<li><a class="reference internal" href="#item-decorators">Item Decorators</a></li>
+<li><a class="reference internal" href="#item-types">Item Types</a></li>
+<li><a class="reference internal" href="#item-mouse-commands">Item Mouse Commands</a></li>
+<li><a class="reference internal" href="#item-keyboard-shortcuts">Item Keyboard Shortcuts</a></li>
+<li><a class="reference internal" href="#using-the-item-toolbar">Using the Item Toolbar</a><ul>
+<li><a class="reference internal" href="#all-items">All Items</a></li>
+<li><a class="reference internal" href="#result-item">Result Item</a></li>
+<li><a class="reference internal" href="#directory-item">Directory Item</a></li>
+<li><a class="reference internal" href="#image-file-item">Image File Item</a></li>
+<li><a class="reference internal" href="#python-file-item">Python File Item</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_shell_commands.html"
+                        title="previous chapter">Shell Commands</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_status_bar.html"
+                        title="next chapter">Using the Status Bar</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="history-items">
+<span id="vip-history-items"></span><h1>History Items</h1>
+<p>The <em>history items</em> portion of the shell user interface contains a history of
+all the commands you have executed in your shell session along with their
+associated results, outputs and exceptions.</p>
+<p>Unlike the default Python interpreter shell, which only displays text, history
+items in the VIP Shell are objects which can display as text, graphics or even
+complete user interfaces. Being objects, they are also <em>smart</em> and support a
+wide variety of actions that manipulate them in various ways, as you shall soon
+see.</p>
+<div class="section" id="level-of-detail-lod">
+<h2>Level of Detail (LOD)</h2>
+<p>Each history item has associated with it an attribute called <em>level of detail</em>
+(LOD for short). Basically, the LOD setting controls how much of the information
+associated with the history item is displayed at any given instant, and has one
+of the following three values:</p>
+<dl class="docutils">
+<dt><strong>Collapsed</strong></dt>
+<dd>Displays the item&#8217;s information collapsed down to a single line.</dd>
+</dl>
+<img alt="_images/vip_lod0.jpg" src="_images/vip_lod0.jpg" />
+<dl class="docutils">
+<dt><strong>Expanded</strong></dt>
+<dd>Displays an expanded form of the item&#8217;s information. The expanded form can
+display more than one line of text, but has an upper bound specified by a
+shell option you control.</dd>
+</dl>
+<img alt="_images/vip_lod1.jpg" src="_images/vip_lod1.jpg" />
+<dl class="docutils">
+<dt><strong>Full</strong></dt>
+<dd>Displays all of the item&#8217;s information in full detail. Their is no
+predefined upper bound for the amount of information that can be displayed
+for an item.</dd>
+</dl>
+<img alt="_images/vip_lod2.jpg" src="_images/vip_lod2.jpg" />
+<p>Each history item has its own individual LOD setting, so you have complete
+control over how much information is displayed on an item by item basis. There
+are a number of keyboard, mouse and toolbar controls that affect the level of
+detail setting for a single history item, or all history items at once. We&#8217;ll be
+covering these shortly.</p>
+</div>
+<div class="section" id="item-decorators">
+<h2>Item Decorators</h2>
+<p>History items also have a number of optional visual decorators that provide
+additional information about the items:</p>
+<dl class="docutils">
+<dt><strong>Id</strong></dt>
+<dd><p class="first">Each history item has an associated numeric <em>id</em> which uniquely identifies
+the item within your shell session. You can also use the id to
+programmatically refer to a history item from Python code executed in the
+shell using the special <em>__</em> variable described previously.</p>
+<p>History item ids are assigned sequentially starting from 0. They may or may
+not always appear sequentially in the history list however since it is
+possible to move, hide and delete items in the list.</p>
+<p class="last">When the id decorator is enabled, the item id appears at the beginning of
+the top line of each history item:</p>
+</dd>
+</dl>
+<img alt="_images/vip_ids.jpg" src="_images/vip_ids.jpg" />
+<dl class="docutils">
+<dt><strong>Icon</strong></dt>
+<dd>Each type of history item also has an associated icon that helps identify
+the kind of data it represents. When the icon decorator is enabled, the icon
+is displayed at the beginning of the top line of each history item:</dd>
+</dl>
+<img alt="_images/vip_icons.jpg" src="_images/vip_icons.jpg" />
+<dl class="docutils">
+<dt><strong>Line numbers</strong></dt>
+<dd>When the line numbers decorator is enabled, each line of a history item with
+the <em>expanded</em> or <em>full</em> level of detail setting is prefixed with its line
+number:</dd>
+</dl>
+<img alt="_images/vip_lines.jpg" src="_images/vip_lines.jpg" />
+<p>There are a number of ways to turn the item decorators on or off which we&#8217;ll be
+discussing shortly.</p>
+</div>
+<div class="section" id="item-types">
+<h2>Item Types</h2>
+<p>As mentioned previously, shell items can be of several different types (i.e.
+classes). While they all share many common characteristics and actions, each
+class also has its own unique characteristics, even if only a slightly different
+appearance or icon.</p>
+<p>The following is a list of all standard shell history item types along with a
+brief description of their function and typical appearance:</p>
+<dl class="docutils">
+<dt><strong>Command Item</strong></dt>
+<dd>Represents one or more previously executed blocks of Python code and/or
+shell commands from the current shell session.</dd>
+</dl>
+<img alt="_images/vip_item_command.jpg" src="_images/vip_item_command.jpg" />
+<dl class="docutils">
+<dt><strong>Persisted Command Item</strong></dt>
+<dd>Represents one or more previously executed blocks of Python code and/or
+shell commands from a previous shell session. Unlike other shell items,
+commands are normally persisted from session to session until explicitly
+deleted, helping to support a workflow involving ongoing debugging or code
+development.</dd>
+</dl>
+<img alt="_images/vip_item_pcommand.jpg" src="_images/vip_item_pcommand.jpg" />
+<dl class="docutils">
+<dt><strong>Result Item</strong></dt>
+<dd>Represents the result obtained by evaluating a Python expression in the
+shell.</dd>
+</dl>
+<img alt="_images/vip_item_result.jpg" src="_images/vip_item_result.jpg" />
+<dl class="docutils">
+<dt><strong>Output Item</strong></dt>
+<dd>Represents printed output produced as a result of executing a block of
+Python code in the shell.</dd>
+</dl>
+<img alt="_images/vip_item_output.jpg" src="_images/vip_item_output.jpg" />
+<dl class="docutils">
+<dt><strong>Error Item</strong></dt>
+<dd>Represent printed output sent to <em>stderr</em> as a result of executing a block
+of Python code in the shell.</dd>
+</dl>
+<img alt="_images/vip_item_error.jpg" src="_images/vip_item_error.jpg" />
+<dl class="docutils">
+<dt><strong>Exception Item</strong></dt>
+<dd>Represents an exception generated as a result of executing a block of Python
+code in the shell.</dd>
+</dl>
+<img alt="_images/vip_item_exception.jpg" src="_images/vip_item_exception.jpg" />
+<dl class="docutils">
+<dt><strong>Directory Item</strong></dt>
+<dd>Represents a directory and its contents.</dd>
+</dl>
+<img alt="_images/vip_item_directory.jpg" src="_images/vip_item_directory.jpg" />
+<dl class="docutils">
+<dt><strong>File Item</strong></dt>
+<dd>Represents a file of a type not specifically supported by the shell.</dd>
+</dl>
+<img alt="_images/vip_item_file.jpg" src="_images/vip_item_file.jpg" />
+<dl class="docutils">
+<dt><strong>Python File Item</strong></dt>
+<dd>Represents a Python source file and its contents.</dd>
+</dl>
+<img alt="_images/vip_item_pyfile.jpg" src="_images/vip_item_pyfile.jpg" />
+<dl class="docutils">
+<dt><strong>Image File Item</strong></dt>
+<dd>Represents an image file (e.g. a .png or .jpg file)</dd>
+</dl>
+<img alt="_images/vip_item_imgfile.jpg" src="_images/vip_item_imgfile.jpg" />
+<dl class="docutils">
+<dt><strong>View Item</strong></dt>
+<dd>Represents a user interface view of a Facets-based object.</dd>
+</dl>
+<img alt="_images/vip_item_view.jpg" src="_images/vip_item_view.jpg" />
+<dl class="docutils">
+<dt><strong>Log Item</strong></dt>
+<dd>Represents the information associated with a <em>debug</em>, <em>info</em>, <em>warning</em>,
+<em>error</em>, <em>critical</em> or <em>log</em> function call from the <tt class="docutils literal"><span class="pre">facets.core.debug</span></tt>
+module.</dd>
+</dl>
+<img alt="_images/vip_item_log.jpg" src="_images/vip_item_log.jpg" />
+<dl class="docutils">
+<dt><strong>Locals Item</strong></dt>
+<dd>Represents the local variables and their values active at the time the
+<em>show_locals</em> function from the <tt class="docutils literal"><span class="pre">facets.core.debug</span></tt> was called.</dd>
+</dl>
+<img alt="_images/vip_item_locals.jpg" src="_images/vip_item_locals.jpg" />
+<dl class="docutils">
+<dt><strong>Called From Item</strong></dt>
+<dd>Represents the set of stack frames active at the time the <em>called_from</em>
+function from the <tt class="docutils literal"><span class="pre">facets.core.debug</span></tt> module was called.</dd>
+</dl>
+<img alt="_images/vip_item_calledfrom.jpg" src="_images/vip_item_calledfrom.jpg" />
+</div>
+<div class="section" id="item-mouse-commands">
+<h2>Item Mouse Commands</h2>
+<p>The history item list supports a number of mouse commands that can be invoked
+when the mouse pointer is over a history item:</p>
+<dl class="docutils">
+<dt><strong>Click</strong></dt>
+<dd>Executes the current item. The meaning of <em>execute</em> can vary from one
+history item type to the next. This command is most commonly used with
+<em>Command</em> items in order to re-execute their associated Python code blocks
+and/or shell commands.</dd>
+<dt><strong>Ctrl-click</strong></dt>
+<dd>Selects the current item, causing it to be highlighted. The selected item
+can be used with several keyboard shortcuts to establish a target or range
+of items.</dd>
+<dt><strong>Shift-click</strong></dt>
+<dd>Executes the current and all following visible history items.</dd>
+<dt><strong>Right-click</strong></dt>
+<dd>Copies the contents of the current item to the code editor text buffer,
+completely replacing its previous contents.</dd>
+<dt><strong>Ctrl-right-click</strong></dt>
+<dd>Appends the contents of the current item to the end of the code editor text
+buffer.</dd>
+<dt><strong>Shift-right-click</strong></dt>
+<dd>Appends the contents of the current item and all following visible history
+items to the end of the code editor text buffer.</dd>
+<dt><strong>Alt-right-click</strong></dt>
+<dd>Appends a reference to the current item (e.g. __[11]) to the end of the
+code editor text buffer.</dd>
+<dt><strong>Alt-Shift-right-click</strong></dt>
+<dd>Appends references to the current item and all following visible history
+items (e.g. __[11], __[13],__[27]) to the end of the code editor text
+buffer.</dd>
+</dl>
+</div>
+<div class="section" id="item-keyboard-shortcuts">
+<h2>Item Keyboard Shortcuts</h2>
+<p>Each history item supports a number of actions available via keyboard shortcuts.
+The remainder of this section lists and describes each such shortcut. Please be
+aware that all shortcuts are pointer context sensitive, meaning that the
+keyboard action always applies to the history item immediately under the mouse
+cursor (referred to as the <em>current item</em>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Many of the actions are shared across all history item types, but a few are
+particular to a specific type. In those cases, the applicable type is shown
+in square brackets immediately following the shortcut key name.</p>
+</div>
+<dl class="docutils">
+<dt><strong>&#8216;</strong> (single quote)</dt>
+<dd>Hides all duplicate items in the history list. A duplicate item is any
+history item having the same type and content as another item.</dd>
+<dt><strong>,</strong> (comma)</dt>
+<dd>Hides all items in the history list preceding the current item.</dd>
+<dt><strong>-</strong> (minus sign)</dt>
+<dd>Hides the current item and any associated items in the history list. A
+command, and all items it produces, form a set of associated items.</dd>
+<dt><strong>.</strong> (period)</dt>
+<dd>Hides all items in the history list following the current item.</dd>
+<dt><strong>/</strong> (forward slash)</dt>
+<dd>Show all currently hidden items in the history list.</dd>
+<dt><strong>0</strong></dt>
+<dd>Hides all items produced by this item&#8217;s associated command, but does not
+hide the command itself.</dd>
+<dt><strong>1</strong></dt>
+<dd>Toggles the display of item id decorators for all items.</dd>
+<dt><strong>2</strong></dt>
+<dd>Toggles the display of item icon decorators for all items.</dd>
+<dt><strong>3</strong></dt>
+<dd>Toggles the display of item line number decorators for all items.</dd>
+<dt><strong>4</strong></dt>
+<dd>Cycles to the next available theme.</dd>
+<dt><strong>=</strong> (equal sign)</dt>
+<dd>Shows only the non-hidden history items of the same type as the current
+item.</dd>
+<dt><strong>E</strong></dt>
+<dd>Creates a new window containing a copy of the current item.</dd>
+<dt><strong>T</strong></dt>
+<dd>Transfers the current item to another shell and keeps the item in this
+shell.</dd>
+<dt><strong>[</strong> (left square bracket)</dt>
+<dd>Hides all history items preceding the current item with the same type as the
+current item.</dd>
+<dt><strong>\</strong> (backward slash)</dt>
+<dd>Hides all history items between the current item and selection.</dd>
+<dt><strong>]</strong> (right square bracket)</dt>
+<dd>Hides all history items following the current item with the same type as the
+current item.</dd>
+<dt><strong>b</strong></dt>
+<dd>Hides the bottommost visible history item and its associated items.</dd>
+<dt><strong>c</strong></dt>
+<dd>Copies the contents of the current item to the system clipboard.</dd>
+<dt><strong>d</strong> [Python File]</dt>
+<dd>Displays the default view associated with the current Python source file.</dd>
+<dt><strong>e</strong></dt>
+<dd>Adds a new tab containing a copy of contents of the current item to the
+shell.</dd>
+<dt><strong>e</strong> [Python File]</dt>
+<dd>Creates a tab containing the contents of the Python source code file for the
+current item.</dd>
+<dt><strong>f</strong></dt>
+<dd>Filters out wanted or unwanted lines from the current item by displaying a
+popup dialog where you can enter the text the filter must match (or not
+match).</dd>
+<dt><strong>i</strong> [Image File]</dt>
+<dd>Creates an inline image transformer view for the current image file.</dd>
+<dt><strong>i</strong> [Result]</dt>
+<dd>Displays the implementation source files for the current result item.</dd>
+<dt><strong>l</strong> [Directory]</dt>
+<dd>Lists the Python source files in the current directory item.</dd>
+<dt><strong>n</strong></dt>
+<dd>Shows the first hidden item (and its associated items) after the last
+visible history item.</dd>
+<dt><strong>o</strong></dt>
+<dd>Shows the shells options dialog.</dd>
+<dt><strong>q</strong></dt>
+<dd>Clears the current contents of the code editor buffer.</dd>
+<dt><strong>s</strong></dt>
+<dd>Saves the contents of the current item to a file.</dd>
+<dt><strong>t</strong></dt>
+<dd>Transfers the current item to another shell and then deletes it from this
+shell.</dd>
+<dt><strong>x</strong></dt>
+<dd>Exports the current item to an external program or tool.</dd>
+<dt><strong>z</strong> [View]</dt>
+<dd>Changes the vertical height of the current view item using a pop-up slider.</dd>
+<dt><strong>z</strong> [Image File]</dt>
+<dd>Creates an inline image zoom view for the current image file.</dd>
+<dt><strong>Backspace</strong></dt>
+<dd>Hides all items like the current one in the history list.</dd>
+<dt><strong>Ctrl-Delete</strong></dt>
+<dd>Deletes all currently hidden items from the history list.</dd>
+<dt><strong>Ctrl-End</strong></dt>
+<dd>Moves the current item and all associated items to the bottom of the history
+list.</dd>
+<dt><strong>Ctrl-Home</strong></dt>
+<dd>Moves the current item and all associated items to the top of the history
+list.</dd>
+<dt><strong>Ctrl-Shift-Delete</strong></dt>
+<dd>Deletes all items from the history list.</dd>
+<dt><strong>Ctrl-c</strong></dt>
+<dd>Copies the contents of the current item to the system clipboard.</dd>
+<dt><strong>Delete</strong></dt>
+<dd>Hides the current item in the history list.</dd>
+<dt><strong>Down</strong></dt>
+<dd>Moves the current item down one item in the history list if possible.</dd>
+<dt><strong>End</strong></dt>
+<dd>Moves the current item to the bottom of the history list.</dd>
+<dt><strong>Enter</strong></dt>
+<dd>Executes the current item.</dd>
+<dt><strong>F3</strong></dt>
+<dd>Toggles the shell&#8217;s filter bar on or off.</dd>
+<dt><strong>F4</strong></dt>
+<dd>Toggles the shell&#8217;s status bar on or off.</dd>
+<dt><strong>Home</strong></dt>
+<dd>Moves the current item to the top of the history list.</dd>
+<dt><strong>Left</strong></dt>
+<dd>Decreases the level of detail of the current item if possible.</dd>
+<dt><strong>Right</strong></dt>
+<dd>Increases the level of detail of the current item if possible.</dd>
+<dt><strong>Up</strong></dt>
+<dd>Moves the current item up in the history list if possible.</dd>
+</dl>
+</div>
+<div class="section" id="using-the-item-toolbar">
+<h2>Using the Item Toolbar</h2>
+<p>Each history item has associated with it a number of contextual toolbars
+containing one or more tools for manipulating the item in some way. The toolbars
+are located on the left, right and center of each history item, but do not
+appear until you move the mouse pointer near the toolbar&#8217;s <em>home</em> position.</p>
+<p>The home position for each toolbar is indicated by a small marker dot that
+appears when you first move the mouse pointer over the item:</p>
+<img alt="_images/vip_toolbar1.jpg" src="_images/vip_toolbar1.jpg" />
+<p>As the mouse pointer approaches the toolbar&#8217;s home position, the associated
+toolbar gradually fades into view:</p>
+<img alt="_images/vip_toolbar2.jpg" src="_images/vip_toolbar2.jpg" />
+<p>If you move the mouse pointer away from the home position, the toolbar fades out
+again.</p>
+<p>However, if you move the mouse pointer close to the toolbar&#8217;s home position it
+<em>locks</em> the toolbar into place so that it does not fade out as you move the
+mouse pointer away. This is to allow you to select a tool not located near the
+toolbar&#8217;s home position. In this case, you will have to move the mouse pointer
+completely out of the toolbar to make it disappear again.</p>
+<p>The VIP Shell provides a default set of tools for the three toolbars. However,
+you can use the shell&#8217;s options dialog to organize the toolbars as you like. If
+you remove all tools from a particular toolbar, its home position marker does
+not appear when you move the mouse pointer over a history item.</p>
+<p>There are a core set of tools that apply to all history items. However, there
+also a number of tools that only apply to certain item types. The shell options
+<em>Toolbar</em> tab groups all of these item specific tools into a single category
+referred to as: <em>Display custom item actions</em>. The shell displays all custom
+item tools at the right end of whatever toolbar positions you select.</p>
+<p>You invoke a tool simply by clicking on it. The core set of tools are as
+follows:</p>
+<div class="section" id="all-items">
+<h3>All Items</h3>
+<dl class="docutils">
+<dt><strong>Hide item</strong></dt>
+<dd>Hides the item in the history item list.</dd>
+<dt><strong>Increase item level of detail</strong></dt>
+<dd>Increases the item&#8217;s level of detail setting by one level. If the item is
+already at the <em>full</em> setting, the tool appears greyed out in the toolbar.</dd>
+<dt><strong>Decrease item level of detail</strong></dt>
+<dd>Decreases the item&#8217;s level of detail setting by one level. If the item is
+already at the <em>collapsed</em> setting, the tool appears greyed out in the
+toolbar.</dd>
+<dt><strong>Execute item</strong></dt>
+<dd><p class="first">Performs the item&#8217;s <em>execute</em> action. The effect of <em>execute</em> varies between
+item types. For example, for a <em>Command</em> item the code associated with the
+item is re-executed. For a <em>Python File</em> item, an <em>execfile</em> is performed on
+the file.</p>
+<p class="last">If the item does not support the <em>execute</em> action, the tool appears greyed
+out in the toolbar.</p>
+</dd>
+<dt><strong>Display item in a new window</strong></dt>
+<dd>Removes the item from the history list and displays it in a new window.</dd>
+<dt><strong>Display item in a new tab</strong></dt>
+<dd>Leaves the item in the history list and also displays it as a new tab in
+the code editor section of the shell.</dd>
+<dt><strong>Save item to a file</strong></dt>
+<dd>Saves the contents of the item to a file after prompting for the name of the
+file.</dd>
+<dt><strong>Copy item to the clipboard</strong></dt>
+<dd>Copies the contents of the item to the system clipboard.</dd>
+<dt><strong>Display shell options</strong></dt>
+<dd>Displays the shell options dialog.</dd>
+<dt><strong>Toggle item ids</strong></dt>
+<dd>Toggles the item <em>id</em> decorator on or off for all history items.</dd>
+<dt><strong>Toggle item icons</strong></dt>
+<dd>Toggles the item <em>icon</em> decorator on or off for all history items.</dd>
+<dt><strong>Toggle item line numbers</strong></dt>
+<dd>Toggles the item <em>line numbers</em> decorator on or off for all history items.</dd>
+</dl>
+<p>In addition, the following history item type specific tools are also available:</p>
+</div>
+<div class="section" id="result-item">
+<h3>Result Item</h3>
+<dl class="docutils">
+<dt><strong>Show the complete structure of the item</strong></dt>
+<dd>Adds a new <em>View</em> item containing a ValueEditor view of the item&#8217;s value.</dd>
+</dl>
+<img alt="_images/vip_toolbar_value.jpg" src="_images/vip_toolbar_value.jpg" />
+<dl class="docutils">
+<dt><strong>Show the Python source files for the item</strong></dt>
+<dd>Adds a <em>Python File</em> item for each source file used in the implementation
+of the item&#8217;s value. If no source files can be found, the tool does not
+appear in the toolbar.</dd>
+</dl>
+<img alt="_images/vip_toolbar_impl.jpg" src="_images/vip_toolbar_impl.jpg" />
+<dl class="docutils">
+<dt><strong>Display the default view for the item</strong></dt>
+<dd>Adds a new View item containing the default Facets view for the item&#8217;s
+value. If the value is not an instance of the HasFacets class, the tool
+does not appear in the toolbar.</dd>
+</dl>
+<img alt="_images/vip_toolbar_rview.jpg" src="_images/vip_toolbar_rview.jpg" />
+</div>
+<div class="section" id="directory-item">
+<h3>Directory Item</h3>
+<dl class="docutils">
+<dt><strong>List Python source files in the directory</strong></dt>
+<dd>Adds a <em>Python File</em> item for each Python source file in the directory.</dd>
+</dl>
+<img alt="_images/vip_toolbar_src.jpg" src="_images/vip_toolbar_src.jpg" />
+</div>
+<div class="section" id="image-file-item">
+<h3>Image File Item</h3>
+<dl class="docutils">
+<dt><strong>Create an image zoom view for the item</strong></dt>
+<dd>Adds a <em>View</em> item containing an ImageZoomEditor view of the image. You can
+use this to zoom in or out of the image and to examine the various color
+attributes of the image&#8217;s pixels.</dd>
+</dl>
+<img alt="_images/vip_toolbar_zoom.jpg" src="_images/vip_toolbar_zoom.jpg" />
+<dl class="docutils">
+<dt><strong>Create an image transformer view for the item</strong></dt>
+<dd>Adds a <em>View</em> item containing an image transformer view of the image. You
+can use this to manipulate the appearance of the image in various ways and
+to define HLSATransform values and masks that can be used in Facets-based
+image manipulation code.</dd>
+</dl>
+<img alt="_images/vip_toolbar_xform.jpg" src="_images/vip_toolbar_xform.jpg" />
+</div>
+<div class="section" id="python-file-item">
+<h3>Python File Item</h3>
+<dl class="docutils">
+<dt><strong>Display the view for the source file</strong></dt>
+<dd><p class="first">Attempts to display the default Facets view for the demo or popup value
+defined by the module. This is intended mainly for use with Python source
+modules adhering to the Facets <em>demo</em> protocol.</p>
+<p class="last">If the module defines a <em>demo</em>, a <em>View</em> item for the demo&#8217;s default Facets
+view is created. If the module defines a <em>popup</em>, a popup view of the
+popup&#8217;s default Facets view is displayed.</p>
+</dd>
+</dl>
+<img alt="_images/vip_toolbar_view.jpg" src="_images/vip_toolbar_view.jpg" />
+<dl class="docutils">
+<dt><strong>Edit the source file inline</strong></dt>
+<dd>Adds a <em>View</em> item containing a TextEditor for editing the module source
+code.</dd>
+</dl>
+<img alt="_images/vip_toolbar_inline.jpg" src="_images/vip_toolbar_inline.jpg" />
+<dl class="docutils">
+<dt><strong>Edit the source file in an editor tab</strong></dt>
+<dd>Adds a new code editor tab editing the module&#8217;s source code.</dd>
+</dl>
+<img alt="_images/vip_toolbar_tab.jpg" src="_images/vip_toolbar_tab.jpg" />
+<dl class="docutils">
+<dt><strong>Edit the source file in a separate window</strong></dt>
+<dd>Creates a separate window containing a CodeEditor editing the module&#8217;s
+source code.</dd>
+</dl>
+<img alt="_images/vip_toolbar_window.jpg" src="_images/vip_toolbar_window.jpg" />
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_status_bar.html" title="Using the Status Bar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_shell_commands.html" title="Shell Commands"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

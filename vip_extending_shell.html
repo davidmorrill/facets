@@ -1,0 +1,433 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Extending the Shell &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="The Tool Framework" href="tool_framework.html" />
+    <link rel="prev" title="Shell Themes" href="vip_themes.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_framework.html" title="The Tool Framework"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_themes.html" title="Shell Themes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Extending the Shell</a><ul>
+<li><a class="reference internal" href="#creating-new-commands">Creating New Commands</a><ul>
+<li><a class="reference internal" href="#command-facets">Command Facets</a></li>
+<li><a class="reference internal" href="#command-override-methods">Command Override Methods</a></li>
+<li><a class="reference internal" href="#command-helper-methods">Command Helper Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_themes.html"
+                        title="previous chapter">Shell Themes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_framework.html"
+                        title="next chapter">The Tool Framework</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="extending-the-shell">
+<span id="vip-extending-shell"></span><h1>Extending the Shell</h1>
+<p>Since the source code for the VIP Shell is included, enterprising developers are
+free to extend it in whatever way they want. However, in this section we will be
+covering three specific, architected ways of extending the shell:</p>
+<ul class="simple">
+<li>Creating new commands</li>
+<li>Creating new history items</li>
+<li>Creating new themes</li>
+</ul>
+<div class="section" id="creating-new-commands">
+<h2>Creating New Commands</h2>
+<p>A shell command is an action that can be executed directly from the code editor
+that extends the capabilities of the shell in some useful way. You create a
+shell command by defining a new Python class that derives from the ShellCommand
+base class and registering that class with the shell.</p>
+<p>Let&#8217;s start with a simple example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">facets.ui.vip_shell.commands.api</span> <span class="kn">import</span> <span class="n">ShellCommand</span>
+
+<span class="k">class</span> <span class="nc">TypeCommand</span> <span class="p">(</span> <span class="n">ShellCommand</span> <span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">execute</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">item</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span>
+
+<span class="n">__</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">register</span><span class="p">(</span> <span class="s">&#39;!&#39;</span><span class="p">,</span> <span class="n">TypeCommand</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The purpose of this command is to display the history item type of each result
+returned by all Python code blocks or shell commands executed prior to this
+command in the same code editor execution. To see what we mean by this, let&#8217;s
+try executing the following:</p>
+<div class="highlight-python"><pre>1+1
+/!</pre>
+</div>
+<p>which should display:</p>
+<img alt="_images/vip_def_cmd1.jpg" src="_images/vip_def_cmd1.jpg" />
+<p>The last block in this figure is the output from our command, indicating that
+the <tt class="docutils literal"><span class="pre">1+1</span></tt> Python expression preceding it returned two history items: a
+CommandItem instance used to represent the Python expression (and our /!
+command), and a ResultItem object representing the result of evaluating the
+<tt class="docutils literal"><span class="pre">`1+1`</span></tt> expression (i.e. <em>2</em>).</p>
+<p>Now let&#8217;s go back to our command definition and provide some comments about how
+the code works:</p>
+<ul>
+<li><p class="first">We create the command by defining TypeCommand as a subclass of ShellCommand.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">__.shell.register(</span> <span class="pre">'!',</span> <span class="pre">TypeCommand</span> <span class="pre">)</span></tt> statement registers our command
+with the shell under the name <em>!</em>. Since we know this code is executed within
+a VIP Shell instance, we use the <em>__</em> shell variable to get access to the
+shell&#8217;s <em>register</em> method, which takes the name of the command and the class
+implementing the command as arguments.</p>
+<p>Also note that the name the command is registered under can be any string
+which does not contain a blank and which is not the name of one of the shell&#8217;s
+built-in commands.</p>
+</li>
+<li><p class="first">The command&#8217;s logic is provided by the <em>execute</em> method, which all commands
+should override. This method has no arguments. The reason is that all the
+information the command needs to operate is provided as part of the command&#8217;s
+state. This is illustrated in the example by the <tt class="docutils literal"><span class="pre">self.items</span></tt> reference,
+which provides the list of history items returned by all previously executed
+commands.</p>
+</li>
+</ul>
+<p>Because we entered and executed the command definition directly within the shell
+itself, the command is not automatically persisted across shell sessions. To
+create a persistent definition we need to save the definition to a file and then
+execute the file from the shell.</p>
+<p>For example, if we save the TypeCommand definition to a file called
+<em>type_command.py</em>, we can create a permanent command for it by executing:</p>
+<div class="highlight-python"><pre>/x type_command</pre>
+</div>
+<p>which should display the following result:</p>
+<img alt="_images/vip_def_cmd2.jpg" src="_images/vip_def_cmd2.jpg" />
+<p>If you now exit and restart your shell session, you&#8217;ll find that the /!
+command is already defined. Remember that you can always unregister any command
+you&#8217;ve previously defined using the <em>-</em> modifier. For example:</p>
+<div class="highlight-python"><pre>/!-</pre>
+</div>
+<p>which should display:</p>
+<img alt="_images/vip_def_cmd3.jpg" src="_images/vip_def_cmd3.jpg" />
+<p>If you need to change the definition of a command, simply update its definition
+file and re-execute it from the shell as shown previously. This time you&#8217;ll get
+a message indicating that the command has been redefined:</p>
+<img alt="_images/vip_def_cmd4.jpg" src="_images/vip_def_cmd4.jpg" />
+<p>One nice feature of the shell&#8217;s command system is that any shell commands you
+add are automatically integrated into the shell&#8217;s help system:</p>
+<img alt="_images/vip_def_cmd5.jpg" src="_images/vip_def_cmd5.jpg" />
+<p>The <em>/!</em> command we defined is shown in blue to indicate that it is a user-
+defined command. You&#8217;ll note that it does not have a helpful command summary
+displayed next to its name like the other commands do. In order to support this
+feature, we need to define a value for the command&#8217;s <em>summary</em> facet. For
+example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">TypeCommand</span> <span class="p">(</span> <span class="n">ShellCommand</span> <span class="p">):</span>
+
+    <span class="n">summary</span> <span class="o">=</span> <span class="s">&#39;Displays the type of each preceding history item result.&#39;</span>
+
+    <span class="k">def</span> <span class="nf">execute</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Having made and executed this change, we should now see:</p>
+<img alt="_images/vip_def_cmd6.jpg" src="_images/vip_def_cmd6.jpg" />
+<p>This looks good, but if we click on the /! link, we see the following message:</p>
+<img alt="_images/vip_def_cmd7.jpg" src="_images/vip_def_cmd7.jpg" />
+<p>In order to provide the full-length help for the command we either need to:</p>
+<ul class="simple">
+<li>Assign the help text as the value of the command&#8217;s <em>help</em> facet, or</li>
+<li>Override the <em>show_help</em> method to return the appropriate help description
+string.</li>
+</ul>
+<p>Setting the <em>help</em> facet is the easiest solution in the case where the help text
+is a constant. Overriding the <em>show_help</em> method works better in cases where the
+help text is dynamic, depending upon other values in the command object&#8217;s state,
+such as the name the command was invoked with or the options provided with the
+command.</p>
+<p>In this case, we&#8217;ll set the <em>help</em> facet in the TypeCommand class definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">TypeHelp</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">Displays the class type of each history item returned by all Python code</span>
+<span class="s">blocks or shell commands preceding this one in the code editor text buffer.</span>
+
+<span class="s">The command has no options.</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">class</span> <span class="nc">TypeCommand</span> <span class="p">(</span> <span class="n">ShellCommand</span> <span class="p">):</span>
+
+    <span class="n">summary</span> <span class="o">=</span> <span class="s">&#39;Displays the type of each preceding history item result.&#39;</span>
+    <span class="n">help</span>    <span class="o">=</span> <span class="n">TypeHelp</span>
+
+    <span class="k">def</span> <span class="nf">execute</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="o">...</span>
+</pre></div>
+</div>
+<p>Now when we click on the link for the /! command in the help commands list we
+get the following result:</p>
+<img alt="_images/vip_def_cmd8.jpg" src="_images/vip_def_cmd8.jpg" />
+<p>Nice! So now you&#8217;ve seen how with just a few lines of code you can create your
+own custom shell command fully integrated with the shell&#8217;s built-in help system.</p>
+<div class="section" id="command-facets">
+<h3>Command Facets</h3>
+<p>As we mentioned previously, a shell command&#8217;s <em>execute</em> method is not passed
+any arguments because all information it needs is available from its object
+state. The following list describes the state elements in more detail:</p>
+<dl class="docutils">
+<dt>summary</dt>
+<dd>A string you provide containing a short, one-line summary of what the
+command does. The value is used in creating the help command list of all
+available shell commands.</dd>
+<dt>help</dt>
+<dd><p class="first">A string you provide containing the full description of what the command
+does. The value is used when the user requests help for the command, either
+by clicking on the command&#8217;s link in the help command list, or by executing
+the command with the ? suffix (e.g. /!?).</p>
+<p class="last">This value is returned by the default implementation of the <em>show_help</em>
+method.</p>
+</dd>
+<dt>options_type</dt>
+<dd><p class="first">An enumerated value you provide which describes what type of <em>options</em> data
+the command accepts. The possible values are:</p>
+<dl class="docutils">
+<dt>none</dt>
+<dd>The command does not have any options.</dd>
+<dt>path</dt>
+<dd>The command accepts a path (i.e. directory). Setting this value enables
+<em>path tab completion</em> when the user presses the <em>Ctrl-Tab</em> key in the
+code editor.</dd>
+<dt>file</dt>
+<dd>The command accepts a file. Setting this value enables <em>file name tab
+completion</em> when the user presses the <em>Ctrl-Tab</em> key in the code editor.</dd>
+<dt>source</dt>
+<dd>The command accepts a Python source file. Setting this value enables
+<em>Python source file name tab completion</em> when the user presses the
+<em>Ctrl-Tab</em> key in the code editor.</dd>
+<dt>expression</dt>
+<dd>The command accepts a Python expression. Setting this value enables
+<em>Python tab completion</em> when the user presses the <em>Ctrl-Tab</em> key in the
+code editor.</dd>
+</dl>
+<p class="last">Setting the correct value for the options type makes your command more user
+friendly when the user is typing it in the shell&#8217;s code editor. The default
+value is <strong>none</strong>, meaning that the shell does not provide any special user
+assistance for the command when the user presses the <em>Ctrl-Tab</em> key.</p>
+</dd>
+<dt>shell</dt>
+<dd>A reference to the VIP Shell instance the command is invoked from. This
+value is set by the shell prior to calling <em>execute</em>. The shell provides
+access to many useful helper methods and values, such as the history item
+list and history item factory methods.</dd>
+<dt>command</dt>
+<dd><p class="first">A string containing the name the command was invoked with. This value is set
+by the shell prior to calling <em>execute</em>. This value is useful in cases where
+you register your command under more than one name, since it allows you to
+use the command name to specify additional information about the operation
+to be performed.</p>
+<p class="last">For example, the built-in <em>p</em> and <em>pp</em> commands both reference the same
+shell command class, which uses the <em>command</em> name to determine whether the
+profiler results should be displayed in the shell or not.</p>
+</dd>
+<dt>options</dt>
+<dd>A string containing the options passed to your command. This value is set by
+the shell prior to calling <em>execute</em>.</dd>
+<dt>items</dt>
+<dd>The list of history items returned by prior sub-commands executed in the
+same code editor command execution. This value is set by the shell prior to
+calling <em>execute</em>.</dd>
+<dt>is_help</dt>
+<dd>A boolean value indicating whether this is a help request (True) or
+execution request (False). This value is set by the shell prior to calling
+<em>execute</em>, but you do not need to check it since the <em>execute</em> method is
+only called if it is False. The value is mainly used by the shell itself
+as part of managing the command&#8217;s life cycle.</dd>
+</dl>
+</div>
+<div class="section" id="command-override-methods">
+<h3>Command Override Methods</h3>
+<p>The ShellCommand class also defines two methods you might need to override:</p>
+<dl class="docutils">
+<dt>execute</dt>
+<dd><p class="first">Called when the command is executed. It has no arguments, but can return
+several different result types:</p>
+<dl class="last docutils">
+<dt>None</dt>
+<dd>No result. Usually returned by commands executed for their side effects.</dd>
+<dt>history item (or a list of history items)</dt>
+<dd>Each history item returned is appended to the results for the code
+editor command the shell command is part of. The command&#8217;s <em>shell</em>
+reference provides access to factory methods for creating new history
+items.</dd>
+<dt>string</dt>
+<dd><p class="first">The string is converted to an OutputItem history item and appended to
+the results for the code editor command the shell command is part of.</p>
+<p>Note that the string can contain substrings wrapped in [[...]] (for
+emphasis) or &lt;&lt;...&gt;&gt; (for examples). For example:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="k">return</span> <span class="p">(</span><span class="s">&quot;Result: [[</span><span class="si">%s</span><span class="s">]]&quot;</span> <span class="o">%</span> <span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>callable</dt>
+<dd><p class="first">The callable is invoked after all Python code blocks and other shell
+commands in the same code editor command have been executed. This can
+be useful for commands which need to perform post-processing after all
+other commands have executed. For example, the <em>lod</em> command uses this
+feature to adjust the level of detail setting for all command history
+items, even the ones executed following the <em>lod</em> command. In effect, it
+allows you to divide your command into a pre-processing phase performed
+when <em>execute</em> is called, and a post-processing phase performed when the
+callback is called.</p>
+<p class="last">The callback receives no arguments and the value it returns is processed
+like the result of the <em>execute</em> method, except that the result cannot
+be another callback.</p>
+</dd>
+</dl>
+</dd>
+<dt>show_help</dt>
+<dd><p class="first">Called when the command is executed with the ? help request suffix. It has
+no arguments and should return a text string containing the full help
+description for the command. The default implementation simply returns the
+value of the <em>help</em> facet.</p>
+<p class="last">Note that the string can contain substrings wrapped in [[...]] (for
+emphasis) or &lt;&lt;...&gt;&gt; (for examples). For example: <em>&#8220;Hello, [[world]]!&#8221;</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="command-helper-methods">
+<h3>Command Helper Methods</h3>
+<p>The ShellCommand class also has several helper methods you can use:</p>
+<dl class="docutils">
+<dt>has_no_options()</dt>
+<dd>Used for commands that have no options. It raises a SyntaxError exception
+if the command&#8217;s <em>options</em> string is not empty. It has no arguments and no
+result.</dd>
+<dt>bad_options()</dt>
+<dd>Used for commands that you have determined to have invalid options. It
+raises a generic SyntaxError exception containing the invalid options
+string. It has no arguments and no result.</dd>
+<dt>evaluate( [expression] )</dt>
+<dd><p class="first">Used for evaluating Python expressions in the shell&#8217;s context. It accepts an
+optional string argument containing the Python expression to evaluate. If
+the argument is omitted, the command&#8217;s <em>options</em> string is evaluated
+instead.</p>
+<p class="last">The Python expression is evaluated using the shell&#8217;s current local
+variables. If the expression evaluates successfully, the result of the
+evaluation is returned as the result. Otherwise a SyntaxError is raised
+indicating that the command&#8217;s options string could not be evaluated.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_framework.html" title="The Tool Framework"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_themes.html" title="Shell Themes"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

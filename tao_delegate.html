@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Delegate &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Notify" href="tao_notify.html" />
+    <link rel="prev" title="Initialize" href="tao_initialize.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tao_notify.html" title="Notify"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tao_initialize.html" title="Initialize"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" accesskey="U">Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Delegate</a><ul>
+<li><a class="reference internal" href="#using-explicit-delegation">Using Explicit Delegation</a></li>
+<li><a class="reference internal" href="#using-prototypedfrom-delegation">Using PrototypedFrom Delegation</a></li>
+<li><a class="reference internal" href="#it-s-your-choice">It&#8217;s Your Choice</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tao_initialize.html"
+                        title="previous chapter">Initialize</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tao_notify.html"
+                        title="next chapter">Notify</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="delegate">
+<span id="tao-delegate"></span><h1>Delegate</h1>
+<p>Anyone familiar with OOD (Object Oriented Design) is probably familiar with the
+argument that says <em>composition</em> and <em>delegation</em> are often more powerful than
+<em>inheritance</em>. Facets provides special support for delegation through the
+<em>DelegatesTo</em> and <em>PrototypedFrom</em> facets.</p>
+<div class="section" id="using-explicit-delegation">
+<h2>Using Explicit Delegation</h2>
+<p>As a somewhat trivial example, let&#8217;s say we are writing a graphics application
+containing <em>Circle</em>, <em>Rectangle</em> and <em>Polygon</em> classes. Each of these classes
+has some common characteristics like <em>fill_color</em>, <em>outline_color</em> and
+<em>outline_width</em>.</p>
+<p>We would like to encapsulate these drawing attributes into a common <em>Style</em>
+object that each object can refer to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Style</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">fill_color</span>    <span class="o">=</span> <span class="n">Color</span><span class="p">(</span> <span class="s">&#39;white&#39;</span> <span class="p">)</span>
+    <span class="n">outline_color</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span> <span class="s">&#39;black&#39;</span> <span class="p">)</span>
+    <span class="n">outline_width</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">20</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we could write our code so that the delegation is explicit. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Circle</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">Style</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">draw</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">graphics</span> <span class="p">):</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="n">init</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">fill_color</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">outline_color</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">outline_width</span> <span class="p">)</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="n">draw_circle</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-prototypedfrom-delegation">
+<h2>Using PrototypedFrom Delegation</h2>
+<p>There is nothing wrong with this approach, other than the extra level of
+referencing needed to get to the drawing attributes. Another approach, using
+the <em>PrototypedFrom</em> facet, might look like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Circle</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">style</span>         <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">Style</span> <span class="p">)</span>
+    <span class="n">fill_color</span>    <span class="o">=</span> <span class="n">PrototypedFrom</span><span class="p">(</span> <span class="s">&#39;style&#39;</span> <span class="p">)</span>
+    <span class="n">outline_color</span> <span class="o">=</span> <span class="n">PrototypedFrom</span><span class="p">(</span> <span class="s">&#39;style&#39;</span> <span class="p">)</span>
+    <span class="n">outline_width</span> <span class="o">=</span> <span class="n">PrototypedFrom</span><span class="p">(</span> <span class="s">&#39;style&#39;</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">draw</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">graphics</span> <span class="p">):</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="n">init</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">fill_color</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">outline_color</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">outline_width</span> <span class="p">)</span>
+        <span class="n">graphics</span><span class="o">.</span><span class="n">draw_circle</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This code defines the drawing attributes as parts of the Circle class that
+<em>prototype</em> their values from the Style object referenced by the object&#8217;s
+<em>style</em> attribute. This simplifies the <em>draw</em> method code but adds additional
+attribute definitions to the Circle class.</p>
+<p>However, there are several important additional differences:</p>
+<ul class="simple">
+<li>The drawing attributes in the Circle class do not require any additional
+storage initially. Each attribute reference automatically looks up the
+corresponding object attribute reference in the Circle&#8217;s <em>style</em> object.</li>
+<li>If any drawing attribute is assigned a new value, the value is saved in the
+Circle object and does not affect the Circle&#8217;s <em>style</em> object. However, any
+future reference to that attribute uses the Circle object&#8217;s value rather than
+the <em>style</em> object&#8217;s value used initially. This characteristic is where the
+<em>PrototypedFrom</em> name comes from.</li>
+<li>If the same drawing attribute is later deleted (e.g.
+<cite>del circle.outline_color</cite>), the drawing attribute&#8217;s value reverts back to
+using the corresponding value from the <em>style</em> object.</li>
+</ul>
+<p>With this behavior in mind, we now see that the PrototypedFrom version is
+actually quite different from the explicit delegation approach. In the explicit
+delegation version, if all Circle objects share the same Style object, then
+changing any attribute in the Style object affects all Circle objects.</p>
+<p>In the PrototypedFrom version, the case is quite different:</p>
+<ul class="simple">
+<li>If we change one of a Circle object&#8217;s drawing attributes, it only affects that
+Circle object.</li>
+<li>If we change one of the shared Style object&#8217;s attributes, it only affects
+those Circle objects with no local value set for the attribute.</li>
+</ul>
+</div>
+<div class="section" id="it-s-your-choice">
+<h2>It&#8217;s Your Choice</h2>
+<p>Neither approach is inherently better than the other; it simply depends upon
+which fits your design best. If the PrototypedFrom version seems like a better
+fit, then its good to know that the PrototypedFrom facet is saving you a lot of
+tedious coding:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">draw</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">graphics</span> <span class="p">):</span>
+    <span class="n">graphics</span><span class="o">.</span><span class="n">init</span><span class="p">(</span>
+        <span class="nb">getattr</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="s">&#39;fill_color&#39;</span><span class="p">,</span>    <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">fill_color</span> <span class="p">),</span>
+        <span class="nb">getattr</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="s">&#39;outline_color&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">outline_color</span> <span class="p">),</span>
+        <span class="nb">getattr</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="s">&#39;outline_width&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">outline_width</span> <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">graphics</span><span class="o">.</span><span class="n">draw_circle</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>If we had used DelegatesTo instead of PrototypedFrom in our example, all
+references to a Circle object&#8217;s drawing attributes would <em>always</em> redirect to
+the Circle object&#8217;s <em>style</em> object, even when setting an attribute. So using the
+DelegatesTo facet would be the same as the explicit delegation version, but with
+simpler attribute references (i.e. <tt class="docutils literal"><span class="pre">circle.fill_color</span></tt> instead of
+<tt class="docutils literal"><span class="pre">circle.style.fill_color</span></tt>).</p>
+<p>Use of delegation is a design choice. However, once the decision is made to use
+it, Facets provides several options on the best way for you to implement it in
+your application.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tao_notify.html" title="Notify"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tao_initialize.html" title="Initialize"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" >Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

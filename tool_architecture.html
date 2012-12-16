@@ -1,0 +1,880 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Tool Framework Architecture &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Tool Framework" href="tool_framework.html" />
+    <link rel="next" title="The tools Function" href="tool_function.html" />
+    <link rel="prev" title="The Tool Framework" href="tool_framework.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_function.html" title="The tools Function"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_framework.html" title="The Tool Framework"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" accesskey="U">The Tool Framework</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tool Framework Architecture</a><ul>
+<li><a class="reference internal" href="#feature-icon">Feature Icon</a></li>
+<li><a class="reference internal" href="#feature-toolbar">Feature Toolbar</a></li>
+<li><a class="reference internal" href="#feature-metadata">Feature Metadata</a></li>
+<li><a class="reference internal" href="#standard-features">Standard Features</a><ul>
+<li><a class="reference internal" href="#connect-feature">Connect Feature</a></li>
+<li><a class="reference internal" href="#debug-feature">Debug Feature</a></li>
+<li><a class="reference internal" href="#dockcontrol-feature">DockControl Feature</a></li>
+<li><a class="reference internal" href="#drag-and-drop-feature">Drag and Drop Feature</a></li>
+<li><a class="reference internal" href="#layout-feature">Layout Feature</a></li>
+<li><a class="reference internal" href="#options-feature">Options Feature</a></li>
+<li><a class="reference internal" href="#popup-menu-feature">Popup Menu Feature</a></li>
+<li><a class="reference internal" href="#save-feature">Save Feature</a></li>
+<li><a class="reference internal" href="#save-state-feature">Save State Feature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-dockwindowfeature-class">The DockWindowFeature Class</a><ul>
+<li><a class="reference internal" href="#dockwindowfeature-facets">DockWindowFeature Facets</a></li>
+<li><a class="reference internal" href="#dockwindowfeature-methods">DockWindowFeature Methods</a></li>
+<li><a class="reference internal" href="#dockwindowfeature-class-methods">DockWindowFeature Class Methods</a></li>
+<li><a class="reference internal" href="#dockwindowfeature-class-variables">DockWindowFeature Class Variables</a></li>
+<li><a class="reference internal" href="#a-sample-feature-class">A Sample Feature Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#making-a-feature-available">Making a Feature Available</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_framework.html"
+                        title="previous chapter">The Tool Framework</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_function.html"
+                        title="next chapter">The tools Function</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tool-framework-architecture">
+<span id="tool-architecture"></span><h1>Tool Framework Architecture</h1>
+<p>The centerpiece of the tool framework architecture is the concept of a
+<em>feature</em>. A feature is an extension mechanism that imbues a tool that supports
+the feature with new capabilities and facilities. A tool can support any number
+of features at the same time.</p>
+<p>Features work within a context that allows all tools operating within the
+context to exchange information via their associated features. In the case of
+the tool framework, the context is provided by a <em>DockWindow</em>. A DockWindow is
+the Facets component that manages collections of controls, allowing you to
+visually organize and resize them as needed. When used in the tool framework, a
+DockWindow manages collections of tools. In addition, it manages a collection of
+features. As new tools are added, the DockWindow creates feature instances for
+each feature supported by the tool.</p>
+<div class="section" id="feature-icon">
+<h2>Feature Icon</h2>
+<p>The visual indication that a tool supports one or more features is provided by
+the <em>feature icon</em> appearing to the left of the tool&#8217;s label in its DockWindow
+tab. The icon has different appearances and shapes, depending upon the current
+state of the tool, mouse pointer and feature environment. Normally the icon
+appears <em>ghosted</em>, but as the mouse pointer moves into its tab, the icon
+becomes fully opaque, as shown in the following screen shots:</p>
+<img alt="_images/tool_feature_icon.jpg" src="_images/tool_feature_icon.jpg" />
+<p>The feature icon serves several purposes:</p>
+<ul class="simple">
+<li>It indicates that the tool associated with the DockWindow tab is feature
+enabled.</li>
+<li>It indicates the current state of the tool&#8217;s features. We&#8217;ll be describing
+the various states a little later.</li>
+<li>It provides a mouse pointer target for displaying the tool&#8217;s <em>feature
+toolbar</em>.</li>
+</ul>
+</div>
+<div class="section" id="feature-toolbar">
+<h2>Feature Toolbar</h2>
+<p>Some features require user interaction in order to use the feature. In such
+cases the tool can provide an icon to facilitate the interaction. The set of all
+feature provided icons for a given tool is collected together into a single
+<em>feature toolbar</em> that appears when the mouse pointer hovers over the feature
+icon on the tool&#8217;s DockWindows tab. An example of a feature toolbar is shown in
+the following screen shot:</p>
+<p>..image:: images/tool_feature_toolbar.jpg</p>
+<p>In this example we see four different icons, each contributed by a different
+feature associated with the tool.</p>
+<p>The feature provided icon can support different types of user interaction, such
+as:</p>
+<ul class="simple">
+<li>Clicking to perform an action.</li>
+<li>Clicking to display a popup menu.</li>
+<li>Clicking to display a popup dialog.</li>
+<li>Clicking and dragging to perform an action.</li>
+</ul>
+<p>A particular icon may support more than one style of interaction. For example,
+in the previous screenshot, the leftmost <em>chain link</em> icon supports clicking to
+display a popup menu as well as clicking and dragging to perform an action. The
+style, or styles, of interaction supported is normally indicated by the icon&#8217;s
+tooltip.</p>
+</div>
+<div class="section" id="feature-metadata">
+<h2>Feature Metadata</h2>
+<p>The mechanism a tool uses to indicate that it supports a particular feature is
+to attach feature specific <em>metadata</em> to one or more facets defined by the
+tool.</p>
+<p>When a tool is added to a DockWindow, the DockWindow notifies each feature in
+the DockWindow&#8217;s context that a new tool is being added. Each feature class then
+uses standard Facets metadata queries to determine if the tool supports the
+feature. If it does, the feature class typically creates one or more instances
+of itself and returns them to the DockWindow, which adds them to the list of
+other features supported by the tool. If the feature does not find any facets
+containing metadata it recognizes, then it returns <strong>None</strong> to the DockWindow,
+signifying that the tool does not support the feature.</p>
+<p>Not all features rely on metadata to determine whether or not a given tool
+supports the feature, but many do and in the following sections we&#8217;ll
+explicitly describe the metadata a tool needs to define in order to support the
+feature.</p>
+</div>
+<div class="section" id="standard-features">
+<h2>Standard Features</h2>
+<p>The Facets package includes a number of predefined features used by the various
+tools included in the package and which you can also use when creating your own
+tools.</p>
+<p>The standard features are:</p>
+<div class="section" id="connect-feature">
+<h3>Connect Feature</h3>
+<p>Allows tools with compatible <em>connect</em> metadata to be connected together. For
+more information on using this feature within the tools environment, refer to
+the <a class="reference internal" href="tool_function.html#using-tools-environment"><em>Using the Tools Environment</em></a> section, which describes the user interface
+for this feature in more detail.</p>
+<p>To use this feature when creating a tool, simply add <em>connect</em> metadata to any
+facet that can be connected as an input or output to another tool. The value of
+the <em>connect</em> metadata is a string describing the type of connection that can be
+made, and has the form: <em>direction[:[:]name]</em>, where:</p>
+<dl class="docutils">
+<dt>direction</dt>
+<dd><p class="first">The direction of the connection. It can be one of the following values:</p>
+<ul class="last simple">
+<li><em>to</em>: Data can be sent to the facet from another tool.</li>
+<li><em>from</em>: Data can be sent from the facet to another tool.</li>
+<li><em>both</em>: Data to can be sent to or from the facet to another tool.</li>
+</ul>
+</dd>
+<dt>name</dt>
+<dd>A descriptive name or type for the connection. If the name is preceded by a
+single colon, it is a descriptive name for the connection. If it is preceded
+by a double colon (i.e. <em>::</em>), it is a description of the type of value that
+facet can be connected to.</dd>
+</dl>
+<p>If the direction is <em>to</em>, then the facet can be only be connected to another
+tool&#8217;s facet that has a direction of <em>from</em> or <em>both</em>. If the direction is
+<em>from</em>, then it can be connected only to a tool facet with a direction of
+<em>to</em> or <em>both</em>. And finally, a direction of <em>both</em> means that it can be
+connected to any compatible tool facet (i.e. direction of <em>to</em>, <em>from</em> or
+<em>both</em>).</p>
+<p>Note the in addition to having a compatible direction, a facet can only be
+connected to tool facets with a compatible type. If no explicit type
+information is specified in the <em>connect</em> metadata, then the facet can only
+be connected to another facet which is assignment compatible. That is, the
+value of a <em>from</em> facet must be a legal value for the <em>to</em> facet.</p>
+<p>If explicit type information is specified (e.g. <em>connect = &#8216;to::image_file&#8217;</em>),
+then the facet can only be connected to another facet with identical type
+information (e.g. <em>connect = &#8216;from:image_file&#8217;</em>). Using explicit type
+information can help eliminate false positives on facets which are assignment
+compatible, but should not logically be connected together. Note that the type
+information is only a string that must match the connecting facet&#8217;s type
+information, not an actual data type.</p>
+<p>If a descriptive name is supplied (e.g. <em>connect = &#8216;to: image&#8217;</em>), the name is
+used in the tools environment user interface to describe to the user what
+types of connections can be made. Typically the name appears when a user
+clicks on the <em>connect</em> feature icon and a popup menu describing what
+connections can be made or broken is displayed and there is more than one
+possible connection that can be made or broken to a particular tool. In this
+case, the name is used to help differentiate the different facets involved
+(e.g. <em>Connect to the image of the Image Zoomer</em>). Note that the name is only
+used in cases where more than one facet is involved. For example, if the
+connection in the previous example was unambiguous, it would be displayed as:
+<em>Connect to the Image Zoomer</em>.</p>
+<p>If no descriptive name is provided (e.g. <a href="#id1"><span class="problematic" id="id2">*</span></a>connect = &#8216;to&#8217;), the name of the
+facet is used to create the descriptive name for the user interface. For
+example, if a tool includes the definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="p">(</span> <span class="n">connect</span> <span class="o">=</span> <span class="s">&#39;to&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>then <em>image</em> is used in the connect feature user interface to describe any
+connection to the facet. So in cases where a facet&#8217;s name is descriptive, it is
+not necessary to provide a descriptive name in the <em>connect</em> metadata.</p>
+</div>
+<div class="section" id="debug-feature">
+<h3>Debug Feature</h3>
+<p>Adds a debugging icon to each tool&#8217;s feature toolbar that allows the
+developer to view different types of information about the current state of
+the tool. The default icon added to the toolbar looks like:</p>
+<img alt="_images/tool_feature_debug.jpg" src="_images/tool_feature_debug.jpg" />
+<p>Once this feature is added, it applies to all tools. Normally, this feature is
+only available once it has been enabled by checking the <em>Debug</em> option in the
+<em>Feature</em> section of a DockWindow&#8217;s context menu displayed by right clicking
+on any DockWindow surface such as a tab or splitter bar.</p>
+<p>The debug icon supports all of the following actions:</p>
+<dl class="docutils">
+<dt>Click</dt>
+<dd><p class="first">Displays a popup VIPShell view which displays a <strong>DebugInfo</strong> object
+containing the following information:</p>
+<ul class="last simple">
+<li><em>object</em>: The tool object itself.</li>
+<li><em>dock_control</em>: The <strong>DockControl</strong> object for the tool.</li>
+<li><em>control</em>: The <strong>Control</strong> object associated with the DockControl.</li>
+<li><em>ui</em>: The <strong>UI</strong> object associated with the tool.</li>
+</ul>
+</dd>
+<dt>Right click</dt>
+<dd>Displays a popup menu with options to select the type of object dragged when
+the user drags the debug icon to another tool. The possibilities are to drag
+the tool object or its associated DockControl, UI or Control object.
+Changing the object type also affects the appearance of the debug icon.</dd>
+<dt>Drag</dt>
+<dd>Allows the user to drag an <strong>ObjectInspector</strong> whose payload is of the
+currently selected drag type (i.e. the tool object or its associated
+DockControl, UI or Control object). The default is to drag the tool object.</dd>
+<dt>Control-drag</dt>
+<dd>Allows the user to drag an <strong>ObjectInspector</strong> whose payload is the tool
+object.</dd>
+<dt>Shift-drag</dt>
+<dd>Allows the user to drag an <strong>ObjectInspector</strong> whose payload is the
+<strong>DockControl</strong> object for the tool.</dd>
+<dt>Alt-drag</dt>
+<dd>Allows the user to drag an <strong>ObjectInspector</strong> whose payload is the
+<strong>Control</strong> object used to view the tool.</dd>
+</dl>
+<p>As an example of using the debug feature, the following screen shot shows the
+results of clicking the <em>File Sieve</em> tool&#8217;s debug icon to display a VIPShell
+view with information about the tool:</p>
+<img alt="_images/tool_feature_debug2.jpg" src="_images/tool_feature_debug2.jpg" />
+</div>
+<div class="section" id="dockcontrol-feature">
+<h3>DockControl Feature</h3>
+<p>Assigns the <strong>DockControl</strong> object associated with a tool to any facet of the
+tool with <em>dock_control</em> metadata. This feature has no user interface.</p>
+<p>The purpose of this feature is to give tools access to the tools environment
+they are operating in by providing them with a link to the DockControl object
+they are bound to. The DockControl object in turn can provide links to the
+other DockControl objects, tools and features operating within the same
+DockWindow context.</p>
+<p>To use this feature, simply assign <em>dock_control = True</em> metadata to one or
+more facets in a tool. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTool</span> <span class="p">(</span> <span class="n">Tool</span> <span class="p">):</span>
+    <span class="o">...</span>
+    <span class="n">dc</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">DockControl</span><span class="p">,</span> <span class="n">dock_control</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">)</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>The feature will then automatically assign the tool&#8217;s DockControl object as
+the value of any such facet when the tool is added to the tools environment.</p>
+</div>
+<div class="section" id="drag-and-drop-feature">
+<h3>Drag and Drop Feature</h3>
+<p>Adds an icon to a tool&#8217;s feature toolbar that allows a user to drag or drop
+objects on the tool using the icon. The icon added to the toolbar looks like:</p>
+<img alt="_images/tool_feature_drag_drop.jpg" src="_images/tool_feature_drag_drop.jpg" />
+<p>The particular icon displayed depends upon whether the tools supports dragging
+objects, dropping objects or both.</p>
+<p>In order to support dragging, define <em>draggable</em> metadata on any facet
+containing an object that can be dragged. If the value of the metadata is a
+string, the string is used as the tooltip describing the object being dragged
+when the user hovers the mouse pointer over the feature icon.</p>
+<p>More than one facet can contain <em>draggable</em> metadata. If there are multiple
+facet values that can be dragged, they are combined into a <strong>MultiDragDrop</strong>
+object when the user drags the feature icon. If a particular <em>draggable</em> facet
+has a value of <strong>None</strong> at the time the drag operation begins, it is not
+included in the drag.</p>
+<p>If multiple <em>draggable</em> facets have string metadata, the string values are
+combined when creating the icon&#8217;s tooltip. If no <em>draggable</em> facet has string
+valued metadata, then the tooltip simply says <em>Drag this item.</em>.</p>
+<p>In a similar manner, define <em>droppable</em> metadata on any facet that accepts
+dropped objects. As with <em>draggable</em> facets, string metadata values are used
+to define the tooltip displayed for the feature icon. If no <em>droppable</em> facet
+has string metadata, the tooltip simply says <em>Drop an item here.</em>.</p>
+<p>When objects are being dragged over the feature icon for a tool with
+<em>droppable</em> facets, the feature determines whether the object can be dropped
+on the tool by validating the object against the <em>droppable</em> facets. If at
+least one facet can accept the object being dragged, the drag operation is
+allowed to proceed.</p>
+<p>If multiple objects are being dragged (i.e. in the case of another tool being
+dragged that creates a <strong>MultiDragDrop</strong> object), then at least one of the
+<em>droppable</em> facets must accept at least one of the dragged objects in order
+for the drag operation to proceed.</p>
+<p>When a valid object (or objects) or dropped on the tool, the feature attempts
+to assign each dropped object to each <em>droppable</em> facet. Any errors raised by
+failed assignments are ignored.</p>
+<p>If the tool defines both <em>draggable</em> and <em>droppable</em> facets, the icon tooltip
+is defined by grouping and merging together the tooltips for the <em>draggable</em>
+and <em>droppable</em> facets.</p>
+</div>
+<div class="section" id="layout-feature">
+<h3>Layout Feature</h3>
+<p>Adds an icon to each tool&#8217;s feature toolbar that allows the user to rearrange
+all of the tools contained in the perspective by selecting from a palette of
+standard layouts. The icon added to the toolbar looks like:</p>
+<img alt="_images/tool_feature_layout.jpg" src="_images/tool_feature_layout.jpg" />
+<p>Once this feature is added, it applies to all tools. However the icon only
+appears in a tool&#8217;s feature toolbar if there is more than one tool in the
+perspective, since there is nothing to lay out in the case of a single tool.</p>
+<p>The palette of layouts that appears when the toolbar icon is clicked looks
+something like:</p>
+<img alt="_images/tool_feature_layout2.jpg" src="_images/tool_feature_layout2.jpg" />
+<p>The actual palette displayed is context sensitive and depends upon the number
+of tools currently in the perspective.</p>
+</div>
+<div class="section" id="options-feature">
+<h3>Options Feature</h3>
+<p>Adds an icon to a tool&#8217;s feature toolbar that displays the tool&#8217;s <em>options</em>
+dialog when clicked. The icon added to the toolbar looks like:</p>
+<img alt="_images/tool_feature_options.jpg" src="_images/tool_feature_options.jpg" />
+<p>In order to use this feature, the tool must define a View called <em>options</em>.
+This is the view displayed when the user clicks the options icon on the tool&#8217;s
+feature toolbar.</p>
+</div>
+<div class="section" id="popup-menu-feature">
+<h3>Popup Menu Feature</h3>
+<p>Adds an icon to a tool&#8217;s feature toolbar that displays the tool&#8217;s <em>popup</em>
+menu when clicked. The icon added to the toolbar looks like:</p>
+<img alt="_images/tool_feature_popup_menu.jpg" src="_images/tool_feature_popup_menu.jpg" />
+<p>In order to use this feature, a tool must have a facet called <em>popup_menu</em>
+whose value is a <strong>Menu</strong> instance from the <em>facets.ui.menu</em> module. This is
+the popup menu displayed when the user clicks the popup menu icon on the
+tool&#8217;s feature toolbar.</p>
+</div>
+<div class="section" id="save-feature">
+<h3>Save Feature</h3>
+<p>Adds an icon to a tool&#8217;s feature toolbar that allows the user to save the
+current state of the tool. The icon added to the toolbar looks like:</p>
+<img alt="_images/tool_feature_save.jpg" src="_images/tool_feature_save.jpg" />
+<p>In order to use this feature, the tool must be a subclass of the <strong>Saveable</strong>
+class, which can be imported from <em>facets.extra.api</em> and is defined in
+<em>facets.extra.helper.saveable</em>. Saveable is a subclass of <strong>HasPrivateFacet</strong>
+that defines a <em>needs_save</em> Boolean facet and an abstract <em>save</em> method which
+has no arguments and returns no result.</p>
+<p>The tool should set <em>needs_save</em> to <strong>True</strong> whenever the tool has modified
+state the user has the option of saving. Once <em>needs_save</em> is set to <strong>True</strong>,
+the save icon appears on the tool&#8217;s feature toolbar. If <em>nneds_save*</em> is
+<strong>False</strong>, the save icon is not displayed.</p>
+<p>When the user clicks the save icon, the feature calls the tool&#8217;s <em>save</em>
+method, which should take whatever action is required to save the tool&#8217;s
+state. Once saved, the tool should reset <em>needs_save</em> back to <strong>False</strong>.</p>
+</div>
+<div class="section" id="save-state-feature">
+<h3>Save State Feature</h3>
+<p>Automatically saves the state of any tool&#8217;s facets that have <em>save_state</em>
+metadata specified. This is useful for saving user preference information
+across sessions.</p>
+<p>The feature automatically saves the value of any tool facet with <em>save_state</em>
+metadata set to <strong>True</strong>. Previously saved values are automatically restored
+the next time the tool is loaded. In addition, if the tool has a single
+string valued facet with <em>save_state_id</em> metadata set to <strong>True</strong>, the value
+of the facet is used as the key for saving the tool&#8217;s state data in the Facets
+user interface database. If no such facet is found, the state data is saved
+under a key of the form: <em>unknown.plugins.name.state</em>, where <em>name</em> is the
+tool&#8217;s name.</p>
+</div>
+</div>
+<div class="section" id="the-dockwindowfeature-class">
+<h2>The DockWindowFeature Class</h2>
+<p>Of course you are not limited to using just the features provided with the
+Facets package. You can also create and use your own features when defining new
+tools. There are four steps involved in creating and using custom features:</p>
+<ul class="simple">
+<li>Define a new feature by creating a custom subclass of <strong>DockWindowFeature</strong>,
+the base class for all Facets features.</li>
+<li>Create one or more tools making use of your new feature. Tools are just
+standard HasFacets subclasses annotated with feature metadata as needed. Refer
+to the <em>facets.extra.tools</em> package containing the standard Facets tools for
+numerous tool examples.</li>
+<li>Use the DockWindow <em>add_feature</em> function to add your feature to the Facets
+run-time environment.</li>
+<li>Use the <em>tool</em> function to define and display a toolbox containing your
+custom tools along with some, none or all of the standard Facets tools. Refer
+to the <a class="reference internal" href="tool_function.html#tool-function"><em>The tools Function</em></a> section for more information on using the <em>tool</em>
+function.</li>
+</ul>
+<p>In the remainder of this section we&#8217;ll be covering the details of creating your
+own feature by subclassing DockWindowFeature.</p>
+<div class="section" id="dockwindowfeature-facets">
+<h3>DockWindowFeature Facets</h3>
+<p>The DockWindowFeature class defines the following facets:</p>
+<dl class="docutils">
+<dt>dock_control: <em>Instance(DockControl)</em></dt>
+<dd>This is a <em>read-only</em> facet that contains the DockControl instance associated
+with the feature. Note that features are not directly associated with
+application components, but are instead associated with the DockControl object
+that manages the application component. The DockControl object provides the
+feature with access to information about the parent DockWindow object, other
+DockControl objects contained within the same DockWindow, as well as the
+application component. This facet is automatically set by the DockWindow when
+the feature instance is created and associated with an application component.</dd>
+<dt>image: <em>Image</em></dt>
+<dd>Specifies the image (icon) to display on the feature bar. If its value is
+<strong>None</strong>, no image is displayed. For images that never change, the value can
+be declared statically in the class definition. However, the feature is free
+to change the value at any time. Changing the value to a new image causes the
+associated image to be updated on the feature bar. Setting the value to
+<strong>None</strong> removes the image from the feature bar.</dd>
+<dt>tooltip: <em>Str</em></dt>
+<dd>Specifies the tooltip to display when the pointer hovers over the image. The
+value can be changed dynamically to reflect changes in the feature&#8217;s state.</dd>
+<dt>x: <em>Int</em></dt>
+<dd>The x-coordinate of a mouse pointer event that occurred over the feature&#8217;s
+image. This can be used in cases where the event-handling for a feature is
+sensitive to the position of the pointer relative to the feature image. This
+is not normally the case, but the information is available if it is needed.</dd>
+<dt>y: <em>Int</em></dt>
+<dd>The y-coordinate of a pointer event that occurred over the feature&#8217;s image.</dd>
+<dt>shift_down: <em>Bool</em></dt>
+<dd>A boolean value that specifies whether the shift key was being held down when
+a mouse event occurred.</dd>
+<dt>control_down: <em>Bool</em></dt>
+<dd>A boolean value that specifies whether the control key was being held down
+when a mouse event occurred.</dd>
+<dt>alt_down: <em>Bool</em></dt>
+<dd>A boolean value that specifies whether the alt key was being held down when a
+mouse event occurred.</dd>
+</dl>
+</div>
+<div class="section" id="dockwindowfeature-methods">
+<h3>DockWindowFeature Methods</h3>
+<p>The DockWindowFeature class defines the following instance methods:</p>
+<dl class="docutils">
+<dt>click()</dt>
+<dd><p class="first">Handles the user left-clicking on a feature image.</p>
+<p class="last">This method is designed to be overridden by subclasses. The default
+implementation attempts to perform a <em>quick drag</em> operation (see the
+<em>quick_drag</em> method). Returns nothing.</p>
+</dd>
+<dt>right_click()</dt>
+<dd><p class="first">Handles the user right-clicking on a feature image.</p>
+<p class="last">This method is designed to be overridden by subclasses. The default
+implementation attempts to perform a <em>quick drag</em> operation (see the
+<em>quick_right_drag</em> method). Returns nothing. Typically, you would override
+this method to display the feature&#8217;s shortcut menu.</p>
+</dd>
+<dt>drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user drags a feature image.</p>
+<p class="last">This method can be overridden by subclasses. If dragging is supported by the
+feature, then the method returns the object to be dragged; otherwise it
+returns <strong>None</strong>. The default implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>control_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user drags a feature image while
+pressing the <em>Control</em> key.</p>
+<p class="last">This method is designed to be overridden by subclasses. If control-dragging
+is supported by the feature, then the method returns the object to be
+dragged; otherwise it returns <strong>None</strong>. The default implementation returns
+<strong>None</strong>.</p>
+</dd>
+<dt>shift_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user drags a feature image while
+pressing the <em>Shift</em> key.</p>
+<p class="last">This method is designed to be overridden by subclasses. If shift-dragging is
+supported by the feature, then the method returns the object to be dragged;
+otherwise it returns <strong>None</strong>. The default implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>alt_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user drags a feature image while
+pressing the <em>Alt</em> key.</p>
+<p class="last">This method is designed to be overridden by subclasses. If Alt-dragging is
+supported by the feature, then the method returns the object to be dragged;
+otherwise it returns <strong>None</strong>. The default implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>right_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user right mouse button drags a
+feature image.</p>
+<p class="last">This method can be overridden by subclasses. If right dragging is supported by
+the feature, then the method returns the object to be dragged; otherwise it
+returns <strong>None</strong>. The default implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>control_right_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user right mouse button drags a
+feature image while pressing the <em>Control</em> key.</p>
+<p class="last">This method is designed to be overridden by subclasses. If right
+control-dragging is supported by the feature, then the method returns the
+object to be dragged; otherwise it returns <strong>None</strong>. The default
+implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>shift_control_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user right mouse button drags a
+feature image while pressing the <em>Shift</em> key.</p>
+<p class="last">This method is designed to be overridden by subclasses. If right
+shift-dragging is supported by the feature, then the method returns
+the object to be dragged; otherwise it returns <strong>None</strong>. The default
+implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>alt_right_drag()</dt>
+<dd><p class="first">Returns the object to be dragged when the user right mouse button drags a
+feature image while pressing the <em>Alt</em> key.</p>
+<p class="last">This method is designed to be overridden by subclasses. If right Alt-dragging
+is supported by the feature, then the method returns the object to be dragged;
+otherwise it returns <strong>None</strong>. The default implementation returns <strong>None</strong>.</p>
+</dd>
+<dt>drop( object )</dt>
+<dd><p class="first">Handles the user dropping a specified object on a feature image. <em>Object</em>
+specifies the object being dropped onto the feature image. It returns nothing.</p>
+<p class="last">This method is designed to be overridden by subclasses. It is called whenever
+the user drops an object on the feature&#8217;s tab or drag bar image. This method
+is called only if a previous call to <em>can_drop()</em> for the same object returned
+<strong>True</strong>. The default implementation does nothing.</p>
+</dd>
+<dt>can_drop( object )</dt>
+<dd><p class="first">Returns whether a specified object can be dropped on a feature
+image. <em>Object</em> specifies the object being dragged onto the feature image. It
+returns <strong>True</strong> if <em>object</em> is a valid object for the feature to process ,and
+<strong>False</strong> otherwise.</p>
+<p class="last">This method is designed to be overridden by subclasses. It is called whenever
+the user drags an icon over the feature&#8217;s tab or drag bar image. The method
+does not perform any processing on <em>object</em>; it only examines it. Processing
+of the object occurs in the <strong>drop()</strong> method, which is called when the user
+releases the object over the feature&#8217;s image, which typically occurs after the
+<strong>can_drop()</strong> method has indicated that the feature can process the object
+by returning <strong>True</strong>. The default implementation returns <strong>False</strong>,
+indicating that the feature does not accept any objects for dropping.</p>
+</dd>
+<dt>dispose()</dt>
+<dd><p class="first">Performs any clean-up needed when the feature is removed from its associated
+application component (for example, when the user disables the feature).</p>
+<p class="last">This method is designed to be overridden by subclasses. The method performs
+any clean-up actions needed by the feature, such as closing files, removing
+facet listeners, and so on. The method does not return a result. The default
+implementation does nothing.</p>
+</dd>
+<dt>popup_menu( menu )</dt>
+<dd><p class="first">Displays the popup shortcut menu specified by <em>menu</em>, which should be a
+<em>facets.ui.menu.Menu</em> object. It returns nothing.</p>
+<p class="last">This helper method displays the shortcut menu specified by <em>menu</em> at a point
+near the feature&#8217;s current (x,y) value, as specified by the <strong>x</strong> and <strong>y</strong>
+facets. Normally, the (x,y) value contains the screen location where the user
+clicked on the feature&#8217;s tab or drag bar image. The effect is that the menu is
+displayed near the feature&#8217;s icon, with the pointer directly over the top menu
+option.</p>
+</dd>
+<dt>refresh()</dt>
+<dd>Refreshes the display of the feature image. This helper method requests the
+containing DockWindow to refresh the feature toolbar. It returns nothing.</dd>
+<dt>disable( disable = True )</dt>
+<dd><p class="first">Disables or enables the feature, depending upon the value of <em>disable</em>. If
+<em>disable</em> is <strong>True</strong> (the default), the feature is disabled; otherwise it is
+enabled. It returns nothing.</p>
+<p class="last">This helper method temporarily disables the feature for the associated
+application component. The feature can be re-enabled by calling the
+<strong>enable()</strong> method (or by calling <em>disable</em> again with the <em>disable</em> argument
+set to <strong>False</strong>). Disabling the feature removes the feature&#8217;s icon from the
+feature bar without actually deleting the feature (i.e., the <strong>dispose()</strong>
+method is not called).</p>
+</dd>
+<dt>enable( enable = True )</dt>
+<dd><p class="first">Enables or disables the feature, depending upon the value of <em>enable</em>. If
+<em>enable</em> is <strong>True</strong> (the default), the feature is enabled; otherwise it is
+disabled. It returns nothing.</p>
+<p class="last">This helper method re-enables a previously disabled feature for its associated
+application component. Enabling a feature restores the feature bar icon that
+the feature displayed at the time it was disabled.</p>
+</dd>
+<dt>is_enabled()</dt>
+<dd>Returns <strong>True</strong> if the feature is currently enabled, and <strong>False</strong> if it is
+disabled.</dd>
+<dt>quick_drag()</dt>
+<dd>Performs a quick drag and drop operation by displaying a pop-up menu
+containing all targets that the feature&#8217;s xxx_drag() method can be dropped on.
+Selecting an item drops the item on the selected target.</dd>
+<dt>quick_right_drag()</dt>
+<dd>Performs a quick drag and drop operation with the right mouse button by
+displaying a pop-up menu containing all targets that the feature&#8217;s
+xxx_right_drag() method can be dropped on. Selecting an item drops the item on
+the selected target.</dd>
+</dl>
+</div>
+<div class="section" id="dockwindowfeature-class-methods">
+<h3>DockWindowFeature Class Methods</h3>
+<p>The DockWindowFeature class defines the following class methods which are
+called by the DockWindow when an application component is being added:</p>
+<dl class="docutils">
+<dt>feature_for( dock_control )</dt>
+<dd><p class="first">Returns a single new feature object or list of new feature objects for the
+DockControl object specified by <em>dock_control</em>. <em>dock_control</em> corresponds to
+the application component being added or for which the feature is being
+enabled.</p>
+<p>The method should return an instance or list of instances of this class to
+associate with the application component. Alternatively, <strong>None</strong> can be
+returned if the feature does not apply to the application component.</p>
+<p>This class method is designed to be overridden by subclasses. Normally, a
+feature class determines whether it applies to an application component by
+examining the component to see if it is an instance of a certain class,
+supports a specified interface, or has facet attributes with certain types of
+metadata. The application component being added is available through the
+<em>dock_control.object</em> facet attribute. Note that it is possible for
+<em>dock_control.object</em> to be <strong>None</strong> if the DockControl is not associated with
+an application object.</p>
+<p class="last">The default implementation for this method calls the <strong>is_feature_for()</strong>
+class method to determine whether the feature applies to the specified
+DockControl. If it does apply, it calls the <strong>new_feature</strong> class method to
+create the feature instances to be returned. If it does not apply, it simply
+returns <strong>None</strong>.</p>
+</dd>
+<dt>new_feature( dock_control )</dt>
+<dd><p class="first">Returns a new feature instance for the DockControl specified by
+<em>dock_control</em>. <em>dock_control</em> corresponds to the application component being
+added or for which the feature is being enabled.</p>
+<p>The method should return an instance or list of instances of this class to
+associate with the application component. If the feature does not apply to
+the application component, <strong>None</strong> should be returned.</p>
+<p>This method is designed to be overridden by subclasses. The method is called
+by the default implementation of the <strong>feature_for</strong> class method to create
+the feature instances to associate with the application component
+specified by <em>dock_control</em>. The default implementation returns the result of
+calling the class constructor as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">return</span> <span class="n">cls</span><span class="p">(</span> <span class="n">dock_control</span> <span class="o">=</span> <span class="n">dock_control</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">where <em>cls</em> is the feature class.</p>
+</dd>
+<dt>is_feature_for( dock_control )</dt>
+<dd><p class="first">Returns whether this class is a valid feature for the application object
+corresponding to the DockControl specified by <em>dock_control</em>.</p>
+<p>The method should return <strong>True</strong> if the feature applies to the application
+object associated with <em>dock_control</em> and <strong>False</strong> otherwise.</p>
+<p class="last">This class method is designed to be overridden by subclasses. It is called by
+the default implementation of the <strong>feature_for</strong> class method to determine
+whether the feature applies to the application object specified by
+<em>dock_control</em>. The default implementation always returns <strong>True</strong>.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="dockwindowfeature-class-variables">
+<h3>DockWindowFeature Class Variables</h3>
+<p>There are several class-level variables that are also available for use:</p>
+<dl class="docutils">
+<dt>feature_name</dt>
+<dd>Set this to the string value name of the feature as it should appear in the
+DockWindow Features sub-menu (e.g., &#8216;Connect&#8217;). An empty string (the default)
+means that the feature does not appear in the Features sub-menu and cannot be
+enabled or disabled by the user. Try to avoid using feature names that
+conflict with other, known features.</dd>
+<dt>state</dt>
+<dd><p class="first">An integer that specifies the current state of the feature:</p>
+<ul class="simple">
+<li>0: uninstalled</li>
+<li>1: active</li>
+<li>2: disabled</li>
+</ul>
+<p class="last">You do not usually need to set this value explicitly. The DockWindows code
+normally manages the value automatically, setting it when the user enables or
+disables the feature.</p>
+</dd>
+<dt>instances</dt>
+<dd>An automatically maintained list of weak references to all current feature
+instances.</dd>
+</dl>
+</div>
+<div class="section" id="a-sample-feature-class">
+<h3>A Sample Feature Class</h3>
+<p>To illustrate a working feature class implementation, we present an edited
+version of the source code for the standard <em>Options</em> feature, which allows the
+user to display the options dialog for any tool defining a view called
+<em>options</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">facets.core_api</span> <span class="kn">import</span> <span class="n">HasFacets</span>
+<span class="kn">from</span> <span class="nn">facets.api</span> <span class="kn">import</span> <span class="n">View</span>
+<span class="kn">from</span> <span class="nn">facets.ui.dock.api</span> <span class="kn">import</span> <span class="n">DockWindowFeature</span>
+<span class="kn">from</span> <span class="nn">facets.ui.pyface.image_resource</span> <span class="kn">import</span> <span class="n">ImageResource</span>
+
+<span class="k">class</span> <span class="nc">OptionsFeature</span> <span class="p">(</span> <span class="n">DockWindowFeature</span> <span class="p">):</span>
+
+    <span class="c"># Class Constants:</span>
+
+    <span class="c"># The user interface name of the feature:</span>
+    <span class="n">feature_name</span> <span class="o">=</span> <span class="s">&#39;Options&#39;</span>
+
+    <span class="c"># Facet Definitions:</span>
+
+    <span class="c"># The current image to display on the feature bar:</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">ImageResource</span><span class="p">(</span> <span class="s">&#39;options_feature&#39;</span> <span class="p">)</span>
+
+    <span class="c"># The tooltip to display when the mouse is hovering over the image:</span>
+    <span class="n">tooltip</span> <span class="o">=</span> <span class="s">&#39;Click to set view options.&#39;</span>
+
+    <span class="c"># Event Handlers:</span>
+
+    <span class="k">def</span> <span class="nf">click</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Handles the user left clicking on the feature image.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dc</span>                <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dock_control</span>
+        <span class="nb">object</span>            <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">object</span>
+        <span class="n">view</span>              <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="n">facet_view</span><span class="p">(</span> <span class="s">&#39;options&#39;</span> <span class="p">)</span>
+        <span class="n">sx</span><span class="p">,</span> <span class="n">sy</span>            <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">control</span><span class="o">.</span><span class="n">screen_position</span>
+        <span class="n">bx</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">bdx</span><span class="p">,</span> <span class="n">bdy</span>  <span class="o">=</span> <span class="n">dc</span><span class="o">.</span><span class="n">drag_bounds</span>
+        <span class="n">view</span><span class="o">.</span><span class="n">popup_bounds</span> <span class="o">=</span> <span class="p">(</span> <span class="n">bx</span> <span class="o">+</span> <span class="n">sx</span><span class="p">,</span> <span class="n">by</span> <span class="o">+</span> <span class="n">sy</span><span class="p">,</span> <span class="n">bdx</span><span class="p">,</span> <span class="n">bdy</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dock_control</span><span class="o">.</span><span class="n">object</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">(</span>
+            <span class="n">view</span>   <span class="o">=</span> <span class="n">view</span><span class="p">,</span>
+            <span class="n">kind</span>   <span class="o">=</span> <span class="s">&#39;popup&#39;</span>
+        <span class="p">)</span>
+
+    <span class="c"># Overridable Class Methods:</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">is_feature_for</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">dock_control</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns whether or not the DockWindowFeature is a valid feature</span>
+<span class="sd">            for a specified DockControl.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">object</span> <span class="o">=</span> <span class="n">dock_control</span><span class="o">.</span><span class="n">object</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span> <span class="nb">object</span><span class="p">,</span> <span class="n">HasFacets</span> <span class="p">)</span> <span class="ow">and</span>
+                <span class="nb">isinstance</span><span class="p">(</span> <span class="nb">object</span><span class="o">.</span><span class="n">facet_view</span><span class="p">(</span> <span class="s">&#39;options&#39;</span> <span class="p">),</span> <span class="n">View</span> <span class="p">))</span>
+</pre></div>
+</div>
+<p>This simple feature overrides the <em>is_feature_for</em> class method to indicate that
+the feature only applies to application object&#8217;s that derive from <strong>HasFacets</strong>
+and which have a View called <em>options</em> defined.</p>
+<p>It also overrides the <em>click</em> handler for the feature&#8217;s toolbar icon to display
+the tool&#8217;s <em>options</em> dialog whenever the icon is clicked. The dialog is
+displayed as a popup dialog that appears directly under the tool&#8217;s tab.</p>
+<p>There are also several additional lines of code used to:</p>
+<ul class="simple">
+<li>Define the feature name (<em>feature_name = &#8216;Options&#8217;</em>)</li>
+<li>Define the toolbar icon to use (<em>image = ImageResource( &#8216;options_feature&#8217; )</em>)</li>
+<li>Define the tooltip to display when the mouse hovers over the toolbar icon
+(<em>tooltip = &#8216;Click to set view options.&#8217;</em>)</li>
+</ul>
+<p>For other examples of DockWindowFeature subclasses, refer to any of the modules
+with names of the form <em>xxx_feature.py</em> in the <em>facets.extra.features</em> package.</p>
+</div>
+</div>
+<div class="section" id="making-a-feature-available">
+<h2>Making a Feature Available</h2>
+<p>In order for a tool to use a feature, the Facets run-time environnment must
+first be notified that the feature is available.</p>
+<p>There are two ways to do this:</p>
+<ul>
+<li><p class="first">To make all standard Facets features available, use the
+<em>add_standard_features</em> function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">facets.extra.features.api</span> <span class="kn">import</span> <span class="n">add_standard_features</span>
+<span class="n">add_standard_features</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This makes all standard Facets features available in all DockWindow contexts.
+Note that this function is automatically called by the <em>tool</em> function.</p>
+</li>
+<li><p class="first">To add a single, specific feature, use the <em>add_feature</em> function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">facets.ui.dock.api</span> <span class="kn">import</span> <span class="n">add_feature</span>
+<span class="n">add_feature</span><span class="p">(</span> <span class="n">feature_class</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>where <em>feature_class</em> is the <strong>DockWindowFeature</strong> subclass defining the
+feature to be added. It is not an error to call <em>add_feature</em> with the same
+feature class more than once.</p>
+<p>Note that the <em>add_standard_features</em> function is simply a convenience
+function that invokes <em>add_feature</em> once for each of the standard Facets
+feature classes.</p>
+</li>
+</ul>
+<p>If you opt not to use the <em>tool</em> function, but instead create your own custom
+view containing one or more tools and don&#8217;t see the feature icon displayed in
+any of their tabs, chances are good that you forgot to add the necessary
+features to the run-time environment prior to creating the view.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_function.html" title="The tools Function"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_framework.html" title="The Tool Framework"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

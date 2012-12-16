@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>FileBrowser &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="FileStack" href="tool_file_stack.html" />
+    <link rel="prev" title="FacetDB" href="tool_facet_db.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_file_stack.html" title="FileStack"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_facet_db.html" title="FacetDB"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FileBrowser</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_facet_db.html"
+                        title="previous chapter">FacetDB</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_file_stack.html"
+                        title="next chapter">FileStack</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="filebrowser">
+<span id="tool-file-browser"></span><h1>FileBrowser</h1>
+<p>The file browser tool displays a hierarchical tree view of a specified portion
+of your file system and allows you to select directories or files within the
+hierarchy.</p>
+<p>By default, the tool displays the root of your file system (or the root of your
+current drive on Windows). You can change the root either using the tool&#8217;s
+options dialog, available from the tool&#8217;s feature toolbar, or by connecting a
+source of file name paths to the tool&#8217;s <em>root_path</em> facet. The specified root is
+persisted across sessions.</p>
+<p>Selecting a directory or file in the tool&#8217;s tree view assigns the selected item
+to various tool facets as follows:</p>
+<ul class="simple">
+<li>If the selected item is a directory, the name of the directory is assigned
+to the tool&#8217;s <em>directory</em> and <em>path</em> facets.</li>
+<li>If the selected item is a file, the name of the file is assigned to the
+tool&#8217;s <em>file_name</em> and <em>path</em> facets. In addition, a FilePosition object
+describing the file is assigned to the tool&#8217;s <em>file_position</em> facet.</li>
+</ul>
+<p>Any other tools connected to one of these facets will update accordingly. The
+file or path most recently assigned to the tool&#8217;s <em>path</em> facet can also be
+dragged and dropped using the drag (upward pointing arrow) icon on the tool&#8217;s
+feature bar.</p>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.file_browser</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<dl class="docutils">
+<dt>root_path</dt>
+<dd>The directory to use as the root of the displayed portion of the file system.</dd>
+</dl>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<dl class="docutils">
+<dt>directory</dt>
+<dd>The name of the most recently selected directory.</dd>
+<dt>file_name</dt>
+<dd>The name of the most recently selected file.</dd>
+<dt>path</dt>
+<dd>The name of the most recently selected directory or file.</dd>
+<dt>file_position</dt>
+<dd>A FilePosition object describing the most recently selected file.</dd>
+</dl>
+</div>
+<div class="section" id="options">
+<h2>Options</h2>
+<p>In addition to its input and output connections, the file browser tool also
+supports setting the following facets through the tool&#8217;s options dialog
+available via the tool&#8217;s feature toolbar:</p>
+<dl class="docutils">
+<dt>Root path (<em>root_path</em>)</dt>
+<dd>Specifies the directory to use as the root of the displayed portion of the
+file system.</dd>
+</dl>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_file_browser.jpg" src="_images/tool_file_browser.jpg" />
+<p>Shows the file browser tool browsing a portion of the Facets source code tree.</p>
+<img alt="_images/tool_file_browser_options.jpg" src="_images/tool_file_browser_options.jpg" />
+<p>Shows the file browser tool&#8217;s options dialog.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_file_stack.html" title="FileStack"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_facet_db.html" title="FacetDB"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

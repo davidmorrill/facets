@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Getting Facets &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="The Facets UI Demo" href="ui_demo.html" />
+    <link rel="prev" title="Animate" href="tao_animate.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ui_demo.html" title="The Facets UI Demo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tao_animate.html" title="Animate"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Getting Facets</a><ul>
+<li><a class="reference internal" href="#downloading-facets">Downloading Facets</a></li>
+<li><a class="reference internal" href="#installing-facets">Installing Facets</a></li>
+<li><a class="reference internal" href="#updating-facets">Updating Facets</a></li>
+<li><a class="reference internal" href="#facets-prerequisites">Facets Prerequisites</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tao_animate.html"
+                        title="previous chapter">Animate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ui_demo.html"
+                        title="next chapter">The Facets UI Demo</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="getting-facets">
+<h1>Getting Facets</h1>
+<p>Facets is a Python package that works with Python 2.6.x or Python 2.7.x. It does
+not currently work with Python 3.x.x. Before proceeding you should make sure
+that your system has one of the supported versions of Python installed.</p>
+<p>In order to use Facets you&#8217;ll need to:</p>
+<ul class="simple">
+<li>Download the current Facets source code.</li>
+<li>Install Facets by building the C extension modules and setting up your
+PYTHONPATH.</li>
+<li>Download and install additional Python packages used by Facets.</li>
+</ul>
+<div class="section" id="downloading-facets">
+<h2>Downloading Facets</h2>
+<p>The Facets source code can be downloaded from:</p>
+<ul class="simple">
+<li><a class="reference external" href="https://github.com/davidmorrill/facets">https://github.com/davidmorrill/facets</a></li>
+</ul>
+<p>If you are working from a command shell and have git installed, you can use the
+following command to create a local copy of the Facets source code repository
+on your system:</p>
+<div class="highlight-python"><pre>git clone https://github.com/davidmorrill/facets.git</pre>
+</div>
+</div>
+<div class="section" id="installing-facets">
+<span id="id1"></span><h2>Installing Facets</h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This section covers the installation procedure for the <em>alpha</em> version of
+Facets and will be replaced with updated documentation once the <em>beta</em> stage
+is reached.</p>
+</div>
+<p>Since this is <em>alpha</em> level software and subject to frequent update and change,
+it is <strong>not</strong> recommended that Facets be installed into your Python
+<em>site_packages</em> folder. You should use the following procedure instead:</p>
+<ul>
+<li><p class="first">Download the Facets source code and make the top-level Facets directory (i.e.
+the one containing the <em>setup.py</em> file) your current working directory:</p>
+<div class="highlight-python"><pre>cd facets</pre>
+</div>
+</li>
+<li><p class="first">Run the following command to build the two Facets C extension modules:</p>
+<div class="highlight-python"><pre>python setup.py build_ext --inplace</pre>
+</div>
+<p>This command compiles the extension modules directly into the Facets source
+code tree.</p>
+<p>If you get an error message under Windows, you may have to add an option like
+<tt class="docutils literal"><span class="pre">--compiler=msvc</span></tt> to specify the correct compiler for building the extension
+modules:</p>
+<div class="highlight-python"><pre>python setup.py build_ext --inplace --compiler=msvc</pre>
+</div>
+</li>
+<li><p class="first">Finally, add the top-level Facets directory (i.e. the one containing the
+<em>setup.py</em> file) to your <strong>PYTHONPATH</strong> environment variable.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="updating-facets">
+<h2>Updating Facets</h2>
+<p>If you update the Facets source code from the GitHub repository, simply re-run
+the Python set-up command described in the <a class="reference internal" href="#installing-facets"><em>Installing Facets</em></a> section to
+re-build the Facets C extension modules.</p>
+<p>In practice, the source code for these modules does not change very often, so it
+is usually not necessary run the set-up procedure each time you update the
+Facets source. If you do decide to skip this step however, and get unexpected
+results when running any Facets-based code, try running the set-up procedure
+again before doing any further investigation into the problem.</p>
+</div>
+<div class="section" id="facets-prerequisites">
+<h2>Facets Prerequisites</h2>
+<p>Before you can use Facets, you must also install the following additional Python
+packages:</p>
+<dl class="docutils">
+<dt><strong>numpy</strong></dt>
+<dd>Numeric Python (<a class="reference external" href="http://numpy.scipy.org/">http://numpy.scipy.org/</a>). For Windows binaries, also see:
+<a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a>.</dd>
+<dt><strong>PyQt4</strong></dt>
+<dd><p class="first">Python bindings for the Qt GUI toolkit
+(<a class="reference external" href="http://www.riverbankcomputing.co.uk/software/pyqt/download">http://www.riverbankcomputing.co.uk/software/pyqt/download</a>). For Windows
+binaries, also see: <a class="reference external" href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a>.</p>
+<p class="last">This package is needed for creating graphical user interfaces (GUI&#8217;s) using
+Facets.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Facets uses a user interface abstraction layer that allows it to be used with
+other cross platform GUI toolkits. However, the <em>alpha</em> level code has only
+been extensively tested using the PyQt4 toolkit. It is anticipated that the
+<em>beta</em> version will support the following additional GUI toolkits:</p>
+<dl class="last docutils">
+<dt><strong>wxPython</strong></dt>
+<dd>Python bindings for the wxWindows GUI toolkit.</dd>
+<dt><strong>PySide</strong></dt>
+<dd>An alternative set of Python bindings for the Qt GUI toolkit released
+under a more liberal license than PyQt4.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ui_demo.html" title="The Facets UI Demo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tao_animate.html" title="Animate"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

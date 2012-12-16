@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>HasFacets Animation Methods &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Animation System" href="animation_system.html" />
+    <link rel="next" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="prev" title="Tweener Objects" href="animation_tweener_objects.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_shell.html" title="The VIP Shell"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="animation_tweener_objects.html" title="Tweener Objects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" accesskey="U">The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation_tweener_objects.html"
+                        title="previous chapter">Tweener Objects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_shell.html"
+                        title="next chapter">The VIP Shell</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hasfacets-animation-methods">
+<span id="animation-methods"></span><h1>HasFacets Animation Methods</h1>
+<p>The <strong>HasFacets</strong> base class defines a small set of helper methods designed to
+simplify the process of creating and managing facets animations for many common
+cases. While these methods will handle most bread and butter scenarios, there
+may be cases involving creating and managing collections of concurrent or
+sequentially executing animations where you may need more control. In these
+cases you may want to augment using these methods with direct use of the
+underlying animation classes, such as <strong>ConcurrentAnimation</strong> or
+<strong>SequentialAnimation</strong>.</p>
+<p>The helper methods provided by the <strong>HasFacets</strong> class are:</p>
+<dl class="docutils">
+<dt>animate_facet( name = Missing, time = 1.0, end = Missing, begin = Missing, repeat = 1, reverse = True, path = Missing, tweener = Missing, replace = True, start = True )</dt>
+<dd><p class="first">Creates and returns a <strong>FacetAnimation</strong> object for the facet specified by
+<em>name</em>. The begin and end values for the animation are specified by <em>begin</em>
+and <em>end</em> respectively. If <em>begin</em> is omitted, the current value of the facet
+is used as the begin value. If <em>begin</em> is specfied, then <em>end</em> may be omitted,
+in which case the end value will be the current value of the facet; otherwise
+the end value must be specified (unless <em>start</em> is <strong>False</strong>).</p>
+<p>The animation runs for the number of seconds specified by <em>time</em>, which
+defaults to one (i.e. 1.0) second. The animation repeats the number of times
+specified by <em>repeat</em>, which defaults to one. If <em>repeat</em> is zero, the
+animation runs forever or until explicitly halted. If <em>reverse</em> is <strong>True</strong>
+(the default), alternating animations run in reverse, creating a <em>ping-pong</em>
+or <em>bouncing</em> effect. If <em>reverse</em> is <strong>False</strong>, each repetition runs from the
+begin value to the end value.</p>
+<p><em>Path</em> specifies the path object used for the animation. If omitted, the
+method attempts to supply a default path based on the data type of the
+specified facet. For example, if the facet value is an <em>int</em>, a
+<strong>LinearIntPath</strong> is used. If no reasonable path object can be determined, the
+<em>path</em> facet on the created <strong>FacetAnimation</strong> object is not set.</p>
+<p><em>Tweener</em> specifies the tweener object used for the animation. If omitted,
+the <em>tweener</em> facet on the created <strong>FacetAnimation</strong> object is not set.</p>
+<p>If both <em>start</em> and <em>replace</em> are <strong>True</strong>, any currently running or pending
+animations for the specified facet are halted and discarded prior to starting
+the new animation. If <em>start</em> is <strong>True</strong> and <em>replace</em> is <strong>False</strong> (the
+default), then if there is no currently running animation for the specified
+facet, the newly created animation is started. Otherwise, if an animation is
+already active, the new animation is queued to the end of a list of animations
+waiting to run for the specified facet. As each active animation completes,
+the next waiting animation is automatically started.</p>
+<p>As noted above, if <em>start</em> is <strong>True</strong> (the default), the created
+<strong>FacetAnimation</strong> object is automatically started if no other animations are
+currently running for the specified facet. If <em>start</em> is <strong>False</strong>, then the
+<strong>FacetAnimation</strong> object is not automatically started. In addition, the
+<strong>FacetAnimation</strong> object is not added to the queue of animation objects
+associated with the specified facet. In this case it is the reponsibility of
+the caller to start the animation running and perform any other animation
+management tasks.</p>
+<p class="last">The method always returns the <strong>FacetAnimation</strong> object created. Note that
+depending upon the value of the <em>start</em> and <em>replace</em> arguments and whether
+there are any animations already running for the specified facet, the
+animation object returned may or may not already be in the running state.</p>
+</dd>
+<dt>animated_facets( *names, running = False )</dt>
+<dd><p class="first">Returns a list of all <strong>FacetAnimation</strong> objects for the list of facets
+specified by <em>names</em>, or for the entire object if no <em>names</em> are specified.</p>
+<p>If <em>running</em> is <strong>True</strong>, then only the <strong>FacetAnimation</strong> objects currently
+running are returned. If <em>running</em> is <strong>False</strong> (the default), then all
+<strong>FacetAnimation</strong> objects for the specified facet names are returned,
+including those that are waiting for currently running animations to complete.</p>
+<p class="last">Note that this method only returns <strong>FacetAnimation</strong> objects created by
+calling the <em>animate_facet</em> method. Any animation objects created by other
+means are not included in the result.</p>
+</dd>
+<dt>halt_animated_facets( *names, flush = True )</dt>
+<dd><p class="first">Halts all currently running animations for the list of facets specified by
+<em>names</em>, or for all object facets if no <em>names</em> are specified.</p>
+<p class="last">If <em>flush</em> is <strong>True</strong> (the default), the method also discards any animations
+for the specified facets that are waiting for currently running animations to
+complete. If <em>flush</em> is <strong>False</strong>, any animations waiting for the halted
+animations to complete will start running automatically.</p>
+</dd>
+</dl>
+<p>The following code shows a simple example using some of the helper methods just
+described:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">facets.api</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Bouncer</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">bouncer</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span> <span class="p">)</span>
+    <span class="n">time</span>    <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="mf">1.0</span> <span class="p">)</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;bouncer&#39;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">400</span> <span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;time&#39;</span> <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">facets_init</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span>
+            <span class="s">&#39;bouncer&#39;</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">begin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">repeat</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_time_notify</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">halt_animated_facets</span><span class="p">(</span> <span class="s">&#39;bouncer&#39;</span> <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">facets_init</span><span class="p">()</span>
+
+<span class="n">Bouncer</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the example we have one animated facet, <em>bouncer</em>, whose value ranges
+between 0 and 100, and a <em>time</em> facet used to interactively control the length
+of time for the <em>bouncer</em> animation cycle.</p>
+<p>The <em>facets_init</em> method is used to start the animation when the <strong>Bouncer</strong>
+object is first created, and is also called each time the <em>time</em> facet changes
+value. Because the <em>repeat</em> value is specified as 0, the animation runs
+continuously until explicitly halted, which is why the <em>_time_notify</em> method,
+called each time the <em>time</em> value is changed used the lower slider control,
+uses the <em>halt_animated_facets</em> method to stop the current <em>bouncer</em> animation
+before starting a new one.</p>
+<p>The following screen shot shows the example running:</p>
+<img alt="_images/animation_methods.jpg" src="_images/animation_methods.jpg" />
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_shell.html" title="The VIP Shell"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="animation_tweener_objects.html" title="Tweener Objects"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" >The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,177 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>The Tool Framework &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="Tool Framework Architecture" href="tool_architecture.html" />
+    <link rel="prev" title="Extending the Shell" href="vip_extending_shell.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_architecture.html" title="Tool Framework Architecture"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_extending_shell.html" title="Extending the Shell"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Tool Framework</a><ul>
+<li><a class="reference internal" href="#a-quick-introduction">A Quick Introduction</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_extending_shell.html"
+                        title="previous chapter">Extending the Shell</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_architecture.html"
+                        title="next chapter">Tool Framework Architecture</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-tool-framework">
+<h1>The Tool Framework</h1>
+<p>The Facets <em>tool framework</em> is both an architecture and an extensible collection
+of Facets classes called <em>tools</em>. When used within the context of the tool
+framework, the tool classes create a rich graphical equivalent to the well
+known *nix shell pipe which allows creating powerful command line tools by
+stringing commands together with the output of one acting as input to the next.</p>
+<p>The Facets tool framework equivalent to the *nix shell pipe consists of a
+graphical view called a <em>perspective</em> which allows tools to be added from a menu
+and then laid out using standard window docking and splitter bar controls. Tools
+can be connected together and operated on in various ways using the <em>feature</em>
+toolbar that appears when the mouse is hovered over a tool&#8217;s tab. A sample
+perspective is shown in the following figure:</p>
+<img alt="_images/tools_perspective.jpg" src="_images/tools_perspective.jpg" />
+<p>This example shows a perspective containing an instance of the <em>FacetDB</em> and
+<em>UniversalInspector</em> tools with the mouse pointer hovering over the feature
+toolbar for the <em>FacetDB</em> tool.</p>
+<p>The tool framework can be divided into three main sections:</p>
+<dl class="docutils">
+<dt><a class="reference internal" href="tool_architecture.html#tool-architecture"><em>Tool Framework Architecture</em></a></dt>
+<dd>The framework itself, which defines an open-ended architecture for defining
+and creating tools.</dd>
+<dt><a class="reference internal" href="tool_function.html#tool-function"><em>The tools Function</em></a></dt>
+<dd>A function that allows a developer to graphically create and manage custom
+toolboxes of standard or custom tools.</dd>
+<dt><a class="reference internal" href="tool_tools.html#tool-tools"><em>The Standard Tools</em></a></dt>
+<dd>A collection of dozens of predefined tools included as part of the Facets
+package.</dd>
+</dl>
+<div class="section" id="a-quick-introduction">
+<h2>A Quick Introduction</h2>
+<p>You can also get a quick introduction to using the tool framework to create a
+custom tool by watching this video:</p>
+<div style="margin-top: 16px; padding-bottom: 56.250000%; padding-top: 30px; position: relative; width: 100%">
+<iframe class="youtubep" src="http://www.youtube.com/embed/X1tFypz0Bcs">
+</iframe></div><div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_architecture.html" title="Tool Framework Architecture"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_extending_shell.html" title="Extending the Shell"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

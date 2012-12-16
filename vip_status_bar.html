@@ -1,0 +1,278 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Using the Status Bar &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="Using the Filter Bar" href="vip_filter_bar.html" />
+    <link rel="prev" title="History Items" href="vip_history_items.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_filter_bar.html" title="Using the Filter Bar"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_history_items.html" title="History Items"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_history_items.html"
+                        title="previous chapter">History Items</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_filter_bar.html"
+                        title="next chapter">Using the Filter Bar</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="using-the-status-bar">
+<span id="vip-status-bar"></span><h1>Using the Status Bar</h1>
+<p>The <em>status bar</em> is located at the bottom of the shell view and consists of a
+toolbar and a status message area:</p>
+<img alt="_images/vip_status_bar.jpg" src="_images/vip_status_bar.jpg" />
+<p>The purpose and use of the items on the status bar are as follows:</p>
+<dl class="docutils">
+<dt><strong>Shell status message</strong></dt>
+<dd>Displays status information about the most recently executed shell command,
+including its id (e.g. [5]) and the amount of time it took to execute the
+command.</dd>
+<dt><strong>Display shell help</strong></dt>
+<dd>Clicking this toolbar icon executes the shell help command which creates and
+displays a shell history item containing information and links on how to use
+the VIP Shell.</dd>
+<dt><strong>Display shell options dialog</strong></dt>
+<dd>Clicking this toolbar icon displays the VIP Shell options dialog where you
+can modify and adjust many aspects of the shell behavior. Refer to the
+section on <a class="reference internal" href="vip_shell_options.html#vip-shell-options"><em>Shell Options</em></a> for more information.</dd>
+<dt><strong>Paste into code editor</strong></dt>
+<dd>Clicking this toolbar icon pastes the contents of the system clipboard into
+the code editor at the editor&#8217;s current cursor position.</dd>
+<dt><strong>Clear code editor</strong></dt>
+<dd>Clicking this toolbar icon clears the contents of the code editor after
+first copying its contents to the system clipboard.</dd>
+<dt><strong>History item creation</strong></dt>
+<dd><p class="first">This toolbar icon is a toogle that controls how <em>Command</em> history items are
+created when a command is executed. Normally, each command executed creates
+a new <em>Command</em> history item containing the text of the command. This allows
+you to re-execute or re-edit any command previously executed by simply
+clicking or right-clicking the <em>Command</em> item in the shell history.</p>
+<p>However, there may be times when this is not the behavior you want. Say you
+are interatively developing a new module in the shell and testing each
+change you make as you go. You may not want a long list of Command items,
+one for each version of the code you&#8217;ve tested, in the history list. In this
+case, by clicking this toolbar icon, you place the shell in <em>update</em> mode.
+Now each execution of your module simply updates its associated history
+Command item (if it already exists) with the current version of the code. In
+<em>update</em> mode you only have a single Command item in your history
+representing the most recently executed version of the code. You lose your
+development history, but gain a less cluttered history list. The choice is
+yours.</p>
+<p>Clicking the icon again toggles the behavior back to its original <em>create</em>
+mode setting where new Command items are created each time the code is
+executed.</p>
+<p>Note that if you are in <em>update</em> mode and execute a new command, a new
+Command item will still be created. Subsequent executions will update the
+new Command item as previously described. You create a new command by
+clicking the <em>Clear code editor</em> icon previously described. Besides clearing
+the code editor, it also signals the shell that you are starting a new
+command.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p>You can use this behavior to your advantage when creating a variation of
+a module you are working on. If you have been editing and testing your
+module in <em>update</em> mode, you have only a single Command item in your
+history representing the latest version you&#8217;ve tested. Now say you have
+an idea for an interesting variant of the code you would like to try. You
+could save the current version in the code editor to a file, then start
+making your changes. But, alternatively, you can also click the <em>Clear
+code editor</em> icon followed by clicking the adjacent <em>Paste into code
+editor</em> icon and begin making your changes.</p>
+<p>Clicking the <em>Clear code editor</em> icon copies your current code version to
+the system clipboard, clears the code editor, and signals to the shell
+that you are starting a new command. Clicking the <em>Paste into code
+editor</em> icon pastes your original code back into the code editor. Now,
+when you start making changes and testing them, the shell creates a new
+Command item, since you are working on a new command. Subsequent
+executions update the new Command item. Consequently, you end up with two
+versions of your code in the history list: the original and the new
+variant. This can be very handy, since you can test either version simply
+by clicking on its Command item in the history list.</p>
+<p>If you later decide you want to resume work on the original version,
+simply right-click its Command item. This replaces the code editor
+contents with the contents of the original Command item. Also note that
+subsequent edits and executions update the original Command item since
+right-clicking its Command item reassociated the item with the code
+editor.</p>
+<p class="last">You can use this technique to create any number of active versions of
+your code before finally deciding to save one (or more) of them to a file
+permanently.</p>
+</div>
+</dd>
+<dt><strong>Code editor lock</strong></dt>
+<dd><p class="first">Clicking this toolbar icon toggles the code editor clearing behavior of the
+shell. As explained earlier, the shell normally clears the contents of the
+code editor each time you successfully execute a command. Clicking this icon
+toggles this behavior so that the code editor buffer is never automatically
+cleared. Clicking it again toggles it back to its original <em>auto-clear</em>
+behavior.</p>
+<p class="last">The automatic clearing behavior of the editor is usually best suited to
+situations when you are doing a lot of experimenting with different commands
+or expressions. However, if you are doing heavier code development, such as
+creating a new module from scratch in the shell, you probably want the code
+editor contents left unchanged after each test cycle. In this case, click
+this icon to toggle the <em>auto-clear</em> behavior of the code editor off. This
+mode also works well in conjunction with the <em>History item creation</em> icon&#8217;s
+<em>update</em> mode previously described, since it can prevent cluttering up you
+history list with too many versions of the code you are developing.</p>
+</dd>
+<dt><strong>Drop target</strong></dt>
+<dd><p class="first">To use this tool, drag any mouse draggable object or item and drop it on the
+toolbar icon. The shell will add an item appropriate for the dropped object
+to the history list.</p>
+<p class="last">Note that this tool can be used both with draggable items within your
+application as well as external items, such as files dragged from one of
+your operating system&#8217;s file system explorer or finder windows.</p>
+</dd>
+<dt><strong>Control grabber</strong></dt>
+<dd><p class="first">This toolbar icon allows you quickly get access to the models, controls,
+editors and values displayed in your application&#8217;s user interface. To use
+it, place the mouse pointer over the icon, then click, drag and release the
+mouse pointer over one of the controls in your user interface. Depending
+upon your current shell option settings, the shell will add zero, one or
+more <em>Result</em> history items for the following values:</p>
+<ul class="simple">
+<li>The control you released the mouse pointer over.</li>
+<li>The editor that created the control.</li>
+<li>The object attribute value the editor is editing.</li>
+<li>The object containing the attribute being edited.</li>
+</ul>
+<p>Which values are displayed in the history list depend upon which items are
+enabled in the <em>Control Grabber</em> section on the <em>Debug</em> page of the shell
+options dialog. Refer to the <a class="reference internal" href="vip_shell_options.html#vip-shell-options"><em>Shell Options</em></a> section for more
+information.</p>
+<p>Using this tool can be useful for getting a quick peek at what is happening
+in your application. Once the tool provides you with access to some of your
+key application objects, you can use the full power of the shell to probe
+their current state and behavior.</p>
+<p>One good way to use the tool is in conjunction with the FACETS_DEV
+environment variable and the DockWindow context menu&#8217;s <em>Display&gt;VIP Shell</em>
+action as follows:</p>
+<ul class="last simple">
+<li>Set the FACETS_DEV environment variable to 1. This will add several
+<em>display</em> menu actions to the DockWindow context menu when a Facets-based
+application is run.</li>
+<li>Run your application normally.</li>
+<li>Once your application user interface is visible, right-click any
+DockWindow tab or splitter bar and select the <em>Display&gt;VIP Shell</em> menu
+action. This opens a VIP Shell window.</li>
+<li>Drag the status bar&#8217;s <em>Control capture</em> icon and release the mouse pointer
+over a control editing a part of your application you want to know more
+about.</li>
+</ul>
+</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_filter_bar.html" title="Using the Filter Bar"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_history_items.html" title="History Items"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

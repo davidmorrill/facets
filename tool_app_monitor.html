@@ -1,0 +1,211 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>AppMonitor &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="ClassBrowser" href="tool_class_browser.html" />
+    <link rel="prev" title="The Standard Tools" href="tool_tools.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_class_browser.html" title="ClassBrowser"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_tools.html" title="The Standard Tools"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">AppMonitor</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_tools.html"
+                        title="previous chapter">The Standard Tools</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_class_browser.html"
+                        title="next chapter">ClassBrowser</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="appmonitor">
+<span id="tool-app-monitor"></span><h1>AppMonitor</h1>
+<p>The application monitor tool displays views of all application objects
+associated with its containing tool window or any other DockWindow specified by
+its input Control object.</p>
+<p>An <em>application object</em> refers to a HasFacets object whose contents are
+displayed in a DockWindow DockControl. The tool extracts and displays the
+application objects for each DockControl contained in a particular DockWindow.</p>
+<p>The tool displays each application object as a hierarchical tree view, with each
+node representing an object facet value. Using the tool&#8217;s options dialog,
+available through the tool&#8217;s feature toolbar, you can specify whether each
+application object should be displayed in its own tab or organized into a single
+tree with all of the application objects at the top level.</p>
+<p>When each application object is displayed in its own tab, you can close
+unneeded tabs by clicking the tab&#8217;s <em>close</em> icon. You can also click the tool&#8217;s
+<em>refresh</em> icon on its feature toolbar to update the list of application objects
+being displayed.</p>
+<p>By default, the application monitor shows all of the application objects in its
+own window. You can display the application objects for another window by
+connecting another tool (e.g. the <a class="reference internal" href="tool_control_grabber.html#tool-control-grabber"><em>ControlGrabber</em></a>) to the tool&#8217;s
+<em>control</em> facet. When it receives a new control as input, it searchs the control
+and its parent controls for a containing DockWindow, and then determines the set
+of application objects associated with the DockControls contained in the
+DockWindow.</p>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.app_monitor</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<dl class="docutils">
+<dt>control</dt>
+<dd>A Control object used to determine the DockWindow containing the application
+objects to display.</dd>
+</dl>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<p>None.</p>
+</div>
+<div class="section" id="options">
+<h2>Options</h2>
+<p>In addition to its input connections, the application monitor tool also supports
+setting the following facets through the tool&#8217;s options dialog available via the
+tool&#8217;s feature toolbar:</p>
+<dl class="docutils">
+<dt>View style (<em>view_style</em>)</dt>
+<dd><p class="first">Specifies how the tool should display its application objects:</p>
+<dl class="last docutils">
+<dt>Notebook</dt>
+<dd>Place each application object in a separate notebook tab.</dd>
+<dt>Tree</dt>
+<dd>Organize all application objects into a single tree view.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_app_monitor.jpg" src="_images/tool_app_monitor.jpg" />
+<p>Shows the application monitor tool displaying the application objects for its
+own tool window.</p>
+<img alt="_images/tool_app_monitor_options.jpg" src="_images/tool_app_monitor_options.jpg" />
+<p>A view of the options dialog for the application monitor tool.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_class_browser.html" title="ClassBrowser"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_tools.html" title="The Standard Tools"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

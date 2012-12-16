@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Stdout &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="SyntaxChecker" href="tool_syntax_checker.html" />
+    <link rel="prev" title="SelectDockWindowTheme" href="tool_select_dock_window_theme.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_syntax_checker.html" title="SyntaxChecker"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_select_dock_window_theme.html" title="SelectDockWindowTheme"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Stdout</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_select_dock_window_theme.html"
+                        title="previous chapter">SelectDockWindowTheme</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_syntax_checker.html"
+                        title="next chapter">SyntaxChecker</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="stdout">
+<span id="tool-stdout"></span><h1>Stdout</h1>
+<p>Defines a tool for intercepting, displaying, filtering and searching text sent
+to the application&#8217;s <em>stdout</em> and/or <em>stderr</em> files.</p>
+<p>Using the various options in the tool&#8217;s options dialog, avaiable from the
+tool&#8217;s feature toolbar, you can specify:</p>
+<ul class="simple">
+<li>Whether output send to <em>stdout</em> should be intercepted by the tool.</li>
+<li>Whether output sent to <em>stderr</em> should be intercepted by the tool.</li>
+<li>Whether any intercepted output should also be forwarded to the original stdout
+and/or stderr file handles.</li>
+<li>The maximum number of lines the tool should handle. Once the maximum number of
+lines is exceeded, the tool will start discarding the earliest lines captured.</li>
+</ul>
+<p>The stdout tool also allows you to filter and search the intercepted output
+using either case sensitive or case insensitive matching. Filtering output
+removes non-matching lines from the display. Searching output selects all
+matching lines in the display. You can perform either operation by typing the
+text to match on in either the <em>Filter</em> or <em>Search</em> input fields located at the
+top of the tool&#8217;s view.</p>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.stdout</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<p>None.</p>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<dl class="docutils">
+<dt>selected_text</dt>
+<dd>The currently selected lines within the tool are sent as a single string to
+any connected tools.</dd>
+</dl>
+</div>
+<div class="section" id="options">
+<h2>Options</h2>
+<p>The stdout tool supports setting the following option facets through the tool&#8217;s
+options dialog available via the tool&#8217;s feature toolbar:</p>
+<dl class="docutils">
+<dt>Intercept stdout (<em>stdout_enabled</em>)</dt>
+<dd>Specifies whether output to <em>stdout</em> should be intercepted.</dd>
+<dt>Intercept stderr (<em>stderr_enabled</em>)</dt>
+<dd>Specifies whether output to <em>stderr</em> should be intercepted.</dd>
+<dt>Enable passthru (<em>passthru</em>)</dt>
+<dd>Specifies whether intecepted output should also be forwared to the original
+stdout and/or stderr file handles.</dd>
+<dt>Maximum # of lines (<em>max_lines</em>)</dt>
+<dd>Specifies the maximum number of lines the tool should handle before beginning
+to discard the earliest lines captured.</dd>
+</dl>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_stdout.jpg" src="_images/tool_stdout.jpg" />
+<p>Shows the stdout tool filtering and searching for particular lines in the stdout
+output.</p>
+<img alt="_images/tool_stdout_options.jpg" src="_images/tool_stdout_options.jpg" />
+<p>The stdout tool&#8217;s options dialog.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_syntax_checker.html" title="SyntaxChecker"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_select_dock_window_theme.html" title="SelectDockWindowTheme"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

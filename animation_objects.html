@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Animation Objects &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Animation System" href="animation_system.html" />
+    <link rel="next" title="Path Objects" href="animation_path_objects.html" />
+    <link rel="prev" title="The Animation System" href="animation_system.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="animation_path_objects.html" title="Path Objects"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="animation_system.html" title="The Animation System"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" accesskey="U">The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Animation Objects</a><ul>
+<li><a class="reference internal" href="#ianimatable">IAnimatable</a></li>
+<li><a class="reference internal" href="#baseanimation">BaseAnimation</a></li>
+<li><a class="reference internal" href="#animation">Animation</a></li>
+<li><a class="reference internal" href="#facetanimation">FacetAnimation</a></li>
+<li><a class="reference internal" href="#animationitems">AnimationItems</a></li>
+<li><a class="reference internal" href="#concurrentanimation">ConcurrentAnimation</a></li>
+<li><a class="reference internal" href="#sequentialanimation">SequentialAnimation</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation_system.html"
+                        title="previous chapter">The Animation System</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="animation_path_objects.html"
+                        title="next chapter">Path Objects</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="animation-objects">
+<span id="id1"></span><h1>Animation Objects</h1>
+<p>The core set of animation classes which actually perform animation of facet
+values are organized as shown below:</p>
+<img alt="_images/animation_classes.jpg" src="_images/animation_classes.jpg" />
+<p>Each of these classes is defined in the <em>facets.animation</em> package:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class</th>
+<th class="head">Module</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>IAnimatable</td>
+<td><a class="reference internal" href="src/i_animatable.html"><em>facet.animation.i_animatable</em></a></td>
+</tr>
+<tr class="row-odd"><td>BaseAnimation</td>
+<td><a class="reference internal" href="src/base_animation.html"><em>facets.animation.base_animation</em></a></td>
+</tr>
+<tr class="row-even"><td>Animation</td>
+<td><a class="reference internal" href="src/animation.html"><em>facets.animation.animation</em></a></td>
+</tr>
+<tr class="row-odd"><td>FacetAnimation</td>
+<td><a class="reference internal" href="src/facet_animation.html"><em>facets.animation.facet_animation</em></a></td>
+</tr>
+<tr class="row-even"><td>AnimationItems</td>
+<td><a class="reference internal" href="src/animation_items.html"><em>facets.animation.animation_items</em></a></td>
+</tr>
+<tr class="row-odd"><td>ConcurrentAnimation</td>
+<td><a class="reference internal" href="src/concurrent_animation.html"><em>facets.animation.concurrent_animation</em></a></td>
+</tr>
+<tr class="row-even"><td>SequentialAnimation</td>
+<td><a class="reference internal" href="src/sequential_animation.html"><em>facets.animation.sequential_animation</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="ianimatable">
+<h2>IAnimatable</h2>
+<p>The <strong>IAnimatable</strong> class defines an <em>interface</em> that all animation classes
+must implement. It consists of the following facet definitions:</p>
+<dl class="docutils">
+<dt>start: Event( Bool )</dt>
+<dd>The event to fire when the animation should start.</dd>
+<dt>stop: Event( Bool )</dt>
+<dd>The event to fire when the animation should stop.</dd>
+<dt>stopped: Event( Bool )</dt>
+<dd>The event fired when the animation completes or is stopped.</dd>
+<dt>running: Bool</dt>
+<dd><strong>True</strong> if the animation is running and <strong>False</strong> if it is not.</dd>
+<dt>repeat: Range( 0, None, 1 )</dt>
+<dd>The number of times the animation should repeat (0 = repeat indefinitely).</dd>
+<dt>reverse: Bool</dt>
+<dd><strong>True</strong> if alternating repetitions of the animation should be reversed and
+<strong>False</strong> if they should start over from the <em>begin</em> value.</dd>
+</dl>
+</div>
+<div class="section" id="baseanimation">
+<h2>BaseAnimation</h2>
+<p><strong>BaseAnimation</strong> provides an implementation of the <strong>IAnimatable</strong> interface
+and serves as the base class for all other animation classes. It also adds the
+following two convenience methods:</p>
+<dl class="docutils">
+<dt>run()</dt>
+<dd>Starts the animation running. Returns the object as the result. Calling this
+method is the same as setting the <em>start</em> facet to <strong>True</strong>.</dd>
+<dt>halt()</dt>
+<dd>Stops the animation if it is running. Returns the object as the result.
+Calling this method is the same as setting the <em>stop</em> facet to <strong>True</strong>.</dd>
+</dl>
+</div>
+<div class="section" id="animation">
+<h2>Animation</h2>
+<p>The <strong>Animation</strong> class derives from <strong>BaseAnimation</strong> and provides an abstract
+base class for animating some kind of <strong>HasFacets</strong> object. Beyond the core
+facets implemented by <strong>BaseAnimation</strong>, it defines the following additional
+facets:</p>
+<dl class="docutils">
+<dt>time: Range( 0.0, None, 1.0 )</dt>
+<dd>The time, in seconds, that one cycle of the animation lasts.</dd>
+<dt>path: APath</dt>
+<dd>The <em>path</em> to follow during the animation. Note that this can be either a
+single path object or an iterable that returns a series of path objects.</dd>
+<dt>tweener: ATweener</dt>
+<dd>The <em>tweener</em> to use during the animation. Note that this can be either a
+single tweener object or an iterable that returns a series of tweener objects.</dd>
+</dl>
+<p>The <strong>Animation</strong> class also provides stub definitions for the following two
+facets which each concrete subclass should provide overriding implementations
+for:</p>
+<dl class="docutils">
+<dt>begin: Any</dt>
+<dd>The begin value for the animation.</dd>
+<dt>end: Any</dt>
+<dd>The end value for the animation.</dd>
+</dl>
+<p>Both the <em>begin</em> and <em>end</em> facets must have the same number of elements, which
+can either be a single value or an iterable.</p>
+</div>
+<div class="section" id="facetanimation">
+<h2>FacetAnimation</h2>
+<p>The <strong>FacetAnimation</strong> class is a concrete subclass of <strong>Animation</strong> that
+allows any object facet to be animated and is the type of animation object
+created when using the <em>animate_facet</em> method of the <strong>HasFacets</strong> base class.
+It adds the following two facets:</p>
+<dl class="docutils">
+<dt>object: Instance( HasFacets )</dt>
+<dd>The <strong>HasFacets</strong> object whose facet is being animated.</dd>
+<dt>name: Str</dt>
+<dd>The name of the object facet being animated.</dd>
+</dl>
+</div>
+<div class="section" id="animationitems">
+<h2>AnimationItems</h2>
+<p><strong>AnimationItems</strong> is an abstract base class that extends <strong>BaseAnimation</strong> and
+is used to help define concrete subclassess, like <strong>ConcurrentAnimation</strong> and
+<strong>SequentialAnimation</strong>, that manage collections of animatable items. It defines
+a single new facet:</p>
+<dl class="docutils">
+<dt>items: List( IAnimatable )</dt>
+<dd>The collection of animatable items being managed.</dd>
+</dl>
+</div>
+<div class="section" id="concurrentanimation">
+<h2>ConcurrentAnimation</h2>
+<p><strong>ConcurrentAnimation</strong> is a concrete subclass of <strong>AnimationItems</strong> that
+manages a collection of animation objects that all run concurrently. Its <em>items</em>
+facet defines the set of animation objects it manages.</p>
+<p>When a <strong>ConcurrentAnimation</strong> object is started, all animations it manages are
+started. When the object is stopped, all its managed animations are also
+stopped. If left to run to completion, a <strong>ConcurrentAnimation</strong> object does not
+stop until all its managed component animations have all stopped.</p>
+<p>The following code shows an example using <strong>ConcurrentAnimation</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ComponentColor</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">red</span>   <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="p">)</span>
+    <span class="n">green</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="p">)</span>
+    <span class="n">blue</span>  <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span> <span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">Property</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span> <span class="s">&#39;red, green, blue&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_color</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="p">((</span><span class="mi">65536</span> <span class="o">*</span> <span class="n">red</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">256</span> <span class="o">*</span> <span class="n">green</span><span class="p">)</span> <span class="o">+</span> <span class="n">blue</span><span class="p">)</span>
+
+<span class="n">color</span> <span class="o">=</span> <span class="n">ComponentColor</span><span class="p">()</span>
+<span class="n">ca</span>    <span class="o">=</span> <span class="n">ConcurrentAnimation</span><span class="p">(</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;red&#39;</span><span class="p">,</span>   <span class="mf">5.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span> <span class="p">),</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span> <span class="p">),</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span>  <span class="mf">7.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span> <span class="p">)</span>
+<span class="p">]</span> <span class="p">)</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the example we create a <strong>ConcurrentAnimation</strong> object called <em>ca</em> to manage
+three separate animations for the <em>red</em>, <em>green</em> and <em>blue</em> facets of a
+<strong>ComponentColor</strong> object. We then start all three animations running by calling
+the <em>run</em> method on the <em>ca</em> object.</p>
+<p>Note the use of the <em>start = False</em> argument to the <em>animate_facet</em> method. We
+do not want the <strong>FacetAnimation</strong> object it creates to be started immediately
+or managed by the <em>animate_facet</em> method. Instead we want the
+<strong>ConcurrentAnimation</strong> object we are creating to handle all of the animation
+management tasks for us.</p>
+<p>If later some event happens that requires us to stop all of the animations
+early, we can do this as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">ca</span><span class="o">.</span><span class="n">halt</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>If we want to know when all of the animations are complete, we could add the
+following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">...</span>
+<span class="k">def</span> <span class="nf">animation_done</span> <span class="p">(</span> <span class="p">):</span>
+    <span class="k">print</span> <span class="s">&#39;The animation is complete!&#39;</span>
+
+<span class="n">ca</span><span class="o">.</span><span class="n">on_facet_change</span><span class="p">(</span> <span class="n">animation_done</span><span class="p">,</span> <span class="s">&#39;stopped&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that the <em>animation_done</em> function is called either when all of the
+animations end normally or are stopped early by calling <em>ca.halt()</em>.</p>
+</div>
+<div class="section" id="sequentialanimation">
+<h2>SequentialAnimation</h2>
+<p><strong>SequentialAnimation</strong> is a concrete subclass of <strong>AnimationItems</strong> that
+manages a collection of animation objects that run sequentially, one after the
+other. Its <em>items</em> facet defines the set of animation objects it manages.</p>
+<p>When a <strong>SequentialAnimation</strong> object is started, the first animation in its
+<em>items</em> list is started. When that animation completes, the next animation in
+the list is started, and so on, until all animations in the list have run to
+completion. If a <strong>SequentialAnimation</strong> object is stopped, then whatever
+animation item in its <em>items</em> list is currently running is stopped. If left to
+run to completion, a <strong>SequentialAnimation</strong> object does not stop until the last
+of the animations in its <em>items</em> list has been run and stopped.</p>
+<p>Note that if all you want to do is animate a sequence of changes on a single
+object facet, you can just use several calls to the <em>animate_facet</em> method
+instead, since the <em>animate_facet</em> method automatically runs a series of
+animation requests on the same facet in sequential order. You only need to
+create a <strong>SequentialAnimation</strong> object in cases where the animations to be run
+sequentially are on different objects or different facets of the same object.</p>
+<p>The following code shows an example using <strong>SequentialAnimation</strong> for the same
+<strong>ComponentColor</strong> class from our previous <strong>ConcurrentAnimation</strong> example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="o">...</span>
+<span class="n">color</span> <span class="o">=</span> <span class="n">ComponentColor</span><span class="p">()</span>
+<span class="n">ca</span>    <span class="o">=</span> <span class="n">SequentialAnimation</span><span class="p">(</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;red&#39;</span><span class="p">,</span>   <span class="mf">5.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span> <span class="p">),</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span> <span class="p">),</span>
+    <span class="n">color</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span>  <span class="mf">7.0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="bp">False</span> <span class="p">)</span>
+<span class="p">]</span> <span class="p">)</span>
+<span class="n">ca</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The difference here is that now the <em>green</em> facet animation will not run until
+the <em>red</em> facet animation completes, and the <em>blue</em> facet animation will not run
+until the <em>green</em> facet animation completes. Other than that difference, all of
+the comments we made before about stopping the animation early or being notified
+when it completes are exactly the same.</p>
+<p>It should probably go without saying that <strong>ConcurrentAnimation</strong> and
+<strong>SequentialAnimation</strong> objects can also be composed together. Thus you can
+write code such as:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">sa</span> <span class="o">=</span> <span class="n">SequentialAnimation</span><span class="p">(</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ConcurrentAnimation</span><span class="p">(</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span> <span class="o">...</span> <span class="p">]</span> <span class="p">),</span>
+    <span class="n">ConcurrentAnimation</span><span class="p">(</span> <span class="n">items</span> <span class="o">=</span> <span class="p">[</span> <span class="o">...</span> <span class="p">]</span> <span class="p">),</span>
+    <span class="o">...</span>
+<span class="p">]</span> <span class="p">)</span>
+<span class="n">sa</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>to create a series of animations that run sequentially, and where each item in
+the series is actually a group of animations that all run concurrently. In this
+case, none of the items in the second concurrent animation run until all of the
+items in the first concurrent animation have completed, and so on.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="animation_path_objects.html" title="Path Objects"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="animation_system.html" title="The Animation System"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" >The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

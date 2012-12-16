@@ -1,0 +1,277 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Initialize &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Delegate" href="tao_delegate.html" />
+    <link rel="prev" title="Validate" href="tao_validate.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tao_delegate.html" title="Delegate"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tao_validate.html" title="Validate"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" accesskey="U">Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Initialize</a><ul>
+<li><a class="reference internal" href="#a-simple-python-example">A Simple Python Example</a></li>
+<li><a class="reference internal" href="#a-simple-facets-example">A Simple Facets Example</a></li>
+<li><a class="reference internal" href="#additional-thoughts">Additional Thoughts</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tao_validate.html"
+                        title="previous chapter">Validate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tao_delegate.html"
+                        title="next chapter">Delegate</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="initialize">
+<span id="tao-initialize"></span><h1>Initialize</h1>
+<p>One of the keys to creating a good object model is ensuring that your objects
+always have a valid, consistent state. And part of that process is making sure
+that objects are always correctly initialized.</p>
+<div class="section" id="a-simple-python-example">
+<h2>A Simple Python Example</h2>
+<p>In Python, object attributes are not defined until they are assigned a value.
+Thus it is a common practice for the class constructor to initialize all object
+attributes. This was the practice we followed in our first standard Python
+Person class implementation in the previous section:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="nb">object</span> <span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">gender</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span>    <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+</pre></div>
+</div>
+<p>In some cases, we may decide not to pass in all of the initial object state in
+the class constructor. In such cases it is still a good idea to initialize each
+of the object&#8217;s attributes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person_2</span> <span class="p">(</span> <span class="nb">object</span> <span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span>    <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="mf">0.1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="s">&#39;female&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="a-simple-facets-example">
+<h2>A Simple Facets Example</h2>
+<p>Facets simplifies this process by allowing you to define the initial value for
+an object attribute as part of its facet&#8217;s <em>declaration</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">name</span>   <span class="o">=</span> <span class="n">Str</span><span class="p">(</span> <span class="s">&#39;&#39;</span> <span class="p">)</span>
+    <span class="n">age</span>    <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mf">0.1</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span> <span class="s">&#39;male&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="s">&#39;male&#39;</span><span class="p">,</span> <span class="s">&#39;female&#39;</span> <span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Every Facet has a predefined default value. If you do not specify an initial
+value when defining an object attribute, the default value associated with the
+facet is used as the initial value for the object attribute. This is the feature
+we took advantage of when we wrote our original Facets version of the Person
+class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">name</span>   <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">age</span>    <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mf">0.1</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span> <span class="s">&#39;male&#39;</span><span class="p">,</span> <span class="s">&#39;female&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>To see that this in indeed what is happening, look at the following shell
+session:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">=</span><span class="n">Person</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">name</span>
+<span class="go">&#39;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">age</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">weight</span>
+<span class="go">0.1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">gender</span>
+<span class="go">&#39;male&#39;</span>
+</pre></div>
+</div>
+<p>Facets automatic initialization of object attributes is very useful for several
+reasons:</p>
+<ul class="simple">
+<li>Specifying the initial attribute value in the facet declaration (or using the
+default facet value) provides useful documentation to anyone reading the code
+later. They don&#8217;t have to look at the class constructor method to see what
+value was initially assigned to the attribute.</li>
+<li>Ensuring each attribute has an initial value provides another reason why
+Facets-based classes seldom need explicit class constructors. Since we know
+all attributes have an initial value, we don&#8217;t have to write code in the class
+constructor to set them.</li>
+</ul>
+</div>
+<div class="section" id="additional-thoughts">
+<h2>Additional Thoughts</h2>
+<p>Some other interesting things to note about the Facets <em>initialization</em> feature:</p>
+<ul>
+<li><p class="first">Initialization is <em>smart</em>. For example, we could write:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Schedule</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span> <span class="p">[]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>We&#8217;ve defined the default value for the <em>events</em> attribute to be an empty
+list, so we don&#8217;t have to assign an empty list to <em>events</em> in the class
+constructor. Facets is smart enough to make sure that each new <em>Schedule</em>
+instance has a new, empty list assigned to its <em>events</em> attribute, not the
+original, empty list we used in the attribute&#8217;s facet declaration.</p>
+<p>Anyone familiar with the common Python <em>gotcha</em> of:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">add_item</span> <span class="p">(</span> <span class="n">item</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">):</span>
+    <span class="n">target</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">item</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">target</span>
+</pre></div>
+</div>
+<p>will appreciate this.</p>
+</li>
+<li><p class="first">Initialization is <em>really smart</em>. Unlike the Python class constructor
+initialization approach, Facets doesn&#8217;t actually initialize the object
+attribute until its value is fetched the first time. This <em>deferred
+initialization</em> means your code is more efficient. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Schedule</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span> <span class="p">[]</span> <span class="p">)</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">Schedule</span><span class="p">(</span> <span class="n">events</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;Breakfast meeting at 10:00 AM&#39;</span> <span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example we never have to create an initial empty list value because
+the constructor for <em>s</em> ends up setting <em>events</em> to a non-empty list before we
+ever need to fetch the value of <em>events</em>.</p>
+</li>
+<li><p class="first">The initial value for an object attribute can be computed dynamically.
+Sometimes the initial value for an attribute depends upon other object or
+environmental state that isn&#8217;t known until the object is created.</p>
+<p>Facets ability to define initial values dynamically again helps you to write
+and execute more efficiently, since:</p>
+<ul class="simple">
+<li>You don&#8217;t need to write class constructor code to compute the dynamic value,
+which again may eliminate the need for you to write a class constructor at
+all.</li>
+<li>The Facets code to compute the initial value is only called if needed (i.e.
+in cases where the object attribute is not explicitly set before use).</li>
+</ul>
+<p>Creating dynamic initial facet values is an advanced topic which we&#8217;ll see
+examples of in later chapters.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tao_delegate.html" title="Delegate"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tao_validate.html" title="Validate"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" >Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

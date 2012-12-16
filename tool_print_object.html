@@ -1,0 +1,200 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>PrintObject &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="SelectDockWindowTheme" href="tool_select_dock_window_theme.html" />
+    <link rel="prev" title="ObjectSource" href="tool_object_source.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_select_dock_window_theme.html" title="SelectDockWindowTheme"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_object_source.html" title="ObjectSource"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PrintObject</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_object_source.html"
+                        title="previous chapter">ObjectSource</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_select_dock_window_theme.html"
+                        title="next chapter">SelectDockWindowTheme</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="printobject">
+<span id="tool-print-object"></span><h1>PrintObject</h1>
+<p>Defines a tool which attempts to print the contents of any input object it
+receives to <em>stdout</em>.</p>
+<p>The tool attempts to print any object received in an intelligent manner, based
+on the object&#8217;s type and content as follows:</p>
+<dl class="docutils">
+<dt>file_name</dt>
+<dd>If the input object is a string representing a valid text file, the contents
+of the file, preceded by a banner line identifying the file, is sent to
+<em>stdout</em>.</dd>
+<dt>PythonFilePosition</dt>
+<dd>If the input object is a <strong>PythonFilePosition</strong> object, the Python module,
+class or method it describes it sent to <em>stdout</em>, preceded by a banner line
+identifying the contents. PythonFilePosition objects are output by other
+tools, such as the <a class="reference internal" href="tool_class_browser.html#tool-class-browser"><em>ClassBrowser</em></a> tool.</dd>
+<dt>FilePosition</dt>
+<dd>If the input object is a <strong>FilePosition</strong> object, the section of the file
+desribed by the object is sent to <em>stdout</em>, preceded by a banner line
+describing the file and section. FilePosition objects are output by other
+tools, such as the <a class="reference internal" href="tool_cross_reference.html#tool-cross-reference"><em>CrossReference</em></a> tool.</dd>
+<dt>HasFacets</dt>
+<dd>If the input object is a subclass of <strong>HasFacets</strong>, but is not one of the
+preceding object types, a banner line identify the object type is sent to
+<em>stdout</em>, and then the <em>print_facets</em> method is invoked on the object.</dd>
+</dl>
+<p>For all other object types received, the tool simply prints the object directly
+to <em>stdout</em>.</p>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.print_object</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<dl class="docutils">
+<dt>object</dt>
+<dd>The object to be printed to <em>stdout</em>.</dd>
+</dl>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<p>None.</p>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_print_object.jpg" src="_images/tool_print_object.jpg" />
+<p>Since the print object tool is only used to print input objects to <em>stdout</em>, its
+visual representation is minimal, consisting only of the tab that provides
+access to its feature toolbar.</p>
+<p>In the preceding figure we show an example of the PrintObject tool being used in
+conjunction with the <a class="reference internal" href="tool_control_grabber.html#tool-control-grabber"><em>ControlGrabber</em></a> tool and the <a class="reference internal" href="tool_stdout.html#tool-stdout"><em>Stdout</em></a>
+tool. The ControlGrabber tool has been connected to the PrintObject tool and the
+ConntrolGrabber tool has just been used to select one of the Control objects in
+the view.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_select_dock_window_theme.html" title="SelectDockWindowTheme"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_object_source.html" title="ObjectSource"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

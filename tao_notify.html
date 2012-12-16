@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Notify &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Visualize" href="tao_visualize.html" />
+    <link rel="prev" title="Delegate" href="tao_delegate.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tao_visualize.html" title="Visualize"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tao_delegate.html" title="Delegate"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" accesskey="U">Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Notify</a><ul>
+<li><a class="reference internal" href="#using-implicit-notification">Using Implicit Notification</a></li>
+<li><a class="reference internal" href="#using-descriptive-notification">Using Descriptive Notification</a></li>
+<li><a class="reference internal" href="#using-explicit-notification">Using Explicit Notification</a></li>
+<li><a class="reference internal" href="#using-the-facets-tao">Using the Facets Tao</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tao_delegate.html"
+                        title="previous chapter">Delegate</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tao_visualize.html"
+                        title="next chapter">Visualize</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="notify">
+<span id="tao-notify"></span><h1>Notify</h1>
+<p>The Facets <em>notify</em> feature makes any change to an object attribute an
+<em>observable event</em>. Notify is what makes Facets <em>reactive</em> and is the heart and
+soul of its model-driven design, user interface system, tool framework and
+animation system. Understanding what notify does and how to use it is one of the
+keys to unlocking the full power of Facets.</p>
+<p>Put simply, any time an attribute of a HasFacets derived class changes value,
+Facets notifies any and all interested parties of the change. This is the
+Facets version of the well known <em>observer</em> and <em>publish/subscribe</em> design
+patterns.</p>
+<p>Subscribing to an object attribute change notification (more commonly referred
+to as a <em>facets change notification</em>) can be done in several ways:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Implicitly, using a well defined method naming convention.</li>
+<li>Descriptively, via the <em>on_facets_change</em> and <em>property_depends_on</em> method
+decorators.</li>
+<li>Explicity, using the <em>on_facet_change</em> method call.</li>
+</ul>
+</div></blockquote>
+<p>Let&#8217;s start with a simple example implemented using each of the three basic
+techniques.</p>
+<div class="section" id="using-implicit-notification">
+<h2>Using Implicit Notification</h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Margins</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">left</span>   <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">1.0</span> <span class="p">)</span>
+    <span class="n">right</span>  <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">7.5</span> <span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">4.25</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_left_changed</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+    <span class="k">def</span> <span class="nf">_right_changed</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">Margins</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">center</span>
+<span class="go">4.25</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">left</span> <span class="o">=</span> <span class="mf">2.5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">center</span>
+<span class="go">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">right</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">center</span>
+<span class="go">3.75</span>
+</pre></div>
+</div>
+<p>In this example we&#8217;ve defined a <em>Margins</em> class for keeping track of a
+document&#8217;s left, right and center margin points. We are using the <em>implicit</em>
+technique of subscribing to a change notification by virtue of the special names
+used for the <tt class="docutils literal"><span class="pre">_left_changed</span></tt> and <tt class="docutils literal"><span class="pre">_right_changed</span></tt> methods. If a class has a
+facet called <tt class="docutils literal"><span class="pre">foo</span></tt> and a method called <tt class="docutils literal"><span class="pre">_foo_changed</span></tt>, then the
+<tt class="docutils literal"><span class="pre">_foo_changed</span></tt> method is implicitly assumed to be a change notification
+handler (i.e. subscriber) to the <tt class="docutils literal"><span class="pre">foo</span></tt> attribute.</p>
+<p>The implicit naming technique can only be used to define notification handlers
+for attributes defined on the same class (or one of its superclasses) containing
+the implicitly named handler.</p>
+</div>
+<div class="section" id="using-descriptive-notification">
+<h2>Using Descriptive Notification</h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Margins</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">left</span>   <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">1.0</span> <span class="p">)</span>
+    <span class="n">right</span>  <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">7.5</span> <span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">4.25</span> <span class="p">)</span>
+
+    <span class="nd">@on_facet_change</span><span class="p">(</span> <span class="s">&#39;left, right&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_margins_modified</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>Here we arrive at the same result, but use the <em>descriptive</em> form of defining
+change handlers by means of the <em>on_facet_change</em> method decorator. The
+on_facet_change decorator takes a description of the object attributes the
+following method subscribes to. In this case it leads to a more compact and
+descriptive class definition than the previous example since we don&#8217;t need to
+duplicate the code for computing the center margin.</p>
+<p>As we&#8217;ll see in a later chapter, the <em>on_facet_change</em> and <em>property_depends_on</em>
+decorators both accept a powerful and succinct <em>mini-language</em> for describing
+object attributes. This often makes setting up complex sets of notification
+handlers much easier than using the implicit or explicit approach.</p>
+</div>
+<div class="section" id="using-explicit-notification">
+<h2>Using Explicit Notification</h2>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Margins</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">left</span>   <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">1.0</span> <span class="p">)</span>
+    <span class="n">right</span>  <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">7.5</span> <span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">4.25</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">facets_init</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">on_facet_change</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margins_modified</span><span class="p">,</span> <span class="s">&#39;left, right&#39;</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_margins_modified</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>This is the same example using the explict mechanism for setting up change
+notification handlers based on calling the <em>on_facet_change</em> method. Notice that
+the <em>on_facet_change</em> method uses the same descriptive <em>mini-language</em> for
+describing object attributes used in the previous example&#8217;s <em>on_facet_change</em>
+method decorator.</p>
+<p>Also note the use of the special <em>facets_init</em> method to set up the explicit
+notification handler. Since subclasses of HasFacets seldom need to have an
+explicit <em>__init__</em> class constructor method, the <em>facets_init</em> method is
+provided to handle any post constructor initialization that might be needed. The
+method has no arguments, and all attribute initialization performed by the class
+constructor has already been performed by the time it is called. Thus it is a
+good candidate for performing tasks such as setting up explict change
+notification handlers.</p>
+<p>For this example, the explicit form of setting up a change handler is not the
+simplest solution. However, there are more complex cases where setting up a
+change handler depends upon dynamic state changes that can&#8217;t readily be handled
+by the implicit or descriptive approach (although you might be surprised at how
+many cases the descriptive approach can handle).</p>
+</div>
+<div class="section" id="using-the-facets-tao">
+<h2>Using the Facets Tao</h2>
+<p>Finally, we show the same example using a fourth approach that best illustrates
+the true Facets <em>tao</em>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Margins</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">left</span>   <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">1.0</span> <span class="p">)</span>
+    <span class="n">right</span>  <span class="o">=</span> <span class="n">Float</span><span class="p">(</span> <span class="mf">7.5</span> <span class="p">)</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">Property</span><span class="p">(</span> <span class="n">Float</span> <span class="p">)</span>
+
+    <span class="nd">@property_depends_on</span><span class="p">(</span> <span class="s">&#39;left, right&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_center</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+<p>In this case we&#8217;ve changed the definition of the <em>center</em> facet to be a
+Property rather than a Float. In addition, we use the <em>property_depends_on</em>
+method decorator to indicate that the value of the <em>center</em> property (as
+computed by its <em>_get_center</em> getter method) depends upon the value of the
+<em>left</em> and <em>right</em> facets.</p>
+<p>At first glance this might seem similar to a solution using a standard Python
+<em>property</em>, but it is better for several reasons:</p>
+<ul class="simple">
+<li>If either the <em>left</em> or <em>right</em> facet changes value, so does the <em>center</em>
+facet. So if there are any change handlers listening to the <em>center</em> facet,
+they will be notified of the change.</li>
+<li>The <em>_get_center</em> method, which computes the value of the center property, is
+<strong>not</strong> called when either the <em>left</em> or <em>right</em> facet changes value. It is
+only called when some code requests the value of the <em>center</em> facet. From an
+efficiency point of view this is much better than any of the solutions we&#8217;ve
+looked at so far, since each of them recompute the <em>center</em> value as soon as
+either the <em>left</em> or <em>right</em> facet changes value.</li>
+<li>The value of the <em>center</em> property is not computed each time its value is
+requested. It is computed the first time its value is requested <em>after</em> a
+change to either the <em>left</em> or <em>right</em> facet. In effect its computed value is
+cached, and the cache is automatically flushed each time the <em>left</em> or <em>right</em>
+facet changes value.</li>
+</ul>
+<p>In this section we&#8217;ve given you only a very small taste of what <em>notify</em> is. In
+the next section we&#8217;ll introduce you to the Facets user interface (UI) system
+which leverages <em>notify</em> to create highly interactive and responsive user
+interfaces.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tao_visualize.html" title="Visualize"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tao_delegate.html" title="Delegate"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" >Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

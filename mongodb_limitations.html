@@ -1,0 +1,207 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Limitations of the MongoDB OML &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The MongoDB OML" href="mongodb_oml.html" />
+    <link rel="next" title="Facets Environment Variables" href="environment_variables.html" />
+    <link rel="prev" title="Defining Indexes" href="mongodb_indexes.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="environment_variables.html" title="Facets Environment Variables"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_indexes.html" title="Defining Indexes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" accesskey="U">The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Limitations of the MongoDB OML</a><ul>
+<li><a class="reference internal" href="#facets-issues">Facets Issues</a></li>
+<li><a class="reference internal" href="#mongodb-oml-issues">MongoDB OML Issues</a></li>
+<li><a class="reference internal" href="#mongodb-issues">MongoDB Issues</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mongodb_indexes.html"
+                        title="previous chapter">Defining Indexes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="environment_variables.html"
+                        title="next chapter">Facets Environment Variables</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="limitations-of-the-mongodb-oml">
+<span id="mongodb-limitations"></span><h1>Limitations of the MongoDB OML</h1>
+<p>Although MongoDB OML is very flexible and powerful, it is not perfect. In this
+section we&#8217;ll enumerate a number of issues that you should be aware of when
+deciding whether or not to use MongoDB OML for your application.</p>
+<div class="section" id="facets-issues">
+<h2>Facets Issues</h2>
+<ul>
+<li><p class="first">In order to achieve the correct <em>deferred</em> semantics for <em>DBLink(s)</em> and
+<em>DBRef(s)</em> facets, the code that loads an existing object from a MongoDB
+database does not trigger a facet change notification when initializing any
+<em>deferred</em> mode facet. This is because a Facets change notification includes
+the new value of a facet as part of its information payload. Since the whole
+point of using a <em>deferred</em> mode facet is to delay loading the actual value of
+the facet until your application code actually uses it, generating the change
+notification would nullify the advantage of this MongoDB OML facet feature.</p>
+<p>Note that it is possible that a planned architectural change to the Facets
+package may resolve this problem in the future, at which time this item will
+be removed.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="mongodb-oml-issues">
+<h2>MongoDB OML Issues</h2>
+<ul>
+<li><p class="first">The MongoDB OML is a software layer built on top of MongoDB that provides a
+Facets-based object oriented persistent storage model. MongoDB is a
+document-centric, No SQL database. Although the two fit well together, they
+are not the same thing.</p>
+<p>There are many features of MongoDB that are not exposed or used by the MongoDB
+OML. As such, there may be cases where direct use of the MongoDB feature set
+may be more appropriate for your application design. If there are features
+that MongoDB OML does not provide, you might want to look at the MongoDB
+documentation to see if using the MongoDB API directly might be a better fit
+for your application.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="mongodb-issues">
+<h2>MongoDB Issues</h2>
+<ul>
+<li><p class="first">Perhaps the biggest potential issue with basing an application on MongoDB is
+its lack of atomic multi-document updates or transactions. That is, MongoDB
+does not provide a mechanism for making any change that affects more than a
+single document appear as a single, consistent database update.</p>
+<p>Although all changes made on a single database connection are made
+sequentially, there is the possibility that in an environment supporting
+multiple, simultaneous connections, updates made by different connections may
+get inter-mingled. If the changes happen to affect the same set of documents,
+the final result may not be self-consistent.</p>
+<p>In terms of MongoDB OML, there is a one-to-one mapping between your
+application objects and MongoDB <em>documents</em>. Therefore, if your application
+changes multiple objects and then saves them, there is no guarantee that some
+other application may not be updating the same database objects at the same
+time. If that situation occurs, it is possible that the final MongoDB database
+state may reflect some, but not all, of the changes made by each client
+application, potentially leaving the database in an inconsistent state.</p>
+<p>Currently this is a problem that has to be dealt with at the application
+level. There may be some additional enhancements made to the MongoDB OML
+package in the future that help with this issue. It is also possible that
+MongoDB may itself add some enhancements in this area as well, although the
+author is not aware of any planned work in this area at the moment.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="environment_variables.html" title="Facets Environment Variables"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_indexes.html" title="Defining Indexes"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" >The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

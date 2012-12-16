@@ -1,0 +1,614 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>The MongoDBObject Class &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The MongoDB OML" href="mongodb_oml.html" />
+    <link rel="next" title="MongoDB OML Facets" href="mongodb_facets.html" />
+    <link rel="prev" title="Installing MongoDB" href="mongodb_installing.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mongodb_facets.html" title="MongoDB OML Facets"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_installing.html" title="Installing MongoDB"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" accesskey="U">The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The MongoDBObject Class</a><ul>
+<li><a class="reference internal" href="#format-of-a-query-string">Format of a Query String</a></li>
+<li><a class="reference internal" href="#determining-a-class-s-associated-mongodb-collection">Determining a Class&#8217;s Associated MongoDB Collection</a></li>
+<li><a class="reference internal" href="#the-mongodb-facet">The mongodb Facet</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mongodb_installing.html"
+                        title="previous chapter">Installing MongoDB</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mongodb_facets.html"
+                        title="next chapter">MongoDB OML Facets</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-mongodbobject-class">
+<span id="mongodb-mongodbobject"></span><h1>The MongoDBObject Class</h1>
+<p>As stated previously, in order for an object to be successfully stored in a
+MongoDB database, its class must be a subclass of MongoDBObject, which can be
+imported from <em>facets.extra.mongodb.api</em>. Deriving from MongoDBObject has three
+main functions:</p>
+<ul class="simple">
+<li>It provides you with several important methods used for database access
+(<em>save</em>, <em>delete</em>, <em>load</em>, <em>all</em>, <em>iterall</em>, <em>fetch</em>)</li>
+<li>It provides the context that the <em>DBxxx</em> facets need to operate correctly.</li>
+<li>It provides all of the Facets metadata and event processing needed to make the
+MongoDB OML <em>plumbing</em> work correctly under the covers.</li>
+</ul>
+<p>For the most part, you can ignore the details of the last item and only focus
+your attention on the first two. We&#8217;ll cover the use of the various MongoDB
+<em>DBxxx</em> facets in the next section and continue on here by describing the
+various MongoDB database access methods:</p>
+<dl class="docutils">
+<dt><strong>save()</strong></dt>
+<dd><p class="first">Immediately saves the object to its corresponding MondoDB database
+collection. The only time that an object must <em>explicitly</em> be saved to a
+MongoDB database is in the case of a new top-level database object.</p>
+<p>A <em>top-level</em> object is an object not currently referenced by any other
+object in the database. Such objects are typically retrieved later using one
+of the available query methods.</p>
+<p>In other cases, objects are <em>implicitly</em> saved when the application
+terminates or the MongoDB class&#8217;s <em>save</em> method is called. Of course, using
+these facilities can introduce database update delays, so you may still
+want to use explicit <em>save</em> calls to exercise more control over the current
+state of the MongoDB database.</p>
+<p>Note that explicitly saving an object may also cause other objects related
+to the object being saved to also be saved at the same time. Examples of
+this would be newly created objects assigned to <em>DBRef</em>, <em>DBRefs</em>, <em>DBLink</em>
+or <em>DBLinks</em> facets that are part of the object being saved. The MongoDB OML
+layer detects that such objects are not currently in the database and
+automatically adds them to the database in order to make sure the original
+object has valid database state information about the objects it references.</p>
+<p>The <em>save</em> method can be applied to new objects not already in the MongoDB
+database or objects loaded from the database and then modified in some way.
+As mentioned previously, an explicit <em>save</em> call is not strictly necessary
+in the latter case since the MongoDB OML layer tracks changes to modified
+objects and adds them to a <em>dirty</em> list of objects that need to be saved
+back to the underlying MongoDB database, either when the next <em>save</em> call to
+the application&#8217;s MongoDB object occurs or the application terminates. An
+explicit <em>save</em> call in this case simply provides finer control over when
+database updates occur.</p>
+<p class="last">The method returns <em>self</em> as its result. If any errors are encountered, an
+appropriate exception is raised.</p>
+</dd>
+<dt><strong>delete()</strong></dt>
+<dd><p class="first">Deletes the object from the associated MongoDB database if possible. If the
+object is not currently stored in the MongoDB database, no action is taken.</p>
+<p>If the object contains <em>DBLink</em> or <em>DBLinks</em> facets which reference other
+objects stored in the MongoDB database, those objects will be deleted as
+well. This process is recursive, so deleting one top level object may result
+in deleting an entire hierarchy of objects linked together using <em>DBLink</em>
+and <em>DBLinks</em> references. See the <a class="reference internal" href="mongodb_facets.html#understanding"><em>Understanding DBObject(s), DBRef(s) and DBLinks(s)</em></a> section for more
+information on the role and use of <em>DBLink</em> and <em>DBLinks</em> facets.</p>
+<p class="last">The method returns <em>self</em> as its result. If any errors are encountered, an
+appropriate exception is raised.</p>
+</dd>
+<dt><strong>load( query = None, add = False )</strong></dt>
+<dd><p class="first">If <em>query</em> is not specified or None, it uses the contents of the object as a
+prototype for matching and loading a single MongoDB database object instance
+that matches the assigned facets of the object. It returns the matching
+object if the load is successful. If no match is found, and <em>add</em> is False,
+then None is returned. Otherwise the original object is automatically added
+to the MongoDB database and returned as the result.</p>
+<p>The matching result object, if any, will be of the same class as the object
+or one of its valid subclasses. Valid subclasses are subclasses stored in
+the same MongoDB collection as the object&#8217;s class. Refer to the
+<a class="reference internal" href="#determining"><em>Determining a Class&#8217;s Associated MongoDB Collection</em></a> section for more information on how the collection a
+given class is associated with is determined.</p>
+<p>Note that only facet values which have been explicitly set on the prototype
+object are used when finding a match. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pet</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Fido&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>will only use the value of the <em>name</em> facet when searching for a match,
+no matter what other attributes are defined on an Animal instance.</p>
+<p>If <em>query</em> is a string, it is assumed to be a query string specifying the
+criteria the requested object must match. In this case, the actual contents
+of the object are not use when searching for a match. Refer to the
+<a class="reference internal" href="#query-string"><em>Format of a Query String</em></a> section for more information about the format of a valid
+query string.</p>
+<p>If the case where a <em>query</em> string is specified, but no match is found and
+<em>add</em> is True, the object is added to the MongoDB database and returned as
+the result, just as in the case when no query string is specified.</p>
+<p class="last">Note that unlike the <em>all</em> or <em>iterall</em> methods, the <em>load</em> method will only
+return at most a single matching object and is normally used in cases where
+the requested object is known to be unique.</p>
+</dd>
+<dt><strong>all( query = None, skip = 0, limit = 0, sort = None )</strong></dt>
+<dd><p class="first">Uses the contents of the object as a prototype for matching and loading all
+MongoDB database instances which match the assigned facets of the object. It
+returns a list of all matching objects, which may be empty if no matches are
+found.</p>
+<p>Note that the resulting list of objects includes all matching objects that
+are of the same class as the object or one of its valid subclasses. Valid
+subclasses are subclasses stored in the same MongoDB collection as the
+object&#8217;s class. Refer to the <a class="reference internal" href="#determining"><em>Determining a Class&#8217;s Associated MongoDB Collection</em></a> section for more information
+on how the collection a given class is associated with is determined.</p>
+<p>If <em>query</em> is a string, it is assumed to be a query string specifying the
+criteria that all requested objects must match. In this case, the actual
+contents of the object are not use when searching for matches. Refer to the
+<a class="reference internal" href="#query-string"><em>Format of a Query String</em></a> section for more information about the format of a valid
+query string.</p>
+<p>If <em>sort</em> is not specified, the returned matching objects are in no
+particular order.</p>
+<p>Since the number of matching MongoDB database objects may potentially be
+very large, you can use the <em>skip</em> and <em>limit</em> arguments to control how many
+objects are returned:</p>
+<ul class="last simple">
+<li><em>limit</em>: An integer specifying the maximum number of objects returned. A
+value of 0 (the default) means return all matching objects.</li>
+<li><em>skip</em>: An integer specifying the zero-based index of the first matching
+object returned. When combined with <em>limit</em>, this can be used with
+multiple calls to <em>all</em> to process all matching objects in batches.</li>
+</ul>
+</dd>
+<dt><strong>iterall( query = None, skip = 0, limit = 0, sort = None )</strong></dt>
+<dd><p class="first">This method is similar to the <em>all</em> method, but returns an iterator that
+yields the next matching MongoDB database instance on each iteration.</p>
+<p class="last">This method can be more efficient than using <em>all</em> when the query could
+match a large number of MongoDB database instances but the application only
+needs to process them one at a time. Since the method only converts a single
+MongoDB database document into a Facets-based object on each iterator call,
+the overall latency and memory requirements can be greatly reduced when
+compared to using <em>all</em>.</p>
+</dd>
+<dt><strong>fetch()</strong></dt>
+<dd><p class="first">Returns the first instance of the class found in the MongoDB database, or
+None if no instances exist. This method is most useful for loading root or
+singleton objects stored in the database.</p>
+<p>The result object, if any, will be of the specified class or one of its
+valid subclasses. Valid subclasses are subclasses stored in the same MongoDB
+collection as the object&#8217;s class. Refer to the <a class="reference internal" href="#determining"><em>Determining a Class&#8217;s Associated MongoDB Collection</em></a> section
+for more information on how the collection a given class is associated with
+is determined.</p>
+<p>Note that unlike all of the other methods, this is a class, not an instance
+method. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">pet</span> <span class="o">=</span> <span class="n">Animal</span><span class="o">.</span><span class="n">fetch</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="last">would assign the first Animal instance found in the MongoDB database to
+<em>pet</em>.</p>
+</dd>
+</dl>
+<div class="section" id="format-of-a-query-string">
+<span id="query-string"></span><h2>Format of a Query String</h2>
+<p>The <em>load</em>, <em>all</em> and <em>iterall</em> methods each accept an optional <em>query</em> string
+describing the criteria that matching MongoDB database instances must satisfy.
+The MongoDB OML query language is specifically designed to be a cross between
+familiar Python language syntax and MongoDB database query semantics.</p>
+<p>Although queries are expressed as strings, they are eventually passed to the
+Python <em>eval</em> function and so must adhere to Python language expression syntax.
+In particular, a query should be written as a series of one or more terms
+separated by <em>and</em> and <em>or</em> conjunctions used to control how the individual
+terms affect the query result. Due to the way that the query string gets
+pre-processed, it is highly recommended that each term be enclosed in
+parentheses when using multiple terms. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;(document == &#39;War and Peace&#39;) and (author == &#39;Tolstoy&#39;)&quot;</span>
+</pre></div>
+</div>
+<p>Basically, you can think of a valid query string as being something you might
+write in a Python <em>if</em> statement:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">if</span> <span class="p">(</span><span class="n">document</span> <span class="o">==</span> <span class="s">&#39;War and Peace&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">author</span> <span class="o">==</span> <span class="s">&#39;Tolstoy&#39;</span><span class="p">):</span>
+    <span class="n">do_something</span>
+</pre></div>
+</div>
+<p>In the case of the MongoDB OML, the <em>do_something</em> logic simply adds the current
+MongoDB database item to the matching result set. Of course, for performance
+reasons, the actual query logic all occurs inside the MongoDB database engine,
+which is written in C++, and is translated into the internal query
+representation used by MongoDB. But this analogy should help guide you in how to
+formulate a valid query string for use with the MongoDB OML.</p>
+<p>Each term in the query should be written as an expression returning a boolean
+result and may reference facets defined on the current MongoDB database instance
+being examined as if they were local variables in the query expression&#8217;s
+evaluation context. For example, given the following class definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Dog</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">breed</span> <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">age</span>   <span class="o">=</span> <span class="n">DBInt</span>
+</pre></div>
+</div>
+<p>a valid query might be:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">puppies</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span> <span class="s">&quot;(breed == &#39;Terrier&#39;) and (age &lt;= 2)&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>In order to take advantage of the features of the MongoDB query engine, there
+are a few special rules to keep in mind when writing query strings:</p>
+<ul>
+<li><p class="first">You can query for <em>DBStr</em> facets that match a regular expression using query
+terms of the form: <em>name == &#8216;/regex/&#8217;</em> or <em>name != &#8216;/regex/&#8217;</em> (e.g.
+<em>&#8220;name == &#8216;/x/i&#8217;&#8221;</em> matches any name value containing an upper or lower case
+<em>x</em>).</p>
+<p>Note that the regular expression uses the Perl <em>/.../</em> notation, with an
+optional trailing <em>i</em> to indicate a case insensitive match. Due to some
+limitations on the query string processor, the actual contents of the regular
+expression (i.e. the part between the leading and trailing slashes) should
+follow standard Python <em>re</em> module regular expression syntax.</p>
+</li>
+<li><p class="first">You can reference the facets of nested <em>DBObject</em> or <em>DBObjects</em> values
+directly using standard Python <em>dot</em> notation. For example, if you have the
+following class definitions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">first_name</span> <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">last_name</span>  <span class="o">=</span> <span class="n">DBStr</span>
+
+<span class="k">class</span> <span class="nc">Employee</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">person</span> <span class="o">=</span> <span class="n">DBObject</span><span class="p">(</span> <span class="n">Person</span> <span class="p">)</span>
+    <span class="n">salary</span> <span class="o">=</span> <span class="n">DBFloat</span>
+</pre></div>
+</div>
+<p>you could write the following query:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">layoffs</span> <span class="o">=</span> <span class="n">Employee</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
+    <span class="s">&quot;(salary &gt; 100000.00) and (person.last_name == &#39;Smith&#39;)&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Not a very fair layoff policy, but a perfectly valid query.</p>
+<p>Note that this rule cannot be used with <em>DBRef</em>, <em>DBRefs</em>, <em>DBLink</em> or
+<em>DBLinks</em> values, since their values are not actually available to the MongoDB
+database query engine. Refer to the <a class="reference internal" href="mongodb_facets.html#understanding"><em>Understanding DBObject(s), DBRef(s) and DBLinks(s)</em></a> section for a more
+detailed explanation of the various object reference semantics that MongoDB
+OML supports.</p>
+</li>
+<li><p class="first">If you have a <em>DBObjects</em> facet containing a list of objects, you can test
+for any element of the list matching a specific subquery using a term of the
+form: <em>name( subquery )</em> (e.g.
+<em>&#8220;pets( (breed == &#8216;Terrier&#8217;) and (age &lt; 5) )&#8221;</em>, which will match if the
+object&#8217;s list of pets includes at least one whose breed is Terrier with an
+age less than years).</p>
+<p>Note that the previous example is not equivalent to:
+<em>&#8220;(pets.breed == &#8216;Terrier&#8217;) and (pets.age &lt; 5)&#8221;</em>, since the latter query will
+match any object whose pets list contains at least one object containing a
+breed of Terrier and a possibly different object whose age is less than five
+years. Use the subquery form when the subquery must be true for at least
+one specific item in the list.</p>
+<p>Also note that this rule cannot be used with <em>DBRefs</em> and <em>DBLinks</em> values,
+since their values are not actually available to the MongoDB database query
+engine. Refer to the <a class="reference internal" href="mongodb_facets.html#understanding"><em>Understanding DBObject(s), DBRef(s) and DBLinks(s)</em></a> section for a more detailed
+explanation of the various object reference semantics that MongoDB OML
+supports.</p>
+</li>
+<li><p class="first">If you have a facet whose value is a <em>DBList</em> or <em>DBSet</em> and you want to query
+if the value contains a specific value, you can write a term of the form:
+<em>name == [value]</em> (e.g. <em>&#8220;favorite_numbers == [7]&#8221;</em>). Similarly, if you want
+to check if the value contains at least one of a set of values, you can write:
+<em>name == [value1,value2,...]</em> (e.g. <em>&#8220;favorite_numbers == [7,11]&#8221;</em>).</p>
+<p>If you want to make sure that the value does not contain the specified value
+(or values), use <em>!=</em> (e.g. <em>&#8220;favorite_numbers != [7,11]&#8221;). If you want, you
+can also use *not</em> instead (e.g. &#8220;not (favorite_numbers == [7,11])&#8221;).</p>
+</li>
+<li><p class="first">Similarly, if you have a facet whose value is a <em>DBList</em> or <em>DBSet</em> and you
+want to query if the value contains every item in a set, you can write a term
+of the form: <em>name == {value1,value2,...}</em> (e.g. <em>&#8220;favorite_numbers ==
+{7,11}&#8221;</em>).</p>
+<p>If you want to make sure that it does not contain all specified values, use
+<em>!=</em> (e.g. <em>&#8220;favorite_numbers != {7,11}&#8221;). As before, you can also use use
+*not</em> instead (e.g. &#8220;not (favorite_numbers == {7,11]}&#8221;).</p>
+</li>
+<li><p class="first">When querying numeric values, you are restricted to using just the standard
+Python comparison operation (==, !=, &gt;, &gt;=, &lt;, &lt;=). The one extension is the
+ability to query with the modulus operator using a term of the form:
+<em>(name % value1) == value2</em> or <em>(name % value1) != value2</em> (e.g. use
+<em>(house_number % 2) == 1</em> to test for an odd house number).</p>
+</li>
+<li><p class="first">You can test to make sure that the MongoDB database has a value defined for a
+specific facet by using the facets&#8217; <em>exists</em> property (e.g. <em>&#8220;age.exists&#8221;</em>).</p>
+</li>
+<li><p class="first">You can check the length of a <em>DBObjects</em>, <em>DBRefs</em> or <em>DBLinks</em> facet using
+its <em>size</em> property (e.g. <em>&#8220;pets.size == 1&#8221;</em>). Due to a limitation of MongoDB,
+only the <em>==</em> and <em>!=</em> operators can be used in the query term.</p>
+</li>
+</ul>
+<p>One final note about writing query strings is that even though the string must
+be valid Python, being valid Python does not itself guarantee that the MongoDB
+database will understand the query. The query string is simply used to translate
+a Python-like expression into a form that the MongoDB database can process.
+Whether the reulting query returns the objects you expect may require additional
+testing and experimentation.</p>
+</div>
+<div class="section" id="determining-a-class-s-associated-mongodb-collection">
+<span id="determining"></span><h2>Determining a Class&#8217;s Associated MongoDB Collection</h2>
+<p>Although a MongoDB database is essentially schema-less, it does allow organizing
+groups of related documents into <em>collections</em>. The MongoDB OML takes advantage
+of this by associating each MongoDBObject subclass with a specific MongoDB
+collection. The rules for determing which MongoDB collection a particular
+MongoDBObject subclass is associated with are as follows:</p>
+<ul>
+<li><p class="first">By default, each immediate subclass of MongoDBObject is associated with a
+MongoDB collection having the same name as the subclass. For example, the
+class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">IndexDocument</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>would be associated with a MongoDB collection having the name <em>IndexDocument</em>.</p>
+</li>
+<li><p class="first">By default, each non-immediate subclass of MongoDBObject is associated with
+the MongoDB collection of its parent class which is an immediate subclass of
+MongoDBObject. For example, in the following class hierarchy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Dog</span> <span class="p">(</span> <span class="n">Animal</span> <span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Terrier</span> <span class="p">(</span> <span class="n">Dog</span> <span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>the Animal class is associated with the MongoDB <em>Animal</em> collection using the
+first rule, and both the Dog and Terrier classes are also associated with the
+MongoDB <em>Animal</em> collection through application of the second rule.</p>
+</li>
+<li><p class="first">You can explicitly define the MongoDB collection a class is associated with by
+specifying the collection&#8217;s name using the class-level <em>collection</em> attribute.
+For example, the following code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="s">&#39;Species&#39;</span>
+</pre></div>
+</div>
+<p>associates the Animal class with the MongoDB <em>Species</em> collection.</p>
+<p>Explicity defining the associated MongoDB collection also amends the second
+rule above so that subclasses use the explicit MongoDB collection of their
+closest parent class. For example, in the following class hierarchy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Animal</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="s">&#39;Species&#39;</span>
+
+<span class="k">class</span> <span class="nc">Dog</span> <span class="p">(</span> <span class="n">Animal</span> <span class="p">):</span>
+    <span class="n">collection</span> <span class="o">=</span> <span class="s">&#39;Dogs&#39;</span>
+
+<span class="k">class</span> <span class="nc">Terrier</span> <span class="p">(</span> <span class="n">Dog</span> <span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>instances of Animal are associated with the MongoDB <em>Species</em> collection,
+while instances of Dog and Terrier are both associated with the MongoDB <em>Dogs</em>
+collection.</p>
+</li>
+</ul>
+<p>Of course, all these rules about the MongoDB collection a class is associated
+with are very interesting, but what effect do they have on your application
+data model and logic?</p>
+<p>In practice, the main effect they have is on the results returned by the various
+query methods (i.e. <em>load</em>, <em>all</em>, <em>iterall</em>, <em>fetch</em>). In particular, a query
+can only return results from the MongoDB collection associated with the query&#8217;s
+object.</p>
+<p>For example, given the following class hierarchy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">IndexDocument</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">DBStr</span>
+
+<span class="k">class</span> <span class="nc">Animal</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">DBStr</span>
+
+<span class="k">class</span> <span class="nc">Cat</span> <span class="p">(</span> <span class="n">Animal</span> <span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Dog</span> <span class="p">(</span> <span class="n">Animal</span> <span class="p">):</span>
+    <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Terrier</span> <span class="p">(</span> <span class="n">Dog</span> <span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>we have partioned the underlying MongoDB database into two distinct collections:
+IndexDocument and Animal. If we perform the following query:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">object</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Fido&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>we know that we will either get back None or an instance of Animal, Cat, Dog or
+Terrier, depending upon whether a match is found in the database or not. We know
+that we will not get back an instance of IndexDocument with a <em>name</em> of <em>Fido</em>,
+since IndexDocument instances are not stored in the same MongoDB collection as
+Animal, while instances of Cat, Dog and Terrier are.</p>
+<p>From this you can see that, just by using the default collection name selected
+by the Mongo OML, we get a very natural partitioning of a MongoDB database into
+a system supporting a polymorphic object model. If you ask for an Animal, you
+will only get a result that is an Animal, even if the result is a subclass of
+Animal.</p>
+<p>Note also that if we change the above query to:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nb">object</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Fido&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>then we know that the result will either be None or an instance of Dog or
+Terrier, but not IndexCollection, Animal or Cat. So, in addition to the
+partioning provided by the MongoDB collection a class is associated with, the
+query mechanism also honors the subtype information implied by the query
+object&#8217;s class. Since in the example the query object was a Dog, the result must
+also be a Dog or one of its subclasses, such as Terrier.</p>
+<p>As you can see, for many applications you will never need to explicitly set the
+MongoDB collection a class is associated with and can safely ignore the
+<em>collection</em> class attribute. But if the need does arise, the control is there
+for you to completely manage the collections that your objects are stored in.</p>
+<p>One additional important development consideration is that changing a class&#8217;s
+<em>collection</em> attribute does not affect existing objects already stored in a
+MongoDB database in the original collection. This problem may be addressed in
+the future, but currently the only solution is to either rebuild the MongoDB
+database or create a custom <em>PyMongo</em>-level script that moves the affected
+documents from the original collection to the new collection.</p>
+</div>
+<div class="section" id="the-mongodb-facet">
+<h2>The mongodb Facet</h2>
+<p>In addition to the application facets you define as part of a MongoDBObject
+subclass, every MongoDBObject instance also has a special <em>mongodb</em> facet which
+contains a reference to the <em>MongoDB</em> object your application object is
+associated with. Refer to the <a class="reference internal" href="mongodb_mongodb.html#mongodb-mongodb"><em>The MongoDB Class</em></a> for more detailed
+information about the MongoDB object.</p>
+<p>In many cases, you will never need to use the <em>mongodb</em> facet directly. For
+example, there are no references to this facet anywhere in the example
+application presented previously. However, the facet does play an important role
+in the operation of the MongoDB OML and there may be cases where your application
+may need to set or reference it.</p>
+<p>If not explicitly set in your application code, the <em>mongodb</em> facet is
+initialized to the default MongoDB object for your application. However, you are
+free to set the value of <em>mongodb</em> if necessary. One use case for doing this is
+an application that uses two or more MongoDB databases simultaneously. In a
+situation like this, you would need to explicitly create each of the MongoDB
+object instances needed to access the application&#8217;s MongoDB databases and then
+assign the appropriate MongoDB to the <em>mongodb</em> facet of your MongoDBObject
+subclass instances as needed.</p>
+<p>In practice, this process is not as complex as its sounds. As an example,
+imagine that we have an application that uses customer information and credit
+card data. For security purposes, all credit card data is stored in a separate,
+highly secure, MongoDB database separate from the normal customer information
+MongoDB database. For this example, assume we are using the following two
+application classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">CreditCard</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">customer_id</span>        <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">credit_card_type</span>   <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">credit_card_number</span> <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">expiration_date</span>    <span class="o">=</span> <span class="n">DBStr</span>
+
+<span class="k">class</span> <span class="nc">Customer</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">customer_id</span> <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">name</span>        <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">address</span>     <span class="o">=</span> <span class="n">DBStr</span>
+</pre></div>
+</div>
+<p>where CreditCard objects are stored in the secure MongoDB database, and Customer
+objects are kept in the less secure MongoDB database. Assume that our application
+has already initialzed access to the two MongoDB databases we are using:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">customer_db</span>    <span class="o">=</span> <span class="n">MongoDB</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+<span class="n">credit_card_db</span> <span class="o">=</span> <span class="n">MongoDB</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>and that we now want to retrieve the customer information and credit card data
+for <em>&#8216;John Doe&#8217;</em>:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>customer    = Customer( mongodb = customer_db,</dt>
+<dd>name    = &#8216;John Doe&#8217; ).load()</dd>
+<dt>credit_card = CreditCard( mongodb     = credit_card_db,</dt>
+<dd>customer_id = customer.customer_id ).load()</dd>
+</dl>
+</div></blockquote>
+<p>All we have to do is set the correct MongoDB object on each prototype object
+before calling <em>load</em> (or <em>all</em> or <em>iterall</em>) to ensure that the correct
+MongoDB database is used. The resulting object (or objects) will then have their
+<em>mongodb</em> facet correctly set to the MongoDB they were loaded from. A similar
+process is used for storing newly created objects in a particular database:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">new_card</span> <span class="o">=</span> <span class="n">CreditCard</span><span class="p">(</span>
+    <span class="n">mongodb</span>            <span class="o">=</span> <span class="n">credit_card_db</span><span class="p">,</span>
+    <span class="n">customer_id</span>        <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">credit_card_type</span>   <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">credit_card_number</span> <span class="o">=</span> <span class="o">...</span><span class="p">,</span>
+    <span class="n">expiration_date</span>    <span class="o">=</span> <span class="o">...</span>
+<span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mongodb_facets.html" title="MongoDB OML Facets"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_installing.html" title="Installing MongoDB"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" >The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

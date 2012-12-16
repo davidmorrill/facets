@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>SyntaxChecker &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="TextCollector" href="tool_text_collector.html" />
+    <link rel="prev" title="Stdout" href="tool_stdout.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_text_collector.html" title="TextCollector"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_stdout.html" title="Stdout"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">SyntaxChecker</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_stdout.html"
+                        title="previous chapter">Stdout</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_text_collector.html"
+                        title="next chapter">TextCollector</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="syntaxchecker">
+<span id="tool-syntax-checker"></span><h1>SyntaxChecker</h1>
+<p>Defines a tool that performs syntax checking on an input Python source file.</p>
+<p>The Python source file to be syntax checked can be specified either by
+connecting a Python source file name to the tool&#8217;s <em>file_name</em> input or by
+dropping the source file onto the drop icon on the tool&#8217;s feature toolbar.</p>
+<p>Using the options dialog available from the tool&#8217;s feature toolbar, you can set
+up the tool to automatically position the cursor at the first syntax found in
+the current input source file. You can also configure the tool to automatically
+reload the source file any time the file is changed, which can be handy when
+using an external text editor to correct errors found by the tool.</p>
+<p>If automatic cursor positioning is turned off, you can click the <em>Go To</em> button
+located in the lower right hand corner of the tool&#8217;s view to update the cursor
+position to the most recently found error.</p>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.syntax_checker</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<dl class="docutils">
+<dt>file_name</dt>
+<dd>The name of a Python source file to be syntax checked.</dd>
+</dl>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<p>None.</p>
+</div>
+<div class="section" id="options">
+<h2>Options</h2>
+<p>In addition to its input connections, the syntax checker tool also supports
+setting the following facets through the tool&#8217;s options dialog available via the
+tool&#8217;s feature toolbar:</p>
+<dl class="docutils">
+<dt>Automatically move cursor to syntax error (<em>auto_goto</em>)</dt>
+<dd>Specifies whether the tool should automatically position the cursor on the
+line containing a syntax error.</dd>
+<dt>Automatically reload externally changed files (<em>auto_load</em>)</dt>
+<dd>Specifies whether the tool should automatically reload the current input
+Python source file whenever the file is changed.</dd>
+</dl>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_syntax_checker.jpg" src="_images/tool_syntax_checker.jpg" />
+<p>The view tester tool displaying a syntax error in a source file.</p>
+<img alt="_images/tool_syntax_checker_options.jpg" src="_images/tool_syntax_checker_options.jpg" />
+<p>The syntax checker tool&#8217;s options dialog.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_text_collector.html" title="TextCollector"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_stdout.html" title="Stdout"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

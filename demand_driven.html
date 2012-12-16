@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Demand Driven Documentation &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="Documentation To Do List" href="to_do.html" />
+    <link rel="prev" title="Facets Environment Variables" href="environment_variables.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="to_do.html" title="Documentation To Do List"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="environment_variables.html" title="Facets Environment Variables"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="environment_variables.html"
+                        title="previous chapter">Facets Environment Variables</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="to_do.html"
+                        title="next chapter">Documentation To Do List</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="demand-driven-documentation">
+<span id="demand-driven"></span><h1>Demand Driven Documentation</h1>
+<p>Facets is a large software package and will eventually have a correspondingly
+extensive documentation set to match. But until that day arrives, we&#8217;d like
+to prioritize the creation of documentation using a <em>demand driven</em> approach.</p>
+<p>That is, if there are portions of Facets that you would like to see documented
+(or documented better), please let the author know. Whatever user feedback is
+received will be recorded in the <a class="reference internal" href="to_do.html#document-to-do"><em>Documentation To Do List</em></a> list.</p>
+<p>Documentation items in the <em>to do</em> list will be handled as follows:</p>
+<ul class="simple">
+<li>Items at the top of the list will be documented before items lower on the
+list.</li>
+<li>Each item will have a request count and id associated with it.</li>
+<li>New user submitted items will be added to the end of the list with a request
+count of one and a new, unique id.</li>
+<li>Duplicate requests for the same item id (by different users) will increase the
+item&#8217;s request count by one.</li>
+<li>When an item&#8217;s request count increases, it will move up the list to be just
+above every other item with a smaller request count.</li>
+<li>To avoid <em>spamming</em> the list, user&#8217;s will only be able to <em>vote</em> for one item
+submitted by another user once per 24 hour period.</li>
+<li>The package author reserves the right to add new items to the list. In such
+cases, the new item will be added to the end of list with a request count of
+zero. That is, it will remain below all user submitted requests until one or
+more users <em>vote</em> it up. This is to allow the package author to suggest topics
+that users may not be aware of.</li>
+</ul>
+<p>The following additional rules for maintaining the list will also apply:</p>
+<ul class="simple">
+<li>If an incoming documentation request is too vague or broad (e.g. <em>document
+the Facets UI system</em>), it will be added to the end of the
+<a class="reference internal" href="to_do.html#pending-documentation"><em>Pending Documentation To Do List</em></a> list, along with the user&#8217;s name and date,
+awaiting further refinement or clarification by the submitting user.
+Additional comments explaining what needs to be clarified or refined may also
+be added as needed.</li>
+<li>If the submitting user provides a valid follow-up clarification, the resulting
+item will be moved from the <em>pending</em> to the <em>to do</em> list as described above.</li>
+<li>If a follow-up clarification is still too vague or broad, the clarification
+will be added to or replace the original item on the <em>pending</em> list, where it
+will continue to await additional clarification.</li>
+<li>If an item remains on the <em>pending</em> list for a long period of time (say one
+month) without any further clarification being provided, it will be deemed
+<em>dead</em> and removed from the <em>pending</em> list.</li>
+</ul>
+<p>The <a class="reference internal" href="ui_demo.html#ui-demo"><em>The Facets UI Demo</em></a> is considered part of the Facets documentation, so requests
+for writing a demo illustrating a particular set of Facets features can be
+included in the <em>to do</em> list.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="to_do.html" title="Documentation To Do List"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="environment_variables.html" title="Facets Environment Variables"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

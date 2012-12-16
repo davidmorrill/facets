@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Animate &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Getting Facets" href="installation.html" />
+    <link rel="prev" title="Visualize" href="tao_visualize.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Getting Facets"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tao_visualize.html" title="Visualize"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" accesskey="U">Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Animate</a><ul>
+<li><a class="reference internal" href="#defining-a-model">Defining a Model</a></li>
+<li><a class="reference internal" href="#adding-animation">Adding Animation</a></li>
+<li><a class="reference internal" href="#why-it-works">Why It Works</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tao_visualize.html"
+                        title="previous chapter">Visualize</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="next chapter">Getting Facets</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="animate">
+<span id="tao-animate"></span><h1>Animate</h1>
+<p>From our own experience, we all have a pretty good idea of what <em>animation</em> is.
+We know it includes things like:</p>
+<ul class="simple">
+<li>Saturday morning cartoons.</li>
+<li>Hyper-realistic transforming mechs in movies.</li>
+<li>Cut scenes and computer controlled characters in video games.</li>
+<li>Cute slide and bounce effects on web pages, smart phones and other gadgets.</li>
+</ul>
+<p>And while animation in Facets can be used to create similar effects (albeit
+usually on a more modest scale), the technical definition of animation in Facets
+is: <em>program controlled modification of one or more object attributes over
+time</em>.</p>
+<p>Although that doesn&#8217;t sound too interesting or sexy, proper use can achieve
+results ranging anywhere from cute, to fascinating, all the way up to hypnotic
+and mesmerizing.</p>
+<div class="section" id="defining-a-model">
+<h2>Defining a Model</h2>
+<p>For now, let&#8217;s start simple and just aim for mildly amusing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Bouncer</span> <span class="p">(</span> <span class="n">HasPrivateFacets</span> <span class="p">):</span>
+    <span class="n">bounce</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span> <span class="p">)</span>
+
+    <span class="n">view</span>   <span class="o">=</span> <span class="n">View</span><span class="p">(</span> <span class="n">UItem</span><span class="p">(</span> <span class="s">&#39;bounce&#39;</span> <span class="p">),</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">400</span> <span class="p">)</span>
+
+<span class="n">Bouncer</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>We start with a simple Bouncer class which has a single facet <em>bounce</em>, which is
+an integer in the range from 0 to 100, and a trivial view containing the
+<em>bounce</em> facet rendered using its default editor. Since <em>bounce</em> is a Range, its
+default editor is a RangeEditor.</p>
+<p>Running this program results in:</p>
+<img alt="_images/tao_animate1.jpg" src="_images/tao_animate1.jpg" />
+</div>
+<div class="section" id="adding-animation">
+<h2>Adding Animation</h2>
+<p>No animation is happening yet though (although we can drag the slider back and
+forth with our mouse if we want). However, all that changes when we add the
+following method to our Bouncer class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">facets_init</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">animate_facet</span><span class="p">(</span> <span class="s">&#39;bounce&#39;</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">repeat</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Recall from our previous discussion that the special <em>facets_init</em> method is
+called once immediately after our default class constructor has finished
+initializing the Bouncer object. In this case we take advantage of that to
+start the animation when the object is created.</p>
+<p>Now when we run the program the slider bounces side to side like a progress bar
+gone mad (try squinting while looking at these screen shots and use your
+imagination):</p>
+<img alt="_images/tao_animate2.jpg" src="_images/tao_animate2.jpg" />
+<img alt="_images/tao_animate3.jpg" src="_images/tao_animate3.jpg" />
+<img alt="_images/tao_animate4.jpg" src="_images/tao_animate4.jpg" />
+<p>Loosely translated, the newly added code can be read as: animate our object&#8217;s
+<em>bounce</em> facet to count from 0 (its default initial value) to 100 over a period
+of one second (the default animation time), and then count backward from 100 to
+0 over the next second. Repeat this over and over again until the user stops the
+program.</p>
+<p>Note that this description exactly matches our Facets definition of animation
+given earlier. If you try and drag the slider with your mouse now, you will find
+that you can&#8217;t, because the <em>bounce</em> facet is now <em>program controlled</em> by the
+<strong>FacetAnimation</strong> object.</p>
+</div>
+<div class="section" id="why-it-works">
+<h2>Why It Works</h2>
+<p>If you&#8217;ve read all of the preceding sections carefully, you probably already
+have a pretty good idea of why the slider appears to be <em>animated</em>:</p>
+<ul class="simple">
+<li>The Facets animation system (via a <strong>FacetAnimation</strong> object internally
+created by the <em>animate_facet</em> method) periodically updates the <em>bounce</em> facet
+with a new value.</li>
+<li>As a result of the update, Facets notifies all interested listeners of the
+change to the <em>bounce</em> facet.</li>
+<li>The <strong>RangeEditor</strong> in the <strong>Bouncer</strong> object&#8217;s view, which has automatically
+registered itself as a listener to the <em>bounce</em> facet, handles the change
+notification by updating the appearance of the slider control appropriately.</li>
+</ul>
+<p>And that&#8217;s all there is to it...easy peasy, thanks to the Facets notification
+and UI architecture.</p>
+<p>Of course, there&#8217;s a lot more to learn about the animation system, including all
+of the different animation <em>types</em>, <em>paths</em> and <em>tweeners</em> available, some of
+which will be covered in more detail in later chapters.</p>
+<p>In the meantime, if you want to see more animation examples closer to the
+fascinating and mesmerizing end of the spectrum, try firing up <a class="reference internal" href="ui_demo.html#ui-demo"><em>The Facets UI Demo</em></a>
+and exploring some of the examples in the <em>Graphics and Animation</em> folder.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Getting Facets"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tao_visualize.html" title="Visualize"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" >Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

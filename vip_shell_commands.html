@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Shell Commands &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="History Items" href="vip_history_items.html" />
+    <link rel="prev" title="Using the Code Editor" href="vip_code_editor.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_history_items.html" title="History Items"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_code_editor.html" title="Using the Code Editor"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_code_editor.html"
+                        title="previous chapter">Using the Code Editor</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_history_items.html"
+                        title="next chapter">History Items</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="shell-commands">
+<span id="vip-shell-commands"></span><h1>Shell Commands</h1>
+<p>Shell commands are commands entered into and executed from the shell code editor
+that allow you to perform actions that control the shell environment in some
+way.</p>
+<p>Shell commands can be freely intermixed with blocks of Python code within the
+code editor. To distinuish shell commands from Python code, each command must
+be entered on a separate line within the editor, start in column 1, and have the
+following form:</p>
+<div class="highlight-python"><pre>/command_name[?|-] [options]</pre>
+</div>
+<p>where <em>command_name</em> is the name of the command and <em>options</em> is a string of
+data passed to the command as additional information about the action to be
+performed.</p>
+<p>The actual form and content of <em>options</em> is command dependent. Some commands do
+not accept any options, while others may accept them but also have a default
+value if they are omitted. The description of each command specifies what the
+options, if any, for the command are.</p>
+<p>A <em>?</em> (plus) or <em>-</em> (minus) character may optionally immediately follow the
+command name with the following meaning:</p>
+<dl class="docutils">
+<dt><strong>?</strong></dt>
+<dd>Display the help information for the command (rather than execute it).</dd>
+<dt><strong>-</strong></dt>
+<dd>Unregister the command. This only applies to user created commands,
+described in a later section. The VIP Shell maintains a persistent registry
+of all user defined commands it has encountered. You can use the minus
+modifier to remove a command you no longer need from the registry.</dd>
+</dl>
+<p>The shell comes with a number of predefined commands which are described below:</p>
+<dl class="docutils">
+<dt><strong>cd</strong> - Change Directory Command</dt>
+<dd><p class="first">This command changes the shell&#8217;s current working directory to the directory
+specified by the command&#8217;s options, which should either be an absolute path,
+or a path relative to the current working directory.</p>
+<p>If no options are specified, the current working directory is not changed.
+In all cases the new current working directory is added to the history list.</p>
+<p>Some examples:</p>
+<div class="highlight-python"><pre>/# Change to the parent of the current working directory:
+/cd ..
+
+/# Change to the examples subdirectory of the current working directory:
+/cd ./examples
+
+/# Change to the specified absolute directory:
+/cd C:\temp</pre>
+</div>
+<p>The last example should produce output like the following:</p>
+<img alt="_images/vip_cmd_cd.jpg" class="last" src="_images/vip_cmd_cd.jpg" />
+</dd>
+<dt><strong>dir</strong> - Object Directory Command</dt>
+<dd><p class="first">This command prints the result of <tt class="docutils literal"><span class="pre">dir(</span> <span class="pre">options</span> <span class="pre">)</span></tt>, where <em>options</em> should
+be a Python expression that evaluates to the object to perform the dir() on.
+If options is omitted, the current contents of the shell are displayed. For
+example:</p>
+<div class="highlight-python"><pre>/# Display all current shell symbols:
+/dir
+
+/# Display the contents of the HasFacets class:
+/dir HasFacets</pre>
+</div>
+<p>The last example should produce output similar to:</p>
+<img alt="_images/vip_cmd_dir.jpg" class="last" src="_images/vip_cmd_dir.jpg" />
+</dd>
+<dt><strong>fx</strong> - File Explorer Command</dt>
+<dd><p class="first">This command adds a file explorer view to the shell history using <em>options</em>
+as the root path. The options string may contain wildcard characters (e.g.
+*.py). If no options are specified, the current shell working directory is
+used as the root path.</p>
+<p>Once the file explorer view is displayed, you can double-click directories
+or files in the view to make them available as standard shell history items.</p>
+<p>Some examples:</p>
+<div class="highlight-python"><pre>/# Display all files starting from the current working directory:
+/fx
+
+/# Display all Facets UI demo Python source files:
+/fx C:\Assembla\trunk\facets\extra\demo\ui\*py</pre>
+</div>
+<p>The following figure shows an example of the file explorer in use:</p>
+<img alt="_images/vip_cmd_fx.jpg" class="last" src="_images/vip_cmd_fx.jpg" />
+</dd>
+<dt><strong>l</strong> - List Python Files Command</dt>
+<dd><p class="first">This command lists all Python source (i.e. <em>.py</em>) files matching the
+command&#8217;s <em>options</em>, which should be a path to a directory containing Python
+source code. If no options are specified, then all Python source files in
+the current working directory are listed.</p>
+<p>Some examples:</p>
+<div class="highlight-python"><pre>/# List all Python source files in the current working directory:
+/l
+
+/# List all Python source files in the examples subdirectory:
+/l examples</pre>
+</div>
+<p>An example of some typical command output is shown below:</p>
+<img alt="_images/vip_cmd_l.jpg" class="last" src="_images/vip_cmd_l.jpg" />
+</dd>
+<dt><strong>li</strong> - List Python Implementation Command</dt>
+<dd><p class="first">This command lists all Python source files used in the implementation of the
+object specified in the command&#8217;s <em>options</em>, which should be a Python
+expression that evaluates to the object whose implementation is to be found.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>/# List all files used in the implementation of the Tabbed class:
+/li Tabbed</pre>
+</div>
+<p>which produces the following result:</p>
+<img alt="_images/vip_cmd_li.jpg" class="last" src="_images/vip_cmd_li.jpg" />
+</dd>
+<dt><strong>lod</strong> - Level of Detail Command</dt>
+<dd><p class="first">This command sets the level of detail for all items returned by other
+sub-commands executed at the same time as this one to the level of detail
+specified by <em>options</em>, which should have one of the following values:</p>
+<dl class="docutils">
+<dt><strong>low</strong></dt>
+<dd>Lowest level of detail (i.e. <em>collapsed</em>).</dd>
+<dt><strong>medium</strong></dt>
+<dd>Medium level of detail (i.e. <em>expanded</em>).</dd>
+<dt><strong>high</strong></dt>
+<dd>Highest level of detail (i.e. <em>full</em>).</dd>
+</dl>
+<p>The default is <em>low</em>.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>[ i for i in range(200) ]
+/lod</pre>
+</div>
+<p>which produces the following result:</p>
+<img alt="_images/vip_cmd_lod.jpg" class="last" src="_images/vip_cmd_lod.jpg" />
+</dd>
+<dt><strong>ls</strong> - List Files Command</dt>
+<dd><p class="first">This command lists all files and directories matching the command&#8217;s
+<em>options</em>, which should be a path possibly containing wildcard characters
+such as &#8216;*&#8217; and &#8216;?&#8217;. If no options are specified, then all file and
+directories in the current working directory are listed.</p>
+<p>Some examples:</p>
+<div class="highlight-python"><pre>/# List all file and directories in the current working directory:
+/ls
+
+/# List all files with a .txt extension in the current working directory:
+/ls *.txt
+
+/# List all Python related files in the examples subdirectory:
+/ls examples\*.py*</pre>
+</div>
+<p>The following figure shows some typical output produced using this command-:</p>
+<img alt="_images/vip_cmd_ls.jpg" class="last" src="_images/vip_cmd_ls.jpg" />
+</dd>
+<dt><strong>lx</strong> - List Recently Executed Files Command</dt>
+<dd><p class="first">This command lists all of the most recently executed Python source files
+from most to least recently used. The command has no options.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>/lx</pre>
+</div>
+<p>which might produce output similar to the following:</p>
+<img alt="_images/vip_cmd_lx.jpg" class="last" src="_images/vip_cmd_lx.jpg" />
+</dd>
+<dt><strong>p</strong> - Profile Command</dt>
+<dd><p class="first">This command turns on profiling for the remainder of the command execution.
+This command should proceed a Python expression or code block to be
+profiled.</p>
+<p>When the command is completed, the profiling data is written to a file in
+the current working directory, and the name of the file is sent to the
+shell&#8217;s <em>profile</em> output to allow external tools, such as the ProfileViewer,
+to analyze and display the results.</p>
+<p>See also the <em>pp</em> command for a similar command that prints the profiler
+results directly in the shell.</p>
+<p>For example:</p>
+<div class="last highlight-python"><pre>/p
+for i in xrange( 1000 ):
+    do_something_to_be_profiled()</pre>
+</div>
+</dd>
+<dt><strong>pp</strong> - Profile and Print Command</dt>
+<dd><p class="first">This command turns on profiling for the remainder of the command execution.
+This command should proceed a Python expression or code block to be
+profiled.</p>
+<p>When the command is completed, the profiling data is written to a file in
+the current working directory, and then the results are analyzed and printed
+to the shell&#8217;s output. The name of the file is also sent to the shell&#8217;s
+<em>profile</em> output to allow external tools, such as the ProfileViewer, to
+analyze and display the results.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>/pp
+for i in xrange(1000):
+    print i</pre>
+</div>
+<p>produces the following output:</p>
+<img alt="_images/vip_cmd_pp.jpg" class="last" src="_images/vip_cmd_pp.jpg" />
+</dd>
+<dt><strong>pwd</strong> - Print Working Directory Command</dt>
+<dd><p class="first">This command displays the shell&#8217;s current working directory. It has no
+options. For example:</p>
+<div class="highlight-python"><pre>/pwd</pre>
+</div>
+<p>might produce the following output:</p>
+<img alt="_images/vip_cmd_pwd.jpg" class="last" src="_images/vip_cmd_pwd.jpg" />
+</dd>
+<dt><strong>o</strong> - Shell Options Command</dt>
+<dd><p class="first">This command displays the shell options view within the history list. It has
+no options. For example:</p>
+<div class="highlight-python"><pre>/o</pre>
+</div>
+<p>results in the following display:</p>
+<img alt="_images/vip_cmd_o.jpg" class="last" src="_images/vip_cmd_o.jpg" />
+</dd>
+</dl>
+<p><strong>t</strong> - Execution Time Command</p>
+<blockquote>
+<div><p>This command turns on execution timing for the remainder of the command
+execution. This command should proceed one or more Python expression or code
+blocks to be timed.</p>
+<p>When the command is completed, the execution time for each separate block of
+Python code executed is displayed. You can use the <em>no-op</em> command (/#) to
+separate several blocks of Python code if desired.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>/t
+items = []
+for i in xrange( 100000 ):
+    items.append( i )
+/#
+items = []
+for i in xrange( 1000000 ):
+    items.append( i )</pre>
+</div>
+<p>would produce output similar to:</p>
+<img alt="_images/vip_cmd_t.jpg" src="_images/vip_cmd_t.jpg" />
+</div></blockquote>
+<dl class="docutils">
+<dt><strong>view</strong> - Display Object View Command</dt>
+<dd><p class="first">This command adds the default Facets view for the command&#8217;s options to the
+shell history.</p>
+<p>The command&#8217;s options should be a Python expression that evaluates to a
+HasFacets object. The options can also specify an initial height for the
+view, using the form: <tt class="docutils literal"><span class="pre">object,</span> <span class="pre">height</span> <span class="pre">(e.g.</span> <span class="pre">myobject,</span> <span class="pre">300)</span></tt>.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>from facets.extra.demo.ui.Graphics_and_Animation.Twixter import Twixter
+/view Twixter(), 400</pre>
+</div>
+<p>would produce output like the following:</p>
+<img alt="_images/vip_cmd_view.jpg" class="last" src="_images/vip_cmd_view.jpg" />
+</dd>
+<dt><strong>x</strong> - Execute Command</dt>
+<dd><p class="first">This command executes the Python source file specified by the command&#8217;s
+options. The .py file extension is optional and may be omitted. For
+example:</p>
+<div class="last highlight-python"><pre>/# Execute the mytest.py file:
+/x mytest
+
+/# Execute the C:\test\example.py file:
+/x C:\test\example.py</pre>
+</div>
+</dd>
+<dt><strong>=</strong> - Filter Command</dt>
+<dd><p class="first">This command displays only the visible items in the shell history which
+contain a case insensitive match of the search string specified by the
+command&#8217;s options. If no option string is specified, then all visible
+history items are displayed. For example:</p>
+<div class="last highlight-python"><pre>/# Display only visible history items containing the string 'test':
+/= test
+
+/# Display all visible history items (i.e. removes any previous filter):
+/=</pre>
+</div>
+</dd>
+<dt><strong>/</strong> - Show and Hide Items Command</dt>
+<dd><p class="first">This command shows or hides items in the shell history list based upon the
+options provided. If no options are specified, then all currently hidden
+history items are made visible again.</p>
+<p>If specified, the options should be a string of the form: <tt class="docutils literal"><span class="pre">[+|-]types</span></tt>,
+where <em>types</em> can be a string containing zero, one or more of the following
+history item type codes:</p>
+<ul class="simple">
+<li><strong>c</strong>: Commands</li>
+<li><strong>o</strong>: Output (i.e. stdout)</li>
+<li><strong>e</strong>: Errors (i.e. stderr)</li>
+<li><strong>r</strong>: Results</li>
+<li><strong>x</strong>: Exceptions</li>
+<li><strong>f</strong>: Files (and directories)</li>
+</ul>
+<p>If no <em>types</em> are specified, then all types are assumed.</p>
+<p>The list of types may optionally be preceded by a <em>+</em> or <em>-</em> character. If
+<em>+</em> is specified, then only the currently visible history items matching
+<em>types</em> will remain visible; all other items will be hidden.</p>
+<p>If a leading <em>-</em> is specified, then all currently visible history items
+matching <em>types</em> will be hidden; all other items will remain visible.</p>
+<p>If no leading <em>+</em> or <em>-</em> is specified, <em>+</em> is assumed.</p>
+<p>Some examples:</p>
+<div class="last highlight-python"><pre>/# Show all currently hidden history items:
+//
+
+/# Show only the currently visible command items:
+// +c
+
+/# Hide all currently visible stderr output and exceptions items:
+// -ex</pre>
+</div>
+</dd>
+<dt><strong>#</strong> - Noop Command</dt>
+<dd><p class="first">This command has no options and performs no operation. It is in effect a
+comment and can be used to separate several blocks of Python code. This is
+useful, for example, when using the <em>time</em> command (/t) to display separate
+execution times for each block of Python code to be executed. For example:</p>
+<div class="last highlight-python"><pre>/t
+for i in xrange( 1000000 ):
+    do_something()
+/#
+for i in xrange( 1000000 ):
+    do_something_else()</pre>
+</div>
+</dd>
+<dt><strong>~</strong> - Do Not Clear Editor Command</dt>
+<dd><p class="first">This command has no options and simply prevents clearing the shell editor&#8217;s
+text buffer after a successful command execution. This can be useful when
+you are iteratively developing code, since it eliminates the need to keep
+retrieving the last version of the code back into the code editor.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre># My really big shell project
+# ...
+# lots of python code you are working on
+# ...
+/~</pre>
+</div>
+<p>should produce results similar to the following figure, which shows that the
+contents of the code editor have not been cleared after executing the
+command:</p>
+<img alt="_images/vip_cmd_lock.jpg" src="_images/vip_cmd_lock.jpg" />
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">It can be useful to use this command in conjunction with the
+<em>history item creation</em> status bar tool, which controls when new
+<em>Command</em> items get added to the history list.</p>
+</div>
+</dd>
+<dt>Help Command</dt>
+<dd><p class="first">This command displays information on how to use the VIP Shell. The command
+does not have a name. That is, the command is invoked whenever a slash
+<em>not</em> followed by a command name is invoked. It does take an <em>option</em>
+however, which is the the category of help information to be displayed. The
+possible values for the option are:</p>
+<dl class="docutils">
+<dt><strong>commands</strong></dt>
+<dd>Displays information on the various shell commands (such as this one).</dd>
+<dt><strong>variables</strong></dt>
+<dd>Displays information on the special variables available in the code
+editor.</dd>
+<dt><strong>keys</strong></dt>
+<dd>Displays information about the various code editor keyboard shortcuts.</dd>
+<dt><strong>items</strong></dt>
+<dd>Displays information about the various keyboard and mouse actions for
+history items.</dd>
+<dt><strong>debug</strong></dt>
+<dd>Displays information about the special debugging calls supported by the
+shell that can be added to your code.</dd>
+</dl>
+<p>If no option is specified, a summary with links to the various help
+categories just described is displayed.</p>
+<p>Some examples:</p>
+<div class="highlight-python"><pre>/# Display the shell help summary:
+/
+
+/# Display help information about the various shell commands:
+/ commands</pre>
+</div>
+<p>The output from the first example above should look like:</p>
+<img alt="_images/vip_cmd_help.jpg" class="last" src="_images/vip_cmd_help.jpg" />
+</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_history_items.html" title="History Items"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_code_editor.html" title="Using the Code Editor"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

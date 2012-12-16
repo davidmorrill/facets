@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Facets Environment Variables &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="Demand Driven Documentation" href="demand_driven.html" />
+    <link rel="prev" title="Limitations of the MongoDB OML" href="mongodb_limitations.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="demand_driven.html" title="Demand Driven Documentation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_limitations.html" title="Limitations of the MongoDB OML"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Facets Environment Variables</a><ul>
+<li><a class="reference internal" href="#facets-bp">FACETS_BP</a></li>
+<li><a class="reference internal" href="#facets-config">FACETS_CONFIG</a></li>
+<li><a class="reference internal" href="#facets-debug">FACETS_DEBUG</a></li>
+<li><a class="reference internal" href="#facets-dev">FACETS_DEV</a></li>
+<li><a class="reference internal" href="#facets-fbi">FACETS_FBI</a></li>
+<li><a class="reference internal" href="#facets-images">FACETS_IMAGES</a></li>
+<li><a class="reference internal" href="#facets-init">FACETS_INIT</a></li>
+<li><a class="reference internal" href="#facets-theme">FACETS_THEME</a></li>
+<li><a class="reference internal" href="#facets-ui">FACETS_UI</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mongodb_limitations.html"
+                        title="previous chapter">Limitations of the MongoDB OML</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="demand_driven.html"
+                        title="next chapter">Demand Driven Documentation</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="facets-environment-variables">
+<h1>Facets Environment Variables</h1>
+<p>Facets defines a number of environment variables that control various aspects of
+the Facets run-time environment. The next few sections cover the name, value and
+usage of each of these variables.</p>
+<div class="section" id="facets-bp">
+<h2>FACETS_BP</h2>
+<p>Defines the name of the file containing the persistent breakpoints set using the
+Facets <em>FBI</em> debugger. If not defined, it defaults to a file called <em>fbi.bp</em>
+located in the Facets configuration directory.</p>
+<p>Setting this variable is useful if you are debugging multiple Facets
+applications and do or do not want them to share the same set of saved
+breakpoints.</p>
+</div>
+<div class="section" id="facets-config">
+<h2>FACETS_CONFIG</h2>
+<p>Defines the directory where Facets configuration information, such as the Facets
+UI database and default persistent breakpoint file, is located. If not defined,
+Facets uses the following platform specific directory location:</p>
+<dl class="docutils">
+<dt><strong>Windows</strong></dt>
+<dd><em>APPDATA</em>\Facets (e.g. <em>C:\Users\dmorrill\AppData\Roaming\Facets</em>)</dd>
+<dt><strong>Other (OS X, Linux, etc.)</strong></dt>
+<dd><em>HOME</em>/.facets (e.g. <em>/home/dmorrill/.facets</em>)</dd>
+</dl>
+<p>You only need to set this environment variable if you want to keep your
+application&#8217;s Facets configuration data separate from other Facets-based
+applications on your system.</p>
+<p>If you do specify a directory, and it does not exist, Facets automatically
+creates it when needed. If it exists, but is a file rather than a directory,
+Facets displays an error message.</p>
+</div>
+<div class="section" id="facets-debug">
+<h2>FACETS_DEBUG</h2>
+<p>Defines the integer valued debug level for application execution. If not
+defined, the debug level is 0, meaning no debug information is logged. To
+log debug information, a non-zero value must be set.</p>
+<p>The debug level affects the <em>log</em>, <em>log_if</em>, <em>called_from</em>, <em>created_from</em>,
+<em>object_info</em>, <em>wdump</em> and <em>wdump_if</em> functions defined by the
+<em>facets.extra.debug</em> module.</p>
+<p>The <em>log_if</em> and <em>wdump_if</em> functions define a <em>mask</em> argument which, when
+logically ANDed with the debug level, must be non- zero for the debug
+information to be logged, allowing you to conditionally control what information
+is logged based on the value of FACETS_DEBUG.</p>
+</div>
+<div class="section" id="facets-dev">
+<h2>FACETS_DEV</h2>
+<p>Defines a boolean (i.e. 0 or 1) valued flag specifying whether or not developer
+features are enabled. If not defined, it defaults to 0 (False), indicating
+developer features are not enabled.</p>
+<p>If developer features are enabled, right clicking any DockWindow tab or
+splitter bar to display its context menu will include a <em>Display</em> sub-menu with
+options to:</p>
+<ul class="simple">
+<li>Display a VIP Shell window.</li>
+<li>Display a Facets tools window.</li>
+<li>Display an FBI (Frame Based Inspector) debugger window.</li>
+</ul>
+<p>Each of these windows can display additional information about the running state
+of your application.</p>
+<img alt="_images/facets_dev_menu.jpg" src="_images/facets_dev_menu.jpg" />
+<p>In addition, you can also right-click any label in a Facets user interface to
+display the same VIP Shell window available through the DockWindow context menu:</p>
+<img alt="_images/facets_dev_shell.jpg" src="_images/facets_dev_shell.jpg" />
+</div>
+<div class="section" id="facets-fbi">
+<h2>FACETS_FBI</h2>
+<p>Defines an integer value specifying if, or how, the Facets <em>FBI</em> (Frame Based
+Inspector) debugger should be invoked when an application is started. The
+possible values are:</p>
+<dl class="docutils">
+<dt><strong>0</strong></dt>
+<dd>The FBI debugger should not be invoked when the application starts.</dd>
+<dt><strong>&gt;0</strong></dt>
+<dd>The FBI debugger is started with the application in a suspended state just
+prior to displaying its initial user interface.</dd>
+<dt><strong>&lt;0</strong></dt>
+<dd>The FBI debugger window is created and displayed, but not enabled. The
+application user interface is created and displayed normally. You can then
+use the FBI debugger window to set breakpoints in your already running
+application.</dd>
+</dl>
+<p>If not defined, FACETS_FBI defaults to <em>0</em>, so your application starts normally
+with no FBI debugger window created.</p>
+<p>Note that you can also insert explicit breakpoints into you code using the <em>bp</em>
+function defined in the <em>facets.extra.helper.fbi</em> module. In this case, the
+value of the FACETS_FBI variable determines whether or not the FBI debugger is
+invoked when a breakpoint is encountered.</p>
+<p>If FACETS_FBI is <em>0</em>, any breakpoint encountered is ignored; otherwise the
+breakpoint suspends execution of the current function and invokes the debugger.
+This allows you to leave breakpoints in your program code without always
+invoking the FBI debugger simply by leaving the FACETS_FBI environment variable
+undefined or set to <em>0</em>. Setting FACETS_FBI to any non- zero value allows
+breakpoints to interrupt program execution.</p>
+</div>
+<div class="section" id="facets-images">
+<h2>FACETS_IMAGES</h2>
+<p>Defines a list of directory paths appended to the default list of paths used  by
+the Facets <em>ImageLibrary</em>. If multiple paths are specified, they must be
+separated by the standard platform path separator (i.e. &#8216;;&#8217; on Windows and &#8216;:&#8217;
+on Linux and OS X).</p>
+<p>The <em>ImageLibrary</em> is a resource manager that helps locate image assets at run-
+time. Images can be stored in directories or .zip files and their directories
+added to the ImageLibrary search path to simplify application image retrieval
+and loading.</p>
+</div>
+<div class="section" id="facets-init">
+<h2>FACETS_INIT</h2>
+<p>Defines how a Facets application&#8217;s initial user interface is created. The
+possible values are:</p>
+<dl class="docutils">
+<dt><strong>app</strong></dt>
+<dd>Runs the application normally.</dd>
+</dl>
+<img alt="_images/facets_init_app.jpg" src="_images/facets_init_app.jpg" />
+<dl class="docutils">
+<dt><strong>shell</strong></dt>
+<dd><p class="first">Create&#8217;s the application&#8217;s user interface embedded as a tab in a window
+along with a second tab containing a VIPShell whose namespace is initially
+populated with all of the values contained in the application object view&#8217;s
+<em>context</em> dictionary. You can use the VIPShell&#8217;s Python environment to
+interactively explore the state of your application while it runs.</p>
+<p class="last">This is similar to <em>shell_app</em>, but can reduce screen clutter in cases where
+your application has a very simple user interface.</p>
+</dd>
+</dl>
+<img alt="_images/facets_init_shell.jpg" src="_images/facets_init_shell.jpg" />
+<dl class="docutils">
+<dt><strong>shell_app</strong></dt>
+<dd>Creates the application&#8217;s user interface and a separate VIPShell window
+whose namespace is initially populated with all of the values contained in
+the application object view&#8217;s <em>context</em> dictionary. You can use the
+VIPShell&#8217;s Python environment to interactively explore the state of your
+application while it runs.</dd>
+</dl>
+<img alt="_images/facets_init_shell_app.jpg" src="_images/facets_init_shell_app.jpg" />
+<dl class="docutils">
+<dt><strong>tools</strong></dt>
+<dd>Creates the application&#8217;s user interface view and a separate <em>tools</em> window
+whose <em>object</em> facet is set to the application object. You can configure
+the tools window with your favorite Facets tools and use it to display
+information about your application.</dd>
+</dl>
+<img alt="_images/facets_init_tools.jpg" src="_images/facets_init_tools.jpg" />
+<p>If FACETS_INIT is not defined, it defaults to <em>app</em>, which runs your application
+normally. If the value is not in the above list, an error message is displayed
+and no application user interface is displayed.</p>
+</div>
+<div class="section" id="facets-theme">
+<h2>FACETS_THEME</h2>
+<p>Defines the name of the DockWindow&#8217;s theme used for all DockWindows created
+without specifying an explicit theme. DockWindows manage the tabs and splitter
+bars used within an application, so setting a theme affects the appearance of
+those user interface elements within your application.</p>
+<p>If FACETS_THEME is not defined, <em>default</em> is used, which is the name of the
+default DockWindows theme. If an unrecognized theme name is specified, an error
+message is diplayed, along with a list of all valid DockWindow theme names. If
+you are not familiar with the available themes, you can also start your
+application with the FACETS_INIT environment variable set to <em>tools</em>, then
+create an instance of the <em>Select DockWindow Theme</em> tool and use it to explore
+how the various available themes look with your application.</p>
+</div>
+<div class="section" id="facets-ui">
+<h2>FACETS_UI</h2>
+<p>Defines the GUI toolkit Facets uses to create all user interface views. The
+possible values are:</p>
+<dl class="docutils">
+<dt><strong>qt</strong></dt>
+<dd>Use the PyQt4/Qt toolkit.</dd>
+<dt><strong>side</strong></dt>
+<dd>Use the PySide/Qt toolkit.</dd>
+<dt><strong>wx</strong></dt>
+<dd>Use the wxPython/wxWindows toolit.</dd>
+<dt><strong>null</strong></dt>
+<dd>Use the <em>null</em> toolkit (no user interfaces are created).</dd>
+</dl>
+<p>If the environment variable is not defined, Facets automatically searches for
+the PyQt4, PySide, wxPython or null toolkit, in that order, and uses the first
+one found. Since the null toolkit is included with the Facets package, the
+search always succeeds.</p>
+<p>You normally only need to set FACETS_UI if more than one GUI toolkit is, or
+might be, installed and you want to explicitly specify which toolkit to use.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="demand_driven.html" title="Demand Driven Documentation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_limitations.html" title="Limitations of the MongoDB OML"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

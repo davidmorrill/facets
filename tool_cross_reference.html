@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>CrossReference &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="DropZone" href="tool_drop_zone.html" />
+    <link rel="prev" title="ControlStack" href="tool_control_stack.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_drop_zone.html" title="DropZone"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_control_stack.html" title="ControlStack"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">CrossReference</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_control_stack.html"
+                        title="previous chapter">ControlStack</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_drop_zone.html"
+                        title="next chapter">DropZone</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="crossreference">
+<span id="tool-cross-reference"></span><h1>CrossReference</h1>
+<p>Defines a cross reference tool for displaying and selecting information about
+the various module-level symbols defined and referenced within a specified
+Python source code tree. Module-level symbols typically include classes,
+functions and constants defined with module-level scope. Only statements used to
+import module-level definitions are included in the reference information.</p>
+<p>The cross reference tool automatically constructs a cross reference database
+whenever a path is assigned to its <em>root</em> facet and the database does not
+already exist. Once the database has been created, it is not updated unless
+explicitly requested to do so by clicking on the <em>update</em> button in the tool&#8217;s
+user interface (see the screenshot below).</p>
+<p>The cross reference database is stored in the root directory of the path
+assigned to the <em>root</em> facet with a name of the form: <em>package_xref.data</em>, where
+<em>package</em> is the package prefix assigned to the tool&#8217;s <em>package</em> facet. The
+database will only contain cross-reference information for symbols imported from
+packages starting with <em>package</em>. For example, if the value of <em>package</em> is
+<em>facets</em>, then the database is called <em>facets_xref.data</em> and only contains
+cross-reference information for symbols imported from <em>facets</em> (e.g. <em>from
+facets.api import ...</em>).</p>
+<p>The top part of the tool&#8217;s user interface shows a tree view of all symbols
+contained in the cross reference. Expanding a symbol displays all files in the
+source tree containing at least one reference to the symbol. Selecting a
+particular symbol displays the list of all modules in the source tree which
+define the symbol. This list may have zero, one or more entries. If the symbol
+is not defined in the source tree, it will not have a definition. And in some
+cases, a symbol may be defined more than once in the source tree, in which case
+it will have multiple definition files listed.</p>
+<p>You can restrict the symbols displayed in the tool by typing a string into the
+<em>Filter</em> field located at the top of the tool&#8217;s user interface. Only symbols
+containing the specified string using a <em>case insensitive</em> match are displayed</p>
+<p>Note that the <em>file_name</em> output of the tool is driven by the most recently
+selected item in the tool&#8217;s user interface as follows:</p>
+<ul class="simple">
+<li>If a symbol is selected from the top part of the user interface and there is
+at least one definition for the symbol in the database, then the first such
+definition is output as the value of <em>file_name</em>.</li>
+<li>If a symbol definition is explicitly selected from the bottom part of the user
+interface, the definition file is output as the value of <em>file_name</em>.</li>
+<li>If a symbol reference entry is selected, the reference file is output as the
+value of <em>file_name</em>.</li>
+</ul>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.cross_reference</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<dl class="docutils">
+<dt>symbol</dt>
+<dd>A string containing the name of a symbol to look up or use as a filter. The
+cross-reference tool will only display symbols whose name contains the
+specified string.</dd>
+</dl>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<dl class="docutils">
+<dt>file_name</dt>
+<dd>A <strong>FilePosition</strong> object describing the most recently selected
+cross reference file or definition. A FilePosition object contains both the
+fully qualified file name and line number of the reference or definition.</dd>
+</dl>
+</div>
+<div class="section" id="options">
+<h2>Options</h2>
+<p>In addition to its input and output connections, the cross reference tool also
+supports setting the following facets through the tool&#8217;s options dialog
+available via the tool&#8217;s feature toolbar:</p>
+<dl class="docutils">
+<dt>Root directory (<em>root</em>)</dt>
+<dd>The path to the root of Python source tree to be cross-referenced.</dd>
+<dt>Package prefix (<em>package</em>)</dt>
+<dd>A string containing the package prefix of all symbols to be included in the
+cross-reference information. It may be the empty string if you do not want to
+restrict the cross-reference information to a particular package.</dd>
+</dl>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_cross_reference.jpg" src="_images/tool_cross_reference.jpg" />
+<p>Shows the cross reference tool with the <em>ArrayEditor</em> symbol selected.</p>
+<img alt="_images/tool_cross_reference_options.jpg" src="_images/tool_cross_reference_options.jpg" />
+<p>The cross reference tool&#8217;s options dialog.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_drop_zone.html" title="DropZone"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_control_stack.html" title="ControlStack"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

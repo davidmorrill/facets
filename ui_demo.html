@@ -1,0 +1,256 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>The Facets UI Demo &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="Facets UI" href="facets_ui.html" />
+    <link rel="prev" title="Getting Facets" href="installation.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="facets_ui.html" title="Facets UI"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Getting Facets"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The Facets UI Demo</a><ul>
+<li><a class="reference internal" href="#the-demo-selector">The Demo Selector</a></li>
+<li><a class="reference internal" href="#the-symbol-cross-reference">The Symbol Cross Reference</a></li>
+<li><a class="reference internal" href="#selecting-a-demo">Selecting a Demo</a></li>
+<li><a class="reference internal" href="#the-demo-tab">The Demo Tab</a></li>
+<li><a class="reference internal" href="#the-description-tab">The Description Tab</a></li>
+<li><a class="reference internal" href="#the-source-tab">The Source Tab</a></li>
+<li><a class="reference internal" href="#the-log-tab">The Log Tab</a></li>
+<li><a class="reference internal" href="#reorganizing-the-ui-demo-window">Reorganizing the UI Demo Window</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Getting Facets</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="facets_ui.html"
+                        title="next chapter">Facets UI</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-facets-ui-demo">
+<span id="ui-demo"></span><h1>The Facets UI Demo</h1>
+<p>Facets includes an extensive set of user interface (UI) demonstration programs
+that are provided both to inspire you and to provide you with useful starting
+points for your own coding flights of fancy.</p>
+<p>Each demonstration can either be invoked individually from the command shell or,
+more commonly, run under control of the Facets UI demo program, which can
+be started using the command:</p>
+<div class="highlight-python"><pre>python -m facets.extra.demo.ui.demo</pre>
+</div>
+<p>When you first start the UI demo program, you should see a window like the
+following:</p>
+<img alt="_images/ui_demo_startup.jpg" src="_images/ui_demo_startup.jpg" />
+<div class="section" id="the-demo-selector">
+<h2>The Demo Selector</h2>
+<p>The top-left hand corner of the demo window contains a hierchical view of all
+available demos:</p>
+<img alt="_images/ui_demo_tree.jpg" src="_images/ui_demo_tree.jpg" />
+<p>The view is organized as a nested series of folders. Select any item in a folder
+to launch the corresponding demo.</p>
+</div>
+<div class="section" id="the-symbol-cross-reference">
+<h2>The Symbol Cross Reference</h2>
+<p>The bottom left hand corner of the demo window contains a list of all Facets
+package symbols referenced by any of the demos:</p>
+<img alt="_images/ui_demo_symbols.jpg" src="_images/ui_demo_symbols.jpg" />
+<p>Each symbol entry can be opened to display the list of demo files that reference
+the symbol:</p>
+<img alt="_images/ui_demo_symbols_select.jpg" src="_images/ui_demo_symbols_select.jpg" />
+<p>Selecting one of the referencing demo files will launch the selected demo. This
+can be a useful feature if you are looking for an example of how to use a
+particular Facets item, such as a Facets type or UI editor.</p>
+<p>To help speed your search, you can enter a full or partial symbol name into the
+<strong>Filter</strong> field at the top. The list automatically updates to show all matching
+symbols as you type:</p>
+<img alt="_images/ui_demo_symbols_filter.jpg" src="_images/ui_demo_symbols_filter.jpg" />
+<p>The search is case insensitive and matches any part of the symbol name. You
+can clear the current filter by clicking the <strong>X</strong> icon just to the right of
+the filter text field.</p>
+</div>
+<div class="section" id="selecting-a-demo">
+<h2>Selecting a Demo</h2>
+<p>Once a demo has been selected from the folders or symbols view, the demo is
+started, creating four new tabs in the main part of the UI demo on the right
+side of the window:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#ui-demo-demo-tab"><em>The Demo Tab</em></a></li>
+<li><a class="reference internal" href="#ui-demo-description-tab"><em>The Description Tab</em></a></li>
+<li><a class="reference internal" href="#ui-demo-source-tab"><em>The Source Tab</em></a></li>
+<li><a class="reference internal" href="#ui-demo-log-tab"><em>The Log Tab</em></a></li>
+</ul>
+</div>
+<div class="section" id="the-demo-tab">
+<span id="ui-demo-demo-tab"></span><h2>The Demo Tab</h2>
+<p>The <em>Demo</em> tab is where the demo program&#8217;s Facets UI appears:</p>
+<img alt="_images/ui_demo_demo.jpg" src="_images/ui_demo_demo.jpg" />
+<p>In some cases, where a large or popup user interface is being demonstrated, you
+will see a button instead:</p>
+<img alt="_images/ui_demo_popup.jpg" src="_images/ui_demo_popup.jpg" />
+<p>In this case, click the button to display the demo&#8217;s popup view.</p>
+</div>
+<div class="section" id="the-description-tab">
+<span id="ui-demo-description-tab"></span><h2>The Description Tab</h2>
+<p>The <em>Description</em> tab contains descriptive information which usually covers one
+or both of the following topics:</p>
+<ul class="simple">
+<li>How to use the demo.</li>
+<li>How the demo code works.</li>
+</ul>
+<img alt="_images/ui_demo_description.jpg" src="_images/ui_demo_description.jpg" />
+<p>If it is not clear how a particular demo is supposed to work, try clicking the
+description tab to see if any help on using the demo is available.</p>
+</div>
+<div class="section" id="the-source-tab">
+<span id="ui-demo-source-tab"></span><h2>The Source Tab</h2>
+<p>The <em>Source</em> tab displays the source code for the demo:</p>
+<img alt="_images/ui_demo_source.jpg" src="_images/ui_demo_source.jpg" />
+<p>The source tab contains a full blown text editor which allows you to try out
+(and optionally save) changes to the demo. This can be useful for quickly
+experimenting with variations of the original code to see <em>what if?</em>.</p>
+<p>To try out a change, modify the source code then click the <em>gear</em> icon located
+in the lower right hand corner of the source tab view. If no syntax errors are
+found, the new version of the demo replaces the original version shown on the
+demo tab.</p>
+<p>If the code contains a syntax error, information about the error apears in the
+status message area just to the left of the <em>gear</em> icon, and the line where
+the error was encountered is highlighted in the source code editor. Correct the
+error, then click the <em>gear</em> icon to try again.</p>
+<p>Note that it is not necessary to save any changes prior to clicking the <em>gear</em>
+icon, but if you do make changes you want to keep, click the <em>diskette</em> icon to
+the right of the <em>gear</em> icon. A standard file dialog prompting for the name of
+the file to save to will appear. Fill this out and click the <em>OK</em> button. Each
+time you run a demo, make changes, then save, you will be prompted for a new
+file name to prevent you from accidentally overwriting the original demo source
+code.</p>
+</div>
+<div class="section" id="the-log-tab">
+<span id="ui-demo-log-tab"></span><h2>The Log Tab</h2>
+<p>The <em>log</em> tab displays the results of any <em>print</em> statements executed by the
+demo program. Since most demos do not contain print statements, this tab is
+usually empty.</p>
+</div>
+<div class="section" id="reorganizing-the-ui-demo-window">
+<h2>Reorganizing the UI Demo Window</h2>
+<p>Each of the views and tabs contained in the UI demo window can be dragged about
+and reorganized as desired:</p>
+<img alt="_images/ui_demo_reorganize.jpg" src="_images/ui_demo_reorganize.jpg" />
+<p>If a tab is visble, drag the tab to its new location. If no tab is visible,
+drag the narrow horizontal bar above the view to the desired location. The
+results of your reorganization are automatically saved across UI demo program
+sessions.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="facets_ui.html" title="Facets UI"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Getting Facets"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

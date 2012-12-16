@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Shell Options &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="Shell Themes" href="vip_themes.html" />
+    <link rel="prev" title="Using the Filter Bar" href="vip_filter_bar.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_themes.html" title="Shell Themes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_filter_bar.html" title="Using the Filter Bar"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Shell Options</a><ul>
+<li><a class="reference internal" href="#options-tab">Options Tab</a></li>
+<li><a class="reference internal" href="#debug-tab">Debug Tab</a></li>
+<li><a class="reference internal" href="#toolbar-tab">Toolbar Tab</a></li>
+<li><a class="reference internal" href="#theme-colors-tab">Theme Colors Tab</a></li>
+<li><a class="reference internal" href="#start-up-code-tab">Start-up Code Tab</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_filter_bar.html"
+                        title="previous chapter">Using the Filter Bar</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_themes.html"
+                        title="next chapter">Shell Themes</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="shell-options">
+<span id="vip-shell-options"></span><h1>Shell Options</h1>
+<p>The VIP Shell has a large number of settings that can be configured to suit your
+own personal preferences. Some of these can be modified via keyboard shortcuts
+or toolbar icons in various parts of the shell user interface. But all of the
+options can be viewed and set in one place using the shell&#8217;s <em>options</em> dialog.</p>
+<p>The options dialog can be displayed in several ways:</p>
+<ul class="simple">
+<li>Press <em>Ctrl-O</em> when the code editor has keyboard focus.</li>
+<li>Press <em>o</em> (without the Control key) when the mouse pointer is over any history
+list item.</li>
+<li>Click the <em>wrench</em> icon on the status bar&#8217;s toolbar.</li>
+<li>Click the <em>wrench</em> icon in any history item&#8217;s contextual tool bar.</li>
+<li>Execute the <em>/o</em> shell command from the code editor (displays the shell
+dialog as a history list <em>View</em> item).</li>
+</ul>
+<p>The dialog itself is divided into five sections or <em>tabs</em>:</p>
+<dl class="docutils">
+<dt><strong>Options</strong></dt>
+<dd>Allows setting many of the shell&#8217;s user interface preference options.</dd>
+<dt><strong>Debug</strong></dt>
+<dd>Allows setting options related to the various code debugging features of the
+shell.</dd>
+<dt><strong>Toolbar</strong></dt>
+<dd>Allows configuring which history item contextual toolbar icons are displayed
+on the three available toolbars: left, middle, right.</dd>
+<dt><strong>Theme Colors</strong></dt>
+<dd>Allows fine tuning the text colors used with the currently selected shell
+theme.</dd>
+<dt><strong>Start-up Code</strong></dt>
+<dd>Allows entering Python code or shell commands to be run each time the shell
+is started.</dd>
+</dl>
+<p>The next few sections cover each of the option dialog&#8217;s tabs in more detail.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is important to note that the shell option settings are persistent, but
+not global. That is, the VIP Shell is a Facets editor, and like any editor,
+its user preference items depend on its View and Item <em>id</em> facet&#8217;s values.</p>
+<p>Thus, based on how the VIP Shell is invoked, it may not support saving
+preference options at all, or it may save its setting under a different name
+than those of other VIP Shell instances.</p>
+<p class="last">For example, Facets includes a VIP Shell <em>tool</em> for use with the <em>tools</em>
+framework. It has a specific <em>id</em> for its shell settings which includes the
+tool&#8217;s <em>name</em> (normally <em>VIP Shell</em>). Changing the tool&#8217;s name results in a
+set of preference settings different than the default ones. The DockWindow&#8217;s
+<em>Display&gt;VIP Shell</em> context menu action takes advantage of this by setting
+it&#8217;s VIP Shell tool instance&#8217;s <em>name</em> to something different than the
+default, allowing you to have a different set of shell preferences when using
+the DockWindow action than you would if you had invoked the VIP Shell tool
+directly from the command line: <tt class="docutils literal"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">facets.extra.tools.vip_shell</span></tt>.</p>
+</div>
+<div class="section" id="options-tab">
+<h2>Options Tab</h2>
+<img alt="_images/vip_options_options.jpg" src="_images/vip_options_options.jpg" />
+<dl class="docutils">
+<dt><strong>Show filter bar</strong></dt>
+<dd>If checked, the <em>filter bar</em> at the top of the shell view is displayed. If
+not checked, the filter bar is hidden.</dd>
+<dt><strong>Show status bar</strong></dt>
+<dd>If checked, the <em>status bar</em> at the bottom of the shell view is displayed.
+If not checked, the status bar is hidden.</dd>
+<dt><strong>Show IDs</strong></dt>
+<dd>If checked, each history item displays its <em>id</em>. If not checked, history
+item ids are hidden.</dd>
+<dt><strong>Show icons</strong></dt>
+<dd>If checked, each history item displays its identifying item type icon. If
+not checked, history item icons are hidden.</dd>
+<dt><strong>Show line numbers</strong></dt>
+<dd>If checked, each history item displays a line number on each line as long
+when the item is not in <em>collapsed</em> mode. If not checked, line numbers are
+not displayed.</dd>
+<dt><strong>Theme</strong></dt>
+<dd><p class="first">Allows you to select which of the available VIP Shell themes to use. Click
+the name of the current theme to display a drop-down list of available
+themes. Once the list has focus, use the up and down arrow keys to visually
+cycle through the available themes. Click the list again to expand the drop
+down list and select a theme by name.</p>
+<p class="last">Once you select a theme, you can continue to fine tune its appearance using
+the controls on the <em>Theme Colors</em> tab.</p>
+</dd>
+<dt><strong>Font</strong></dt>
+<dd>Allows you to select the history item font used by the VIP Shell. Clicking
+the name of the current font displays a pop-up dialog allowing you to select
+a different font.</dd>
+<dt><strong>Maximum lines threshold</strong></dt>
+<dd><p class="first">Allows you to specify the maximum number of lines of text to display in a
+history item when the item is in <em>expanded</em> mode. If an item has more than
+the specified number of lines, items will be elided from the display (with
+a line indicating how many lines were omitted inserted in their place).</p>
+<p class="last">Click on the current maximum to display a pop-up slider used to adjust the
+maximum number of lines. Note that changing the value does not affect
+current history items already in the <em>expanded</em> state. The value is only
+used when an item enters the <em>expanded</em> state.</p>
+</dd>
+<dt><strong>Maximum collection items</strong></dt>
+<dd><p class="first">Allows you to specify the maximum number of list, dict, set or tuple values
+to display in a <em>Result</em> history item. If a collection contained in a
+Result item has more than the specified maximum, items will be elided from
+the display (with a line indicating how many items were omitted inserted
+in their place.)</p>
+<p class="last">Click on the current maximum to display a pop-up slider used to adjust the
+maximum number of items. Note that changing the value does not immediately
+affect current Result items. The value is only used when preparing an item
+for display when its content or state changes.</p>
+</dd>
+<dt><strong>Traceback context lines</strong></dt>
+<dd><p class="first">Allows you to specify the maximum number of lines of source code <em>context</em>
+to display on either side of the currently executing line when formatting an
+<em>Exception</em> history item for diplay. Fewer lines may be displayed if not
+enough contextually related source code is available.</p>
+<p class="last">Click on the current number of lines to display a pop-up slider used to
+adjust the line count. Note that changing the value does not affect existing
+Exception items. The value is only used when creating a new Exception
+history item.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="debug-tab">
+<h2>Debug Tab</h2>
+<img alt="_images/vip_options_debug.jpg" src="_images/vip_options_debug.jpg" />
+<p>The <em>Debug</em> tab displays a number of options useful for debugging your
+application code. The options are dividied into two categories:</p>
+<dl class="docutils">
+<dt><strong>Debug</strong></dt>
+<dd><p class="first">The <em>debug</em> options are used in conjunction with the following debugging
+functions from the <tt class="docutils literal"><span class="pre">facets.core.debug</span></tt> module:</p>
+<ul class="simple">
+<li>debug</li>
+<li>info</li>
+<li>warning</li>
+<li>error</li>
+<li>critical</li>
+<li>log</li>
+<li>called_from</li>
+<li>show_locals</li>
+</ul>
+<p>Each option controls the creation and display of history items associated
+with each of these functions as follows:</p>
+<dl class="last docutils">
+<dt><strong>Display debug requests</strong></dt>
+<dd>If checked, calls to the <em>debug</em> function create <em>Log</em> history items. If
+not checked, calls to <em>debug</em> are ignored.</dd>
+<dt><strong>Display info requests</strong></dt>
+<dd>If checked, calls to the <em>info</em> function create <em>Log</em> history items. If
+not checked, calls to <em>info</em> are ignored.</dd>
+<dt><strong>Display warning requests</strong></dt>
+<dd>If checked, calls to the <em>warning</em> function create <em>Log</em> history items.
+If not checked, calls to <em>warning</em> are ignored.</dd>
+<dt><strong>Display error requests</strong></dt>
+<dd>If checked, calls to the <em>error</em> function create <em>Log</em> history items. If
+not checked, calls to <em>error</em> are ignored.</dd>
+<dt><strong>Display critical requests</strong></dt>
+<dd>If checked, calls to the <em>critical</em> function create <em>Log</em> history items.
+If not checked, calls to <em>critical</em> are ignored.</dd>
+<dt><strong>Display called_from requests</strong></dt>
+<dd>If checked, calls to the <em>called_from</em> function create <em>CalledFrom</em>
+history items. If not checked, calls to <em>called_from</em> are ignored.</dd>
+<dt><strong>Display show_locals requests</strong></dt>
+<dd>If checked, calls to the <em>show_locals</em> function create <em>Locals</em> history items. If not checked, calls to <em>show_locals</em> are ignored.</dd>
+</dl>
+</dd>
+<dt><strong>Control Grabber</strong></dt>
+<dd><p class="first">The <em>control grabber</em> options are used with the <em>Control grabber</em> tool on
+the status bar&#8217;s toolbar and are used to specify what values are added to
+the history list when the tool is used to <em>grab</em> a control:</p>
+<dl class="last docutils">
+<dt><strong>Display control adapter</strong></dt>
+<dd>If checked, the abstract control the tool is dropped on is added to the
+history list. If no checked, no abstract control information is
+displayed.</dd>
+<dt><strong>Display editor</strong></dt>
+<dd>If checked, the editor that created the control the tool is dropped on
+is added to the history list. If no checked, no editor information is
+displayed.</dd>
+<dt><strong>Display object</strong></dt>
+<dd>If checked, the object containing the facet edited by the control the
+tool is dropped on is added to the  history list. If not checked, no
+object information is displayed.</dd>
+<dt><strong>Display object value</strong></dt>
+<dd>If checked, the value of the facet edited by the control the tool is
+dropped on is added to the history list. If not checked, no value
+information is displayed.</dd>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="section" id="toolbar-tab">
+<h2>Toolbar Tab</h2>
+<img alt="_images/vip_options_toolbar.jpg" src="_images/vip_options_toolbar.jpg" />
+<p>Each history list item has three contextual toolbars: left, center and right.
+The <em>toolbar</em> tab shows the name of each tool and allows you to select which
+toolbars each tool appears in. Simply check or uncheck the toolbar you want each
+tool to appear in.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Each tool can appear in a single, no or multiple toolbars.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although you can the select the toolbar(s) that a particular icon appears in,
+you cannot control the order of their appearance within a toolbar. The order
+is controlled by the shell.</p>
+</div>
+</div>
+<div class="section" id="theme-colors-tab">
+<h2>Theme Colors Tab</h2>
+<img alt="_images/vip_options_theme.jpg" src="_images/vip_options_theme.jpg" />
+<p>Each VIP Shell theme defines the background colors and overall appearance of the
+various shell history item types. It also includes a default set of text colors
+used for various purposes within the theme. You can use the color selectors on
+the <em>theme colors</em> tab to modify those default text colors to suit your own
+taste.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>Changing the text colors on the <em>theme colors</em> tab only affects the text
+colors for the current theme. If you change themes, the new theme&#8217;s text
+colors are used. If you later switch back to your earlier theme, the colors
+you specified previously are restored.</p>
+<p class="last">If you want to discard all changes you have made to the current theme&#8217;s
+colors, click the <em>Reset colors</em> button located near the bottom of the tab.
+This restores the colors to the default colors for the current theme.</p>
+</div>
+<p>To change a color, hover your mouse pointer over the current color swatch for a
+particular item. The words <em>HUE</em>, <em>LIGHTNESS</em> and <em>SATURATION</em> overlay the
+current color:</p>
+<img alt="_images/vip_options_hls1.jpg" src="_images/vip_options_hls1.jpg" />
+<p>Click within one of the three regions to modify the corresponding color
+attribute. Select a new hue, lightness or saturation value as desired:</p>
+<img alt="_images/vip_options_hls2.jpg" src="_images/vip_options_hls2.jpg" />
+<img alt="_images/vip_options_hls3.jpg" src="_images/vip_options_hls3.jpg" />
+<img alt="_images/vip_options_hls4.jpg" src="_images/vip_options_hls4.jpg" />
+<p>Right-click to return to the original color swatch to select a different color
+attribute.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Each color swatch uses an HLSColorEditor. Refer to the section on that editor
+for more details on using it to select colors.</p>
+</div>
+<p>The purpose of each theme color is as follows:</p>
+<dl class="docutils">
+<dt><strong>Output item (stdout)</strong></dt>
+<dd>Text color for <em>Output</em> history items.</dd>
+<dt><strong>Error item (stderr)</strong></dt>
+<dd>Text color for <em>Error</em> history items.</dd>
+<dt><strong>Result item</strong></dt>
+<dd>Base text color for <em>Result</em> history items.</dd>
+<dt><strong>Shell command item</strong></dt>
+<dd>Base text color for <em>Command</em> history items.</dd>
+<dt><strong>Exception item</strong></dt>
+<dd>Base text color for <em>Exception</em> history items.</dd>
+<dt><strong>Directory item</strong></dt>
+<dd>Base text color for <em>Directory</em> history items.</dd>
+<dt><strong>File item</strong></dt>
+<dd>Base text color for <em>File</em> history items.</dd>
+<dt><strong>Python file item</strong></dt>
+<dd>Base text color for <em>Python source file</em> history items.</dd>
+<dt><strong>Line numbers</strong></dt>
+<dd>Text color for history item line numbers.</dd>
+<dt><strong>Item Id</strong></dt>
+<dd>Text color for history item ids.</dd>
+<dt><strong>Omitted data</strong></dt>
+<dd>Text color used for history item lines indicating the number of lines or
+items omitted.</dd>
+<dt><strong>Emphasized</strong></dt>
+<dd>Text color of <em>emphasized</em> text within a history item.</dd>
+<dt><strong>Example</strong></dt>
+<dd>Text color of <em>example</em> text within a history item.</dd>
+<dt><strong>Error</strong></dt>
+<dd>Text color of <em>error</em> text within a history item.</dd>
+<dt><strong>Python normal</strong></dt>
+<dd>Text color for normal Python tokens in a block of Python source code
+contained within a history item.</dd>
+<dt><strong>Python literal</strong></dt>
+<dd>Text color for a literal string in a block of Python source code contained
+within a history item.</dd>
+<dt><strong>Python number</strong></dt>
+<dd>Text color for a literal number in a block of Python source code contained
+within a history item.</dd>
+<dt><strong>Python keyword</strong></dt>
+<dd>Text color for a Python keyword in a block of Python source code contained
+within a history item.</dd>
+<dt><strong>Python comment</strong></dt>
+<dd>Text color for a comment in a block of Python source code contained within a
+history item.</dd>
+<dt><strong>Python special</strong></dt>
+<dd>Text color for a special symbol or token in a block of Python source code
+contained within a history item.</dd>
+</dl>
+</div>
+<div class="section" id="start-up-code-tab">
+<h2>Start-up Code Tab</h2>
+<img alt="_images/vip_options_code.jpg" src="_images/vip_options_code.jpg" />
+<p>Enter any Python code or shell commands you want executed before each VIP Shell
+session begins. For example, you can use this to import frequently used modules
+or packages.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Any code or commands entered here are not executed until the next time the
+shell is started.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_themes.html" title="Shell Themes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_filter_bar.html" title="Using the Filter Bar"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

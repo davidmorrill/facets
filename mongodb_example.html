@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>A Complete MongoDB OML Example &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The MongoDB OML" href="mongodb_oml.html" />
+    <link rel="next" title="Installing MongoDB" href="mongodb_installing.html" />
+    <link rel="prev" title="The MongoDB OML" href="mongodb_oml.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mongodb_installing.html" title="Installing MongoDB"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_oml.html" title="The MongoDB OML"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" accesskey="U">The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">A Complete MongoDB OML Example</a><ul>
+<li><a class="reference internal" href="#document-classes-py">document_classes.py</a></li>
+<li><a class="reference internal" href="#document-index-py">document_index.py</a></li>
+<li><a class="reference internal" href="#document-query-py">document_query.py</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mongodb_oml.html"
+                        title="previous chapter">The MongoDB OML</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mongodb_installing.html"
+                        title="next chapter">Installing MongoDB</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="a-complete-mongodb-oml-example">
+<span id="mongodb-complete-example"></span><h1>A Complete MongoDB OML Example</h1>
+<p>Hopefully the previous sections have whet your appetite for learning more about
+using the MongoDB OML. So in this section we&#8217;re going to attempt to appease your
+hunger for knowledge with a working example of a complete MongoDB-based
+application.</p>
+<p>Of course, creating a relatively short but effective example can be a bit of a
+challenge, but we&#8217;re optimistic that you will find the example both illustrative
+and motivating. Since the example comes before you have learned any of the
+details of using the MongoDB OML, we suggest reading through the example code a
+couple of times, starting with a quick run through now to get a feeling for what
+the code looks like, and again later after having read through some of the
+programming detail sections that follow.</p>
+<p>The application is a simple document indexing system that indexes all of the
+words and their frequency of occurence within a collection of documents. As an
+added bonus, the system indexes both regular text documents and Python source
+files. In the case of Python source files, only the non-language keyword symbols
+are indexed. We threw in Python source file indexing because developers tend
+to have more Python code lying around than they do copies of <em>War and Peace</em>.</p>
+<p>The application is further divided into a command-line program for indexing
+one or more documents and a Facets UI-based interactive application for
+querying and browsing the contents of the document index.</p>
+<p>The application is spread across three source files:</p>
+<dl class="docutils">
+<dt><strong>document_classes.py</strong></dt>
+<dd>Defines the MongoDB OML classes used to define the document index data
+model.</dd>
+<dt><strong>document_index.py</strong></dt>
+<dd>The command line document indexing tool.</dd>
+<dt><strong>document_query.py</strong></dt>
+<dd>The interactive Facets UI based query tool.</dd>
+</dl>
+<p>One of the things that we hope you will see when studying the example
+application code is how little <em>database programming</em> is involved. For the most
+part, the code is nearly all related to indexing and UI presentation. Since
+we assume that you are already familar with this type of code, we will only
+provide additional commentary on the parts of the code specifically related to
+using the MongoDB OML.</p>
+<div class="section" id="document-classes-py">
+<h2>document_classes.py</h2>
+<p>So with all that said, let&#8217;s get started with the file that defines our
+indexing application data model, <strong>document_classes.py</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  Imports:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.mongodb.api</span> \
+    <span class="kn">import</span> <span class="n">MongoDBObject</span><span class="p">,</span> <span class="n">DBStr</span><span class="p">,</span> <span class="n">DBInt</span><span class="p">,</span> <span class="n">DBSet</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;IndexDocument&#39; class:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">IndexDocument</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Represents a document in the document index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># The name of the document:</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">DBStr</span>
+
+    <span class="c"># The total number of words contained in the document:</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">DBInt</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;IndexWord&#39; class:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">IndexWord</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Represents the index information for a specific word.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># The word:</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">DBStr</span><span class="p">(</span> <span class="n">index</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">)</span>
+
+    <span class="c"># The number of times the word is used in all documents:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">DBInt</span>
+
+    <span class="c"># The set of documents the word occurs in:</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">DBSet</span>
+</pre></div>
+</div>
+<p>One of the first things you&#8217;ll note in reading through the example&#8217;s code is
+that this is the only file that actually imports any symbols from the MongoDB
+OML package (i.e. <em>facets.extra.mongodb.api</em>). The remaining two files simply
+import the two classes defined in this file: <strong>IndexDocument</strong> and
+<strong>IndexWord</strong>. This should be fairly typical of any MongoDB OML-based
+application. That is, the data model, defined as normal Facets-based classes,
+encapsulates all of the database specific information, and the remaining
+application code simply deals (for the most part) with data model classes and
+instances.</p>
+<p>The first thing to note in the above code are the symbols imported from the
+MongoDB OML package:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">facets.extra.mongodb.api</span> \
+    <span class="kn">import</span> <span class="n">MongoDBObject</span><span class="p">,</span> <span class="n">DBStr</span><span class="p">,</span> <span class="n">DBInt</span><span class="p">,</span> <span class="n">DBSet</span>
+</pre></div>
+</div>
+<p><strong>MongoDBObject</strong> is the base class for any persistable object that can be
+stored or retrieved from a MongoDB database. One important thing to note is that
+MongoDBObject derives from the <strong>HasFacets</strong> base class, and therefore the full
+power and capability of the Facets package is at your disposal when defining a
+class that can be stored in a MongoDB database.</p>
+<p>The remaining three symbols: <strong>DBStr</strong>, <strong>DBInt</strong> and <strong>DBSet</strong> are special
+MongoDB oriented facets with semantics identical to the standard <strong>Str</strong>,
+<strong>Int</strong> and <strong>Set</strong> facets. The <em>DB</em> prefix simply signifies that the values
+assigned to the corresponding object facets should be saved in the MongoDB
+database. We&#8217;ll cover all of the available MongoDB facets in a later section.</p>
+<p>Another important thing to note is that not all facets defined within a
+MongoDBObject subclass need to have the <em>DB</em> prefix. That is, you are free to
+use standard facets such as <strong>Str</strong> or <strong>Int</strong> as well. The only difference is
+that the values of standard, non-MongoDB facets are not saved to a MongoDB
+database when an object is stored. You can use this to your advantage to
+segregate the facets in a class into persistent (i.e. <em>DBxxx</em>) and
+non-persistent (i.e. transient) facets. In the case of our example, all of the
+defined facets are persistent facets that are stored in the MongoDB database.</p>
+<p>A quick read through the rest of the source file reveals that it defines two
+classes, <strong>IndexDocument</strong> and <strong>IndexWord</strong>, both of which are subclasses of
+<strong>MongoDBObject</strong>, and so instances of these classes can be stored in a MongoDB
+database. In essence, these two classes define the <em>data model</em> we are using for
+the document index. An <strong>IndexDocument</strong> instance keeps track of the total
+number of words a specific document contains, while an <strong>IndexWord</strong> document
+keeps track of the number of times a specific word occurs within a document
+collection, and which documents within the collection contain at least one
+occurence of the word.</p>
+<p>A careful reader will also have noted the metadata used in the declaration of
+the <em>word</em> facet of the IndexWord class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">word</span> <span class="o">=</span> <span class="n">DBStr</span><span class="p">(</span> <span class="n">index</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, the <em>index = True</em> metadata indicates that the value of the <em>word</em>
+facet should be used as a MongoDB database index. This is mainly an application
+performance enhancement for use by the document indexing application, which
+needs to randomly retrieve existing IndexWord values from the document index
+database in the process of indexing a document. Refer to the
+<a class="reference internal" href="mongodb_indexes.html#mongodb-indexes"><em>Defining Indexes</em></a> section for more information about defining MongoDB
+indexes.</p>
+<p>The main thing to learn from this code is that defining a MongoDB-backed data
+model is really no different than defining any other Facets-based model. Instead
+of deriving subclasses from HasFacets, you derive from MongoDBObject, and in
+addition to defining normal facets, you also define persistent facets using any
+of the <em>DBxxx</em> facets provided by the MongoDB OML package. So there is really
+very little difference from the standard Facets programming model. In
+particular, this can make migrating an existing application to use a MongoDB
+database a fairly simple task.</p>
+</div>
+<div class="section" id="document-index-py">
+<h2>document_index.py</h2>
+<p>Next up is the source code for the command line document indexing tool defined
+in <strong>document_index.py</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  Imports:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">time</span> \
+    <span class="kn">import</span> <span class="n">time</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> \
+    <span class="kn">import</span> <span class="n">abspath</span><span class="p">,</span> <span class="n">splitext</span>
+
+<span class="kn">from</span> <span class="nn">glob</span> \
+    <span class="kn">import</span> <span class="n">iglob</span>
+
+<span class="kn">from</span> <span class="nn">cStringIO</span> \
+    <span class="kn">import</span> <span class="n">StringIO</span>
+
+<span class="kn">from</span> <span class="nn">tokenize</span> \
+    <span class="kn">import</span> <span class="n">generate_tokens</span><span class="p">,</span> <span class="n">ENDMARKER</span><span class="p">,</span> <span class="n">NAME</span>
+
+<span class="kn">from</span> <span class="nn">facets.api</span> \
+    <span class="kn">import</span> <span class="n">HasFacets</span><span class="p">,</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">facets.core.facet_base</span> \
+    <span class="kn">import</span> <span class="n">read_file</span>
+
+<span class="kn">from</span> <span class="nn">document_classes</span> \
+    <span class="kn">import</span> <span class="n">IndexDocument</span><span class="p">,</span> <span class="n">IndexWord</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  Constants:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="c"># The correct command usage message:</span>
+<span class="n">Usage</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="s">The correct usage is:</span>
+<span class="s">    python document_index.py document [ document, ..., document ]</span>
+<span class="s">where:</span>
+<span class="s">    document = The name of a text or Python (.py) source file to be indexed.</span>
+<span class="s">&quot;&quot;&quot;</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c"># The set of valid characters that can appear in a word:</span>
+<span class="n">Letters</span> <span class="o">=</span> <span class="s">&#39;abcdefghijklmnopqrstuvwxuyABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;</span>
+
+<span class="c"># The set of Python keywords:</span>
+<span class="n">PythonKeywords</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span> <span class="p">[</span>
+    <span class="s">&#39;class&#39;</span><span class="p">,</span> <span class="s">&#39;def&#39;</span><span class="p">,</span> <span class="s">&#39;if&#39;</span><span class="p">,</span> <span class="s">&#39;else&#39;</span><span class="p">,</span> <span class="s">&#39;elif&#39;</span><span class="p">,</span> <span class="s">&#39;for&#39;</span><span class="p">,</span> <span class="s">&#39;in&#39;</span><span class="p">,</span> <span class="s">&#39;try&#39;</span><span class="p">,</span> <span class="s">&#39;except&#39;</span><span class="p">,</span>
+    <span class="s">&#39;finally&#39;</span><span class="p">,</span> <span class="s">&#39;from&#39;</span><span class="p">,</span> <span class="s">&#39;import&#39;</span><span class="p">,</span> <span class="s">&#39;return&#39;</span><span class="p">,</span> <span class="s">&#39;break&#39;</span><span class="p">,</span> <span class="s">&#39;continue&#39;</span><span class="p">,</span> <span class="s">&#39;while&#39;</span><span class="p">,</span> <span class="s">&#39;not&#39;</span><span class="p">,</span>
+    <span class="s">&#39;and&#39;</span><span class="p">,</span> <span class="s">&#39;or&#39;</span><span class="p">,</span> <span class="s">&#39;assert&#39;</span><span class="p">,</span> <span class="s">&#39;raise&#39;</span><span class="p">,</span> <span class="s">&#39;del&#39;</span><span class="p">,</span> <span class="s">&#39;print&#39;</span><span class="p">,</span> <span class="s">&#39;yield&#39;</span><span class="p">,</span> <span class="s">&#39;global&#39;</span><span class="p">,</span> <span class="s">&#39;exec&#39;</span><span class="p">,</span>
+    <span class="s">&#39;with&#39;</span><span class="p">,</span> <span class="s">&#39;as&#39;</span><span class="p">,</span> <span class="s">&#39;is&#39;</span>
+<span class="p">]</span> <span class="p">)</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;DocumentIndex&#39; class:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">DocumentIndexer</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Allows new documents to be added to the document index database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">#-- Facet Definitions ------------------------------------------------------</span>
+
+    <span class="c"># A mapping from words we&#39;ve already seen to IndexWord objects:</span>
+    <span class="n">all_words</span> <span class="o">=</span> <span class="n">Any</span><span class="p">(</span> <span class="p">{}</span> <span class="p">)</span>
+
+    <span class="c">#-- Public Methods ---------------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">add</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">document</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Adds the document whose file name is specified by *document* to the</span>
+<span class="sd">            document index database.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c"># Normalize the document path:</span>
+        <span class="n">document</span> <span class="o">=</span> <span class="n">abspath</span><span class="p">(</span> <span class="n">document</span> <span class="p">)</span>
+
+        <span class="c"># Only index documents that we have not already indexed previously:</span>
+        <span class="k">if</span> <span class="n">IndexDocument</span><span class="p">(</span> <span class="n">document</span> <span class="o">=</span> <span class="n">document</span> <span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; has already been indexed and is being ignored.&quot;</span> <span class="o">%</span>
+                   <span class="n">document</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="c"># Read the contents of the document (if possible):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span> <span class="n">document</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">text</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span> <span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; could not be read and is being ignored.&quot;</span> <span class="o">%</span> <span class="n">document</span>
+
+            <span class="k">return</span> <span class="bp">False</span>
+
+        <span class="c"># Select the parsing method to use (Python or normal text):</span>
+        <span class="k">if</span> <span class="n">splitext</span><span class="p">(</span> <span class="n">document</span> <span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.py&#39;</span><span class="p">:</span>
+            <span class="n">next_word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_python</span><span class="p">(</span> <span class="n">text</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">next_word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parse_text</span><span class="p">(</span> <span class="n">text</span> <span class="p">)</span>
+
+        <span class="c"># Parse the document into words and add each valid word to the document</span>
+        <span class="c"># index, creating new entries in the index for newly encountered words:</span>
+        <span class="n">words</span>     <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">all_words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_words</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">next_word</span><span class="p">():</span>
+            <span class="n">index_word</span> <span class="o">=</span> <span class="n">all_words</span><span class="o">.</span><span class="n">get</span><span class="p">(</span> <span class="n">word</span> <span class="p">)</span>
+            <span class="k">if</span> <span class="n">index_word</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">all_words</span><span class="p">[</span> <span class="n">word</span> <span class="p">]</span> <span class="o">=</span> <span class="n">index_word</span> <span class="o">=</span> \
+                    <span class="n">IndexWord</span><span class="p">(</span> <span class="n">word</span> <span class="o">=</span> <span class="n">word</span> <span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">(</span> <span class="n">add</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">)</span>
+
+            <span class="n">index_word</span><span class="o">.</span><span class="n">documents</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">document</span> <span class="p">)</span>
+            <span class="n">index_word</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">words</span>            <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c"># Add a new entry for the document to the index:</span>
+        <span class="n">IndexDocument</span><span class="p">(</span> <span class="n">document</span> <span class="o">=</span> <span class="n">document</span><span class="p">,</span> <span class="n">words</span> <span class="o">=</span> <span class="n">words</span> <span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="c"># Indicate that the document was processed successfully:</span>
+        <span class="k">print</span> <span class="s">&quot;&#39;</span><span class="si">%s</span><span class="s">&#39; has been added to the document index.&quot;</span> <span class="o">%</span> <span class="n">document</span>
+
+        <span class="k">return</span> <span class="bp">True</span>
+
+    <span class="c">#-- Private Methods --------------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">parse_python</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">source</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Sets up to parse the Python source whose contents are specified by</span>
+<span class="sd">            *source* into a stream of words. Returns an iterator which returns</span>
+<span class="sd">            the next word from the source on each call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">generate_tokens</span><span class="p">(</span> <span class="n">StringIO</span><span class="p">(</span> <span class="n">source</span> <span class="p">)</span><span class="o">.</span><span class="n">readline</span> <span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">parse</span> <span class="p">(</span> <span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">for</span> <span class="nb">type</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">tokenizer</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">ENDMARKER</span><span class="p">:</span>
+                        <span class="k">break</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">type</span> <span class="o">==</span> <span class="n">NAME</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">token</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PythonKeywords</span><span class="p">):</span>
+                        <span class="k">yield</span> <span class="n">token</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">parse</span>
+
+
+    <span class="k">def</span> <span class="nf">parse_text</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">text</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Sets up to parse the text document whose contents are specified by</span>
+<span class="sd">            *source* into a stream of words. Returns an iterator which returns</span>
+<span class="sd">            the next word from the document on each call.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">parse</span> <span class="p">(</span> <span class="p">):</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+                <span class="n">word</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="p">[</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">word</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">Letters</span> <span class="p">]</span> <span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+                <span class="k">if</span> <span class="n">word</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">word</span>
+
+        <span class="k">return</span> <span class="n">parse</span>
+
+<span class="c">#-- Run the command ------------------------------------------------------------</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="c"># Make sure the command usage is correct, otherwise print an error and exit:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">Usage</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span> <span class="mi">1</span> <span class="p">)</span>
+
+    <span class="c"># Create a document indexer and use it to index each command line document:</span>
+    <span class="n">now</span>       <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">indexer</span>   <span class="o">=</span> <span class="n">DocumentIndexer</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">iglob</span><span class="p">(</span> <span class="n">pattern</span> <span class="p">):</span>
+            <span class="n">documents</span> <span class="o">+=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="n">document</span> <span class="p">)</span>
+
+    <span class="c"># Display a summary of the indexing results and execution time:</span>
+    <span class="k">print</span> <span class="s">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">79</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="si">%d</span><span class="s"> document</span><span class="si">%s</span><span class="s"> processed in </span><span class="si">%.3f</span><span class="s"> seconds.&#39;</span> <span class="o">%</span> <span class="p">(</span>
+          <span class="n">documents</span><span class="p">,</span> <span class="s">&#39;s&#39;</span><span class="p">[</span> <span class="n">documents</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="p">],</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">now</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Although this file is quite a bit longer than the previous file, nearly all of
+the code has to do with the document indexing logic. The following list calls
+out the MongoDB-related bits of code that merit additional explanation:</p>
+<dl class="docutils">
+<dt><strong>from document_classes import IndexDocument, IndexWord</strong></dt>
+<dd>As mentioned previously, there are no explicit imports of symbols from the
+MongoDB OML package. The only imports are for the application specific data
+model classes we defined earlier.</dd>
+<dt><strong>if IndexDocument( document = document ).load() is not None:</strong></dt>
+<dd><p class="first">Here we are performing a simple MongoDB query to see whether a particular
+document has already been indexed, in which case there is no additional work
+that needs to be done.</p>
+<p>The query is broken into two parts. The
+<em>IndexDocument( document = document )</em> code creates a prototype
+IndexDoxument object which we want to see if the database contains a match
+for. This is just a standard Facets instance constructor used to construct
+a prototype object with a particular <em>document</em> value. The <em>.load()</em> method
+invoked on the prototype object then checks the MongoDB database to see if
+an IndexDocument object with a matching <em>document</em> value exists. If it does,
+the method returns a new IndexDocument object containing the full details of
+the object, including the correct value for the <em>words</em> facet. If no match
+is found, None is returned.</p>
+<p class="last">This is just one possible form of database object query, one that is
+especially well suited for finding an object when a unique key value is
+available (in this case the <em>document</em> facet uniquely identifies a
+particular IndexDocument instance). We&#8217;ll see additional query examples in
+several other parts of this example, with more details available in
+<a class="reference internal" href="mongodb_mongodbobject.html#mongodb-mongodbobject"><em>The MongoDBObject Class</em></a> section.</p>
+</dd>
+<dt><strong>all_words[ word ] = index_word = IndexWord( word = word ).load( add = True )</strong></dt>
+<dd>This line of code is executed when we have determined that we do not have
+any information available about a particular word in our in-memory cache
+(i.e. <em>all_words</em>), and so we want to check if there is any information
+about the word in the document index database. The
+<em>IndexWord( word = word ).load( add = True )</em> code performs a database query
+for the IndexWord instance matching the specified value of <em>word</em>. This is
+very similar to our previous IndexDocument query example, but with the
+addition of the <em>add = True</em> argument to the <em>load</em> method. This indicates
+that if no matching IndexWord instance is found, the object prototype
+should be added to the database and also returned as the value of the
+method. This allows us to both query and update the database in a single
+request, and is in some ways very similar to the use of the <em>setdefault</em>
+method on a standard Python <em>dict</em> instance.</dd>
+<dt><strong>index_word.documents.add( document ); index_word.count += 1</strong></dt>
+<dd>These two lines are actually just standard Python/Facets code, but because
+they are operating on objects associated with a MongoDB database, they
+have the additional useful side effect of updating the database with the new
+facets values. Note that, in this example, the update is not immediate, but
+occurs later, when the application exits. We&#8217;ll discuss database updates in
+more detail in <a class="reference internal" href="mongodb_mongodbobject.html#mongodb-mongodbobject"><em>The MongoDBObject Class</em></a> and <a class="reference internal" href="mongodb_mongodb.html#mongodb-mongodb"><em>The MongoDB Class</em></a>
+sections.</dd>
+<dt><strong>IndexDocument( document = document, words = words ).save()</strong></dt>
+<dd>This line is executed at the end of the document indexing operation and adds
+a new IndexDocument object to the MongoDB database. The first part of the
+line simply creates a new IndexDocument instance, while the <em>.save()</em> method
+causes the object to be explicitly saved to the MongoDB database. The
+explicit save is necessary because not every new IndexDocument object should
+be saved to the database, so we have to add a new instance to the database
+explicitly. Once an object has been added to the database, subsequent
+changes to the object will automatically update the database.</dd>
+</dl>
+<p>The remainder of the code in the source file is simple standard Facets and
+Python code related to command line processing, document parsing and indexing.
+Overall, we had:</p>
+<ul class="simple">
+<li>Three lines of code explicitly related to database query and update.</li>
+<li>Two lines of code performing implicit database updates.</li>
+<li>No lines of code related to explicit database management (database schema
+definition, connection creation, connection closing, etc).</li>
+</ul>
+<p>If you&#8217;re not a big fan of the minutiae of database organization and management,
+the last point may be particularly interesting. Of course, the MongoDB OML
+package does provide some amount of control over database management, which
+we&#8217;ll cover in more detail in subsequent sections. But the overall design of the
+package is such that it tries as much as possible to get out of your way and let
+you focus on application design and logic without having to worry about the
+underlying database details.</p>
+<p>Finally, as an example of the document indexing tool in action, we present the
+following command line invocation of the tool used to index all of the Python
+source files contained in the facets.ui package:</p>
+<div class="highlight-python"><pre>&gt;python document_index.py C:\Assembla\trunk\facets\ui\*.py
+'C:\Assembla\trunk\facets\ui\action_controller.py' has been added to the document index.
+'C:\Assembla\trunk\facets\ui\api.py' has been added to the document index.
+'C:\Assembla\trunk\facets\ui\attr_list.py' has been added to the document index.
+.
+.
+.
+'C:\Assembla\trunk\facets\ui\view_element.py' has been added to the document index.
+'C:\Assembla\trunk\facets\ui\view_elements.py' has been added to the document index.
+'C:\Assembla\trunk\facets\ui\__init__.py' has been added to the document index.
+-------------------------------------------------------------------------------
+63 documents processed in 4.363 seconds.</pre>
+</div>
+<p>We&#8217;ve elided some of the files processed to shorten the overall output. The
+example was run on a Intel Core i3 based laptop running Windows 7 with 4 GB of
+RAM. If you take the time to do the math, you can see that the average time to
+index a single document was about 69 milliseconds.</p>
+</div>
+<div class="section" id="document-query-py">
+<h2>document_query.py</h2>
+<p>As the final chapter in our example trilogy, we&#8217;ll now take a look at the
+Facets UI-based document index query tool defined in <strong>document_query.py</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  Imports:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">facets.api</span> \
+    <span class="kn">import</span> <span class="n">HasFacets</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Range</span><span class="p">,</span> <span class="n">Enum</span><span class="p">,</span> <span class="n">Instance</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Theme</span><span class="p">,</span> <span class="n">View</span><span class="p">,</span> <span class="n">HGroup</span><span class="p">,</span> \
+           <span class="n">VSplit</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">GridEditor</span><span class="p">,</span> <span class="n">ScrubberEditor</span><span class="p">,</span> <span class="n">on_facet_notify</span>
+
+<span class="kn">from</span> <span class="nn">facets.ui.grid_adapter</span> \
+    <span class="kn">import</span> <span class="n">GridAdapter</span>
+
+<span class="kn">from</span> <span class="nn">document_classes</span> \
+    <span class="kn">import</span> <span class="n">IndexDocument</span><span class="p">,</span> <span class="n">IndexWord</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;WordAdapter&#39; class:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">WordAdapter</span> <span class="p">(</span> <span class="n">GridAdapter</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Adapts IndexWord instances for use with the GridEditor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span> <span class="s">&#39;Word&#39;</span><span class="p">,</span> <span class="s">&#39;word&#39;</span> <span class="p">),</span> <span class="p">(</span> <span class="s">&#39;Count&#39;</span><span class="p">,</span> <span class="s">&#39;count&#39;</span> <span class="p">)</span> <span class="p">]</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;DocumentAdapter&#39;</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">DocumentAdapter</span> <span class="p">(</span> <span class="n">GridAdapter</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Adapts IndexDocument instances for use with the GridEditor.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="s">&#39;Document&#39;</span><span class="p">,</span> <span class="s">&#39;document&#39;</span> <span class="p">),</span> <span class="p">(</span> <span class="s">&#39;Words&#39;</span><span class="p">,</span> <span class="s">&#39;words&#39;</span> <span class="p">)</span> <span class="p">]</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;DocumentQuery&#39; class:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">DocumentQuery</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Represents a query against the document index.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c">#-- Facet Definitions ------------------------------------------------------</span>
+
+    <span class="c"># The substring used to match a partial or complete word in the index:</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">Str</span>
+
+    <span class="c"># The minimum word count to match:</span>
+    <span class="n">min_count</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span>
+
+    <span class="c"># The maximum word count to match:</span>
+    <span class="n">max_count</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">0</span> <span class="p">)</span>
+
+    <span class="c"># The document to restrict the search to:</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span> <span class="s">&#39;Any&#39;</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="s">&#39;all_documents&#39;</span> <span class="p">)</span>
+
+    <span class="c"># The list of all documents in the document index:</span>
+    <span class="n">all_documents</span> <span class="o">=</span> <span class="n">List</span>
+
+    <span class="c"># The list of index words matching the current query values:</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">List</span>
+
+    <span class="c"># The currently selected word:</span>
+    <span class="n">word</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">IndexWord</span> <span class="p">)</span>
+
+    <span class="c"># The list of documents the currently selected word is contained in:</span>
+    <span class="n">documents</span> <span class="o">=</span> <span class="n">List</span>
+
+    <span class="c">#-- Facet View Definitions -------------------------------------------------</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">HGroup</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;match&#39;</span><span class="p">,</span> <span class="n">springy</span> <span class="o">=</span> <span class="bp">True</span> <span class="p">),</span> <span class="s">&#39;_&#39;</span><span class="p">,</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;min_count&#39;</span><span class="p">,</span>
+                  <span class="n">editor</span>     <span class="o">=</span> <span class="n">ScrubberEditor</span><span class="p">(),</span>
+                  <span class="n">width</span>      <span class="o">=</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span>
+                  <span class="n">item_theme</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span> <span class="s">&#39;@std:LG&#39;</span> <span class="p">)</span>
+            <span class="p">),</span> <span class="s">&#39;_&#39;</span><span class="p">,</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;max_count&#39;</span><span class="p">,</span>
+                  <span class="n">editor</span>     <span class="o">=</span> <span class="n">ScrubberEditor</span><span class="p">(),</span>
+                  <span class="n">width</span>      <span class="o">=</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span>
+                  <span class="n">item_theme</span> <span class="o">=</span> <span class="n">Theme</span><span class="p">(</span> <span class="s">&#39;@std:LG&#39;</span> <span class="p">)</span>
+            <span class="p">),</span> <span class="s">&#39;_&#39;</span><span class="p">,</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;document&#39;</span> <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">VSplit</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;words&#39;</span><span class="p">,</span>
+                  <span class="n">editor</span> <span class="o">=</span> <span class="n">GridEditor</span><span class="p">(</span> <span class="n">adapter</span>    <span class="o">=</span> <span class="n">WordAdapter</span><span class="p">,</span>
+                                       <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;sort&#39;</span> <span class="p">],</span>
+                                       <span class="n">selected</span>   <span class="o">=</span> <span class="s">&#39;word&#39;</span> <span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;documents&#39;</span><span class="p">,</span>
+                  <span class="n">editor</span> <span class="o">=</span> <span class="n">GridEditor</span><span class="p">(</span> <span class="n">adapter</span>    <span class="o">=</span> <span class="n">DocumentAdapter</span><span class="p">,</span>
+                                       <span class="n">operations</span> <span class="o">=</span> <span class="p">[</span> <span class="s">&#39;sort&#39;</span> <span class="p">]</span> <span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">show_labels</span> <span class="o">=</span> <span class="bp">False</span>
+        <span class="p">),</span>
+        <span class="n">title</span>     <span class="o">=</span> <span class="s">&#39;Document Index Query&#39;</span><span class="p">,</span>
+        <span class="nb">id</span>        <span class="o">=</span> <span class="s">&#39;facets.extra.mongodb.examples.document_query.&#39;</span>
+                    <span class="s">&#39;DocumentQuery&#39;</span><span class="p">,</span>
+        <span class="n">width</span>     <span class="o">=</span> <span class="mf">0.50</span><span class="p">,</span>
+        <span class="n">height</span>    <span class="o">=</span> <span class="mf">0.67</span><span class="p">,</span>
+        <span class="n">resizable</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="p">)</span>
+
+    <span class="c">#-- Facet Default Values ---------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">_all_documents_default</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="p">([</span> <span class="s">&#39;Any&#39;</span> <span class="p">]</span> <span class="o">+</span> <span class="p">[</span> <span class="nb">id</span><span class="o">.</span><span class="n">document</span> <span class="k">for</span> <span class="nb">id</span> <span class="ow">in</span> <span class="n">IndexDocument</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="p">])</span>
+
+    <span class="c">#-- Facet Event Handlers ---------------------------------------------------</span>
+
+    <span class="nd">@on_facet_notify</span><span class="p">(</span> <span class="s">&#39;match, min_count, max_count, document&#39;</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_query_modified</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Handles any facet affecting the current query being changed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">query</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">match</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;(word == &#39;/</span><span class="si">%s</span><span class="s">/&#39;)&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">match</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_count</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&#39;(count &gt;= </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_count</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_count</span> <span class="o">&lt;</span> <span class="mi">1000000</span><span class="p">:</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&#39;(count &lt;= </span><span class="si">%s</span><span class="s">)&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_count</span> <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span> <span class="o">!=</span> <span class="s">&#39;Any&#39;</span><span class="p">:</span>
+            <span class="n">query</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="s">&quot;(documents == [&#39;</span><span class="si">%s</span><span class="s">&#39;])&quot;</span> <span class="o">%</span>
+                          <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span> <span class="s">&#39;</span><span class="se">\\</span><span class="s">&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="se">\\\\</span><span class="s">&#39;</span> <span class="p">)</span> <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">word</span>  <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">words</span> <span class="o">=</span> <span class="n">IndexWord</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span> <span class="s">&#39; and &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">query</span> <span class="p">)</span> <span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_word_changed</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">word</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Handles the &#39;word&#39; facet being changed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">documents</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">documents</span> <span class="o">=</span> <span class="p">[</span> <span class="n">IndexDocument</span><span class="p">(</span> <span class="n">document</span> <span class="o">=</span> <span class="n">document</span> <span class="p">)</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+                          <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">word</span><span class="o">.</span><span class="n">documents</span> <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">documents</span> <span class="o">=</span> <span class="n">documents</span>
+
+<span class="c">#-- Run the program ------------------------------------------------------------</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">DocumentQuery</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>As in the document indexer code, there is a fair amount of code here, but again
+most of it is involved with the query presentation details, with only three
+methods dealing specifically with the MongoDB database:</p>
+<dl class="docutils">
+<dt><strong>_all_documents_default</strong></dt>
+<dd><p class="first">This method handles returning the default value for the <em>all_documents</em>
+facet, which is used to define an enumeration of all possible indexed
+documents currently in the document index database. It creates this list
+using the code: <em>[ id.document for id in IndexDocument().all() ]</em>.</p>
+<p>This is an example of a database query using the MongoDBObject class&#8217;s
+<em>all</em> method. With no arguments, the <em>all</em> method returns all instances
+of a particular object type within the database; in this case it returns all
+instances of the IndexDocument class, from which the document file name,
+represented by the <em>document</em> facet, is extracted.</p>
+<p class="last">Note the <em>All</em> value prepended to the list is used to indicate that no
+particular document is being selected for the query.</p>
+</dd>
+<dt><strong>_word_changed</strong></dt>
+<dd>This Facets event handler is invoked whenever the user selects a particular
+IndexWord entry in the topmost query results table (see the application
+screenshot below). The selected IndexWord object contains a list of the
+documents containing that word. This method uses the code
+<em>[ IndexDocument( document = document ).load() for document in
+word.documents ]</em> to retrieve the matching set of IndexDocument objects for
+display in the document summary table shown in the bottom half of the
+application view. This is another example of using a prototype object based
+query to match and load uniquely matching object instances. Note also how
+easy it is to drive the query using the set-based <em>documents</em> facet defined
+by the IndexWord class.</dd>
+<dt><strong>_query_modified</strong></dt>
+<dd><p class="first">This method is the heart of the query application and is invoked whenever
+any facet related to forming a query changes value. The method works by
+building up a Python-based query string based upon the current values of the
+query items displayed on the top line of the application view. A typical
+query formed by this method might look something like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="s">&quot;(word == &#39;/self/&#39;) and (count &gt;= 5)&quot;</span>
+</pre></div>
+</div>
+<p>which can be read as: find any objects where <em>word</em> contains <em>self</em> and
+<em>count</em> is greater than or equal to <em>5</em>.</p>
+<p class="last">The line: <em>self.words = IndexWord().all( &#8216; and &#8216;.join( query ) )</em> then
+performs a query that returns all IndexWord instances matching the specified
+query string. In this case, the <em>all</em> method is passed an explicit query
+string and so only returns the objects matching the query rather than all
+possible objects. The resulting list of IndexWord objects is then assigned
+to <em>self.words</em>, causing the topmost table view to be updated with the
+query results.</p>
+</dd>
+</dl>
+<p>Although this file contains more database related code, by far the largest part
+is devoted to converting the various query UI values into an equivalent database
+query string. Omitting that code, there are only three lines of code explicitly
+related to database query logic.</p>
+<p>A screen shot of the document query application in action is shown below:</p>
+<img alt="_images/document_query.jpg" src="_images/document_query.jpg" />
+<p>This shot shows the query application being run after performing the document
+indexing command shown at the end of the previous section. It shows the results
+of querying for all words containing <em>Ba</em> with at most 1000 uses. In addition,
+the <em>StatusBar</em> entry has been selected, resulting in the bottom half of the
+view showing all documents <em>StatusBar</em> occurs in, along with the total number
+of words indexed in each referenced document.</p>
+<p>Well, that completes the tour of our complete sample MongoDB OML application. At
+this point you&#8217;re probably either totally pysched or completely baffled. In
+either case, we hope you&#8217;ll continue on to learn more about the details of using
+the MongoDB OML package in your own applications.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mongodb_installing.html" title="Installing MongoDB"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_oml.html" title="The MongoDB OML"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" >The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

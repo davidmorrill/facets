@@ -1,0 +1,373 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Tweener Objects &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Animation System" href="animation_system.html" />
+    <link rel="next" title="HasFacets Animation Methods" href="animation_methods.html" />
+    <link rel="prev" title="Path Objects" href="animation_path_objects.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="animation_methods.html" title="HasFacets Animation Methods"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="animation_path_objects.html" title="Path Objects"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" accesskey="U">The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tweener Objects</a><ul>
+<li><a class="reference internal" href="#tweener">Tweener</a></li>
+<li><a class="reference internal" href="#easeintweener">EaseInTweener</a></li>
+<li><a class="reference internal" href="#easeouttweener">EaseOutTweener</a></li>
+<li><a class="reference internal" href="#easeouteaseintweener">EaseOutEaseInTweener</a></li>
+<li><a class="reference internal" href="#easytweener">EasyTweener</a></li>
+<li><a class="reference internal" href="#cycletweener">CycleTweener</a></li>
+<li><a class="reference internal" href="#ramptweener">RampTweener</a></li>
+<li><a class="reference internal" href="#retrogradetweener">RetrogradeTweener</a></li>
+<li><a class="reference internal" href="#bouncetweener">BounceTweener</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation_path_objects.html"
+                        title="previous chapter">Path Objects</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="animation_methods.html"
+                        title="next chapter">HasFacets Animation Methods</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tweener-objects">
+<span id="animation-tweener-objects"></span><h1>Tweener Objects</h1>
+<p>As previously described, a <em>tweener</em> object manipulates the flow of time during
+an animation. The Facets animation system includes the following predefined set
+of tweener classes and objects:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Class or object</th>
+<th class="head">Module</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Tweener</td>
+<td><a class="reference internal" href="src/tweener.html"><em>facet.animation.tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>LinearTweener</td>
+<td><a class="reference internal" href="src/tweener.html"><em>facet.animation.tweener</em></a></td>
+</tr>
+<tr class="row-even"><td>NoEasing</td>
+<td><a class="reference internal" href="src/tweener.html"><em>facet.animation.tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>EaseInTweener</td>
+<td><a class="reference internal" href="src/ease_in_tweener.html"><em>facets.animation.ease_in_tweener</em></a></td>
+</tr>
+<tr class="row-even"><td>EaseIn</td>
+<td><a class="reference internal" href="src/ease_in_tweener.html"><em>facets.animation.ease_in_tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>EaseOutTweener</td>
+<td><a class="reference internal" href="src/ease_out_tweener.html"><em>facets.animation.ease_out_tweener</em></a></td>
+</tr>
+<tr class="row-even"><td>EaseOut</td>
+<td><a class="reference internal" href="src/ease_out_tweener.html"><em>facets.animation.ease_out_tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>EaseOutEaseInTweener</td>
+<td><a class="reference internal" href="src/ease_out_ease_in_tweener.html"><em>facets.animation.ease_out_ease_in_tweener</em></a></td>
+</tr>
+<tr class="row-even"><td>EaseOutEaseIn</td>
+<td><a class="reference internal" href="src/ease_out_ease_in_tweener.html"><em>facets.animation.ease_out_ease_in_tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>EasyTweener</td>
+<td><a class="reference internal" href="src/easy_tweener.html"><em>facets.animation.easy_tweener</em></a></td>
+</tr>
+<tr class="row-even"><td>CycleTweener</td>
+<td><a class="reference internal" href="src/cycle_tweener.html"><em>facets.animation.cycle_tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>RampTweener</td>
+<td><a class="reference internal" href="src/ramp_tweener.html"><em>facets.animation.ramp_tweener</em></a></td>
+</tr>
+<tr class="row-even"><td>RetrogradeTweener</td>
+<td><a class="reference internal" href="src/retrograde_tweener.html"><em>facets.animation.retrograde_tweener</em></a></td>
+</tr>
+<tr class="row-odd"><td>BounceTweener</td>
+<td><a class="reference internal" href="src/bounce_tweener.html"><em>facets.animation.bounce_tweener</em></a></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="tweener">
+<h2>Tweener</h2>
+<p>The <strong>Tweener</strong> class defines the base class from which all other tweener
+classes derive. The <strong>Tweener</strong> class is a concrete class that implements a
+basic <em>linear</em> tween, which performs no time manipulation at all. To emphasize
+this, <strong>LinearTweener</strong> is provided as a synonym you can use instead of
+<strong>Tweener</strong>. The same module also defines a <strong>NoEasing</strong> attribute, which is
+simply a predefined and reusable <strong>Tweener</strong> instance.</p>
+<p>The <strong>Tweener</strong> class defines the following two facets:</p>
+<dl class="docutils">
+<dt>compose: Callable( identity )</dt>
+<dd>The tweener this one is composed with. Since tweener objects are basically
+functions of the form: t&#8217; = tweener(t), which map a time <em>t</em> to a new time
+<em>t&#8217;</em> in the same range, tweener objects can be composed to create new
+composite tweeners: t&#8217; = tweener_1(tweener_2(...tweener_n(t)...)). You can use
+the <em>compose</em> facet to perform such tweener composition without actually
+having to write it out in its functional form. This allows you to create a
+tweener composition without having to create a new subclass of tweener that
+explicitly implements the composition. The default value for <em>compose</em> is the
+identity function where <em>t&#8217;</em> == <em>t</em>.</dd>
+<dt>modified: Event</dt>
+<dd>The event fired when one of the parameters defining the tweener is modified.
+This is not used by the <strong>Tweener</strong> class, since it has no pamaters, but is
+provided for use by subclasses.</dd>
+</dl>
+<p>The <strong>Tweener</strong> class also implements the single public method:</p>
+<dl class="docutils">
+<dt>at( t )</dt>
+<dd>Returns the tween mapped time t&#8217; for time t, where t is between 0.0 and 1.0.
+The result must be in the range from 0.0 to 1.0. This method must be
+overridden by any subclass to implement a new tweening function. The
+implementation for the <strong>Tweener</strong> class simply returns <em>t</em> unchanged.</dd>
+</dl>
+<p>The <em>at</em> method defines the tweening function described above. Note that it is
+always a mapping of a time value between 0.0 and 1.0 to another time value
+between 0.0 and 1.0, where 0.0 corresponds to the start time of the animation
+and 1.0 corresponds to the end time of the animation. This is true no matter how
+long the animation runs. The animation system handles the conversion of time
+from the normalized <em>[0.0, 1.0]</em> time range to actual animation time, thus
+simplifying the task of creating new tweening functions.</p>
+<p>Basically, creating a new tweener class boils down to implementing a new <em>at</em>
+method that implements the desired tweening function. As a result, tweener
+subclasses typically do not implement any new public methods, and only define
+new facets used as parameters in computing the function defined by the <em>at</em>
+method.</p>
+<p>As mentioned previously, a tweener manipulates the flow of time in an animation.
+The default <em>at</em> method defined by the <strong>Tweener</strong> class simply returns the
+input time unchanged:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">at</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">t</span> <span class="p">):</span>
+    <span class="k">return</span> <span class="n">t</span>
+</pre></div>
+</div>
+<p>If you want to implement a simple tweener that makes time run backwards (like
+playing a movie in reverse) you could do so using the following <em>at</em> method
+definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">at</span> <span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">t</span> <span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In essence, such a tweener would make any animation it was applied to run from
+its end value to its start value without otherwise affecting the flow of time
+(i.e. without adding any slow motion or fast forward effects).</p>
+<p>To help illustrate what effect a tweener has on an animation, we provide a plot
+of the tweener function over the time range from 0.0 to 1.0 as shown in the
+following figure for the base <strong>Tweener</strong> class:</p>
+<img alt="_images/tweener_linear.jpg" src="_images/tweener_linear.jpg" />
+<p>All of these plots are taken directly from the <em>Animation Lab</em> demo in the
+<em>Graphics and Animation</em> section of the Facets UI demo. We highly recommend
+trying the demo for yourself to become more familiar with the effect that each
+tweener type has on an animation. You can even compose tweeners and create and
+try your own tweening classes directly within the demo.</p>
+</div>
+<div class="section" id="easeintweener">
+<h2>EaseInTweener</h2>
+<p>The <strong>EaseInTweener</strong> class defines a classic animation <em>ease-in</em> effect, where
+an animation starts out relatively fast and then slows down as it nears the end
+of the animation, as illustrated in the following plot:</p>
+<img alt="_images/tweener_ease_in.jpg" src="_images/tweener_ease_in.jpg" />
+<p>The same module also defines an <strong>EaseIn</strong> attribute containing a predefined and
+reusable instance of <strong>EaseInTweener</strong>.</p>
+</div>
+<div class="section" id="easeouttweener">
+<h2>EaseOutTweener</h2>
+<p>The <strong>EaseOutTweener</strong> class defines a classic animation <em>ease-out</em> effect,
+where an animation starts out relatively slow and then speeds up as it nears the
+end of the animation, as illustrated in the following plot:</p>
+<img alt="_images/tweener_ease_out.jpg" src="_images/tweener_ease_out.jpg" />
+<p>The same module also defines an <strong>EaseOut</strong> attribute containing a predefined
+and reusable instance of <strong>EaseOutTweener</strong>.</p>
+</div>
+<div class="section" id="easeouteaseintweener">
+<h2>EaseOutEaseInTweener</h2>
+<p>The <strong>EaseOutEaseInTweener</strong> class defines a classic animation
+<em>ease-out/ease-in</em> effect, where an animation starts out relatively slow, speeds
+up, and then slows down again as it nears the end of the animation, as
+illustrated in the following plot:</p>
+<img alt="_images/tweener_ease_out_ease_in.jpg" src="_images/tweener_ease_out_ease_in.jpg" />
+<p>The same module also defines an <strong>EaseOutEaseIn</strong> attribute containing a
+predefined and reusable instance of <strong>EaseOutEaseInTweener</strong>.</p>
+</div>
+<div class="section" id="easytweener">
+<h2>EasyTweener</h2>
+<p>The <strong>EasyTweener</strong> is a variation on the <strong>EaseOutEaseIn</strong> tweener that uses
+a different easing function, as illustrated in the following plot:</p>
+<img alt="_images/tweener_easy.jpg" src="_images/tweener_easy.jpg" />
+</div>
+<div class="section" id="cycletweener">
+<h2>CycleTweener</h2>
+<p>The <strong>CycleTweener</strong> basically makes an animation play forward linearly, then
+backward linearly, the number of times specified by its <em>cycles</em> facet. This is
+illustrated in the following plot which shows the tweener function for <em>cycles</em>
+values of 1 and 2:</p>
+<img alt="_images/tweener_cycle.jpg" src="_images/tweener_cycle.jpg" />
+</div>
+<div class="section" id="ramptweener">
+<h2>RampTweener</h2>
+<p>The <strong>RampTweener</strong> divides the animation cycle into three phases defined using
+the following two facets:</p>
+<dl class="docutils">
+<dt>cycle: Range( 0.0, 1.0, 0.5 )</dt>
+<dd>The fraction of the time cycle spent in the <em>ramp</em>.</dd>
+<dt>level: Range( 0.0, 1.0, 0.0 )</dt>
+<dd>The maximum level reached before starting the <em>ramp</em>.</dd>
+</dl>
+<p>The middle (or <em>ramp</em>) phase lasts for a time specified by <em>cycle</em>. The
+beginning and ending phases last for an amount of time specified by <em>(1.0 -
+cycle)/2.0</em>. The first phase starts with an output value of 0.0 and moves
+linearly to the output value specified by <em>level</em>. The ending phase does the
+converse, starting with an output value of <em>1.0 - level</em> and moving linearly to
+1.0 at time 1.0. The middle phase also moves linearly, starting with an output
+value of <em>level</em> and moving to <em>1.0 - level</em>.</p>
+<p>This is more easily understood looking at the following plot, which shows the
+function for several different values of <em>cycle</em> and <em>level</em>:</p>
+<img alt="_images/tweener_ramp.jpg" src="_images/tweener_ramp.jpg" />
+</div>
+<div class="section" id="retrogradetweener">
+<h2>RetrogradeTweener</h2>
+<p>The <strong>Retrograde</strong> tweener does a simple linear animation from its start value
+to its end value, but reverses the flow of time for a while during the middle
+part of the animation. The only control facet provided is:</p>
+<dl class="docutils">
+<dt>amount: Range( 0.0, 1.0, 0.5 )</dt>
+<dd>The amount of retrograde movement.</dd>
+</dl>
+<p>The following plots illustrate the type of effect that results for different
+values of <em>amount</em>:</p>
+<img alt="_images/tweener_retrograde.jpg" src="_images/tweener_retrograde.jpg" />
+</div>
+<div class="section" id="bouncetweener">
+<h2>BounceTweener</h2>
+<p>The <strong>BounceTweener</strong> attempts to provide a <em>bouncing ball</em> type effect by
+appearing to bounce one or more times upon reaching its end value. The bounce
+is controlled by the following three facets:</p>
+<dl class="docutils">
+<dt>time: Range( 0.1, 1.0, 0.45 )</dt>
+<dd>The time at which the first bounce begins.</dd>
+<dt>height: Range( 0.0, 1.0, 0.1 )</dt>
+<dd>The maximum height of the bounce.</dd>
+<dt>bounces: Range( 1, 5, 2 )</dt>
+<dd>The number of bounces.</dd>
+</dl>
+<p>The effect is illustrated in the following plots, which show the results for
+different facet settings:</p>
+<img alt="_images/tweener_bounce.jpg" src="_images/tweener_bounce.jpg" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="animation_methods.html" title="HasFacets Animation Methods"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="animation_path_objects.html" title="Path Objects"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="animation_system.html" >The Animation System</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

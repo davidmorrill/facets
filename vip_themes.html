@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Shell Themes &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The VIP Shell" href="vip_shell.html" />
+    <link rel="next" title="Extending the Shell" href="vip_extending_shell.html" />
+    <link rel="prev" title="Shell Options" href="vip_shell_options.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_extending_shell.html" title="Extending the Shell"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="vip_shell_options.html" title="Shell Options"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" accesskey="U">The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Shell Themes</a><ul>
+<li><a class="reference internal" href="#all-black">All Black</a></li>
+<li><a class="reference internal" href="#all-white">All White</a></li>
+<li><a class="reference internal" href="#bee">Bee</a></li>
+<li><a class="reference internal" href="#core-thor">Core: Thor</a></li>
+<li><a class="reference internal" href="#dark">Dark</a></li>
+<li><a class="reference internal" href="#default">Default</a></li>
+<li><a class="reference internal" href="#grey-3d">Grey 3D</a></li>
+<li><a class="reference internal" href="#light">Light</a></li>
+<li><a class="reference internal" href="#pad-black">Pad: Black</a></li>
+<li><a class="reference internal" href="#pad-grey">Pad: Grey</a></li>
+<li><a class="reference internal" href="#pad-legal">Pad: Legal</a></li>
+<li><a class="reference internal" href="#pad-white">Pad: White</a></li>
+<li><a class="reference internal" href="#pad-yellow">Pad: Yellow</a></li>
+<li><a class="reference internal" href="#rounded">Rounded</a></li>
+<li><a class="reference internal" href="#shadow">Shadow</a></li>
+<li><a class="reference internal" href="#simple-black">Simple Black</a></li>
+<li><a class="reference internal" href="#simple-white">Simple White</a></li>
+<li><a class="reference internal" href="#smooth">Smooth</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vip_shell_options.html"
+                        title="previous chapter">Shell Options</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_extending_shell.html"
+                        title="next chapter">Extending the Shell</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="shell-themes">
+<span id="vip-themes"></span><h1>Shell Themes</h1>
+<p>The VIP Shell supports customization of the appearance of history list items
+through the use of <em>themes</em> and <em>theme text colors</em>. You customize your history
+list&#8217;s appearance by:</p>
+<ol class="arabic simple">
+<li>Selecting a theme using the shell options dialog. The <em>Theme</em> option on the
+dialog&#8217;s <em>Options</em> tab allows to you to select from the available themes
+provided with the shell. You can also press the <em>4</em> key when hovering your
+mouse pointer over a history item to cycle to the next available theme.</li>
+<li>Optionally customize the text colors for your selected theme using the
+<em>Theme Colors</em> tab of the shell options dialog.</li>
+</ol>
+<p>Refer to the <a class="reference internal" href="vip_shell_options.html#vip-shell-options"><em>Shell Options</em></a> section for more information on using the
+shell options dialog.</p>
+<p>The remainder of this section is devoted to providing graphical illustrations of
+each of the standard shell themes.</p>
+<div class="section" id="all-black">
+<h2>All Black</h2>
+<img alt="_images/theme_all_black.jpg" src="_images/theme_all_black.jpg" />
+</div>
+<div class="section" id="all-white">
+<h2>All White</h2>
+<img alt="_images/theme_all_white.jpg" src="_images/theme_all_white.jpg" />
+</div>
+<div class="section" id="bee">
+<h2>Bee</h2>
+<img alt="_images/theme_bee.jpg" src="_images/theme_bee.jpg" />
+</div>
+<div class="section" id="core-thor">
+<h2>Core: Thor</h2>
+<img alt="_images/theme_core_thor.jpg" src="_images/theme_core_thor.jpg" />
+</div>
+<div class="section" id="dark">
+<h2>Dark</h2>
+<img alt="_images/theme_dark.jpg" src="_images/theme_dark.jpg" />
+</div>
+<div class="section" id="default">
+<h2>Default</h2>
+<img alt="_images/theme_default.jpg" src="_images/theme_default.jpg" />
+</div>
+<div class="section" id="grey-3d">
+<h2>Grey 3D</h2>
+<img alt="_images/theme_grey_3d.jpg" src="_images/theme_grey_3d.jpg" />
+</div>
+<div class="section" id="light">
+<h2>Light</h2>
+<img alt="_images/theme_light.jpg" src="_images/theme_light.jpg" />
+</div>
+<div class="section" id="pad-black">
+<h2>Pad: Black</h2>
+<img alt="_images/theme_pad_black.jpg" src="_images/theme_pad_black.jpg" />
+</div>
+<div class="section" id="pad-grey">
+<h2>Pad: Grey</h2>
+<img alt="_images/theme_pad_grey.jpg" src="_images/theme_pad_grey.jpg" />
+</div>
+<div class="section" id="pad-legal">
+<h2>Pad: Legal</h2>
+<img alt="_images/theme_pad_legal.jpg" src="_images/theme_pad_legal.jpg" />
+</div>
+<div class="section" id="pad-white">
+<h2>Pad: White</h2>
+<img alt="_images/theme_pad_white.jpg" src="_images/theme_pad_white.jpg" />
+</div>
+<div class="section" id="pad-yellow">
+<h2>Pad: Yellow</h2>
+<img alt="_images/theme_pad_yellow.jpg" src="_images/theme_pad_yellow.jpg" />
+</div>
+<div class="section" id="rounded">
+<h2>Rounded</h2>
+<img alt="_images/theme_rounded.jpg" src="_images/theme_rounded.jpg" />
+</div>
+<div class="section" id="shadow">
+<h2>Shadow</h2>
+<img alt="_images/theme_shadow.jpg" src="_images/theme_shadow.jpg" />
+</div>
+<div class="section" id="simple-black">
+<h2>Simple Black</h2>
+<img alt="_images/theme_simple_black.jpg" src="_images/theme_simple_black.jpg" />
+</div>
+<div class="section" id="simple-white">
+<h2>Simple White</h2>
+<img alt="_images/theme_simple_white.jpg" src="_images/theme_simple_white.jpg" />
+</div>
+<div class="section" id="smooth">
+<h2>Smooth</h2>
+<img alt="_images/theme_smooth.jpg" src="_images/theme_smooth.jpg" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_extending_shell.html" title="Extending the Shell"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="vip_shell_options.html" title="Shell Options"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="vip_shell.html" >The VIP Shell</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,354 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Validate &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="Introduction" href="introduction.html" />
+    <link rel="next" title="Initialize" href="tao_initialize.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tao_initialize.html" title="Initialize"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" accesskey="U">Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Validate</a><ul>
+<li><a class="reference internal" href="#a-simple-python-example">A Simple Python Example</a></li>
+<li><a class="reference internal" href="#adding-some-python-type-checking">Adding Some Python Type Checking</a></li>
+<li><a class="reference internal" href="#a-simple-facets-example">A Simple Facets Example</a></li>
+<li><a class="reference internal" href="#additional-thoughts">Additional Thoughts</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="introduction.html"
+                        title="previous chapter">Introduction</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tao_initialize.html"
+                        title="next chapter">Initialize</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="validate">
+<span id="tao-validate"></span><h1>Validate</h1>
+<p>As a Python developer or user, you&#8217;re already familiar with the fact that
+object attributes do not have fixed types. At one instant an attribute might
+have an integer value, and at the next it might have a string value. In many
+cases this is a good thing, since it can streamline coding and allows certain
+kinds of classes to be easily reused in different contexts.</p>
+<p>Some examples of when this flexible typing is a very good thing are the Python
+<em>list</em>, <em>tuple</em>, <em>dict</em> and <em>set</em> classes, which all work equally well with any
+kind of data. In strongly typed languages like C++, C# or Java, creating
+flexible <em>collection</em> classes like these requires the use of <em>generics</em>, which
+provide a similar capability but can be much more difficult to write and
+implement correctly.</p>
+<div class="section" id="a-simple-python-example">
+<h2>A Simple Python Example</h2>
+<p>But just because this type flexibility is a good thing in many important cases
+does not mean that it is always a good thing. Let&#8217;s say we are writing a health
+application where we need to keep track of the name, age, weight and gender of
+various people. In Python, we might start by creating the following class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="nb">object</span> <span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">gender</span> <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span>    <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+</pre></div>
+</div>
+<p>Now, we might intuitively know that a name should be a string, an age should be
+a non-negative integer, a weight should be a positive float, and the gender
+should either be the string &#8220;male&#8221; or &#8220;female&#8221;. But as a Python user you know
+there is nothing in the above code to enforce this.</p>
+<p>We could decide that with our &#8216;leet coding skills this is not a problem, since
+we will never, ever make a mistake and assign the wrong kind of value to any of
+the object&#8217;s attributes. That&#8217;s fine for highly skilled conscientious coders.</p>
+</div>
+<div class="section" id="adding-some-python-type-checking">
+<h2>Adding Some Python Type Checking</h2>
+<p>But what if this class is part of a package you are distributing to other Python
+developers, not all of which possess your level of python-fu. Reluctantly, you
+decide to add some checking logic to you class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="nb">object</span> <span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">gender</span> <span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span> <span class="n">name</span><span class="p">,</span> <span class="nb">basestring</span> <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="s">&#39;The name argument must be a string&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span> <span class="n">age</span><span class="p">,</span> <span class="nb">int</span> <span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="n">age</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="s">&#39;The age argument must be a non-negative integer&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span> <span class="n">weight</span><span class="p">,</span> <span class="nb">float</span> <span class="p">))</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">float</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="s">&#39;The weight argument must be a positive float&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">gender</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span> <span class="s">&#39;male&#39;</span><span class="p">,</span> <span class="s">&#39;female&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span> <span class="s">&#39;The gender argument must be either &quot;male&quot; or &quot;female&quot;&#39;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span>    <span class="o">=</span> <span class="n">age</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gender</span> <span class="o">=</span> <span class="n">gender</span>
+</pre></div>
+</div>
+<p>Phew! Well, that was a little bit painful, but at least we know now that all of
+the inputs to the constructor have been properly validated. So we sit back with
+a sigh of relief and start to dig out the XBox controller. Suddenly we remember
+that there&#8217;s nothing preventing our fellow developers from writing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span> <span class="s">&#39;Joe&#39;</span><span class="p">,</span> <span class="mi">48</span><span class="p">,</span> <span class="mf">165.2</span><span class="p">,</span> <span class="s">&#39;male&#39;</span> <span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="s">&#39;middle aged&#39;</span>
+</pre></div>
+</div>
+<p>Groan!</p>
+</div>
+<div class="section" id="a-simple-facets-example">
+<h2>A Simple Facets Example</h2>
+<p>By now you&#8217;ve probably gotten the point that unrestricted type flexibility may
+not always be what we want. So now let&#8217;s rewrite our example using Facets
+<em>validate</em> feature:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Person</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">name</span>   <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">age</span>    <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
+    <span class="n">weight</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span> <span class="mf">0.1</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
+    <span class="n">gender</span> <span class="o">=</span> <span class="n">Enum</span><span class="p">(</span> <span class="s">&#39;male&#39;</span><span class="p">,</span> <span class="s">&#39;female&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The main things to note about this example are:</p>
+<ul>
+<li><p class="first">We derive our Person class from HasFacets instead of object. This is how we
+access the features that the Facets package provides. There are other base
+classes we can derive from as well, which we&#8217;ll describe in other chapters;
+but HasFacets is the base class that all Facets-featured classes derive from.</p>
+</li>
+<li><p class="first">We define a number of <em>typed</em> instance attributes using lines like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">name</span> <span class="o">=</span> <span class="n">Str</span>
+</pre></div>
+</div>
+<p>which can be read as saying &#8220;instances of this class have an attribute called
+<em>name</em> which must have a <em>string</em> (i.e. Str) value&#8221;.</p>
+<p>The <em>Str</em>, <em>Range</em> and <em>Enum</em> symbols are called <em>facets</em> and provide many of
+the same capabilities as a <em>type</em> in other programming languages. In
+particular, in this example they provide the type checking (i.e. <em>validation</em>)
+we are looking for.</p>
+</li>
+</ul>
+<p>At first glance it might not seem like it, but this Facets class is actually a
+functional superset of the second Python example we wrote previously. That is:</p>
+<ul class="simple">
+<li>It automatically provides a constructor which ensures that only valid
+arguments are passed and assigned.</li>
+<li>It also catches attempts to assign invalid values to object attributes after
+the constructor has run.</li>
+</ul>
+<p>To see this, we&#8217;ll show the results of an interactive Python interpreter session
+using the Facets version of the Person class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Joe&#39;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">48</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="mf">165.2</span><span class="p">,</span> <span class="n">gender</span> <span class="o">=</span> <span class="s">&#39;male&#39;</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="s">&#39;middle aged&#39;</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;C:\Assembla\trunk\facets\core\facet_handlers.py&quot;</span>, line <span class="m">187</span>, in <span class="n">error</span>
+    <span class="nb">object</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_info</span><span class="p">(</span> <span class="nb">object</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="p">),</span> <span class="n">value</span>
+<span class="gr">facets.core.facet_errors.FacetError</span>: <span class="n">The &#39;age&#39; facet of a Person instance must</span>
+<span class="go">be an integer &gt;= 0, but a value of middle aged was specified.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Joe&#39;</span><span class="p">,</span> <span class="n">age</span> <span class="o">=</span> <span class="mi">48</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="mf">165.2</span><span class="p">,</span> <span class="n">gender</span> <span class="o">=</span> <span class="s">&#39;guy&#39;</span> <span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;C:\Assembla\trunk\facets\core\facet_handlers.py&quot;</span>, line <span class="m">187</span>, in <span class="n">error</span>
+    <span class="nb">object</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_info</span><span class="p">(</span> <span class="nb">object</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="p">),</span> <span class="n">value</span>
+<span class="gr">facets.core.facet_errors.FacetError</span>: <span class="n">The &#39;gender&#39; facet of a Person instance must</span>
+<span class="go">be &#39;male&#39; or &#39;female&#39;, but a value of guy was specified.</span>
+</pre></div>
+</div>
+<p>Note that the Facets-based Person class caught both:</p>
+<ul class="simple">
+<li>The attempt to incorrectly modify an object attribute after the object had
+been constructed.</li>
+<li>The attempt to pass the constructor an invalid argument.</li>
+</ul>
+<p>The careful reader might also note the difference in the constructor calls
+between the standard Python Person class and the Facets version. Although you
+can construct Facets classes that accept unnamed constructor arguments, the
+default HasFacets constructor expects only a list of named arguments, each of
+which is assigned to their eponymous object attribute.</p>
+<p>This means you don&#8217;t need to create an explicit class constructor for many
+Facets classes, although you are free to do so if you like. In later chapters
+we&#8217;ll cover some examples of constructing Facets classes with and without an
+explicit constructor method.</p>
+</div>
+<div class="section" id="additional-thoughts">
+<h2>Additional Thoughts</h2>
+<p>Some final comments about Facets <em>validation</em> before moving on to the next
+section:</p>
+<ul>
+<li><p class="first">Facets does not force you to define a specific type for all object attributes.
+The <em>Any</em> Facet can be used to define attributes which accept any Python
+value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">NamedValue</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">name</span>  <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">Any</span>
+</pre></div>
+</div>
+<div class="highlight-python"><pre>nv1 = NamedValue(
+    name = 'manager',
+    value = Person( name = 'Joe', age = 48, weight = 165.2, gender = 'male' )
+)
+nv2 = NamedValue(
+    name  = 'meaning of life'
+    value = 42
+)</pre>
+</div>
+<p>You can also use the <em>Python</em> Facet, which is like <em>Any</em> but has standard
+Python attribute semantics. That is, you must explicity set the associated
+obect attribute before referencing it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">NamedPythonValue</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">name</span>  <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">Python</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">nv</span> <span class="o">=</span> <span class="n">NamedPythonValue</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">nv</span><span class="o">.</span><span class="n">name</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">nv</span><span class="o">.</span><span class="n">value</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">AttributeError</span>: <span class="n">&#39;NamedPythonValue&#39; object has no attribute &#39;value&#39;</span>
+</pre></div>
+</div>
+<p>Using Facets gives you the best of both worlds: strongly typed attributes when
+you need them, and flexibly type attributes when you don&#8217;t.</p>
+</li>
+<li><p class="first">You can easily mutate existing Facet types to create new ones. For example,
+let&#8217;s say you want an attribute that can either be None or an integer in the
+range from 1 to 6. Simply write:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">DiceRoll</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">die_value</span> <span class="o">=</span> <span class="n">Either</span><span class="p">(</span> <span class="bp">None</span><span class="p">,</span> <span class="n">Range</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span> <span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">roll</span> <span class="o">=</span> <span class="n">DiceRoll</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roll</span><span class="o">.</span><span class="n">die_value</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roll</span><span class="o">.</span><span class="n">die_value</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">roll</span><span class="o">.</span><span class="n">die_value</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+  File <span class="nb">&quot;C:\Assembla\trunk\facets\core\facet_handlers.py&quot;</span>, line <span class="m">187</span>, in <span class="n">error</span>
+    <span class="nb">object</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">full_info</span><span class="p">(</span> <span class="nb">object</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="p">),</span> <span class="n">value</span>
+<span class="gr">facets.core.facet_errors.FacetError</span>: <span class="n">The &#39;die_value&#39; facet of a DiceRoll instance</span>
+<span class="go">must be 1 &lt;= an integer &lt;= 6 or None, but a value of 7 was specified.</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">You can define your own, new Facet types if the ones you need aren&#8217;t provided
+by the Facets package. We&#8217;ll cover this more advanced topic in a later
+chapter.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tao_initialize.html" title="Initialize"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="introduction.html" title="Introduction"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="introduction.html" >Introduction</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

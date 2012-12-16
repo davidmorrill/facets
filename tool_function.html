@@ -1,0 +1,633 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>The tools Function &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Tool Framework" href="tool_framework.html" />
+    <link rel="next" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="prev" title="Tool Framework Architecture" href="tool_architecture.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_tools.html" title="The Standard Tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_architecture.html" title="Tool Framework Architecture"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" accesskey="U">The Tool Framework</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">The tools Function</a><ul>
+<li><a class="reference internal" href="#a-quick-overview">A Quick Overview</a></li>
+<li><a class="reference internal" href="#defining-a-custom-toolbox">Defining a Custom Toolbox</a></li>
+<li><a class="reference internal" href="#using-the-tools-function">Using the tools Function</a></li>
+<li><a class="reference internal" href="#using-the-tools-environment">Using the Tools Environment</a><ul>
+<li><a class="reference internal" href="#connecting-tools">Connecting Tools</a></li>
+<li><a class="reference internal" href="#disconnecting-tools">Disconnecting Tools</a></li>
+<li><a class="reference internal" href="#perspective-menu">Perspective Menu</a></li>
+<li><a class="reference internal" href="#exporting-a-perspective">Exporting a Perspective</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_architecture.html"
+                        title="previous chapter">Tool Framework Architecture</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_tools.html"
+                        title="next chapter">The Standard Tools</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-tools-function">
+<span id="tool-function"></span><h1>The tools Function</h1>
+<p>The Facets package provides a high-level <em>tools</em> function that takes all of the
+capabilities of the low-level tools framework and wraps them in an easy to use
+user interface that allows you to create a customizable tools environment that
+can be invoked from the command line or embedded within your application.</p>
+<p>A screen shot of a typical tools environment in use is shown below:</p>
+<img alt="_images/tool_function.jpg" src="_images/tool_function.jpg" />
+<div class="section" id="a-quick-overview">
+<h2>A Quick Overview</h2>
+<p>We&#8217;ll start the discussion of the tools function by providing a quick overview
+of some of the key facilities that it provides:</p>
+<dl class="docutils">
+<dt>Toolbox</dt>
+<dd><p class="first">A tools environment created using the <em>tools</em> function makes available a
+collection of tools for you to choose from. This collection of tools is
+(somewhat unsurprisingly) referred to as a <em>toolbox</em>. You can either use one
+of the standard toolboxes supplied with Facets or create your own custom
+toolboxes including any of the standard Facets tools or any custom tools you
+create or acquire.</p>
+<p>A toolbox is defined using a simple text file, usually with a <em>.box</em>
+extension, that describes:</p>
+<ul class="simple">
+<li>The set of tools included within the toolbox.</li>
+<li>The hierarchical organization of the tools for presentation within the
+tool environment&#8217;s user interface.</li>
+</ul>
+<p class="last">Defining a toolbox using an external text file makes it easy to update the
+contents of the toolbox and to share the toolbox across multiple tool
+environments.</p>
+</dd>
+<dt>Perspective</dt>
+<dd>A <em>perspective</em> (a term borrowed from the Eclipse framework) is simply a named
+canvas containing zero, one or more tools organized to work together as a
+composite whole. The tools environment allows you to create any number of
+perspectives and switch between them at any time. A perspective provides you
+a means of easily creating task oriented tool clusters oriented toward
+particular workflows.</dd>
+<dt>Connection</dt>
+<dd>A <em>connection</em> is the thing that allows one tool to talk to another. Nearly
+all Facets tools expose one or more <em>connection points</em> for communicating with
+other tools. Connection points can either be inputs, outputs or both and are
+defined by adding <em>connect</em> metadata to one or more of a tool&#8217;s facet
+definitions. The tools environment provides a simple graphical mechanism for
+creating and breaking connections between compatible tools. Connections are
+persistent and associated with the perspective and tools they are created for.</dd>
+<dt>Export</dt>
+<dd>Perspectives provide a nice scratchpad for quickly putting together and
+testing new composite tools made from component tools connected together using
+connections. Every now and then though you create a really nifty little tool
+that you would like to use standalone or share with other people. The tools
+environment faciliates this by providing an <em>export</em> option that allows you to
+convert any perspective into a custom, standalone Python source module tool
+that can easily be invoked from the commahd line or shared with other
+developers. The resulting source module is nicely formatted, well commented,
+compact and can easily be hand tweaked to add new features or elements not
+directly supported by the tools environment.</dd>
+</dl>
+</div>
+<div class="section" id="defining-a-custom-toolbox">
+<span id="custom-toolbox"></span><h2>Defining a Custom Toolbox</h2>
+<p>As mentioned previously, the collection of tools supported by a particular tools
+environment is defined by a toolbox whose description is contained in a simple
+text file, usually with a <em>.box</em> file extension. The Facets package includes
+several toolbox files:</p>
+<dl class="docutils">
+<dt>facets/extra/tools/tool.box</dt>
+<dd>Defines the default toolbox used by the tools environment.</dd>
+<dt>facets/extra/tools/helper/fbi.box</dt>
+<dd>Defines a debugging toolbox used by the FBI debugger.</dd>
+<dt>facets/extra/demo/ui/tool.box</dt>
+<dd>Defines a custom tool box containing just Facets UI demos that can be fun to
+play around with interactively within a tools environment.</dd>
+</dl>
+<p>A valid toolbox file can contain the following three types of lines:</p>
+<dl class="docutils">
+<dt>Comment</dt>
+<dd>Any blank line or line whose first non-blank character is <em>#</em> is considered
+to be a comment and is ignored.</dd>
+<dt>Tool</dt>
+<dd>Any line of the form: <em>name: package.module.class</em> defines a tool. <em>Name</em> can
+be any non-empty string that does not contain a <em>:</em> character or start with
+<em>#</em> and specifies the name of the tool as it will appear in the tool
+environment&#8217;s user interface. Following the first <em>:</em> is a string defining the
+package, module and class defining the tool (e.g.
+<em>facets.extra.tools.text_editor.TextEditor</em>).</dd>
+<dt>Section</dt>
+<dd>Any non-comment line which does not contain a <em>:</em> defines a section. The
+contents of the line define the name of the section as it will appear in the
+tool environment&#8217;s user interface. Sections are used to help organize the
+presentation of tools within the user interface.</dd>
+</dl>
+<p>Like Python, the contents of a toolbox file are sensitive to leading white
+space. Lines with greater levels of indenting that follow a section are
+considered to be part of the preceding section. Sections can also be nested by
+increasing the amount of indenting used to start a new level.</p>
+<p>To illustrate these rules, the following example shows the beginning part of the
+default Facets toolbox file:</p>
+<div class="highlight-python"><pre>#-------------------------------------------------------------------------------
+# The standard Facets developer tools:
+#-------------------------------------------------------------------------------
+VIP Shell:               facets.extra.tools.vip_shell.VIPShell
+Text Editor:             facets.extra.tools.text_editor.TextEditor
+Text:                    facets.extra.tools.text_file.TextFile
+Text Collector:          facets.extra.tools.text_collector.TextCollector
+Select DockWindow Theme: facets.extra.tools.select_dock_window_theme.SelectDockWindowTheme
+Application Monitor:     facets.extra.tools.app_monitor.AppMonitor
+Class Browser:           facets.extra.tools.class_browser.ClassBrowser
+Clipboard:               facets.extra.tools.clipboard.Clipboard
+Control
+    Control Flasher:     facets.extra.tools.control_flasher.ControlFlasher
+    Control Grabber:     facets.extra.tools.control_grabber.ControlGrabber
+    Control Stack:       facets.extra.tools.control_stack.ControlStack
+Cross Reference:         facets.extra.tools.cross_reference.CrossReference
+Drop Zone:               facets.extra.tools.drop_zone.DropZone
+Debugging
+    Event Monitor:       facets.extra.tools.event_monitor.EventMonitor
+    FBI Viewer:          facets.extra.tools.fbi_viewer.FBIViewer
+    Breakpoints:         facets.extra.tools.breakpoints.Breakpoints
+    Heap Browser:        facets.extra.tools.heap_browser.HB_HeapBrowser
+    Listener:            facets.extra.tools.listener.Listener
+    Traceback Viewer:    facets.extra.tools.traceback_viewer.TracebackViewer
+    Wiretap:             facets.extra.tools.wiretap.Wiretap
+...</pre>
+</div>
+<p>Most of the lines in the example define tools, with the two lines containing
+<em>Control</em> and <em>Debugging</em> defining the beginning of user interface sections.
+Note the use of indenting to define the contents of a section.</p>
+</div>
+<div class="section" id="using-the-tools-function">
+<h2>Using the tools Function</h2>
+<p>There are several ways to create a tools environment using the <em>tools</em> function.
+If you just want to use the standard Facets toolbox, you can create a tools
+environment directly from the command line using:</p>
+<div class="highlight-python"><pre>python -m facets.extra.tools.run</pre>
+</div>
+<p>However, if you want full control you can create a standard or custom tools
+environment in your own code by directly invoking the <em>tools</em> function
+contained in the <em>facets.extra.tools.tools</em> module. The signature for the
+<em>tools</em> function is as follows:</p>
+<p><em>tools( object = None, application = &#8216;Facets&#8217;, tools = None, toolbox = None,
+show = True )</em></p>
+<p>As you can see, all arguments are optional, with a call to <em>tools()</em> simply
+creating a tools environment using the standard Facets toolbox. The meaning of
+the various arguments are as follows:</p>
+<dl class="docutils">
+<dt>object</dt>
+<dd>Specifies an optional application object that is made available to any
+<em>Universal Inspector</em> tool added to a perspective. This can be useful when you
+are creating a tools environment specifically for help in debugging or testing
+a particular object in your application.</dd>
+<dt>application</dt>
+<dd>Specifies a name for the tools environment being created. The name is used as
+a key for saving and restoring user preference information for the created
+tools environment. This can be useful when creating several custom tools
+environments used for different purposes or application, by allowing the
+perspectives created for each environment to be stored using different
+application names.</dd>
+<dt>tools</dt>
+<dd>Specifies an optional list of default tools to automatically add to each new
+perspective created. If not specified or <strong>None</strong>, each new perspective starts
+off empty. If a value is provided, it should be a list of strings containing
+the user interface name of tools in the environment&#8217;s toolbox (e.g. <em>[&#8216;File
+Sieve&#8217;, &#8216;Universal Inspector&#8217;]</em>). The specified tools are added to each new
+perspective in the order specified.</dd>
+<dt>toolbox</dt>
+<dd><p class="first">Specifies a <strong>Toolbox</strong> object describing the set of tools (i.e. <em>toolbox</em>)
+made available to each perspective in the environment. If not specified or
+<strong>None</strong>, the default Facets toolbox is used. To use a custom toolbox, create
+a text file containing a description of the toolbox as described in the
+<a class="reference internal" href="#custom-toolbox"><em>Defining a Custom Toolbox</em></a> section, and then pass a value of the form: <em>Toolbox(
+file_name = file_name )</em> as the <em>toolbox</em> argument, where <em>file_name</em> is the
+name of the toolbox text file you created. The Toolbox class is defined in the
+<em>facets.extra.tools.tools</em> module.</p>
+<p class="last">In order to make specifying the toolbox file easier, you can leave the path
+information off of the file name if the file is in the same directory as the
+module creating the Toolbox object or one of its callers. The Toolbox class
+automatically searches for the toolbox file in the directories referenced by
+modules in the Python call stack.</p>
+</dd>
+<dt>show</dt>
+<dd>If <strong>True</strong> (the default), the created tools environment is automatically
+displayed. If <strong>False</strong>, it is up to your application to display the tools
+environment when needed. You can do this simply by calling the <em>edit_facets</em>
+method on the <strong>Tools</strong> object returned by the function.</dd>
+</dl>
+<p>The result of calling the <em>tools</em> function is a <strong>Tools</strong> object representing
+the tools environment. If you specified <em>show = False</em>, you will need to
+explicitly call the <em>edit_facets</em> method on the result to display the tools
+environment.</p>
+</div>
+<div class="section" id="using-the-tools-environment">
+<span id="using-tools-environment"></span><h2>Using the Tools Environment</h2>
+<p>The user interface for the tools environment is divided into two areas, as
+shown in the following screen shot:</p>
+<img alt="_images/tool_env_areas.jpg" src="_images/tool_env_areas.jpg" />
+<dl class="docutils">
+<dt>Menu Bar</dt>
+<dd>Contains menu actions that allow you to manipulate the current perspective in
+various ways.</dd>
+<dt>Perspective Area</dt>
+<dd>Contains the set of tools you have added to the current perspective.</dd>
+</dl>
+<p>When you first start a tools environment it automatically loads the last
+perspective used. If this is the first time starting a particular environment,
+the <em>Default</em> perspective is loaded. If you want to use a different perspective,
+simply click on the <em>Switch</em> menu bar item and select a different perspective
+from the drop-down menu list.</p>
+<p>If you want to create a new perspective, select the <em>Perspective/New...</em> entry
+from the menu and enter a name for your new perspective in the pop-up dialog
+that appears.</p>
+<p>Depending upon the arguments passed to the <em>tools</em> function, a newly created
+perspective may be initially empty or populated with a default set of tools
+which you can either use, add to or delete. To delete a tool, click the <em>X</em>
+icon on the right side of its tab. To add a new tool to the perspective, click
+the <em>Tools</em> menu bar item and select the tool you want to add from the drop-down
+menu list. The contents of the menu list directly reflect the contents and
+structure of the toolbox file provided to the <em>tools</em> function.</p>
+<p>If you want, you can add more than one copy of a particular tool to the
+perspective. Additional copies have a numeric suffix appended to their tab name
+(e.g. <em>Universal Inspector 2</em>).</p>
+<div class="section" id="connecting-tools">
+<h3>Connecting Tools</h3>
+<p>Once tools have been added to the perspective area you can visually organize
+them any way you want using standard tab dragging, docking and splitter bar
+adjustments. The layout you create is automatically persisted as part of the
+perspective definition.</p>
+<p>In most cases you will also want to create connections between the tools you
+have added. This can be done in one of two ways.</p>
+<p><strong>Method 1</strong>: Hover the mouse pointer over the feature icon for one of the two
+tools to connect and click on the tool&#8217;s <em>connection</em> icon:</p>
+<img alt="_images/tool_env_connection.jpg" src="_images/tool_env_connection.jpg" />
+<p>Then select the connection you want to make from the pop-up menu that appears.
+For example:</p>
+<img alt="_images/tool_env_connection2.jpg" src="_images/tool_env_connection2.jpg" />
+<p>The popup menu reflects the available connections that can be made between the
+selected tool and all other tools currently in the perspective.</p>
+<p><strong>Method 2</strong>: Hover the mouse pointer over the feature icon for one of the two
+tools to connect then click and drag on the tool&#8217;s <em>connection</em> icon. As you
+drag, the other tools within the perspective that you can connect to update
+their feature icon to indicate that they are valid drop targets:</p>
+<img alt="_images/tool_env_connection3.jpg" src="_images/tool_env_connection3.jpg" />
+<p>Position your pointer over a tool showing the drop target and release it to make
+a connection. If the two tools have more than one possible connection that can
+be made between them, a pop-up menu allowing you to choose the connection you
+want appears. Select the desired item to complete the connection. If only one
+legal connection is possible, the connection is made automatically without
+displaying a pop-up menu.</p>
+<p>Note that if you do not see the connection icon when you hover over a tool&#8217;s
+feature icon it means that the tool does not support the connection feature.</p>
+</div>
+<div class="section" id="disconnecting-tools">
+<h3>Disconnecting Tools</h3>
+<p>You can break existing connections between tools using two different approaches
+as well.</p>
+<p><strong>Method 1</strong>: Hover the mouse pointer over the feature icon for one of the two
+tools to disconnect and click on the tool&#8217;s <em>connection</em> icon, just as if you
+were going to make a connection. If the tool already has existing connections,
+the pop-up menu that appears will also have a section for breaking connections:</p>
+<img alt="_images/tool_env_connection4.jpg" src="_images/tool_env_connection4.jpg" />
+<p>Select the connection you want to break to complete the disconnection.</p>
+<p><strong>Method 2</strong>: If you no longer need one of the tools you want to disconnect,
+simply close it by clicking its tab&#8217;s <em>X</em> icon. Closing a tool breaks all
+connections it has with other tools in the same perspective.</p>
+</div>
+<div class="section" id="perspective-menu">
+<h3>Perspective Menu</h3>
+<p>In addition to the <em>New...</em> option for creating a new perspective, the
+<em>Perspective</em> menu bar item also contains several other useful options:</p>
+<dl class="docutils">
+<dt>Rename...</dt>
+<dd>Displays a pop-up dialog that allows you to enter a new name for the current
+perspective.</dd>
+<dt>Delete</dt>
+<dd>Deletes the current perspective and switches to the <em>Default</em> perspective.
+Note that the <em>Default</em> perspective cannot be deleted or renamed.</dd>
+<dt>Clone...</dt>
+<dd>Creates a new window containing a copy of the current perspective. You can
+use this to have more than one perspective open at once.</dd>
+<dt>Export as stand-alone tool..</dt>
+<dd>Displays a pop-up dialog that allows you to create a new Python source module
+which implements the current perspective as a stand-alone tool. Refer to the
+next section for more information on using this option.</dd>
+<dt>Mode/Unlocked</dt>
+<dd>Sets the current perspective into the <em>unlocked</em> mode. When unlocked, the
+perspective&#8217;s tools display their tabs and can be dragged, closed, docked and
+reorganized as desired.</dd>
+<dt>Mode/Locked</dt>
+<dd>Sets the current perspective into the <em>locked</em> mode. When locked, the tool&#8217;s
+tabs are not displayed (unless they are part of a notebook group), and they
+cannot be dragged, closed or reorganized. However, splitter bars are still
+active, allowing the relative size of tools to be changed as needed.</dd>
+<dt>Mode/Frozen</dt>
+<dd>Sets the current perspective into the <em>frozen</em> mode. When frozen, all tools
+in the perspective are completely locked down, with no adjustment to a tool&#8217;s
+organization, position or size allowed.</dd>
+</dl>
+</div>
+<div class="section" id="exporting-a-perspective">
+<h3>Exporting a Perspective</h3>
+<p>As mentioned in the previous section, selecting the <em>Perspective/Export as
+stand-alone tool..</em> menu option allows you to create a new Python source module
+which implements the tools contained in the current perspective, along with
+their layout and connections, as a completely stand-alone tool that can be
+invoked from the command line or shared with other developers.</p>
+<p>When you select this menu option, a dialog similar to the following appears:</p>
+<img alt="_images/tool_env_connection4.jpg" src="_images/tool_env_connection4.jpg" />
+<p>The bottom half of the dialog shows you the source code for the module being
+exported. The top half contains a number of fields allowing you to specify
+various options for the exported code:</p>
+<dl class="docutils">
+<dt>Class name</dt>
+<dd>Specifies the name of the class that defines the exported tool. It must be a
+string that can be used as a valid Python class name. The specified name is
+also used as part of the persistent id for the tool in the Facets user
+interface database.</dd>
+<dt>File name</dt>
+<dd>Specifies the name of the file the exported tool is saved in. By default, this
+name is derived automatically from the specified <em>Class name</em> value.</dd>
+<dt>Path</dt>
+<dd>Specifies the directory the exported tool is saved in.</dd>
+<dt>Title</dt>
+<dd>Specifies the title that appears in the exported tool&#8217;s window title bar.</dd>
+<dt>Width</dt>
+<dd>Specifies the default width of the exported tool&#8217;s window. This may be an
+integer pixel width or a fractional screen width. For example, a value of
+500 means the window should be 500 pixels wide, while a value of 0.5 means
+the window should be half of the screen&#8217;s width.</dd>
+<dt>Height</dt>
+<dd>Specifies the default height of the exported tool&#8217;s window. This may be an
+integer pixel width or a fractional screen height. For example, a value of
+750 means the window should be 750 pixels high, while a value of 0.75 means
+the window should be three quarters of the screen&#8217;s height.</dd>
+</dl>
+<p>When you have adjusted the values as needed, click the <em>Save</em> button to save the
+the exported tool to the specified file. The following shows an example of the
+code generated when the <em>Save</em> button is clicked:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">--------------------------------------------------------------------------------</span>
+<span class="sd">FileSieve: A Facets component tool.</span>
+<span class="sd">--------------------------------------------------------------------------------</span>
+<span class="sd">Generated by:       facets.extra.tools.tools</span>
+<span class="sd">Perspective:        File Sieve</span>
+<span class="sd">Date/Time:          Thursday, March 01, 2012 at 04:56:09 PM</span>
+
+<span class="sd">Component Tools:    FileSieve</span>
+<span class="sd">                    UniversalInspector</span>
+
+<span class="sd">Supported Features: DebugFeature</span>
+<span class="sd">                    DragDropFeature</span>
+<span class="sd">                    OptionsFeature</span>
+<span class="sd">                    SaveStateFeature</span>
+<span class="sd">--------------------------------------------------------------------------------</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  Imports:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">cPickle</span> \
+    <span class="kn">import</span> <span class="n">loads</span>
+
+<span class="kn">from</span> <span class="nn">facets.api</span> \
+    <span class="kn">import</span> <span class="n">HasPrivateFacets</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Instance</span><span class="p">,</span> <span class="n">View</span><span class="p">,</span> <span class="n">Item</span><span class="p">,</span> <span class="n">NotebookEditor</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.tools.file_sieve</span> \
+    <span class="kn">import</span> <span class="n">FileSieve</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.tools.universal_inspector</span> \
+    <span class="kn">import</span> <span class="n">UniversalInspector</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.features.debug_feature</span> \
+    <span class="kn">import</span> <span class="n">DebugFeature</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.features.drag_drop_feature</span> \
+    <span class="kn">import</span> <span class="n">DragDropFeature</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.features.options_feature</span> \
+    <span class="kn">import</span> <span class="n">OptionsFeature</span>
+
+<span class="kn">from</span> <span class="nn">facets.extra.features.save_state_feature</span> \
+    <span class="kn">import</span> <span class="n">SaveStateFeature</span>
+
+<span class="c">#-------------------------------------------------------------------------------</span>
+<span class="c">#  &#39;FileSieve&#39; class:</span>
+<span class="c">#-------------------------------------------------------------------------------</span>
+
+<span class="k">class</span> <span class="nc">FileSieve</span> <span class="p">(</span> <span class="n">HasPrivateFacets</span> <span class="p">):</span>
+
+    <span class="c">#-- Class Constants --------------------------------------------------------</span>
+
+    <span class="c"># The pickled string form of the layout template used by the tool contents:</span>
+    <span class="n">_template</span> <span class="o">=</span> <span class="s">&quot;cfacets.core.facet_defs</span><span class="se">\n</span><span class="s">...&quot;</span>
+
+    <span class="c">#-- Facet Definitions ------------------------------------------------------</span>
+
+    <span class="c"># The component tools:</span>
+    <span class="n">tool_1</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">FileSieve</span><span class="p">,</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;File Sieve&#39;</span> <span class="p">}</span> <span class="p">)</span>
+    <span class="n">tool_2</span> <span class="o">=</span> <span class="n">Instance</span><span class="p">(</span> <span class="n">UniversalInspector</span><span class="p">,</span> <span class="p">{</span> <span class="s">&#39;name&#39;</span><span class="p">:</span> <span class="s">&#39;Universal Inspector&#39;</span> <span class="p">}</span> <span class="p">)</span>
+
+    <span class="c"># The list of all component tools:</span>
+    <span class="n">tools</span> <span class="o">=</span> <span class="n">List</span>
+
+    <span class="c"># The layout template for the tools:</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">Any</span>
+
+    <span class="c">#-- Facet View Definitions -------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">default_facets_view</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Returns the View to use with this perspective.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">View</span><span class="p">(</span>
+            <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;tools&#39;</span><span class="p">,</span>
+                  <span class="n">style</span>      <span class="o">=</span> <span class="s">&#39;custom&#39;</span><span class="p">,</span>
+                  <span class="n">show_label</span> <span class="o">=</span> <span class="bp">False</span><span class="p">,</span>
+                  <span class="nb">id</span>         <span class="o">=</span> <span class="s">&#39;tools&#39;</span><span class="p">,</span>
+                  <span class="n">editor</span>     <span class="o">=</span> <span class="n">NotebookEditor</span><span class="p">(</span>
+                      <span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+                          <span class="n">DebugFeature</span><span class="p">,</span>
+                          <span class="n">DragDropFeature</span><span class="p">,</span>
+                          <span class="n">OptionsFeature</span><span class="p">,</span>
+                          <span class="n">SaveStateFeature</span>
+                      <span class="p">],</span>
+                      <span class="n">dock_style</span> <span class="o">=</span> <span class="s">&#39;tab&#39;</span><span class="p">,</span>
+                      <span class="n">page_name</span>  <span class="o">=</span> <span class="s">&#39;.name&#39;</span><span class="p">,</span>
+                      <span class="n">template</span>   <span class="o">=</span> <span class="s">&#39;template&#39;</span>
+                  <span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">title</span>     <span class="o">=</span> <span class="s">&#39;File Sieve Tool&#39;</span><span class="p">,</span>
+            <span class="nb">id</span>        <span class="o">=</span> <span class="s">&#39;facets.extra.tools.tools.generated.FileSieve&#39;</span><span class="p">,</span>
+            <span class="n">resizable</span> <span class="o">=</span> <span class="bp">True</span><span class="p">,</span>
+            <span class="n">width</span>     <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">height</span>    <span class="o">=</span> <span class="mf">0.328</span>
+        <span class="p">)</span>
+
+    <span class="c">#-- HasFacets Method Overrides ---------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">facets_init</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Initializes all of the inter-tool connections.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tool_1</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tool_2</span>
+        <span class="p">]</span>
+
+    <span class="c">#-- Facet Default Values ---------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">_template_default</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="n">loads</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">_template</span> <span class="p">)</span>
+
+<span class="c">#-- Start the tool (if invoked from the command line) --------------------------</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">FileSieve</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+
+<span class="c">#-- EOF ------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+<p>Note that the generated code is set up so that it can be invoked directly from
+the command line. For example:</p>
+<div class="highlight-python"><pre>python file_sieve.py</pre>
+</div>
+<p>It can also easily be embedded and invoked from other applications. For example,
+the following code could be used to display a pop-up version of the tool:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">file_sieve</span> <span class="kn">import</span> <span class="n">FileSieve</span>
+<span class="o">...</span>
+<span class="n">FileSieve</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It can also be included as part of another application view:</p>
+<div class="highlight-python"><pre>from file_sieve import FileSieve
+...
+class MyApp( HasFacets ):
+    ...
+    sieve = Instance( FileSieve, () )
+    ...
+    view = View(
+        ...
+        UItem( 'sieve', style = 'custom' ),
+        ...
+    )</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_tools.html" title="The Standard Tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_architecture.html" title="Tool Framework Architecture"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>Facets UI &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="The Animation System" href="animation_system.html" />
+    <link rel="prev" title="The Facets UI Demo" href="ui_demo.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="animation_system.html" title="The Animation System"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ui_demo.html" title="The Facets UI Demo"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Facets UI</a><ul>
+<li><a class="reference internal" href="#ui-elements">UI Elements</a></li>
+<li><a class="reference internal" href="#ui-object-relationships">UI Object Relationships</a></li>
+<li><a class="reference internal" href="#creating-user-interface-views">Creating User Interface Views</a><ul>
+<li><a class="reference internal" href="#creating-views">Creating Views</a></li>
+<li><a class="reference internal" href="#displaying-views">Displaying Views</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#default-view">Default View</a></li>
+<li><a class="reference internal" href="#group">Group</a></li>
+<li><a class="reference internal" href="#managing-user-preferences">Managing User Preferences</a><ul>
+<li><a class="reference internal" href="#view-id">View id</a></li>
+<li><a class="reference internal" href="#group-id">Group id</a></li>
+<li><a class="reference internal" href="#item-id">Item id</a></li>
+<li><a class="reference internal" href="#user-preference-pitfalls-and-advice">User Preference Pitfalls and Advice</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ui_demo.html"
+                        title="previous chapter">The Facets UI Demo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="animation_system.html"
+                        title="next chapter">The Animation System</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="facets-ui">
+<h1>Facets UI</h1>
+<p>Facets UI (User Interface) is the part of the Facets framework that allows you
+to convert your Facets models into interactive, graphical user interfaces (often
+called GUI&#8217;s). Taken together, the many varied components of Facets UI form the
+<em>visualize</em> part of the Facets <em>tao</em>.</p>
+<div class="section" id="ui-elements">
+<h2>UI Elements</h2>
+<p>Let&#8217;s start our exploration of the Facets UI by taking a quick tour of its major
+functional elements:</p>
+<dl class="docutils">
+<dt><strong>View</strong></dt>
+<dd>View objects contain or reference all of the other Facets UI elements, and
+are the top-level, or root, element of every Facets user interface. You can
+think of them as defining the windows and dialogs of the user interfaces you
+create.</dd>
+<dt><strong>Group</strong></dt>
+<dd>Views contain Groups, which act as containers for other Groups and Items
+(described next). The main purpose of Groups is visual layout and
+organization.</dd>
+<dt><strong>Item</strong></dt>
+<dd>Each Item describes an association between one of your model facets and an
+editor that displays or modifies the facet.</dd>
+<dt><strong>EditorFactory</strong></dt>
+<dd>EditorFactory objects are referenced by Item objects and define all of the
+options needed to instantiate the Editor object which performs the actual
+facet editing.</dd>
+<dt><strong>Editor</strong></dt>
+<dd>An Editor creates and manages the user interface controls used to display or
+manipulate the value of a facet.</dd>
+<dt><strong>Handler</strong></dt>
+<dd>A Handler object controls and mediates the interaction between the various
+parts of a user interface (i.e. View).</dd>
+<dt><strong>UIInfo</strong></dt>
+<dd>A UIInfo object contains information about the Editor objects instantiated
+when a Facets user interface is created. It is typically passed as input to
+a Handler object to allow it to monitor and control the behavior of the UI.</dd>
+<dt><strong>UI</strong></dt>
+<dd>A UI object contains all of the information about a Facets user interface
+that is being displayed. You can think of a View and its related objects
+(Groups, Items, EditorFactories, etc.) as being a blueprint or description
+of a user interface, while a UI object is the result of creating a user interface from that blueprint.</dd>
+<dt><strong>adapter</strong></dt>
+<dd><p class="first">Adapters help bridge the gap between the data contained in a model and the
+kind of data that a particular editor knows how to manipulate. They are more
+of a design pattern used thoughout the Facets UI as opposed to an abstract
+or concrete base class. Adapters are typically used in conjunction with
+Editor classes that perform more complex types of data editing and
+presentation.</p>
+<p class="last">For example, the GridAdapter is an adapter that works with the GridEditor to
+allow you to map nearly any type of model data into a form that can be
+displayed and edited using a tabular grid.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>There is a strong connection between EditorFactory and Editor classes. A
+particular EditorFactory class is used to create instances of a related set
+of Editor classes.</p>
+<p>As a result, the distinction between the two sometimes get blurred. For the
+most part, as a Facets developer you will be using EditorFactory classes. In
+some cases, when you are writing a custom Handler subclass, you may have
+occasion to deal directly with the Editor instances created by an
+EditorFactory instance.</p>
+<p>The blurring between the two types of classes is further aggravated by the
+fact that all standard Facets EditorFactory classes have names that end in
+<em>Editor</em> rather than <em>EditorFactory</em> (e.g. <em>TextEditor</em> and <em>GridEditor</em>).
+This is done intentionally, to simplify reading program code and because as a
+developer you never need to directly refer to an Editor class by name (unless
+you are defining a custom EditorFactory/Editor of your own).</p>
+<p>That is, Facets chooses to allow you to write:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Item</span><span class="p">(</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">editor</span> <span class="o">=</span> <span class="n">TextEditor</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>rather than the more technically correct (but illegal):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">Item</span><span class="p">(</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="n">editor_factory</span> <span class="o">=</span> <span class="n">TextEditorFactory</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">Please keep this distinction in mind while reading through this section.</p>
+</div>
+</div>
+<div class="section" id="ui-object-relationships">
+<h2>UI Object Relationships</h2>
+<p>The relationship between the various Facets UI classes just described can be
+shown graphically as follows:</p>
+<img alt="_images/ui_objects_graph.jpg" src="_images/ui_objects_graph.jpg" />
+<p>As you can see, the figure is divided into three main sections:</p>
+<dl class="docutils">
+<dt><strong>Context</strong></dt>
+<dd>The <em>context</em> is a dictionary of objects specifying a named set of models
+(i.e. objects) a particular View operates on.</dd>
+<dt><strong>UI Description</strong></dt>
+<dd>A Facets <em>View</em> is really an object hierarchy describing what application
+models and facets to view or edit, what editors to use for viewing or
+editing those items, and how to arrange those editors visually.</dd>
+<dt><strong>UI Run-time</strong></dt>
+<dd>When an application requests that a particular View be displayed, the Facets
+run-time converts the user interface described by the View into a
+corresponding collection of GUI widgets, managed by Editor instances, and UI
+and UIInfo control objects. These are used, in conjunction with additional
+user-defined Handler and adapter instances, to manage the user interface
+while it is active.</dd>
+</dl>
+</div>
+<div class="section" id="creating-user-interface-views">
+<h2>Creating User Interface Views</h2>
+<p>Creating user interfaces in Facets is a matter of creating and displaying Views.
+If you read the introductory section on <em>visualize</em>, then you&#8217;ve seen several
+examples of this already. In this section we&#8217;ll introduce you to the most common
+techniques used.</p>
+<div class="section" id="creating-views">
+<h3>Creating Views</h3>
+<p>Let&#8217;s start with how to define a View. For many Views, the simplest approach is
+to define them statically as part of a class definition:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyGame</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">score</span>  <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="n">status</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span> <span class="s">&#39;player&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Here we&#8217;ve defined a class MyGame containing two facets, <em>player</em> and <em>score</em>,
+as well as a View called <em>status</em> for displaying them. The <em>status</em> View becomes
+part of the class definition and is available to client code through a number of
+mechanisms we&#8217;ll be exploring in the following sections.</p>
+<p>A variation on the above approach is the define a method that returns the View:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyGame</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">score</span>  <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="k">def</span> <span class="nf">status</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="n">View</span><span class="p">(</span> <span class="s">&#39;player&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>From the point of view of Facets, these two techniques are nearly identical as
+we shall see. The second technique is slightly longer than the first, but is
+useful in cases where the View returned contains dynamic content which may not
+be available until the View is displayed:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyGame</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">score</span>  <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="k">def</span> <span class="nf">status</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span>
+        <span class="k">return</span> <span class="n">View</span><span class="p">(</span> <span class="s">&#39;player&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&#39;Player: &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, we&#8217;ve included the name of the player in the View&#8217;s title.
+Since this is usually not known until the program is running, it make&#8217;s since to
+define the View using a method.</p>
+<p>Another less commonly used design is to define the View at the point of use:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyGame</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">player</span> <span class="o">=</span> <span class="n">Str</span>
+    <span class="n">score</span>  <span class="o">=</span> <span class="n">Int</span>
+
+<span class="n">game</span> <span class="o">=</span> <span class="n">MyGame</span><span class="p">(</span> <span class="n">player</span> <span class="o">=</span> <span class="s">&#39;Tom&#39;</span><span class="p">,</span> <span class="n">score</span> <span class="o">=</span> <span class="mi">100</span> <span class="p">)</span>
+<span class="n">game</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">(</span> <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span> <span class="s">&#39;player&#39;</span><span class="p">,</span> <span class="s">&#39;score&#39;</span> <span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <em>edit_facets</em> method displays a View, which in this example we create and
+pass as a argument to the method. In general this is a less flexible technique
+since it does not allow the View to be reused in other contexts very easily.</p>
+</div>
+<div class="section" id="displaying-views">
+<h3>Displaying Views</h3>
+<p>Facets provides two methods for displaying Views: <em>edit_facets</em> and
+<em>configure_facets</em>. Of these, <em>edit_facets</em> is by far the one most frequently
+used, and is the one we&#8217;ll describe in this section.</p>
+<p>The <em>edit_facets</em> method accepts the following list of optional keyword
+arguments:</p>
+<dl class="docutils">
+<dt><strong>view</strong></dt>
+<dd>Specifies the View to display. This can either be the name of the view or
+an actual View instance. The default value is <em>None</em>, which means that the
+<em>default</em> view for the object should be displayed. We&#8217;ll discuss default
+views in more detail shortly.</dd>
+<dt><strong>parent</strong></dt>
+<dd>Specifies the parent control for the View. The default value is <em>None</em>,
+meaning that the View has no parent. If a View has no parent, it is a
+top-level window for the application; otherwise it is a <em>child</em> window of
+its parent control.</dd>
+<dt><strong>kind</strong></dt>
+<dd><p class="first">Specifies the <em>kind</em> of View to display. The possible values are:</p>
+<ul class="simple">
+<li>live</li>
+<li>panel</li>
+<li>subpanel</li>
+<li>modal</li>
+<li>nonmodal</li>
+<li>livemodal</li>
+<li>popup</li>
+<li>popout</li>
+<li>popover</li>
+<li>info</li>
+<li>editor</li>
+<li>wizard</li>
+</ul>
+<p class="last">We&#8217;ll be describing these different View kinds in the section on View
+objects. The default value is <em>None</em>, which means the value of the View&#8217;s
+<em>kind</em> facet should be used. Specifying <em>kind</em> as an argument to
+<em>edit_facets</em> allows you to override the View&#8217;s <em>kind</em> if necessary.</p>
+</dd>
+<dt><strong>context</strong></dt>
+<dd>Specifies the <em>context</em> dictionary for the View. Every View edits or
+displays the values of facets from a set of one or more named objects that
+form the View&#8217;s <em>context</em>. The default value is <em>None</em>, which means the
+context is determined through other means we&#8217;ll describe in a later section.</dd>
+<dt><strong>handler</strong></dt>
+<dd>Specifies the <em>handler</em> object or class used to mediate the behavior of the
+View being displayed. In the MVC (Model, View, Controller) design pattern,
+the handler would be considered to be the <em>controller</em> for the View. The
+default value is <em>None</em>, which means the View&#8217;s <em>handler</em> facet value should
+be used. Specifying <em>handler</em> as an argument allows you to override the
+default handler associated with the View.</dd>
+<dt><strong>id</strong></dt>
+<dd>Specifies the user preference <em>id</em> to use when displaying the View. Each
+Facets View can automatically save and restore user preference information
+based on the id associated with the View. Refer to the
+<a class="reference internal" href="#managing-user-preferences"><em>Managing User Preferences</em></a> section for more information. The default
+value is the empty string, which means the View&#8217;s <em>id</em> facet should be used.
+Specifying the <em>id</em> as an argument allows you to override the key used for
+saving and restoring user preference data, which can be useful in cases
+where the same View might be used in multiple application contexts which are
+logically different to the user.</dd>
+<dt><strong>scrollable</strong></dt>
+<dd><p class="first">Specifies whether or not the View being displayed is scrollable. A value of
+True means the View should support a vertical scroll bar that allows the
+contents of the View to be scrolled. A False value indicates the View should
+be large enough to display the entire contents of the View without
+scrolling.</p>
+<p class="last">The default value is <em>None</em>, which means that the View&#8217;s <em>scrollable</em> facet
+should be used to determine whether a scroll bar should be added. Again,
+specifying <em>scrollable</em> as an argument allows you to override the View&#8217;s
+value if necessary.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="default-view">
+<h2>Default View</h2>
+<p>Every Facet&#8217;s object has a View associated with it called its <em>default</em> view.
+This is the View displayed when no explicit view is specified with an
+<em>edit_facets</em> or <em>configure_facets</em> method call. The rules used to define the
+default view are as follows:</p>
+<ul class="simple">
+<li>If the object&#8217;s class has a statically defined View called <em>facets_view</em>, then
+that is the default view.</li>
+<li>If the object&#8217;s class only has a single statically defined View, then that is
+the default view, even if it is not called <em>facets_view</em>.</li>
+<li>If the object&#8217;s class has more than one statically defined View, and none of
+them are called <em>facets_view</em>, then the default view is dynamically
+synthesized using all <em>editable</em> facets for the object. The View contains a
+single vertical Group containing all of the editable facets in alphabetical
+order and using the default Editor associated with each facet. Note that
+<em>editable</em> facets refers to the list of facet names returned by the object&#8217;s
+<em>editable_facets</em> method, which you can override to return a list different
+than the default implementation if necessary.</li>
+</ul>
+<p>It is very common to define a class with only a single statically defined View.
+That View then becomes the <em>default</em> view for the class, no matter what its name
+is. This fact is reflected in many examples in this guide, where you will see
+code like:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">DieRoll</span> <span class="p">(</span> <span class="n">HasFacets</span> <span class="p">):</span>
+    <span class="n">die_1</span> <span class="o">=</span> <span class="n">Int</span>
+    <span class="n">die_2</span> <span class="o">=</span> <span class="n">Int</span>
+
+    <span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;die_1&#39;</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;readonly&#39;</span> <span class="p">),</span>
+        <span class="n">Item</span><span class="p">(</span> <span class="s">&#39;die_2&#39;</span><span class="p">,</span> <span class="n">style</span> <span class="o">=</span> <span class="s">&#39;readonly&#39;</span> <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_die_1_default</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span> <span class="k">return</span> <span class="n">randint</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span> <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_die_2_default</span> <span class="p">(</span> <span class="bp">self</span> <span class="p">):</span> <span class="k">return</span> <span class="n">randint</span><span class="p">(</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span> <span class="p">)</span>
+
+<span class="n">DieRoll</span><span class="p">()</span><span class="o">.</span><span class="n">edit_facets</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This code displays the View called <em>view</em> even though it is not explicity
+referenced in the <em>edit_facets</em> call, since it is the default view for the
+class.</p>
+</div>
+<div class="section" id="group">
+<h2>Group</h2>
+<p>There are a number of different Group subtypes that support
+various layout styles and approaches:</p>
+<dl class="docutils">
+<dt><strong>VGroup</strong></dt>
+<dd>Organizes its contents vertically. For example:</dd>
+</dl>
+<img alt="_images/group_vgroup.jpg" src="_images/group_vgroup.jpg" />
+<dl class="docutils">
+<dt><strong>HGroup</strong></dt>
+<dd>Organizes its contents horizontally. For example:</dd>
+</dl>
+<img alt="_images/group_hgroup.jpg" src="_images/group_hgroup.jpg" />
+<dl class="docutils">
+<dt><strong>VGrid</strong></dt>
+<dd>Organizes its contents using a grid-based layout. For example:</dd>
+</dl>
+<img alt="_images/group_vgrid.jpg" src="_images/group_vgrid.jpg" />
+<dl class="docutils">
+<dt><strong>HFlow</strong></dt>
+<dd>Organizes its contents horizontally with support for wrapping elements
+vertically when the horizontal space required exceeds the space
+available.</dd>
+<dt><strong>VFlow</strong></dt>
+<dd>Organizes its contents vertically with support for wrapping elements
+horizontally when the vertical space required exceeds the space
+available.</dd>
+<dt><strong>VFold</strong></dt>
+<dd>Organizes its contents vertically using a series of tabs that allow the user
+to open and close individual elements. For example:</dd>
+</dl>
+<img alt="_images/group_vfold.jpg" src="_images/group_vfold.jpg" />
+<dl class="docutils">
+<dt><strong>HSplit</strong></dt>
+<dd>Organizes its contents horizontally with user adjustable splitter bars
+provided to control the size of each element. For example:</dd>
+</dl>
+<img alt="_images/group_hsplit.jpg" src="_images/group_hsplit.jpg" />
+<dl class="docutils">
+<dt><strong>VSplit</strong></dt>
+<dd>Organizes its contents vertically with user adjustable splitter bars
+provided to control the size of each element. For example:</dd>
+</dl>
+<img alt="_images/group_vsplit.jpg" src="_images/group_vsplit.jpg" />
+<dl class="docutils">
+<dt><strong>Tabbed</strong></dt>
+<dd>Organizes its contents into a series of tabbed notebook pages. For example:</dd>
+</dl>
+<img alt="_images/group_tabbed.jpg" src="_images/group_tabbed.jpg" />
+<dl class="docutils">
+<dt><strong>StatusBar</strong></dt>
+<dd>Organizes its contents horizontally using a visual style typically
+associated with application status bars or tool bars. For example:</dd>
+</dl>
+<img alt="_images/group_statusbar.jpg" src="_images/group_statusbar.jpg" />
+</div>
+<div class="section" id="managing-user-preferences">
+<span id="id1"></span><h2>Managing User Preferences</h2>
+<p>One hallmark of a well-designed and user-friendly application is its ability to
+customise its behavior to fit each user. While this customisation can taken many
+forms, we&#8217;ll mention a few typical examples:</p>
+<ul class="simple">
+<li>Remembering each application window&#8217;s or dialog&#8217;s most recent size and
+position and restoring that size and position the next time the window or
+dialog is needed.</li>
+<li>Remembering and restoring the arrangement of tabbed views and splitter bars
+contained within a window across application sessions.</li>
+<li>Remembering and restoring the order and widths of columns displayed in a
+particular tabular grid from one use to the next.</li>
+<li>Remembering the most recently used paths or files selected in a particular
+application context.</li>
+</ul>
+<p>One important feature of the Facets UI system is that it makes implementing
+these types of user preference behaviors very simple. In the remainder of this
+section we&#8217;ll explain the details of how to enable and use the Facets user
+preference system when creating user interfaces.</p>
+<div class="section" id="view-id">
+<h3>View id</h3>
+<p>As we&#8217;ve already learned, each Facets user interface is created from a View
+object. And each View instance has a string-valued <em>id</em> facet used to identify
+the View to the Facets user preference system. If the value of <em>id</em> is the
+empty string, then no user preference information is saved or restored for the
+View.</p>
+<p>However, if <em>id</em> is non-empty, its value is used as a <em>key</em> for saving and
+restoring all user preference information for the View in the user specific
+Facets data base. Thus all you need to do to enable Facets user preference
+management system is to make sure that your View instances have non-empty <em>id</em>
+facet values.</p>
+<p>In addition to enabling user preference management, you automatically also get
+one of the user preference items we mentioned earlier, namely that of saving and
+restoring an application window&#8217;s or dialog&#8217;s size and position from one use to
+the next.</p>
+<p>That is, if a View&#8217;s id is non-empty, then each time the View is displayed,
+Facets checks to see if it has size and position information for the View in its
+data base, using the View&#8217;s <em>id</em> facet as the data base key. If it does,the
+saved preference information is used to size and position the View when
+displayed to the user. If it does not, then the size and position information
+specified by the View object itself is used instead.</p>
+<p>Similarly, when a View is closed, Facets checks the View&#8217;s <em>id</em> facet. If it is
+non-empty, the size and position of the View&#8217;s window or dialog is used to
+update (or create) the user preference information saved in the Facets data base
+under the View&#8217;s <em>id</em> facet&#8217;s value. If the View&#8217;s <em>id</em> is empty, the data base
+is not updated.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Facets never deletes user preference information from the data base. If you
+use a non-empty View id for a while, and later decide not to use it (i.e.
+make it the empty string), then any existing Facets data bases containing
+user preference data saved under the original View id will not be affected.
+The user preference information will simply sit there unused until it is
+explicitly deleted.</p>
+</div>
+<p>So, now that you&#8217;ve learned about saving user preference information by
+setting a View&#8217;s <em>id</em> facet to a non-empty value, what should you set the value
+to? Good question!</p>
+<p>Since all user preference information gets saved into each user&#8217;s personal
+Facets data base, we should try to avoid stepping on any other Facets
+application&#8217;s user preference data if at all possible. So using a View id of
+<tt class="docutils literal"><span class="pre">`My</span> <span class="pre">View`</span></tt> may not be a good choice.</p>
+<p>The recommended convention for View id values is to use names of the form:
+<tt class="docutils literal"><span class="pre">`package1.package2.</span> <span class="pre">...</span> <span class="pre">.module.class`</span></tt> to avoid accidental name collisions.
+Of course, the string refers to the Python package, module and class where the
+associated View is defined. For example:</p>
+<div class="highlight-python"><pre>View(
+    ...
+    id = facets.extra.tools.image_knife.ImageKnife
+)</pre>
+</div>
+<p>Since fully-qualified module and class names should normally be unique within
+a user&#8217;s Python path, following this convention should avoid most problems.</p>
+<p>Of course, there are some additional cases to consider:</p>
+<ul class="simple">
+<li>Classes that define more than one View with user preference data.</li>
+<li>View&#8217;s that are used in more than one context.</li>
+</ul>
+<p>For the first case, appending the View&#8217;s name to its id should be sufficient to
+resolve the problem. For example:</p>
+<div class="highlight-python"><pre>class MyApp ( HasFacets ):
+    ...
+    main_view = View(
+        ...
+        id = 'my_package.my_app.MyApp:main_view'
+    )
+
+    options_view = View(
+        ...
+        id = 'my_package.my_app.MyApp:options_view'
+    )</pre>
+</div>
+<p>The second case can arise when you create some kind of reusable component with
+a View that might be used in different applications or contexts. In cases like
+this, even though it is the exact same View, the user may want to have
+different preference settings saved from one application or context to the next.</p>
+<p>In this case, you should probably include some information in the View&#8217;s <em>id</em>
+that identifies the application context as well as your View. For example, you
+might add an application settable <em>id</em> or <em>name</em> facet to your component the
+application can use to identify itself. For example:</p>
+<div class="highlight-python"><pre>class MyComponent ( HasFacets ):
+    ...
+    name = Str( 'default' )
+    ...
+    def default_facets_view ( self ):
+        return View(
+            ...
+            id = 'my_package.my_component.MyComponent:' + self.name
+        )</pre>
+</div>
+<p>In this case we&#8217;ve qualified our unique View class name with our (hopefully)
+unique application context <em>name</em> to create a composite id that allows it to be
+used by multiple applications with both application and user specific preference
+settings. Note also how we have dynamically created the View in order to set the
+<em>id</em> facet using the application provided name information.</p>
+<p>The conventions outlined above are also the ones used by Facets itself, as shown
+by the following screen shot, which shows the FacetDB tool displaying some of
+the user preference View id keys saved on the author&#8217;s system:</p>
+<img alt="_images/db_tool.jpg" src="_images/db_tool.jpg" />
+</div>
+<div class="section" id="group-id">
+<h3>Group id</h3>
+<p>Views contain Groups used to organize the appearance of a user interface is
+various ways, such as by using notebook tabs (Tabbed) or horizontal and vertical
+splitter bars (HSplit and VSplit). Using groups like these give users the
+ability to organize and adjust a window or dialog&#8217;s content to their liking. In
+such cases, users probably will also want to be able to persist their tab
+organization and splitter bar settings from one session to the next.</p>
+<p>You can accomodate this in your application simply by setting the <em>id</em> facet of
+any Group (such as a Tabbed, HSPlit or VSplit instance) to a non-empty string,
+just as you did for the View instance. For example:</p>
+<div class="highlight-python"><pre>class MyApp ( HasFacets ):
+    ...
+    view = View(
+        Tabbed(
+            Item( ... ),
+            Item( ... ),
+            Item( ''' ),
+            id = 'tabbed'
+        ),
+        ...
+        id = 'my_package.my_app.MyApp'
+    )</pre>
+</div>
+<p>Setting the Group&#8217;s <em>id</em> to a non-empty string saves and restores the tab and
+splitter bar position information for the Group as part of the user preference
+data for the containing View.</p>
+<p>There are a few additional items worth noting:</p>
+<ul>
+<li><p class="first">Unlike the View <em>id</em>, which should be unique for a given user, the Group <em>id</em>
+value only needs to be unique within its containing View. This was illustrated
+by the Group id value of <em>tabbed</em> used in our preceding example.</p>
+<p>The reason for this is simple. All of the user preference data for a given
+View is stored in the Facets data base under the key given by the View&#8217;s <em>id</em>
+value. The user preference data stored in the data base is actually a
+dictionary of values whose keys are the Group and Item <em>id</em> values contained
+in the View. When the View is created or closed, Facets associates each part
+of the user preference data for the View with each Group or Item it contains
+using its corresponding <em>id</em> value. For this reason, the Group (and Item) <em>id</em>
+values only need to be unique with their View.</p>
+</li>
+<li><p class="first">Another important point is that it is only necessary to assign a non-empty
+Group id to the outermost Group in a nested series of Tabbed, HSplit and
+VSplit groups. The reason is that internally Facets collapses all nested
+Tabbed, HSplit and VSplit groups into a single control called a DockWindow.
+The DockWindow manages all items contained within the nested series of groups
+as a single entity. Consequently you only have provide a Group id for the
+outermost such group, which is where the corresponding DockWindow is defined.
+At run-time the DockWindow saves or restores all of the tab and splitter bar
+information it maintains for all of the nested groups as a single entity under
+the outermost Group&#8217;s id.</p>
+<p>Note that this applies as long as the nested groups consist only of Tabbed,
+HSplit or VSplit instances. Introducing Groups of other types into the
+hierarchy breaks the chain. If this situation occurs, you will have to define
+another unique Group id for the outermost Tabbed, HSplit, or VSplit group in
+the <em>inner chain</em>.</p>
+<p>The next two examples illustrate these scenarios:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">view</span> <span class="o">=</span> <span class="n">View</span><span class="p">(</span>
+    <span class="n">Tabbed</span><span class="p">(</span>
+          <span class="n">HSplit</span><span class="p">(</span>
+              <span class="n">VSplit</span><span class="p">(</span>
+                   <span class="n">Item</span><span class="p">(</span> <span class="o">...</span> <span class="p">),</span>
+                   <span class="n">Item</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+              <span class="p">),</span>
+              <span class="n">VSplit</span><span class="p">(</span>
+                  <span class="n">Item</span><span class="p">(</span> <span class="o">...</span> <span class="p">),</span>
+                  <span class="n">Item</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+              <span class="p">)</span>
+          <span class="p">),</span>
+          <span class="n">VGroup</span><span class="p">(</span>
+              <span class="n">Item</span><span class="p">(</span> <span class="o">...</span> <span class="p">),</span>
+              <span class="n">Item</span><span class="p">(</span> <span class="o">...</span> <span class="p">)</span>
+          <span class="p">),</span>
+          <span class="nb">id</span> <span class="o">=</span> <span class="s">&#39;tabbed&#39;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, only the outer Tabbed group needs a non-empty <em>id</em> value, since
+the nested HSplit and VSplit groups form an unbroken chain. The VGroup
+instance does not break the chain because it does not contain any additional
+groups that start a new chain:</p>
+<div class="highlight-python"><pre>view = View(
+    HSplit(
+        VGroup(
+            HSplit(
+                Item( ... ),
+                Item( ... ),
+                id = 'hsplit2'
+            ),
+            HSplit(
+                Item( ... ),
+                Item( ... ),
+                id = 'hsplit3'
+            )
+        ),
+        VGroup(
+            Item( ... )
+            Item( ... )
+        ),
+        id = 'hsplit1'
+    )
+)</pre>
+</div>
+<p>In this example, the situation has changed. The two inner HSplit groups are
+separated from the outermost HSplit group by a VGroup, which is not a Tabbed,
+HSplit or VSplit group. Internally, Facets creates three independent
+DockWindow controls to manage the various UI elements and each requires a
+unique Group id to save its user preference layout information under.</p>
+</li>
+<li><p class="first">Setting a non-empty Group id on a non-Tabbed, HSplit or VSplit group has no
+effect since no other Group types currently have user preference data to save
+or restore.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="item-id">
+<h3>Item id</h3>
+<p>You can also save and restore user preference data for any of the Item instances
+in a View. Follow the same procedure as before: simply assign a non-empty value
+to the Item&#8217;s <em>id</em> facet. As with a Group <em>id</em>, the value only needs to be
+unique within the View the Item is contained in.</p>
+<p>The user preference data for an Item is actually associated with the Editor used
+by the Item. Some Editors have user preference data that can be saved and
+restored, and others do not. Assigning a non-empty id to an Item with an Editor
+that does not have any user preference data has no effect.</p>
+<p>The following is a list of standard Facets editors that support saving and
+restoring user preference data:</p>
+<dl class="docutils">
+<dt><strong>ColorPaletteEditor</strong></dt>
+<dd>Saves and restores the user&#8217;s color palette changes.</dd>
+<dt><strong>GridEditor</strong></dt>
+<dd>Saves and restores user adjusted column width information.</dd>
+<dt><strong>HistoryEditor</strong></dt>
+<dd>Saves and restores the most recently selected items in the user&#8217;s history
+list.</dd>
+<dt><strong>InstanceEditor</strong></dt>
+<dd>Saves and restores the user preference data for the View associated with the
+most recently edited instance value.</dd>
+<dt><strong>NotebookEditor</strong></dt>
+<dd>Saves and restores the DockWindow user preference data associated with the
+editor. A NotebookEditor uses a DockWindow in its implementation and allows
+the DockWindow&#8217;s user preference data concerning tab organization and
+splitter bar positions to be saved and restored as the NotebookEditor&#8217;s user
+preference data. This is the same kind of preference data supported by the
+Tabbed, HSplit and VSplit groups.</dd>
+<dt><strong>VipShellEditor</strong></dt>
+<dd>Saves and restores all of the user preference data settable using the
+VIP Shell&#8217;s options dialog.</dd>
+<dt><strong>CodeEditor</strong></dt>
+<dd>Saves and restores any user modified key bindings.</dd>
+<dt><strong>FileEditor</strong></dt>
+<dd>Saves and restores the user&#8217;s file selection history.</dd>
+</dl>
+</div>
+<div class="section" id="user-preference-pitfalls-and-advice">
+<h3>User Preference Pitfalls and Advice</h3>
+<p>Here are a few final words of warning and advice on using the Facets user
+preference management system:</p>
+<ul class="simple">
+<li>To save <em>any</em> user preference information at all for a particular View, you
+<em>must</em> set its id to a non-empty value. It won&#8217;t matter how many Group or
+Item id values you set if you forget to set the View&#8217;s id to a non-empty
+value.</li>
+<li>Remember to set the Group or Item id values for all user interface elements
+that have user interface data you want saved. Any Group or Item with an empty
+id will not have user preference data saved for it, even if its View and other
+sibling Groups and Items have non-empty ids.</li>
+<li>The above rule is very important to remember when using Items with
+associated InstanceEditors. Editing an Instance facet  often results in
+displaying a nested View of the instance object. That View may have a unique
+id used for saving its user preference data, but it will have no effect if the
+Item or containing View used to display the sub-view has no id. Forgetting
+to assign an Item id for an instance facet is a common mistake that trips up
+new and experienced Facets users alike.</li>
+<li>Just because you can easily save user preference data for each View in your
+application doesn&#8217;t mean that you must save it. Users may want some Views to
+never save user preference data. Other Views may work better if only some
+of the available user preference data is saved. It&#8217;s really a design decision
+you have to make. Facets just tries to make the process of saving the data is
+simple as possible once you&#8217;ve determined what needs to be saved.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="animation_system.html" title="The Animation System"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ui_demo.html" title="The Facets UI Demo"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

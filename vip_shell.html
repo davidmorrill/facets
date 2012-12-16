@@ -1,0 +1,190 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>The VIP Shell &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="next" title="Using the Code Editor" href="vip_code_editor.html" />
+    <link rel="prev" title="HasFacets Animation Methods" href="animation_methods.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vip_code_editor.html" title="Using the Code Editor"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="animation_methods.html" title="HasFacets Animation Methods"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="animation_methods.html"
+                        title="previous chapter">HasFacets Animation Methods</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vip_code_editor.html"
+                        title="next chapter">Using the Code Editor</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-vip-shell">
+<span id="vip-shell"></span><h1>The VIP Shell</h1>
+<p>The VIP (Visual Interactive Python) Shell is a Facets editor that allows you to
+interact with your application using a graphical Python interpreter shell. The
+shell view is divided into four main areas as shown in the following figure:</p>
+<img alt="_images/vip_areas.jpg" src="_images/vip_areas.jpg" />
+<p>The main purpose of each area is as follows:</p>
+<dl class="docutils">
+<dt><strong>Filter bar</strong></dt>
+<dd>Filters history items based on item type or content.</dd>
+<dt><strong>History items</strong></dt>
+<dd>Displays all executed Python code or shell commands and their results.</dd>
+<dt><strong>Code editor</strong></dt>
+<dd>Allows you to enter and edit Python code and shell commands.</dd>
+<dt><strong>Status bar</strong></dt>
+<dd>Provides a toolbar of useful actions and the status of the most recently
+executed command.</dd>
+</dl>
+<p>The VIP Shell is different from some Python interpreter shells in that entry of
+Python code and expressions occurs in a different area (code editor) than
+the display of the results (history items).</p>
+<p>There are several ways you can use or invoke the VIP Shell:</p>
+<ul>
+<li><p class="first">You can use it just like any other Facets editor in your application. The
+value it edits should be a dictionary whose contents form the set of local
+variables exposed and manipulated by the shell.</p>
+</li>
+<li><p class="first">You can use it via the VIPShell <em>tool</em>, a tool framework component that
+includes a VIP Shell editor view and allows you to connect various shell
+elements to other tool components. The VIPShell tool can also be invoked as a
+stand-alone application:</p>
+<div class="highlight-python"><pre>python -m facets.extra.tools.vip_shell</pre>
+</div>
+</li>
+<li><p class="first">You can use the VIPShell tool as a debugging aid by setting the <em>FACETS_DEV</em>
+environment variable to 1. Doing so enables a Facets run-time feature that
+displays a VIP Shell window whenever:</p>
+<ul class="simple">
+<li>You right-click a Facets user interface label.</li>
+<li>You select the <em>Display&gt;VIP Shell</em> option from the context menu displayed
+when you right-click any DockWindow tab or splitter bar.</li>
+</ul>
+<p>You can use this feature to quickly explore the run-time state of your
+application.</p>
+</li>
+</ul>
+<p>Although the VIP Shell is just one of many Facets editors, its capabilities are
+extensive enough that we have split information on using it into several
+sections:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vip_code_editor.html">Using the Code Editor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_shell_commands.html">Shell Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_history_items.html">History Items</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_status_bar.html">Using the Status Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_filter_bar.html">Using the Filter Bar</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_shell_options.html">Shell Options</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_themes.html">Shell Themes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vip_extending_shell.html">Extending the Shell</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vip_code_editor.html" title="Using the Code Editor"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="animation_methods.html" title="HasFacets Animation Methods"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

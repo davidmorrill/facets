@@ -1,0 +1,444 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>MongoDB OML Facets &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The MongoDB OML" href="mongodb_oml.html" />
+    <link rel="next" title="The MongoDB Class" href="mongodb_mongodb.html" />
+    <link rel="prev" title="The MongoDBObject Class" href="mongodb_mongodbobject.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mongodb_mongodb.html" title="The MongoDB Class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_mongodbobject.html" title="The MongoDBObject Class"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" accesskey="U">The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MongoDB OML Facets</a><ul>
+<li><a class="reference internal" href="#understanding-dbobject-s-dbref-s-and-dblinks-s">Understanding DBObject(s), DBRef(s) and DBLinks(s)</a></li>
+<li><a class="reference internal" href="#owned-versus-shared-data">Owned Versus Shared Data</a></li>
+<li><a class="reference internal" href="#immediate-versus-deferred-access">Immediate Versus Deferred Access</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mongodb_mongodbobject.html"
+                        title="previous chapter">The MongoDBObject Class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mongodb_mongodb.html"
+                        title="next chapter">The MongoDB Class</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mongodb-oml-facets">
+<span id="mongodb-facets"></span><h1>MongoDB OML Facets</h1>
+<p>The MongoDB OML allows storing objects which are subclasses of the MongoDBObject
+class in a MongoDB database. However, only the object attributes defined using
+the facets described in this section are actually stored in the database. All
+other object facets are simply discarded when the object is stored in the
+database.</p>
+<p>All of the special MongoDB OML facets can be imported from
+<em>facets.extra.mongodb.api</em> and have names of the form <em>DBxxx</em> to help make their
+special database semantics stand out better when reading a class definition. In
+addition, most of the facets have semantics identical to other, standard facets
+that they are based on. In cases such as this, the facet name is formed simply
+by prepending the <em>DB</em> prefix to the standard facet name (e.g. <em>DBStr</em>).</p>
+<p>The remainder of this section provides a brief description of all of the
+available MongoDB OML facets. A follow-on section then provides additional
+details about those MongoDB OML facets that have more complex database specific
+semantics.</p>
+<dl class="docutils">
+<dt><strong>DBAny</strong></dt>
+<dd><p class="first">Any simple value (Bool, Int, Float, Str, ...). It has the same semantics as
+the standard <em>Any</em> facet.</p>
+<p class="last">Note however that it should not be used for saving object references. Use
+the <em>DBObject</em>, <em>DBRef</em> or <em>DBLink</em> facet instead.</p>
+</dd>
+<dt><strong>DBBool</strong></dt>
+<dd>A boolean value. It has the same semantics as the standard <em>Bool</em> facet.</dd>
+<dt><strong>DBInt</strong></dt>
+<dd>An integer value. It has the same semantics as the standard <em>Int</em> facet.</dd>
+<dt><strong>DBFloat</strong></dt>
+<dd>A floating point value. It has the same semantics as the standard <em>Float</em>
+facet.</dd>
+<dt><strong>DBStr</strong></dt>
+<dd>A string value. It has the same semantics as the standard <em>Str</em> facet.</dd>
+<dt><strong>DBList</strong></dt>
+<dd><p class="first">A list of heterogeneous simple data values (Bool, Int, Float, Str, ...). It
+has the same semantics as the standard <em>List</em> facet.</p>
+<p class="last">Note however that it should not be used to store object references. Use a
+<em>DBObjects</em>, <em>DBRefs</em> or <em>DBLinks</em> facet instead.</p>
+</dd>
+<dt><strong>DBDict</strong></dt>
+<dd><p class="first">A dictionary of heterogeneous simple data values. It has the same semantics
+as the standard <em>Dict</em> facet.</p>
+<p class="last">Note however that it should not be used to store object references.
+Currently there is no way using the MongoDB OML to store database object
+references using a dictionary-based value.</p>
+</dd>
+<dt><strong>DBSet</strong></dt>
+<dd><p class="first">A set of heterogeneous simple data values. It has the same semantics as the
+standard <em>Set</em> facet.</p>
+<p class="last">Note however that it should not be used to store object references.
+Currently there is no way using the MongoDB OML to store database object
+references using a set-based value.</p>
+</dd>
+<dt><strong>DBRange</strong></dt>
+<dd>A numeric value within a specified range. It has the same semantics as the
+standard <em>Range</em> facet.</dd>
+<dt><strong>DBObject</strong></dt>
+<dd>Contains a reference to a MongoDBObject instance that is stored as part of
+the containing object in the MongoDB database. It has the same semantics as
+the standard <em>Instance</em> facet, although the specified class should be
+MongoDBObject or a subclass.</dd>
+<dt><strong>DBObjects</strong></dt>
+<dd>Contains a list of references to MongoDBObject instances that are stored as
+part of the containing object in the MongoDB database. It has the same
+semantics as the standard <em>List</em> facet, although the default facet has been
+changed to MongoDBObject. If the list facet type is explicitly specified, it
+should be MongoDBObject or a subclass.</dd>
+<dt><strong>DBRef</strong></dt>
+<dd>Contains a reference to a MongoDBObject instance that is not owned by the
+referencing object and is stored independently of the referencing object in
+the MongoDB database. It has semantics similar to the standard <em>Instance</em>
+facet, although the specified class should be MongoDBObject or a subclass.</dd>
+<dt><strong>DBRefs</strong></dt>
+<dd>Contains a list of references to MongoDBObject instances that are not owned
+by the referencing object and which are stored independently of the
+referencing object in the MongoDB database. It has the same semantics as the
+standard <em>List</em> facet, although the default facet has been changed to
+MongoDBObject. If the list facet type is explicitly specified, it should be
+MongoDBObject or a subclass.</dd>
+<dt><strong>DBLink</strong></dt>
+<dd>Contains a reference to a MongoDBObject instance that is owned by the
+referencing object but is stored independently of the referencing object in
+the MongoDB database. It has semantics similar to the standard <em>Instance</em>
+facet, although the specified class should be MongoDBObject or a subclass.</dd>
+<dt><strong>DBLinks</strong></dt>
+<dd>Contains a list of references to MongoDBObject instances that are owned by
+the referencing object but which are stored independently of the referencing
+object in the MongoDB database. It has the same semantics as the standard
+<em>List</em> facet, although the default facet has been changed to MongoDBObject.
+If the list facet type is explicitly specified, it should be MongoDBObject
+or a subclass.</dd>
+</dl>
+<div class="section" id="understanding-dbobject-s-dbref-s-and-dblinks-s">
+<span id="understanding"></span><h2>Understanding DBObject(s), DBRef(s) and DBLinks(s)</h2>
+<p>If you&#8217;ve already read the preceding section on the MongoDB OML facets, you&#8217;ve
+probably noticed the perhaps confusing variety of facets provided for storing
+database object references. In this section we hope to dispel as much of that
+confusion as possible by explaining in detail the various nuances between the
+various object reference facets and why they exist.</p>
+<p>As you&#8217;ve presumably already gathered, there are three basic object reference
+types: <em>DBObject</em>, <em>DBRef</em> and <em>DBLink</em>, along with their corresponding list
+forms: <em>DBObjects</em>, <em>DBRefs</em>, <em>DBLinks</em>.</p>
+<p>In each case the difference between the singular and plural forms is the same.
+The singular form holds a single object reference, while the list form holds a
+list of object references which may contain zero, one or more object references.
+That difference affects how you use them within your Python code, but as far as
+the MongoDB OML layer is concerned, the singular and plural form both have the
+same semantics. Since it is the MongoDB OML semantics we are concerned with in
+this section, we will not make any further distinction between the singular and
+plural forms in the remainder of this discussion.</p>
+<p>So now the question becomes what is the semantic difference between <em>DBObject</em>,
+<em>DBRef</em> and <em>DBLink</em>. All of them accept the same types of values, namely
+MongoDBObject (or one of its subclasses) instances. The differences lie in how
+they are stored in the underlying MongoDB database and how the MongoDB OML layer
+handles them.</p>
+<p>If we were simply pickling a large object hierarchy and storing the result in a
+file, we wouldn&#8217;t need to make any distinction between a <em>DBObject</em>, <em>DBRef</em> or
+<em>DBLink</em>. We would simply serialize each object in the object graph as we
+encountered it, and write the entire resulting byte stream out to a file. When
+we unpickle the object graph, we would simply reverse the process by reading the
+entire file and reconstructing the original object graph.</p>
+<p>The problem with this approach is time and memory. As the size of the object
+graph increases, the time required to load, and amount of memory needed to hold,
+all of the objects might eventually reach unacceptable levels.</p>
+<p>This is one of many reasons why developers often turn to storing their data in
+a database of some sort. Databases are typically designed to store huge amounts
+of data and provide quick access to only those parts of the data needed by
+an application at any particular instant.</p>
+<p>One of the major design goals of the MongoDB OML is to provide quick access to
+huge amounts of stored data while still preserving the convenience of defining
+and using an object oriented data model. And the approach it takes is to
+recognize that there is no &#8220;one size fits all&#8221; solution to mapping an object
+model onto an underlying database, and to provide several solutions that
+developers can choose from when creating their data model. Hence the need for
+the <em>DBObject</em>, <em>DBRef</em> and <em>DBLink</em> facets. Each provides nearly identical
+data modeling semantics, but provide different performance and size trade offs
+when looked at from the underlying database storage layer point of view.</p>
+<p>So in what follows we&#8217;ll be looking at various common use cases and what effect
+the different MongoDB OML object reference facets might have when applied in
+those cases.</p>
+</div>
+<div class="section" id="owned-versus-shared-data">
+<h2>Owned Versus Shared Data</h2>
+<p><em>Owned</em> data is data specific to a single object, while <em>shared</em> data is data
+that is shared among a group of objects. A simple example might be that of a
+grade school student. Each student has their own name (which is data they own)
+and a teacher (which is data they do not own, but share with other students).</p>
+<p>In terms of mapping objects to a database, owned data is typically stored as
+part of the data associated with the owning object, while shared data is not.
+Instead, shared data is typically stored separately in the database, and any
+object sharing that data simply stores a reference to where the shared data
+is kept in the database.</p>
+<p>This is the primary distinction between <em>DBObject</em> and <em>DBLink</em> facets, which
+are used for <em>owned</em> data, and <em>DBRef</em> facets, which are used for <em>shared</em>
+data.</p>
+<p>Management of owned data is simple. Since it is stored as part of the owning
+object, deleting the owning object also deletes the owned data.</p>
+<p>Shared data, on the other hand, is more complex to manage. Since shared data is
+usually shared among an unknown number of other objects, it&#8217;s often difficult to
+tell exactly when shared data should be deleted. There must usually be some
+additional application logic that deals explicitly with creating and deleting
+shared objects.</p>
+<p>In the case of the MongoDB OML, shared objects are represented using <em>DBRef</em>
+(and <em>DBRefs</em>) facets. In general, using these facets means that it is up to
+your application code to determine when it is time to delete the object the
+facets reference (actually, you usually want to delete them only when no object
+continues to reference them). The same is true about making sure that shared
+objects are correctly added to the database, although an object containing a
+<em>DBRef</em> that refers to an shared object not in the database will automatically
+save the shared object to the database when the object containing the <em>DBRef</em>
+is saved.</p>
+<p>Now that we&#8217;ve made the distinction between <em>owned</em> and <em>shared</em> object
+references, let&#8217;s proceed with a further refinement of the <em>owned</em> data use
+case.</p>
+</div>
+<div class="section" id="immediate-versus-deferred-access">
+<h2>Immediate Versus Deferred Access</h2>
+<p>As we&#8217;ve seen, <em>owned</em> data is logically part of the owning object and is
+deleted when the owning object is deleted. However, in practical terms, we can
+make a further distinction between two different types of owned data:
+<em>immediate</em> and <em>deferred</em>.</p>
+<p>As an example, let&#8217;s take the case of an application containing information
+about a server farm. Each object representing a server might contain information
+about the server&#8217;s hostname, IP address and a log of all server activity for the
+last month.</p>
+<p>Now each of these three pieces of information is data <em>owned</em> by the server
+object, since it all applies to the specific server it is associated with. If we
+ever delete a server object, we should delete all of its owned data as well. The
+problem is that the log data may be very large and seldom used by most
+applications using the MongoDB database containing the server data, and so it
+seems very inefficient in terms of time and memory to load all of the log data
+every time an application instantiates a server object from the database.</p>
+<p>The MongoDB OML helps you address this problem by providing both <em>immediate</em> and
+<em>deferred</em> object references. An <em>immediate</em> reference is an object whose data
+is loaded into storage at the same time its owning object is loaded. A
+<em>deferred</em> reference is an object which is not loaded into storage until the
+application code that loads the owning object actually references the
+<em>deferred</em> object.</p>
+<p>With this distinction in mind, it should now be clear that we would probably
+want the server hostname and IP address to be defined as <em>immediate</em> data,
+since they are fairly small and used often by applications, while the server
+log data should be <em>deferred</em>, since it is large and infrequently used by
+applications.</p>
+<p>In MongoDB OML, all facets except for <em>DBRef(s)</em> and <em>DBLink(s)</em> are <em>immediate</em>
+mode facets. Both <em>DBRef(s)</em> and <em>DBLink(s)</em> facets are <em>deferred</em> mode, meaning
+that their associated object data is not loaded until explicitly referenced by
+application code.</p>
+<p>So now we can proceed with a possible definition of our hypothetical server
+object classes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">LogData</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">List</span><span class="p">(</span> <span class="n">Str</span> <span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Server</span> <span class="p">(</span> <span class="n">MongoDBObject</span> <span class="p">):</span>
+    <span class="n">hostname</span>   <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">ip_address</span> <span class="o">=</span> <span class="n">DBStr</span>
+    <span class="n">log</span>        <span class="o">=</span> <span class="n">DBLink</span><span class="p">(</span> <span class="n">LogData</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>We&#8217;ve used a <em>DBLink</em> facet rather than a <em>DBRef</em> facet because the LogData
+object is <em>owned</em> by the Server object, and we want it to be deleted
+automatically when a Server object is deleted. But because <em>DBLink</em> is also a
+<em>deferred</em> facet, we know that the LogData object will never be loaded into
+memory unless some application code explicitly references it. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">server</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">item</span>
+</pre></div>
+</div>
+<p>Now that we&#8217;ve explained the distinctions between <em>owned</em> and <em>shared</em> data,
+and between <em>immediate</em> and <em>deferred</em> access, it might be useful to provide a
+table showing how these concepts apply to the various MongoDB OML facets:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="36%" />
+<col width="28%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Facet</th>
+<th class="head">Data Is</th>
+<th class="head">Access Is</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>DB...</td>
+<td>Owned</td>
+<td>Immediate</td>
+</tr>
+<tr class="row-odd"><td>DBObject</td>
+<td>Owned</td>
+<td>Immediate</td>
+</tr>
+<tr class="row-even"><td>DBObjects</td>
+<td>Owned</td>
+<td>Immediate</td>
+</tr>
+<tr class="row-odd"><td>DBLink</td>
+<td>Owned</td>
+<td>Deferred</td>
+</tr>
+<tr class="row-even"><td>DBLinks</td>
+<td>Owned</td>
+<td>Deferred</td>
+</tr>
+<tr class="row-odd"><td>DBRef</td>
+<td>Shared</td>
+<td>Deferred</td>
+</tr>
+<tr class="row-even"><td>DBRefs</td>
+<td>Shared</td>
+<td>Deferred</td>
+</tr>
+</tbody>
+</table>
+<p>where <em>DB...</em> refers to the <em>DBAny</em>, <em>DBBool</em>, <em>DBInt</em>, <em>DBFloat</em>, <em>DBStr</em>,
+<em>DBList</em>, <em>DBDict</em>, <em>DBSet</em> and <em>DBRange</em> facets.</p>
+<p>Finally, let&#8217;s finish up this section with a couple of additional tips about the
+trade-offs in using the various MongoDB OML object reference types:</p>
+<ul>
+<li><p class="first">The facets of <em>DBObject(s)</em> object references can be used in <em>query strings</em>
+(e.g. <em>&#8220;employee.first_name == &#8216;Jack&#8217;&#8221;</em>, where <em>first_name</em> is a facet of the
+<em>employee DBObject</em> facet), while the facets of <em>DBRef(s)</em> and <em>DBLink(s)</em>
+object references cannot.</p>
+<p>The reason for this is that <em>DBObject(s)</em> facets store their data directly in
+the owning object&#8217;s MongoDB database representation, where it can be accessed
+directly by the MongoDB query engine. Both <em>DBRef(s)</em> and <em>DBLink(s)</em> facets
+only store object reference information in the referencing object&#8217;s MongoDB
+database representation. The actual object data is stored separately in the
+database and is not directly accessible to the query engine.</p>
+</li>
+<li><p class="first">Since <em>DBLink(s)</em> facets defer the storage and time penalty of loading
+referenced objects until they are actually used by an application, it might
+seem like using <em>DBLink(s)</em> facets would always be more efficient than using
+<em>DBObject(s)</em> facets. In practice, the actual storage and time efficiency
+probably depends heavily on the size and access patterns of the data involved.</p>
+<p>If any of the object data is always accessed by applications, then deferring
+the object load may actually be slower than loading it with the owning object
+since multiple database requests are required to load the separate objects.
+Plus there is the additional database storage overhead required for saving
+the database object reference in the owning object.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mongodb_mongodb.html" title="The MongoDB Class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mongodb_mongodbobject.html" title="The MongoDBObject Class"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="mongodb_oml.html" >The MongoDB OML</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>

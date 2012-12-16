@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+
+    <title>ViewTester &mdash; Facets Users Guide 0.1a documentation</title>
+    
+    <link rel="stylesheet" href="_static/facets_doc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/facets.ico"/>
+    <link rel="top" title="Facets Users Guide 0.1a documentation" href="index.html" />
+    <link rel="up" title="The Standard Tools" href="tool_tools.html" />
+    <link rel="next" title="VIPShell" href="tool_vip_shell.html" />
+    <link rel="prev" title="TracebackViewer" href="tool_traceback_viewer.html" /> 
+  </head>
+  <body>
+<div class="header">
+  <img src="_static/logo.jpg">
+</div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tool_vip_shell.html" title="VIPShell"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tool_traceback_viewer.html" title="TracebackViewer"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" accesskey="U">The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">ViewTester</a><ul>
+<li><a class="reference internal" href="#module">Module</a></li>
+<li><a class="reference internal" href="#input-connections">Input Connections</a></li>
+<li><a class="reference internal" href="#output-connections">Output Connections</a></li>
+<li><a class="reference internal" href="#options">Options</a></li>
+<li><a class="reference internal" href="#screenshots">Screenshots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tool_traceback_viewer.html"
+                        title="previous chapter">TracebackViewer</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tool_vip_shell.html"
+                        title="next chapter">VIPShell</a></p>
+
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+<h3>Links</h3>
+<div class="logo"><a href="http://facetsproject.blogspot.com/">
+    <img class="logo" src="_static/blogger.png" alt="Facets Blog"/>
+    <span>Facets Blog</span>
+</a></div>
+<div class="logo"><a href="http://www.youtube.com/user/FacetsTV">
+    <img class="logo" src="_static/youtube.png" alt="FacetsTV"/>
+    <span>Facets TV</span>
+</a></div>
+<div class="logo"><a href="http://www.facebook.com/PyFacets">
+    <img class="logo" src="_static/fb_logo.png" alt="facebook"/>
+    <span>Facets on Facebook</span>
+</a></div>
+<div class="logo"><a href="https://github.com/davidmorrill/facets">
+    <img class="logo" src="_static/github.png" alt="GitHub"/>
+    <span>Facets GitHub Repository</span>
+</a></div>
+
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="viewtester">
+<span id="tool-view-tester"></span><h1>ViewTester</h1>
+<p>Defines a tool for displaying and/or testing the Facets UI View associated with
+an input source file.</p>
+<p>You can use the tool either by connecting a Python source file to the tool&#8217;s
+<em>file_name</em> facet or by dropping the Python source file containing the view to
+be tested onto the file drop icon on the tool&#8217;s feature toolbar.</p>
+<p>In order for a source file to work with the view tester, it must have a
+module-level <em>view</em> or <em>demo</em> symbol defined whose value is either a
+<strong>HasFacets</strong> subclass or subclass instance. The tool will then display the
+default view associated with the subclass or instance. In the case of a
+subclass, the tool will also attempt to create an instance of the class to use
+when creating the view.</p>
+<p>If the source file contains syntax errors, or does not define a valid <em>view</em> or
+<em>demo</em> module-level variable, an appropriate error message is displayed at the
+bottom of the tool&#8217;s view.</p>
+<p>Using the tool&#8217;s options dialog, you can also configure the tool so that it
+automatically attempts to reload the source file&#8217;s view any time the source file
+is changed. This can be handy for testing a view being developed, since you can
+simply save the file in your text editor to see the changes to the view
+reflected in the view tester tool.</p>
+<p>Using the options dialog you can also configure the tool to keep copies of
+previous views open when a new version of the view is created. Again, this can
+be useful while developing a view to quickly see which version of a view looks
+or works better.</p>
+<div class="section" id="module">
+<h2>Module</h2>
+<p>facets.extra.tools.view_tester</p>
+</div>
+<div class="section" id="input-connections">
+<h2>Input Connections</h2>
+<dl class="docutils">
+<dt>file_name</dt>
+<dd>The name of a source file containing the view to be tested.</dd>
+</dl>
+</div>
+<div class="section" id="output-connections">
+<h2>Output Connections</h2>
+<p>None.</p>
+</div>
+<div class="section" id="options">
+<h2>Options</h2>
+<p>In addition to its input connections, the view tester tool also supports setting
+the following facets through the tool&#8217;s options dialog available via the tool&#8217;s
+feature toolbar:</p>
+<dl class="docutils">
+<dt>Automatically run a changed file (<em>auto_load</em>)</dt>
+<dd>Specifies whether the view associated with the current input source file
+should automatically be reloaded whenever the source file changes.</dd>
+<dt>Automatically close old views (<em>auto_close</em>)</dt>
+<dd>Specifies whether old views should automatically be closed each time a new
+version of the view is created from the current input source file. If not,
+then each new view is displayed in a separate tab, and you can close
+views manually by clicking the close icon on each view&#8217;s tab.</dd>
+</dl>
+</div>
+<div class="section" id="screenshots">
+<h2>Screenshots</h2>
+<img alt="_images/tool_view_tester.jpg" src="_images/tool_view_tester.jpg" />
+<p>Shows the view tester tool displaying the view for one of the Facets UI demos.</p>
+<img alt="_images/tool_view_tester_options.jpg" src="_images/tool_view_tester_options.jpg" />
+<p>The view tester tool&#8217;s options dialog.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tool_vip_shell.html" title="VIPShell"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tool_traceback_viewer.html" title="TracebackViewer"
+             >previous</a> |</li>
+        <li><a href="index.html">Facets Users Guide</a> &raquo;</li>
+          <li><a href="tool_framework.html" >The Tool Framework</a> &raquo;</li>
+          <li><a href="tool_tools.html" >The Standard Tools</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, 2012 David C. Morrill.
+    </div>
+  </body>
+</html>
