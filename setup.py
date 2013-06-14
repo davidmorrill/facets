@@ -78,12 +78,14 @@ def find_packages ( root_package ):
                 if name in dirs:
                     items = package_data.setdefault( package, [] )
                     if name == 'library':
-                        items.extend( [ name + '/*.zip', name + '/*.txt' ] )
+                        items.extend( [
+                            name + '/*.zip', name + '/*.txt', name + '/themes*'
+                        ] )
                     elif name == 'themes':
                         items.extend( [ name + '/*.theme' ] )
                     else:
                         items.append( name + '/*' )
-                        
+
                     dirs.remove( name )
         else:
             del dirs[:]
@@ -163,8 +165,8 @@ setup(
     long_description = __doc__,
     classifiers      = classifiers,
 
-    url              = 'http://dmorrill.com',
-    download_url     = 'http://dmorrill.com',
+    url              = 'http://davidmorrill.github.com/facets/',
+    download_url     = 'https://github.com/davidmorrill/facets',
 
     author           = 'David C. Morrill',
     author_email     = 'david.morrill@gmail.com',
