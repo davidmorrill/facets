@@ -340,6 +340,9 @@ class QtControl ( Control ):
         was_enabled = self.control.isEnabled()
         if enabled != was_enabled:
             self.control.setEnabled( enabled )
+            if was_enabled:
+                self.mouse_capture = False
+
             self.facet_property_set( 'enabled', was_enabled, enabled )
 
 
