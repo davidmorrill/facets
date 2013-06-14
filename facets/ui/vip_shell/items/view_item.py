@@ -46,14 +46,14 @@ class ViewItem ( LabeledItem ):
     view = Any
 
     # The 'zoom' view height:
-    height = Either( -1, Range( 60, screen_dy ), default = -1 )
+    height = Either( -1, Range( 50, screen_dy ), default = -1 )
 
     #-- Facet View Definitions -------------------------------------------------
 
     zoom_view = View(
         Item( 'height',
               editor = RangeEditor(
-                  low = 60, high = screen_dy, increment = 1, body_style = 25
+                  low = 50, high = screen_dy, increment = 1, body_style = 25
               )
         )
     )
@@ -63,9 +63,11 @@ class ViewItem ( LabeledItem ):
     def _ui_default ( self ):
         self.add_tool( self.shell.resizer )
 
-        return self.item.edit_facets( parent = self.context.control,
-                                      view   = self.view,
-                                      kind   = 'editor' )
+        return self.item.edit_facets(
+            parent = self.context.control,
+            view   = self.view,
+            kind   = 'editor'
+        )
 
     #-- IStackItem Interface Methods -------------------------------------------
 
@@ -114,8 +116,7 @@ class ViewItem ( LabeledItem ):
         """ Paints the text and optional label in the specified graphics
             context *g* for level of detail 1.
         """
-        if not self.hidden:
-            self.ui.control.visible = True
+        self.ui.control.visible = (not self.hidden)
 
         if self.ltext is not None:
             x, y, dx, dy = self.bounds
