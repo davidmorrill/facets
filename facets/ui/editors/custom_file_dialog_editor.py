@@ -26,9 +26,9 @@ from time \
 from facets.api \
     import HasPrivateFacets, Any, Bool, Event, Str, Enum, List, Dict, Int, \
            Long, Float, Instance, Image, Callable, Property, Button, View, \
-           VGroup, HGroup, HSplit, Item, UItem, ButtonEditor, EnumEditor,  \
-           GridEditor, UIEditor, UIInfo, BasicEditorFactory, on_facet_set, \
-           property_depends_on, spring
+           VGroup, HGroup, HSplit, Handler, Item, UItem, ButtonEditor,     \
+           EnumEditor, GridEditor, UIEditor, UIInfo, BasicEditorFactory,   \
+           on_facet_set, property_depends_on, spring
 
 from facets.core.constants \
     import is_windows
@@ -72,28 +72,6 @@ AccessMap = {
     'select': 'any'
 }
 
-# The View displayed when the create new folder button is clicked:
-NewFolderView = View(
-    VGroup(
-        HGroup(
-            Item( 'folder_name',
-                  label   = 'Name',
-                  tooltip = 'Enter the name of the new folder'
-            ),
-            UItem( 'create',
-                   enabled_when = "folder_name != ''",
-                   tooltip      = 'Create the folder'
-            )
-        ),
-        VGroup(
-            UItem( 'status', style = 'readonly' ),
-            group_theme = '@xform:b?L25'
-        ),
-        group_theme = '@std:popup'
-    ),
-    kind = 'popup'
-)
-
 #-------------------------------------------------------------------------------
 #  Helper functions:
 #-------------------------------------------------------------------------------
@@ -134,6 +112,9 @@ class FSItem ( HasPrivateFacets ):
     # The parent FSItem (if any) for this item:
     parent = Instance( 'facets.ui.editors.custom_file_dialog_editor.FSItem',
                        transient = True )
+
+    # Does this item exist?
+    exists = Bool( False, transient = True )
 
     # Does this item represent some type of container/folder?
     is_folder = Bool( False, transient = True  )
@@ -265,6 +246,7 @@ class BaseFSItem ( FSItem ):
         return self._resolve( 'can_create_folder' )
 
     def _parent_default      ( self ): return self._resolve( 'parent' )
+    def _exists_default      ( self ): return self._resolve( 'exists' )
     def _is_folder_default   ( self ): return self._resolve( 'is_folder' )
     def _children_default    ( self ): return self._resolve( 'children' )
     def _name_default        ( self ): return self._resolve( 'name' )
@@ -357,6 +339,10 @@ class LocalFSItem ( BaseFSItem ):
 
     def _parent_file ( self ):
         return self.__class__( dirname( self.path ), access = self.access )
+
+
+    def _exists ( self ):
+        return exists( self.path )
 
 
     def _is_folder_root ( self ):
@@ -875,6 +861,29 @@ class FilesAdapter ( GridAdapter ):
             self.object.open_file()
 
 #-------------------------------------------------------------------------------
+#  'NewFolderHandler' class:
+#-------------------------------------------------------------------------------
+
+class NewFolderHandler ( Handler ):
+    """ Handles for the create new folder dialog.
+    """
+
+    def object_folder_name_changed ( self, info ):
+        """ Handles the 'folder_name' facet being changed.
+        """
+        folder_name    = info.object.folder_name.strip()
+        info.ui.errors = (
+            (folder_name == '') or
+            info.object.directory.item_for( folder_name ).exists
+        )
+
+
+    def close ( self, info, is_ok ):
+        """ Handles the user attempting to close the dialog.
+        """
+        return ((not is_ok) or info.object.create_new_folder())
+
+#-------------------------------------------------------------------------------
 #  '_CustomFileDialogEditor' class:
 #-------------------------------------------------------------------------------
 
@@ -895,7 +904,7 @@ class _CustomFileDialogEditor ( UIEditor ):
     refresh = Button( '@icons2:Reload?H32L4' )
 
     # Request creating a new directory:
-    new = Button( '@icons:folder-new', view = NewFolderView )
+    new = Button( '@icons:folder-new' )
 
     # Create a new directory:
     create = Button( '@icons:folder-new' )
@@ -1041,41 +1050,80 @@ class _CustomFileDialogEditor ( UIEditor ):
         ]
 
         filter_item = Item( 'filter',
-              springy = True,
               editor  = EnumEditor( name = 'filters' ),
               tooltip = 'Current filter, click to see other filters'
         )
 
         if mode == 'select':
-            groups.append(
-                HGroup( filter_item, group_theme = '#themes:title' )
-            )
+            groups.extend( [
+                VGroup( filter_item, group_theme = '#themes:title' ),
+                VGroup( UItem( 'ext', style = 'custom' ) )
+            ] )
         else:
             groups.extend( [
-                HGroup(
-                    Item( 'file_name',
-                          springy = True,
-                          tooltip = 'Name of file'
+                VGroup(
+                    Item( 'file_name', tooltip = 'Name of file' ),
+                    Item( 'filter',
+                          editor  = EnumEditor( name = 'filters' ),
+                          tooltip = 'Current filter, click to see other filters'
                     ),
+                    group_theme = '#themes:title'
+                ),
+                UItem( 'ext', style = 'custom' ),
+                HGroup(
+                    spring,
                     UItem( 'open',
                            enabled_when = 'can_open',
                            tooltip = '%s file' % mode.capitalize(),
                            editor  = ButtonEditor( label = mode.capitalize() )
-                    )
-                ),
-                HGroup(
-                    '17',  # Hack to get labels to line up
-                    filter_item,
+                    ),
                     UItem( 'cancel',
                            tooltip = '%s request' % cancel.lower(),
                            editor  = ButtonEditor( label = cancel )
-                    )
+                    ),
+                    group_theme = '#themes:title'
                 )
             ] )
 
-        groups.append( UItem( 'ext', style = 'custom' ) )
-
         return View( VGroup( *groups ) )
+
+    def new_folder_view ( self ):
+        if self.factory.confirm_popup:
+            return View(
+                VGroup(
+                    HGroup(
+                        Item( 'folder_name',
+                              label   = 'Name',
+                              tooltip = 'Enter the name of the new folder'
+                        ),
+                        UItem( 'create',
+                               enabled_when = "folder_name != ''",
+                               tooltip      = 'Create the folder'
+                        )
+                    ),
+                    VGroup(
+                        UItem( 'status', style = 'readonly' ),
+                        group_theme = '@xform:b?L25'
+                    ),
+                    group_theme = '@std:popup'
+                ),
+                kind = 'popup'
+            )
+
+        return View(
+            VGroup(
+                Item( 'folder_name',
+                      label   = 'Name',
+                      tooltip = 'Enter the name of the new folder'
+                ),
+                UItem( 'status', style = 'readonly' )
+            ),
+            title   = 'Create new folder',
+            kind    = 'livemodal',
+            handler = NewFolderHandler,
+            width   = 0.25,
+            buttons = [ 'OK', 'Cancel' ]
+        )
 
     #-- Public Method Definitions ----------------------------------------------
 
@@ -1182,6 +1230,29 @@ class _CustomFileDialogEditor ( UIEditor ):
 
     def _filter_default ( self ):
         return ((self.factory.filters or default_filters)[0])
+
+    #-- Public Methods ---------------------------------------------------------
+
+    def create_new_folder ( self ):
+        """ If possible, create the folder specified by the current value of
+            'folder_name'. Returns **True** if successful, and **False** 
+            otherwise.
+        """
+        result      = False
+        folder_name = self.folder_name.strip()
+        if (folder_name == '') or (dirname( folder_name ) != ''):
+            message = 'Please enter a valid folder name.'
+        else:
+            message = self.directory.create_folder( folder_name )
+            if message is None:
+                self.directory.refresh()
+                self.files = self.directory.children
+                message    = 'Created: ' + folder_name
+                result     = True
+
+        self.status = message
+
+        return result
 
     #-- Facet Event Handlers ---------------------------------------------------
 
@@ -1326,23 +1397,15 @@ class _CustomFileDialogEditor ( UIEditor ):
     def _new_set ( self ):
         """ Handles the 'new folder' button being clicked.
         """
-        self.status = self.folder_name = ''
+        self.status      = 'Enter the name of the folder to create'
+        self.folder_name = ''
+        ui               = self.edit_facets( view = 'new_folder_view' )
 
 
     def _create_set ( self ):
         """ Handles the 'create folder' button being clicked.
         """
-        folder_name = self.folder_name.strip()
-        if (folder_name == '') or (dirname( folder_name ) != ''):
-            message = 'Please enter a valid folder name.'
-        else:
-            message = self.directory.create_folder( folder_name )
-            if message is None:
-                self.directory.refresh()
-                self.files = self.directory.children
-                message    = 'Created: ' + folder_name
-
-        self.status = message
+        self.create_new_folder()
 
 
     def _yes_set ( self, yes ):
@@ -1490,8 +1553,8 @@ class CustomFileDialogEditor ( BasicEditorFactory ):
     # The facets UI persistence id to save the user preference data under:
     id = Str
 
-    # Should the confirmation query for overwriting a file in 'create' mode be
-    # a popup (True) or a modal dialog (False)?
+    # Should the confirmation query for creating a new folder or for overwriting
+    # a file in 'create' mode be a popup (True) or a modal dialog (False)?
     confirm_popup = Bool( True )
 
     # The initial sort column name:

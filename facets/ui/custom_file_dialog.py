@@ -47,8 +47,8 @@ class CustomFileDialog ( UIView ):
     # The facets UI persistence id to save the user preference data under:
     id = Str( 'facets.ui.editor.custom_file_dialog' )
 
-    # Should the confirmation query for overwriting a file in 'create' mode be
-    # a popup (True) or a modal dialog (False)?
+    # Should the confirmation query for creating a new folder or for overwriting
+    # a file in 'create' mode be a popup (True) or a modal dialog (False)?
     confirm_popup = Bool( True )
 
     # The initial sort column name:
