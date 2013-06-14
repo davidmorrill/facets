@@ -257,9 +257,16 @@ class _SetEditor ( ControlEditor ):
             self._compute_size( g )
             self._resize()
 
-        drag_item = self.drag_item
+        _, vyt, _, vdy = self.control.visible_bounds
+        vyb            = vyt + vdy
+        drag_item      = self.drag_item
         for item in self.items:
-            if item is not drag_item:
+            iyt = item.position[1]
+            iyb = iyt + item.size[1]
+            if iyt >= vyb:
+                break
+
+            if (iyb > vyt) and (item is not drag_item):
                 item.paint( g )
 
         # If there is an item being dragged, draw it last so that it will be on
@@ -396,12 +403,21 @@ class _SetEditor ( ControlEditor ):
             the items list and animate the movement from its old position to its
             new position.
         """
+        _, vyt, _, vdy = self.control.visible_bounds
+        vyb            = vyt + vdy
         y = 0 if self.theme is None else self.theme.bounds( 0, 0, 0, 0 )[1]
         for item in self.items:
             ix, iy = item.position
             if y != iy:
                 item.position = ( ix, y )
-                item.move_to()
+
+                # Animate the move if either end point is visible, otherwise just
+                # update its draw position to match its logical position. This
+                # saves time when there a lots of items in the set:
+                if (vyt <= y < vyb) or (vyt <= item.draw_position[1] < vyb):
+                    item.move_to()
+                else:
+                    item.draw_position = ( ix, y )
 
             y += item.size[1]
 
@@ -518,6 +534,7 @@ class _SetEditor ( ControlEditor ):
             self._reorder()
 
 
+    @on_facet_set( 'factory:values[]' )
     def _init_items ( self ):
         """ Initializes the list of items based on the current editor value.
         """
@@ -570,6 +587,9 @@ class _SetEditor ( ControlEditor ):
         # Save the resulting item list:
         self.items = included
 
+        # Force a recalculation of item sizes and positions:
+        self._first_paint = None
+
 #-------------------------------------------------------------------------------
 #  'SetEditor' class:
 #-------------------------------------------------------------------------------
@@ -582,7 +602,7 @@ class SetEditor ( CustomControlEditor ):
     klass = _SetEditor
 
     # The set of all possible values:
-    values = Any
+    values = Any( facet_value = True )
 
     # Visual ordering of items in the set, where:
     # 'sort':  Items appear in the sort order specified by the 'compare' and
