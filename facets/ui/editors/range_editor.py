@@ -93,7 +93,7 @@ class _RangeEditor ( Editor ):
         if high <= low:
             low = high = None
             object     = self.object
-            range      = object.facet( self.name ).handler
+            range      = object.base_facet( self.name ).handler
             if isinstance( range, Range ):
                 if range._low_name != '':
                     self._low_name = range._low_name.replace( '.', ':' )
