@@ -56,7 +56,7 @@ class facet_db ( object ):
 
             If the database cannot be opened for any reason, **None** is
             returned. It is the caller's responsibility to close the database
-            when done by calling returned object's 'close()' method.
+            when done by calling the returned object's 'close()' method.
         """
         try:
             return shelve.open( self.db( db, path ),
@@ -70,7 +70,7 @@ class facet_db ( object ):
             is associated with the specified name, or the database cannot be
             opened, the specified default *value* is returned. The optional
             *object* argument is used to further qualify the name in cases where
-            the specified name does not contain an '.' characters. The name of
+            the specified name does not contain any '.' characters. The name of
             the facet database to access can optionally by specified by the *db*
             argument, and defaults to the standard facet database.
 

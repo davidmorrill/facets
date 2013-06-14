@@ -460,7 +460,7 @@ def ui_number ( number ):
 
 
 class inn ( object ):
-    """ Defiines the 'if_not_none' (inn) class/function which allows the
+    """ Defines the 'if_not_none' (inn) class/function which allows the
         caller to invoke methods on a value even if the value is None. In other
         words, it provides a shortcut for the common idiom of:
             if self.value is not None:

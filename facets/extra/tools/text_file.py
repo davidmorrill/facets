@@ -175,7 +175,7 @@ class TextFile ( Tool ):
                 children = [ local_key_bindings ]
             )
 
-        return  View(
+        return View(
             UItem( 'text',
                    editor = CodeEditor(
                        selected_line = 'selected_line',
@@ -191,7 +191,7 @@ class TextFile ( Tool ):
                 group_theme = '#themes:toolbar_group',
                 id          = 'tb'
             ),
-            id = 'facets.extra.tools.text_file.TextFile',
+            id = 'facets.extra.tools.text_file.TextFile'
         )
 
     #-- Property Implementations -----------------------------------------------
