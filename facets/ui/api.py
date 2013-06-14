@@ -97,7 +97,7 @@ from core_editors \
            FilmStripEditor, FontEditor, FontFacet, GridEditor, HistoryEditor,  \
            HLSColorEditor, HTMLBrowserEditor, HTMLEditor, ImageEditor,         \
            ImageEnumEditor, ImageZoomEditor, InstanceEditor, KeyBindingEditor, \
-           LightTableEditor, ListEditor, ListStrEditor,                        \
+           LightTableEditor, ListEditor, ListStrEditor, ListViewEditor,        \
            MultipleInstanceEditor, NotebookEditor, NullEditor, PopupEditor,    \
            ProgressBarEditor, PropertySheetEditor, RangeEditor,                \
            RangeSliderEditor, RGBColorFacet, ScrubberEditor, SetEditor,        \

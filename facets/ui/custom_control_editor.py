@@ -62,7 +62,7 @@ class ControlEditor ( ThemedWindow ):
     editor = Instance( Editor )
 
     # The value the control is editing (the facet type should be set correctly):
-    value = Any
+    # value = Any
 
     # The virtual size of the control (UndefinedSize for a non-scrollable
     # control, and a ( width, height ) tuple for a scrollable control):
@@ -89,6 +89,13 @@ class ControlEditor ( ThemedWindow ):
         """ Allows the control to perform any needed initialization. Called
             immediately after the constructor has run and all externally set
             attributes have been initialized.
+        """
+
+
+    def post_init ( self ):
+        """ Allows the control to perform any needed initialization. Called
+            after the parent editor has finished all initialization of the
+            control.
         """
 
 
@@ -220,11 +227,17 @@ class DefaultCustomControlEditor ( Editor ):
         self.adapter = ui_control
 
         if self.extended_name != 'None':
+            if control.facet( 'value' ) is None:
+                control.add_facet(
+                    'value', self.context_object.facet( self.extended_name )
+                )
+
             self.context_object.sync_facet(
                 self.extended_name, control, 'value', True
             )
 
         self.set_tooltip()
+        control.post_init()
 
 
     def update_editor ( self ):

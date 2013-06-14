@@ -308,6 +308,15 @@ def ListStrEditor ( *args, **facets ):
     return toolkit().list_str_editor( *args, **facets )
 
 
+def ListViewEditor ( *args, **facets ):
+    """ Allows the user to view, edit and organize a collection of objects or
+        values.
+    """
+    from facets.ui.editors.list_view_editor import ListViewEditor
+
+    return ListViewEditor( *args, **facets )
+
+
 def MultipleInstanceEditor ( *args, **facets ):
     """ Allows the user to modify a facet attribute whose value is a list of
         (presumably) related objects which are to be edited in parallel as if

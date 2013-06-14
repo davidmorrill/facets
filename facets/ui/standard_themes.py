@@ -45,4 +45,37 @@ facet_db.set( '#themes:title',
     Theme( '@xform:b?L30', content = ( 6, 4 ) )
 )
 
+# ListViewEditor related themes:
+facet_db.set( '#themes:ListViewEditor__theme',
+    Theme( '@facets:lve', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_normal_theme',
+    Theme( '@facets:lven', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_hover_theme',
+    Theme( '@facets:lveh', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_add_theme',
+    Theme( '@facets:lvea', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_delete_theme',
+    Theme( '@facets:lved', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_move_theme',
+    Theme( '@facets:lvem', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_normal_label_theme',
+    Theme( '@facets:lvenl', content = ( 0, 0 ) )
+)
+
+facet_db.set( '#themes:ListViewEditor_active_label_theme',
+    Theme( '@facets:lveal', content = ( 0, 0 ) )
+)
+
 #-- EOF ------------------------------------------------------------------------
