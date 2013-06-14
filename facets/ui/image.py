@@ -745,14 +745,16 @@ class ImageVolume ( HasPrivateFacets ):
         """ Checks to see if the time stamp of the volume is valid, and if not,
             updates and saves the image volume information.
         """
-        # If this volume is not up to date, update it:
-        path            = self.path.replace( '.', ':' )
-        self.time_stamp = self.facet_db_get( path, '' )
-        path_time_stamp = time_stamp_for( stat( self.path )[ ST_MTIME ] )
-        if self.time_stamp < path_time_stamp:
-            self.save()
-            self.time_stamp = time_stamp_for( time() )
-            self.facet_db_set( path, self.time_stamp )
+        # Only check/update the volume information if we are in developer mode:
+        if facets_env.dev:
+            # If this volume is not up to date, update it:
+            path            = self.path.replace( '.', ':' )
+            self.time_stamp = self.facet_db_get( path, '' )
+            path_time_stamp = time_stamp_for( stat( self.path )[ ST_MTIME ] )
+            if self.time_stamp < path_time_stamp:
+                self.save()
+                self.time_stamp = time_stamp_for( time() )
+                self.facet_db_set( path, self.time_stamp )
 
 
     def image_info ( self, image_name ):
