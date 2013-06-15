@@ -620,10 +620,14 @@ class File ( HasPrivateFacets ):
         if self.is_folder:
             path  = self.absolute_path
             klass = self.__class__
-            for name in listdir( path ):
-                file = join( path, name )
-                if filter( file ):
-                    files.append( klass( file ) )
+            try:
+                for name in listdir( path ):
+                    file = join( path, name )
+                    if filter( file ):
+                        files.append( klass( file ) )
+            except:
+                # Handle the user not having read access to the directory:
+                pass
 
         return files
 
