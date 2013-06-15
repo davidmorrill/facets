@@ -55,7 +55,7 @@ INDENT = 15
 BadTypes = ( NoneType, set )
 
 # Set of easily editable simple types:
-SimpleTypes = ( basestring, int, long, float )
+SimpleTypes = ( basestring, int, long, float, tuple )
 
 # Set of indexable types:
 IndexTypes = ( list, tuple, dict )
@@ -908,8 +908,10 @@ class _PropertySheetEditor ( UIEditor ):
 
         for label, index, value in zip( labels, indices, values ):
             item_editor = indexed_item( index, editor, indexed_editor )
+            item_mode   = indexed_item( index, mode,   indexed_mode   )
             if ((item_editor is None) or
-                isinstance( item_editor, ItemEditors )):
+                (isinstance( item_editor, ItemEditors ) and
+                 (item_mode == 'inline'))):
                 item_editor = TextEditor( evaluate = type( value ),
                                           strict   = True )
 
@@ -921,7 +923,7 @@ class _PropertySheetEditor ( UIEditor ):
                 index     = index,
                 value     = value,
                 editor    = item_editor,
-                mode      = indexed_item( index, mode, indexed_mode ),
+                mode      = item_mode,
                 indent    = depth * INDENT,
                 owner     = owner
             ) )
