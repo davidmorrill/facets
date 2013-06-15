@@ -94,18 +94,18 @@ from core_editors \
            CompoundEditor, CustomEditor, CustomFileDialogEditor,               \
            DirectoryEditor, DNDEditor, DrawableCanvasEditor, DropEditor,       \
            EnumEditor, FileEditor, FileStackEditor, FileSystemEditor,          \
-           FilmStripEditor, FontEditor, FontFacet, GridEditor, HistoryEditor,  \
-           HLSColorEditor, HTMLBrowserEditor, HTMLEditor, ImageEditor,         \
-           ImageEnumEditor, ImageZoomEditor, InstanceEditor, KeyBindingEditor, \
-           LightTableEditor, ListEditor, ListStrEditor, ListViewEditor,        \
-           MultipleInstanceEditor, NotebookEditor, NullEditor, PopupEditor,    \
-           ProgressBarEditor, PropertySheetEditor, RangeEditor,                \
-           RangeSliderEditor, RGBColorFacet, ScrubberEditor, SetEditor,        \
-           ShellEditor, SlideshowEditor, StackEditor, StringGridEditor,        \
-           TemplateEditor, TextEditor, ThemedButtonEditor,                     \
-           ThemedCheckboxEditor, ThemedSliderEditor, ThemedTextEditor,         \
-           VerticalNotebookEditor, TitleEditor, ToolbarEditor, TreeEditor,     \
-           TupleEditor, ValueEditor, VIPShellEditor
+           FilmStripEditor, FilteredSetEditor, FontEditor, FontFacet,          \
+           GridEditor, HistoryEditor, HLSColorEditor, HTMLBrowserEditor,       \
+           HTMLEditor, ImageEditor, ImageEnumEditor, ImageZoomEditor,          \
+           InstanceEditor, KeyBindingEditor, LightTableEditor, ListEditor,     \
+           ListStrEditor, ListViewEditor, MultipleInstanceEditor,              \
+           NotebookEditor, NullEditor, PopupEditor, ProgressBarEditor,         \
+           PropertySheetEditor, RangeEditor, RangeSliderEditor, RGBColorFacet, \
+           ScrubberEditor, SetEditor, ShellEditor, SlideshowEditor,            \
+           StackEditor, StringGridEditor, TemplateEditor, TextEditor,          \
+           ThemedButtonEditor, ThemedCheckboxEditor, ThemedSliderEditor,       \
+           ThemedTextEditor, VerticalNotebookEditor, TitleEditor,              \
+           ToolbarEditor, TreeEditor, TupleEditor, ValueEditor, VIPShellEditor
 
 from facets.ui.adapters.cell \
     import Cell

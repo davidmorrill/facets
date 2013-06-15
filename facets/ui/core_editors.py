@@ -200,6 +200,14 @@ def FilmStripEditor ( *args, **facets ):
     return FilmStripEditor( *args, **facets )
 
 
+def FilteredSetEditor ( *args, **facets ):
+    """ Allows the user to edit a filterable set of items.
+    """
+    from facets.ui.editors.filtered_set_editor import FilteredSetEditor
+
+    return FilteredSetEditor( *args, **facets )
+
+
 def FontEditor ( *args, **facets ):
     """ Allows the user to select a typeface and type size.
     """

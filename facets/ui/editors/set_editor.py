@@ -229,9 +229,14 @@ class _SetEditor ( ControlEditor ):
     # The current item being dragged (if any):
     drag_item = Instance( SetItem )
 
+    # The last selected/deselected item:
+    last_item = Instance( SetItem )
+
     # Are the items currently being dragged over to be included (or excluded)
     # from the set?
     included = Bool
+
+    value = List
 
     #-- ControlEditor Method Overrides -----------------------------------------
 
@@ -309,8 +314,10 @@ class _SetEditor ( ControlEditor ):
                 self._y    = y
                 self.state = 'dragging'
             else:
-                item.included = self.included = not item.included
                 self.state    = 'selecting'
+                self.included = not item.included
+                if not event.shift_down:
+                    item.included = self.included
         else:
             self.state = 'ignoring'
 
@@ -318,17 +325,38 @@ class _SetEditor ( ControlEditor ):
     def selecting_motion ( self, event ):
         """ Handles a mouse motion event while in selecting mode.
         """
-        item = self._item_at( event.x, event.y )
-        if item is not None:
-            item.included = self.included
+        if not event.shift_down:
+            item = self._item_at( event.x, event.y )
+            if item is not None:
+                item.included = self.included
 
 
-    def selecting_left_up ( self ):
+    def selecting_left_up ( self, event ):
         """ Handles the left mouse button being released in selecting mode.
         """
         self.state = 'normal'
+        if self.included != self.drag_item.included:
+            if event.shift_down:
+                last_item = self.last_item
+                if last_item is None:
+                    self.drag_item.included = self.included
+                else:
+                    items          = self.items
+                    last_index     = items.index( last_item )
+                    drag_index     = items.index( self.drag_item )
+                    self.drag_item = last_item
+                    first          = min( last_index, drag_index )
+                    last           = max( last_index, drag_index )
+                    included       = last_item.included
+                    for i in xrange( first, last + 1 ):
+                        items[ i ].included = included
+            else:
+                self.drag_item.included = self.included
+
         self._separate_items()
         self._update_value()
+        self.last_item = self.drag_item
+        self.drag_item = None
 
 
     def dragging_motion ( self, event ):
@@ -506,7 +534,7 @@ class _SetEditor ( ControlEditor ):
 
 
     def _resize ( self ):
-        """ Recomputes the width of all items based yupon the current control
+        """ Recomputes the width of all items based upon the current control
             size.
         """
         dx, dy = self.control.size
@@ -589,6 +617,7 @@ class _SetEditor ( ControlEditor ):
 
         # Force a recalculation of item sizes and positions:
         self._first_paint = None
+        self.refresh()
 
 #-------------------------------------------------------------------------------
 #  'SetEditor' class:
