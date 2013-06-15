@@ -285,6 +285,13 @@ class PropertySheetItem ( PropertySheetItemBase ):
         # based upon the 'facet' name supplied:
         self.add_facet( 'value', DelegatesTo( 'object', self.name ) )
 
+    #-- PropertySheetBase Interface --------------------------------------------
+
+    def dispose ( self ):
+        """ Removes any facet change listeners when the editor is closed.
+        """
+        self.remove_facet( 'value' )
+
 #-------------------------------------------------------------------------------
 #  'PropertySheetEventItem' class:
 #-------------------------------------------------------------------------------
