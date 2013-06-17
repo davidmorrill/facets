@@ -223,6 +223,9 @@ class _SetEditor ( ControlEditor ):
 
     #-- Facet Definitions ------------------------------------------------------
 
+    # Local copy of the current editor value:
+    value = List
+
     # The list of set items being edited:
     items = List # ( SetItem )
 
@@ -235,8 +238,6 @@ class _SetEditor ( ControlEditor ):
     # Are the items currently being dragged over to be included (or excluded)
     # from the set?
     included = Bool
-
-    value = List
 
     #-- ControlEditor Method Overrides -----------------------------------------
 
