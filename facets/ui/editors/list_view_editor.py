@@ -674,17 +674,24 @@ class _ListViewEditor ( ControlEditor ):
         """
         if self.normal_motion( event ):
             self._y    = event.y
-            operations = self.factory.operations
-            delete     = ('delete' in operations)
-            self.state = ('pending' if 'move' in operations else 'clicking')
-            if event.alt_down and delete:
-                self.mode = 'delete'
-            elif 'add' in operations:
-                self.mode = 'add'
+            n          = len( self.value )
+            factory    = self.factory
+            operations = factory.operations
+            delete     = 'delete' in operations
+            add        = 'add'    in operations
+            move       = 'move'   in operations
+            self.state = ('pending' if move else 'clicking')
+            mode       = None
+            if (not event.alt_down) and add:
+                max_len = factory.max_len
+                mode    = 'add' if (max_len < 0) or (n < max_len) else 'hover'
                 if delete:
                     do_after( 600, self._check_delete )
-            else:
-                self.mode = ('delete' if delete else 'move')
+
+            self.mode = (mode     if mode is not None                 else
+                        ('delete' if delete and (n > factory.min_len) else
+                        ('move'   if move and (not (add or delete))   else
+                         'hover')))
         else:
             self.state = 'ignoring'
 
@@ -710,7 +717,7 @@ class _ListViewEditor ( ControlEditor ):
         if item is active_item:
             if self.mode == 'add':
                 self._add_item( item )
-            else:
+            elif self.mode == 'delete':
                 self._delete_item( item )
 
         self.ignoring_left_up( event )
@@ -954,9 +961,9 @@ class _ListViewEditor ( ControlEditor ):
         """ Checks if we can switch from 'add' to 'delete' mode after a short
             delay has expired.
         """
-        if ((self.state == 'pending') and
-            (self.active_item.item is not empty_list)):
-            self.mode = 'delete'
+        if self.state == 'pending':
+            self.mode = ('delete' if (len( self.value ) > self.factory.min_len)
+                         else 'hover')
             self.active_item.refresh()
 
 
@@ -1153,6 +1160,12 @@ class ListViewEditor ( CustomControlEditor ):
     # be used to create a new value when adding to an empty list value:
     factory = Any
 
+    # The minimum length allowed for the editor value:
+    min_len = Int( 0 )
+
+    # The maximum length allowed for the editor value (< 0 means unbounded):
+    max_len = Int( -1 )
+
     # The normal theme used for displaying items:
     normal_theme = ATheme
 
@@ -1176,79 +1189,5 @@ class ListViewEditor ( CustomControlEditor ):
 
     # The width of item labels (in pixels):
     label_width = Range( 0, 500, 60 )
-
-#-------------------------------------------------------------------------------
-#  Test case:
-#-------------------------------------------------------------------------------
-
-if __name__ == '__main__':
-
-    from facets.api import Item, VSplit, Bool
-    from numpy      import array
-
-    class Person ( HasPrivateFacets ):
-        first = Str
-        last  = Str
-
-        view = View(
-            HGroup(
-                Item( 'first', springy = True ),
-                Item( 'last',  springy = True )
-            )
-        )
-
-    class ToDo ( HasFacets ):
-        is_done = Bool( False )
-        task    = Str( 'Do something...' )
-
-        view = View(
-            HGroup(
-                UItem( 'is_done' ),
-                UItem( 'task', springy = True )
-            )
-        )
-
-    list_view_editor = ListViewEditor()
-
-    class ListViewEditorTest ( HasPrivateFacets ):
-        todos  = List( [ ToDo() ] )
-        people = List
-        xform  = Any
-        values = List
-
-        view = View(
-            VSplit(
-                UItem( 'todos',  editor = ListViewEditor( factory = ToDo ) ),
-                UItem( 'people', editor = ListViewEditor() ),
-                UItem( 'xform',  editor = ListViewEditor() ),
-                UItem( 'values', editor = ListViewEditor( factory = 'New...' ) )
-            ),
-            title  = 'ListViewEditor Test',
-            width  = 0.20,
-            height = 0.80
-        )
-
-        def _people_default ( self ):
-            result = []
-            firsts = ( 'Thomas', 'Christine', 'Delia', 'Dwight', 'George' )
-            lasts  = ( 'Lawrence', 'Thomas', 'Johnson', 'Smith', 'Einstein',
-                       'Jones' )
-            for last in lasts:
-                for first in firsts:
-                    result.append( Person( first = first, last = last ) )
-
-            return result
-
-        def _xform_default ( self ):
-            return array( [
-                [    1,    2,    3,    4 ],
-                [   10,   20,   30,   40 ],
-                [  100,  200,  300,  400 ],
-                [ 1000, 2000, 3000, 4000 ]
-            ] )
-
-    test = ListViewEditorTest()
-    test.edit_facets()
-    test.print_facets()
 
 #-- EOF ------------------------------------------------------------------------
