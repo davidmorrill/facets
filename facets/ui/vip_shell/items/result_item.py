@@ -45,6 +45,12 @@ from view_item \
 from generated_item \
     import GeneratedItem
 
+try:
+    from numpy \
+        import ndarray
+except:
+    ndarray = type( None )
+
 #-------------------------------------------------------------------------------
 #  Constants:
 #-------------------------------------------------------------------------------
@@ -248,7 +254,7 @@ class ResultItem ( GeneratedItem ):
 
     #-- Conversion Methods -----------------------------------------------------
 
-    def as_str ( self, item, indent = '', name = '' ):
+    def as_str ( self, item, indent = '', name = '', is_array = False ):
         """ Returns the string value of *item*.
         """
         if indent == '':
@@ -260,7 +266,8 @@ class ResultItem ( GeneratedItem ):
         if isinstance( item, SimpleTypes ):
             return ('%s\x00F%s\x002' % ( indent, repr( item ) ))
 
-        if isinstance( item, list ):
+        if (isinstance( item, list ) or
+            (is_array and isinstance( item, ndarray ))):
             return self.as_list( item, indent, name = name )
 
         if isinstance( item, tuple ):
@@ -268,6 +275,9 @@ class ResultItem ( GeneratedItem ):
 
         if isinstance( item, set ):
             return self.as_list( item, indent, 'set( [', '] )', name )
+
+        if isinstance( item, ndarray ):
+            return self.as_list(item, indent, 'array( [', '] )', name )
 
         if isinstance( item, dict ):
             return self.as_dict( item, indent, name )
@@ -326,26 +336,27 @@ class ResultItem ( GeneratedItem ):
 
         next_indent = indent + IndentLevel
         max_items   = self.shell.max_items
+        is_array    = prefix.startswith( 'array' )
         if (max_items == 0) or (n <= max_items):
             result = [ self.as_str( element, next_indent,
-                                    '%s[%d]' % ( name, i ) )
+                                    '%s[%d]' % ( name, i ), is_array )
                        for i, element in enumerate( item ) ]
 
             # If the result is short enough, return it formatted for single line
             # display:
             length = reduce( lambda x, y: x + len( y ), result, 0 )
             if (length - (n * (len( next_indent ) + 2))) <= 50:
-                return ('\x002%s %s \x002%s' % ( prefix,
+                return ('%s\x002%s %s \x002%s' % ( indent, prefix,
                         ', '.join( [ item.strip() for item in result ] ),
                         suffix ))
         else:
             n1     = (max_items + 1) / 2
             n2     = n - max_items
             part1  = [ self.as_str( item[ i ], next_indent,
-                                    '%s[%d]' % ( name, i ) )
+                                    '%s[%d]' % ( name, i ), is_array )
                        for i in xrange( n1 ) ]
             part2  = [ self.as_str( item[ i ], next_indent,
-                                    '%s[%d]' % ( name, i ) )
+                                    '%s[%d]' % ( name, i ), is_array )
                        for i in xrange( n - (max_items - n1), n ) ]
             result = [
                 ',\n'.join( part1 ),
