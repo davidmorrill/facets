@@ -1010,7 +1010,6 @@ class DockWindow ( HasPrivateFacets ):
                 int( dy * sdy ) - fdy
             )
 
-
     #-- DockWindow User Preference Database Methods ----------------------------
 
     def _get_feature_menu ( self ):
@@ -1058,10 +1057,12 @@ class DockWindow ( HasPrivateFacets ):
             sdx = max( sdx, dx )
             sdy = max( sdy, dy )
 
+        groups  = []
         actions = []
         for name, size in standard_sizes:
             if name is None:
-                actions.append( Separator() )
+                groups.extend( [ ActionGroup( *actions ), Separator() ] )
+                del actions[:]
             else:
                 action = ResizeAction( name = name, size = size )
                 if len( size ) == 2:
@@ -1070,7 +1071,9 @@ class DockWindow ( HasPrivateFacets ):
 
                 actions.append( action )
 
-        return Menu( name = 'Resize', *actions )
+        groups.append( ActionGroup( *actions ) )
+
+        return Menu( name = 'Resize', *groups )
 
 
     def _get_screenshot_menu ( self, is_dock_control ):
