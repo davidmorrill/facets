@@ -1033,11 +1033,13 @@ class DockWindow ( HasPrivateFacets ):
         actions = []
         for feature in all_features:
             if feature.feature_name != '':
-                actions.append( Action( name     = feature.feature_name,
-                                        action   = 'on_toggle_feature',
-                                        _feature = feature,
-                                        style    = 'toggle',
-                                        checked  = (feature.state == 1) ) )
+                actions.append( Action(
+                    name     = feature.feature_name,
+                    action   = 'on_toggle_feature',
+                    _feature = feature,
+                    style    = 'toggle',
+                    checked  = (feature.state == 1)
+                ) )
 
         if len( actions ) > 0:
             actions.sort( lambda l, r: cmp( l.name, r.name ) )
@@ -1154,16 +1156,19 @@ class DockWindow ( HasPrivateFacets ):
             self._dock_info = None
             try:
                 control = self.handler.dock_control_for(
-                                       *(self.handler_args + ( window, data )) )
+                    *(self.handler_args + ( window, data ))
+                )
                 dock_info.dock( control, window )
                 event.result = event.request
 
                 return
             except:
-                warning( window,
-                         "An error occurred while attempting to add an item of "
-                         "type '%s' to the window." % data.__class__.__name__,
-                         title = 'Cannot add item to window' )
+                warning(
+                    window,
+                    "An error occurred while attempting to add an item of type "
+                    "'%s' to the window." % data.__class__.__name__,
+                    title = 'Cannot add item to window'
+                )
 
         # Indicate that we don't handle the drag object:
         event.result = 'ignore'
@@ -1401,15 +1406,20 @@ class LayoutName ( Handler ):
         if is_ok:
             name = info.object.name.strip()
             if name == '':
-                warning( info.ui.control, 'No name specified',
-                         title = 'Save Layout Error' )
+                warning(
+                    info.ui.control,
+                    'No name specified',
+                    title = 'Save Layout Error'
+                )
+
                 return False
 
             if name in self.names:
-                return error( message = '%s is already defined. Replace?' %
-                                        name,
-                              title   = 'Save Layout Warning',
-                              parent  = info.ui.control )
+                return error(
+                    message = '%s is already defined. Replace?' % name,
+                    title   = 'Save Layout Warning',
+                    parent  = info.ui.control
+                )
 
         return True
 
@@ -1423,14 +1433,10 @@ class LayoutManagerAdapter ( GridAdapter ):
 
     columns = [ ( 'Name', 'name' ) ]
 
-    def name_content ( self ):
-        return self.item
+    def name_content ( self ): return self.item
+    def name_sorter  ( self ): return lambda l, r: cmp( l, r )
 
-    def name_sorter ( self ):
-        return lambda l, r: cmp( l, r )
-
-    def double_clicked ( self ):
-        self.object.restore = True
+    def double_clicked ( self ): self.object.restore = True
 
 #-------------------------------------------------------------------------------
 #  'LayoutManager' class:
