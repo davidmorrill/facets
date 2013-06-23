@@ -89,6 +89,48 @@ Templates = {
     '4_4': ( ( ( 1, 1, 1, 1 ), 2 ), ),
 }
 
+# The set of standard window sizes and their labels:
+standard_sizes = (
+    ( '640 x 480',              (  640,  480 ) ),
+    ( '800 x 600',              (  800,  600 ) ),
+    ( '1024 x 768',             ( 1024,  768 ) ),
+    ( '1280 x 720 (HD 720)',    ( 1280,  720 ) ),
+    ( '1366 x 768',             ( 1366,  768 ) ),
+    ( '1440 x 900',             ( 1440,  900 ) ),
+    ( '1600 x 1200',            ( 1600, 1200 ) ),
+    ( '1920 x 1080 (HD 1080)',  ( 1920, 1080 ) ),
+    ( '1920 x 1200',            ( 1920, 1200 ) ),
+    ( '2560 x 1440',            ( 2560, 1440 ) ),
+    ( None, None ),
+    ( 'Top',                    ( 0.00, 0.00, 1.0, 0.5 ) ),
+    ( 'Bottom',                 ( 0.00, 0.50, 1.0, 0.5 ) ),
+    ( 'Left',                   ( 0.00, 0.00, 0.5, 1.0 ) ),
+    ( 'Right',                  ( 0.50, 0.00, 0.5, 1.0 ) ),
+    ( None, None ),
+    ( 'Top left',               ( 0.00, 0.00, 0.5, 0.5 ) ),
+    ( 'Top right',              ( 0.50, 0.00, 0.5, 0.5 ) ),
+    ( 'Bottom left',            ( 0.00, 0.50, 0.5, 0.5 ) ),
+    ( 'Bottom right',           ( 0.50, 0.50, 0.5, 0.5 ) ),
+    ( 'Center',                 ( 0.25, 0.25, 0.5, 0.5 ) )
+)
+
+#-------------------------------------------------------------------------------
+#  Custom actions:
+#-------------------------------------------------------------------------------
+
+class ResizeAction ( Action ):
+    """ Action for resizing a window.
+    """
+
+    #-- Facet Definitions ------------------------------------------------------
+
+    # The size the window should be resized to as a tuple of the form:
+    # ( Int dx, Int dy ) or ( Float x, Float y, Float dx, Float dy )
+    size = Any
+
+    # The action to take (override):
+    action = 'on_resize'
+
 #-------------------------------------------------------------------------------
 #  DockWindow context menu:
 #-------------------------------------------------------------------------------
@@ -604,6 +646,7 @@ class DockWindow ( HasPrivateFacets ):
                     manage_layouts_action.enabled = (self.id != '')
 
                     feature_menu    = self._get_feature_menu()
+                    resize_menu     = self._get_resize_menu()
                     screenshot_menu = self._get_screenshot_menu(
                         is_dock_control
                     )
@@ -623,7 +666,9 @@ class DockWindow ( HasPrivateFacets ):
                         Separator(),
                         select_theme_action,
                         Separator(),
-                        edit_action
+                        edit_action,
+                        Separator(),
+                        resize_menu
                     ]
 
                     if facets_env.dev:
@@ -897,6 +942,75 @@ class DockWindow ( HasPrivateFacets ):
         FBI().tools.activate()
         self._object = None
 
+
+    def on_resize ( self, action ):
+        """ Resizes the window to the requested size (and optional position).
+        """
+        # Get the control that will be resized:
+        control      = self._object.control.root_parent
+        self._object = None
+
+        # We use the frame bounds, since that includes the title bar and resize
+        # widgets. But we have to also calculate the size of the frame controls
+        # because when we resize/position the control, we have to do so in terms
+        # of the client area, which does not include the frame size:
+        cx, cy, cdx, cdy = control.frame_bounds
+        bx, by, bdx, bdy = control.bounds
+        fx, fy, fdx, fdy = bx - cx, by - cy, cdx - bdx, cdy - bdy
+
+        # Find the hardware display that contains the largest part of the
+        # window:
+        max_size = -1
+        info     = toolkit().screen_info()
+        for sx, sy, sdx, sdy in info:
+            tx, ty, tdx, tdy = cx, cy, cdx, cdy
+            if cx < sx:
+                tdx = max( 0, tdx - (sx - tx) )
+                tx  = sx
+
+            if cy < sy:
+                tdy = max( 0, tdy - (sy - ty) )
+                ty  = sy
+
+            size = (max( 0, (min( sx + sdx, tx + tdx ) - tx) ) *
+                    max( 0, (min( sy + sdy, ty + tdy ) - ty) ))
+            if size > max_size:
+                max_size = size
+                screen   = ( sx, sy, sdx, sdy )
+
+        sx, sy, sdx, sdy = screen
+        if len( action.size ) == 2:
+            # An absolute size was selected:
+            cdx, cdy = action.size
+            if (cdx > sdx) or (cdy > sdy):
+                # If the new size won't fit on the current hardware display for
+                # the control, find the first display it will fit on:
+                for sx, sy, sdx, sdy in info:
+                    if (cdx <= sdx) and (cdy <= sdy):
+                        cx, cy = sx, sy
+
+                        break
+
+            # Set the new control size and position, making sure the control
+            # fits completely on the selected display:
+            control.bounds = (
+                fx  + max( sx, min( cx, sx + sdx - cdx ) ),
+                fy  + max( sy, min( cy, sy + sdy - cdy ) ),
+                cdx - fdx,
+                cdy - fdy
+            )
+        else:
+            # A size relative to the current display was selected, so resize
+            # and position the control using the fractional values selected:
+            x, y, dx, dy   = action.size
+            control.bounds = (
+                sx + fx + int( x * sdx ),
+                sy + fy + int( y * sdy ),
+                int( dx * sdx ) - fdx,
+                int( dy * sdy ) - fdy
+            )
+
+
     #-- DockWindow User Preference Database Methods ----------------------------
 
     def _get_feature_menu ( self ):
@@ -934,6 +1048,29 @@ class DockWindow ( HasPrivateFacets ):
             name = 'Features',
             *([ enable_features_action, disable_features_action ] + actions)
         )
+
+
+    def _get_resize_menu ( self ):
+        """ Returns the 'Resize' sub-menu.
+        """
+        sdx = sdy = 0
+        for x, y, dx, dy in toolkit().screen_info():
+            sdx = max( sdx, dx )
+            sdy = max( sdy, dy )
+
+        actions = []
+        for name, size in standard_sizes:
+            if name is None:
+                actions.append( Separator() )
+            else:
+                action = ResizeAction( name = name, size = size )
+                if len( size ) == 2:
+                    dx, dy         = size
+                    action.enabled = ((dx <= sdx) and (dy <= sdy))
+
+                actions.append( action )
+
+        return Menu( name = 'Resize', *actions )
 
 
     def _get_screenshot_menu ( self, is_dock_control ):
