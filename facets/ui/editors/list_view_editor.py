@@ -386,7 +386,9 @@ class ListViewItem ( HasPrivateFacets ):
         """ Handles any facet of the item being set.
         """
         if facet.startswith( 'value_' ):
-            self.owner.value_for( self, int( facet[6:] ), new )
+            index              = int( facet[6:] )
+            self.item[ index ] = new
+            self.owner.value_for( self, index, new )
 
 
     def _draw_position_set ( self ):
