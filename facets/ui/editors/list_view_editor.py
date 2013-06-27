@@ -19,7 +19,7 @@ element.
 from facets.api \
     import HasFacets, HasPrivateFacets, Bool, Str, Unicode, Int, Long, Float, \
            Range, Callable, Any, Instance, List, Enum, Tuple, Theme, ATheme,  \
-           UI, Property, View, HGroup, UItem, TextEditor, on_facet_set
+           UI, Property, View, HGroup, Item, UItem, TextEditor, on_facet_set
 
 from facets.core.facet_base \
     import inn
@@ -129,6 +129,9 @@ class ListViewItem ( HasPrivateFacets ):
     # The label for the item:
     label = Str
 
+    # The labels to use for item elements (like lists, tuples, arrays):
+    item_labels = List( value = [ '' ] )
+
     # The editor that owns this item:
     owner = Any # Instance( _ListViewEditor )
 
@@ -213,6 +216,8 @@ class ListViewItem ( HasPrivateFacets ):
 
         if isinstance( item, ListTypes ):
             uitems = []
+            labels = self.item_labels
+            n      = len( labels )
             for i, value in enumerate( item ):
                 style = 'simple'
                 facet = FacetsMap.get( type( value ) )
@@ -222,10 +227,17 @@ class ListViewItem ( HasPrivateFacets ):
                         facet = Instance( value.__class__ )
                         style = 'custom'
 
-                name = 'value_%d' % i
+                label = labels[ i % n ]
+                name  = 'value_%d' % i
                 self.add_facet( name, facet( value ) )
                 uitems.append(
-                    UItem( name, style = style, springy = True, width = -30 )
+                    Item( name,
+                          label      = label,
+                          show_label = (label != ''),
+                          style      = style,
+                          springy    = True,
+                          width      = -30
+                    )
                 )
 
             view = View( HGroup( *uitems ) )
