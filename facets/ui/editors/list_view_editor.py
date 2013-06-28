@@ -66,7 +66,6 @@ try:
         numpy.uint16:  Int,
         numpy.uint32:  Int,
         numpy.uint64:  Int,
-        numpy.float16: Float,
         numpy.float32: Float,
         numpy.float64: Float
     } )
