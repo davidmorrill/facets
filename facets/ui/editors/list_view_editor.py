@@ -87,6 +87,20 @@ IntTuple = Tuple( Int, Int )
 ListViewOperation = Enum( 'delete', 'add', 'move' )
 
 #-------------------------------------------------------------------------------
+#  Helper functions:
+#-------------------------------------------------------------------------------
+
+def short_float ( value ):
+    """ Returns a floating point value formatted to three digits to the right
+        of the decimal, with excess trailing zeros removed.
+    """
+    result = '%.3f' % value
+    col    = result.find( '.' )
+
+    return (result if col < 0 else
+            (result[ : col + 2 ] + result[ col + 2: ].rstrip( '0' )))
+
+#-------------------------------------------------------------------------------
 #  'EmptyList' class:
 #-------------------------------------------------------------------------------
 
@@ -218,13 +232,19 @@ class ListViewItem ( HasPrivateFacets ):
             labels = self.item_labels
             n      = len( labels )
             for i, value in enumerate( item ):
-                style = 'simple'
-                facet = FacetsMap.get( type( value ) )
+                style  = 'simple'
+                editor = None
+                facet  = FacetsMap.get( type( value ) )
                 if facet is None:
                     facet = Any
                     if isinstance( value, HasFacets ):
                         facet = Instance( value.__class__ )
                         style = 'custom'
+                elif facet is Float:
+                    editor = TextEditor(
+                        evaluate    = float,
+                        format_func = short_float
+                    )
 
                 label = labels[ i % n ]
                 name  = 'value_%d' % i
@@ -234,6 +254,7 @@ class ListViewItem ( HasPrivateFacets ):
                           label      = label,
                           show_label = (label != ''),
                           style      = style,
+                          editor     = editor,
                           springy    = True,
                           width      = -30
                     )
