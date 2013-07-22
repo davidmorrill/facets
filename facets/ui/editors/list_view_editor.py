@@ -28,7 +28,7 @@ from facets.ui.custom_control_editor \
     import CustomControlEditor, ControlEditor
 
 from facets.ui.theme \
-    import LEFT
+    import RIGHT
 
 from facets.ui.constants \
     import screen_dy
@@ -300,8 +300,8 @@ class ListViewItem ( HasPrivateFacets ):
             lx, ly, ldx, ldy = theme.bounds( x, y, dx, dy )
             ldx              = self.label_width
             label_theme      = self.label_theme
-            label_theme.fill( lx, ly, ldx, ldy )
-            label_theme.draw_text( g, label, LEFT, lx, ly, ldx, ldy )
+            label_theme.fill( g, lx, ly, ldx, ldy )
+            label_theme.draw_text( g, label, RIGHT, lx, ly, ldx, ldy )
 
 
     def best_size ( self, g ):
@@ -700,7 +700,7 @@ class _ListViewEditor ( ControlEditor ):
         """ Handles the mouse leaving the control in normal mode.
         """
         active_item, self.active_item = self.active_item, None
-        inn( active_item ).refresh
+        inn( active_item ).refresh()
 
 
     def normal_left_down ( self, event ):

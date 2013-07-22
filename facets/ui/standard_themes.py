@@ -71,11 +71,11 @@ facet_db.set( '#themes:ListViewEditor_move_theme',
 )
 
 facet_db.set( '#themes:ListViewEditor_normal_label_theme',
-    Theme( '@facets:lvenl', content = ( 0, 0 ) )
+    Theme( '@facets:lvenl', content = ( 5, 0 ) )
 )
 
 facet_db.set( '#themes:ListViewEditor_active_label_theme',
-    Theme( '@facets:lveal', content = ( 0, 0 ) )
+    Theme( '@facets:lveal', content = ( 5, 0 ) )
 )
 
 #-- EOF ------------------------------------------------------------------------

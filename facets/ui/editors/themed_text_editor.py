@@ -450,10 +450,11 @@ class _ReadonlyTextEditor ( Editor ):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
+        theme = self.factory.theme
         self.themed_control = ThemedControl(
-            theme     = self.factory.theme,
+            theme     = theme,
             image     = self.factory.image,
-            alignment = 'left',
+            alignment = (theme.alignment if theme is not None else 'left'),
             parent    = parent
         )
         self.adapter = self.themed_control()
