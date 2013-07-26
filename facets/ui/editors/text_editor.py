@@ -38,6 +38,9 @@ logger = logging.getLogger( __name__ )
 HoverColor = ( 208, 208, 208 )
 DownColor  = ( 255, 255, 255 )
 
+# Color used to indicate unassigned modifications to a text editor value:
+ModifiedColor = ( 164, 219, 235 )
+
 #-------------------------------------------------------------------------------
 #  Define a simple identity mapping:
 #-------------------------------------------------------------------------------
@@ -183,6 +186,8 @@ class SimpleEditor ( Editor ):
 
         if self._handle_enter:
             adapter.set_event_handler( text_enter = self.update_object )
+            if not factory.auto_set:
+                adapter.set_event_handler( text_change = self.check_update )
 
         if factory.auto_set:
             adapter.set_event_handler( text_change = self.update_object )
@@ -193,6 +198,13 @@ class SimpleEditor ( Editor ):
     def update_object ( self, event ):
         """ Handles the user entering input data in the edit control.
         """
+        adapter = self.adapter
+        color   = getattr( adapter, '_bg_color', None )
+        if color is not None:
+            adapter.background_color = color
+            del adapter._bg_color
+            adapter.refresh()
+
         if (not self._no_update) and (self.control is not None):
             try:
                 self.value = self._get_user_value()
@@ -205,6 +217,17 @@ class SimpleEditor ( Editor ):
 
             except FacetError, excp:
                 pass
+
+
+    def check_update ( self, event ):
+        """ Handles an update that occurs when 'enter_set' is active but
+            'auto_set' is not.
+        """
+        adapter = self.adapter
+        if getattr( adapter, '_bg_color', None ) is None:
+            adapter._bg_color        = adapter.background_color
+            adapter.background_color = ModifiedColor
+            adapter.refresh()
 
 
     def update_editor ( self ):
@@ -253,6 +276,8 @@ class SimpleEditor ( Editor ):
 
         if self._handle_enter:
             control.unset_event_handler( text_enter = self.update_object )
+            if not self.factory.auto_set:
+                control.unset_event_handler( text_change = self.check_update )
 
         if self.factory.auto_set:
             control.unset_event_handler( text_change = self.update_object )
