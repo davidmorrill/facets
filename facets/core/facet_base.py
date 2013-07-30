@@ -535,6 +535,7 @@ def normalized_color ( color, has_alpha = False, as_int = True ):
         four elements; otherwise it will have three.
 
         The *color* value can be:
+        - a 'web' color string of the form: '#rgb' or '#rrggbb'.
         - an integer value of the form: 0xAARRGGBB.
         - a tuple or list of the form: ( hue, level, saturation [, alpha] )
           representing an HLS(A) encoded color, where hue is an integer value in
@@ -548,6 +549,19 @@ def normalized_color ( color, has_alpha = False, as_int = True ):
         Any input value not matching this description will cause a FacetError to
         be raised.
     """
+    # Handle case of 'web' color of the form: '#rgb' or '#rrggbb':
+    if isinstance( color, basestring ) and color.startswith( '#' ):
+        code = color[1:]
+        if len( code ) == 3:
+            r, g, b = code
+            code    = '%s%s%s%s%s%s' % ( r, r, g, g, b, b )
+
+        if len( code ) == 6:
+            try:
+                color = int( code, 16 )
+            except:
+                pass
+
     # Initialize the component types (True = int, False = float):
     r = g = b = a = True
 
@@ -609,7 +623,6 @@ def normalized_color ( color, has_alpha = False, as_int = True ):
         if g: green /= 255.0
         if b: blue  /= 255.0
         if a: alpha /= 255.0
-
 
     return (( red, green, blue, alpha ) if has_alpha else ( red, green, blue ))
 
