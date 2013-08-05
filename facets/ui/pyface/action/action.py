@@ -11,7 +11,7 @@ The base class for all actions.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Bool, Callable, Enum, HasFacets, Str, Unicode, Image
+    import Any, Bool, Callable, Enum, HasFacets, Str, Unicode, Image
 
 #-------------------------------------------------------------------------------
 #  'Action' class:
@@ -98,6 +98,9 @@ class Action ( HasFacets ):
     # A short description of the action used for tooltip text, etc.:
     tooltip = Unicode
 
+    # Optional user supplied data:
+    data = Any
+
     #-- 'Action' Interface -----------------------------------------------------
 
     #-- Initializers -----------------------------------------------------------
@@ -112,8 +115,8 @@ class Action ( HasFacets ):
     def destroy ( self ):
         """ Called when the action is no longer required.
 
-            By default this method does nothing, but this would be a great place to
-            unhook facet listeners etc.
+            By default this method does nothing, but this would be a great place
+            to unhook facet listeners, etc.
         """
         pass
 

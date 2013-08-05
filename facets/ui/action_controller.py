@@ -82,10 +82,15 @@ class ActionController ( HasPrivateFacets ):
             if method_name.find( '(' ) < 0:
                 method_name += '()'
 
-            try:
-                eval( method_name, globals(), self.context )
+           context    = self.context
+           old_action = context.set_default( 'action', action )
+           try:
+                eval( method_name, globals(), context )
             except:
                 print_exc()
+
+            if old_action is action:
+                del context[ 'action' ]
 
             return
 
