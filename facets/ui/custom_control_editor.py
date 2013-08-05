@@ -22,6 +22,9 @@ from facets.ui.controls.themed_window \
 from facets.ui.adapters.control \
     import Control
 
+from facets.ui.editor \
+    import Editor as BaseEditor
+
 from facets.ui.editors.editor \
     import Editor
 
@@ -227,14 +230,20 @@ class DefaultCustomControlEditor ( Editor ):
         self.adapter = ui_control
 
         if self.extended_name != 'None':
+            object = self.context_object
+            name   = self.extended_name
             if control.facet( 'value' ) is None:
-                control.add_facet(
-                    'value', self.context_object.facet( self.extended_name )
-                )
+                if isinstance( object, BaseEditor ) and (name == 'value'):
+                    # FIXME: Handle the special case of an Editor's 'value'
+                    # facet, which is a property, which doesn't work well as is,
+                    # so we reach down into the editor to extract the actual
+                    # object facet being referenced:
+                    name   = object.name
+                    object = object.object
 
-            self.context_object.sync_facet(
-                self.extended_name, control, 'value', True
-            )
+                control.add_facet( 'value', object.facet( name ) )
+
+            object.sync_facet( name, control, 'value', True )
 
         self.set_tooltip()
         control.post_init()
