@@ -22,7 +22,7 @@ from facets.api \
            UI, Property, View, HGroup, Item, UItem, TextEditor, on_facet_set
 
 from facets.core.facet_base \
-    import inn
+    import inn, invoke
 
 from facets.ui.custom_control_editor \
     import CustomControlEditor, ControlEditor
@@ -867,6 +867,7 @@ class _ListViewEditor ( ControlEditor ):
         is_empty  = (item.item is empty_list)
         data      = (None if is_empty else item.item)
         factory   = self.factory.factory
+        index     = self.index_for( item )
         copy_data = None
         try:
             if issubclass( factory, HasFacets ):
@@ -880,11 +881,13 @@ class _ListViewEditor ( ControlEditor ):
                 copy_data = self._default_factory(
                     factory if data is None else data
                 )
+            elif factory is not None:
+                copy_data = invoke( factory, data, index )
             else:
-                copy_data = (factory or self._default_factory)( data )
+                copy_data = self._default_factory( data )
 
         # Update the editor's value with the new data:
-        index = self.index_for( item ) + (not is_empty)
+        index += (not is_empty)
         self._add_index( index, copy_data )
 
         # Create a new list view item for the copy of the data:
@@ -1185,13 +1188,17 @@ class ListViewEditor ( CustomControlEditor ):
     adapter = Callable( ListViewItem )
 
     # Factory for creating new user items. It should be of the form:
-    # new_item = factory( item ), where 'new_item' is a new user item, and
-    # 'item' is an existing user item to use as the prototype for the new item,
-    # or None if no prototype item is available. If the specified value is not
-    # callable, it is assumed to be a prototype item that can be used to create
-    # new items from. Also accepts special case values of any HasFacets class or
-    # instance, or any simple type, such as a string, number or list, which can
-    # be used to create a new value when adding to an empty list value:
+    # new_item = factory( item [, index] ), where 'new_item' is a new user item,
+    # and 'item' is an existing user item to use as the prototype for the new
+    # item, or None if no prototype item is available. The 'index' argument is
+    # optional and provides the index into the data of the prototype 'item',
+    # unless no prototype is available, in which case it is 0.
+    #
+    # If the specified value is not callable, it is assumed to be a prototype
+    # item that can be used to create new items from. It also accepts special
+    # case values of any HasFacets class or instance, or any simple type, such
+    # as a string, number or list, which can be used to create a new value when
+    # adding to an empty list value:
     factory = Any
 
     # The minimum length allowed for the editor value:
