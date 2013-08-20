@@ -63,6 +63,7 @@ class _FilteredSetEditor ( UIEditor ):
                            ordering = 'sort',
                            separate = factory.separate,
                            adapter  = factory.adapter,
+                           hover    = factory.hover,
                            key      = self._item_key()
                        )
                 )
@@ -149,5 +150,9 @@ class FilteredSetEditor ( BasicEditorFactory ):
     # The set items are displayed in ascending order based on the result
     # returned by the callable for each set item:
     key = Callable
+
+    # Optional function to call when the mouse pointer moves (i.e. hovers) over
+    # an item. Should be a function of the form: f( item ):
+    hover = Callable
 
 #-- EOF ------------------------------------------------------------------------

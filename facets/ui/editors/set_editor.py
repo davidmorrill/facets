@@ -25,6 +25,9 @@ from facets.ui.ui_facets \
 from facets.ui.theme \
     import LEFT
 
+from facets.ui.pyface.timer.api \
+    import do_after
+
 #-------------------------------------------------------------------------------
 #  Constants:
 #-------------------------------------------------------------------------------
@@ -235,6 +238,9 @@ class _SetEditor ( ControlEditor ):
     # The last selected/deselected item:
     last_item = Instance( SetItem )
 
+    # The most recent item the mouse moved (i.e. hovered) over:
+    hover_item = Instance( SetItem )
+
     # Are the items currently being dragged over to be included (or excluded)
     # from the set?
     included = Bool
@@ -294,14 +300,26 @@ class _SetEditor ( ControlEditor ):
     def normal_motion ( self, event ):
         """ Handles the mouse moving in normal mode.
         """
+        x, y = event.x, event.y
+        item = self._item_at( x, y )
+        if self.factory.hover is not None:
+            if item is not self.hover_item:
+                do_after( 333, self._call_hover, item )
+
+            self.hover_item = item
+
         if self.factory.ordering == 'user':
-            x, y   = event.x, event.y
-            item   = self._item_at( x, y )
             cursor = 'arrow'
             if (item is not None) and item.in_drag( x, y ):
                 cursor = 'sizens'
 
             self.control.cursor = cursor
+
+
+    def normal_leave ( self ):
+        """ Handles the mouse pointer leaving the control in normal mode.
+        """
+        self.hover_item = None
 
 
     def normal_left_down ( self, event ):
@@ -620,6 +638,14 @@ class _SetEditor ( ControlEditor ):
         self._first_paint = None
         self.refresh()
 
+
+    def _call_hover ( self, pending ):
+        """ Calls the user's 'hover' handler if the current hover item is still
+            the same as the specified *pending* one.
+        """
+        if (pending is not None) and (self.hover_item is pending):
+            self.factory.hover( pending.item )
+
 #-------------------------------------------------------------------------------
 #  'SetEditor' class:
 #-------------------------------------------------------------------------------
@@ -652,5 +678,9 @@ class SetEditor ( CustomControlEditor ):
 
     # Function that returns the value to sort on:
     key = Callable
+
+    # Optional function to call when the mouse pointer moves (i.e. hovers) over
+    # an item. Should be a function of the form: f( item ):
+    hover = Callable
 
 #-- EOF ------------------------------------------------------------------------
