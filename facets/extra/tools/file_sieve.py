@@ -287,7 +287,7 @@ class FileFilter ( Filter ):
         Item( 'ext',  label = 'Ext.', width = -40 ),
         Item( 'path', label = 'Directory' ),
         Item( 'size', width = -60 ),
-        Item( 'age', width = -60 ),
+        Item( 'age',  width = -60 ),
 #        '_',
 #        Item( 'mode' ),
     )
@@ -297,11 +297,11 @@ class FileFilter ( Filter ):
     def filter ( self, object ):
         """ Returns whether a specified object meets the filter criteria.
         """
-        return ((object.path.find( self.path ) >= 0)       and
-                (object.root.find( self.root ) >= 0)       and
-                self._ext_test(  object.ext )              and
-                self._size_test( object.size )             and
-                self._age_test(  object.date, object.now ) and
+        return ((object.path.lower().find( self.path.lower() ) >= 0) and
+                (object.root.lower().find( self.root.lower() ) >= 0) and
+                self._ext_test(  object.ext )                        and
+                self._size_test( object.size )                       and
+                self._age_test(  object.date, object.now )           and
                 self._mode_test( object.read_only ))
 
     #-- Event Handlers ---------------------------------------------------------
