@@ -1948,9 +1948,9 @@ class BooleanImages ( SingletonHasPrivateFacets ):
 
     #-- Facet Definitions ------------------------------------------------------
 
-    true  = Image( '@icons:true_2'  )
-    false = Image( '@icons:false_2' )
-    check = Image( '@icons:true'    )
+    true  = Image( '@facets:on2'  )
+    false = Image( '@facets:off2' )
+    check = Image( '@facets:on1'  )
 
 boolean_images = None
 
