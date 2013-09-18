@@ -601,13 +601,7 @@ class _PropertySheetEditor ( UIEditor ):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
-        factory                     = self.factory
-        self.property_sheet_adapter = factory.adapter()
-
-        if factory.edit_object:
-            self.target = self.object
-        else:
-            self.target = self.value
+        self.init_data()
 
         return self.edit_facets(
             view = View(
@@ -617,8 +611,8 @@ class _PropertySheetEditor ( UIEditor ):
                           adapter     = PropertySheetGridAdapter,
                           operations  = [ 'edit' ],
                           drag_drop   = 'none',
-                          show_titles = factory.show_titles,
-                          monitor     = factory.monitor,
+                          show_titles = self.factory.show_titles,
+                          monitor     = self.factory.monitor,
                           filter      = 'filter'
                       )
                 )
@@ -628,6 +622,14 @@ class _PropertySheetEditor ( UIEditor ):
         ).set(
             history = self.ui.history
         )
+
+
+    def init_data ( self ):
+        """ Initializes internal editor data.
+        """
+        factory                     = self.factory
+        self.property_sheet_adapter = factory.adapter()
+        self.target = self.object if factory.edit_object else self.value
 
 
     def update_editor ( self ):

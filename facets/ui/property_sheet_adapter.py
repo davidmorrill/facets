@@ -298,6 +298,13 @@ class PropertySheetAdapter ( HasPrivateFacets ):
     def _formatter_default ( self ):
         return self._format_value
 
+    #-- 'object' Method Overrides ----------------------------------------------
+
+    def __call__ ( self ):
+        """ Allows an adapter to be its own 'factory'.
+        """
+        return self
+
     #-- Private Methods --------------------------------------------------------
 
     def _format_value ( self, value ):
