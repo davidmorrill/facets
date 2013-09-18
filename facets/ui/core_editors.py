@@ -369,6 +369,14 @@ def ProgressBarEditor ( *args, **facets ):
     return ProgressBarEditor( *args, **facets )
 
 
+def PropertyListEditor ( *args, **facets ):
+    """ Allows the user to use a property sheet editor.
+    """
+    from facets.ui.editors.property_list_editor import PropertyListEditor
+
+    return PropertyListEditor( *args, **facets )
+
+
 def PropertySheetEditor ( *args, **facets ):
     """ Allows the user to use a property sheet editor.
     """

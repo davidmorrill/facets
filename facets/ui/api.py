@@ -100,12 +100,13 @@ from core_editors \
            InstanceEditor, KeyBindingEditor, LightTableEditor, ListEditor,     \
            ListStrEditor, ListViewEditor, MultipleInstanceEditor,              \
            NotebookEditor, NullEditor, PopupEditor, ProgressBarEditor,         \
-           PropertySheetEditor, RangeEditor, RangeSliderEditor, RGBColorFacet, \
-           ScrubberEditor, SetEditor, ShellEditor, SlideshowEditor,            \
-           StackEditor, StringGridEditor, TemplateEditor, TextEditor,          \
-           ThemedButtonEditor, ThemedCheckboxEditor, ThemedSliderEditor,       \
-           ThemedTextEditor, VerticalNotebookEditor, TitleEditor,              \
-           ToolbarEditor, TreeEditor, TupleEditor, ValueEditor, VIPShellEditor
+           PropertyListEditor, PropertySheetEditor, RangeEditor,               \
+           RangeSliderEditor, RGBColorFacet, ScrubberEditor, SetEditor,        \
+           ShellEditor, SlideshowEditor, StackEditor, StringGridEditor,        \
+           TemplateEditor, TextEditor, ThemedButtonEditor,                     \
+           ThemedCheckboxEditor, ThemedSliderEditor, ThemedTextEditor,         \
+           VerticalNotebookEditor, TitleEditor, ToolbarEditor, TreeEditor,     \
+           TupleEditor, ValueEditor, VIPShellEditor
 
 from facets.ui.adapters.cell \
     import Cell
