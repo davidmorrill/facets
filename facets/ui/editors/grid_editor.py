@@ -324,7 +324,7 @@ class _GridEditor ( Editor ):
             self.selected_indices = indices
 
 
-    @on_facet_set('grid_adapter:refresh' )
+    @on_facet_set( 'grid_adapter:refresh' )
     def refresh_editor ( self ):
         """ Refreshes the contents of the editor when a change that only affects
             the visual appearance of the editor occurs.
@@ -909,6 +909,14 @@ class _GridEditor ( Editor ):
                 rows.append( row )
 
         self.gui_select_rows( rows )
+
+
+    def _object_set ( self ):
+        """ Handles the 'object' facet being changed.
+        """
+        if self.grid_adapter is not None:
+            self.grid_adapter.object = self.object
+            self.do_update_editor()
 
     #-- UI Preference Save/Restore Interface -----------------------------------
 

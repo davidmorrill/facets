@@ -16,7 +16,7 @@ from facets.api \
            ATheme, Theme, Event, Image, Property, Interface, DelegatesTo,      \
            on_facet_set, property_depends_on, implements, TextEditor,          \
            Disallow, View, HGroup, VGroup, Item, InstanceEditor,               \
-           ThemedButtonEditor, ThemedCheckboxEditor, implements,               \
+           ThemedButtonEditor, ThemedCheckboxEditor, Undefined, implements,    \
            property_depends_on
 
 from facets.core.facet_base \
@@ -1406,6 +1406,9 @@ class GridAdapter ( HasPrivateFacets ):
     def len ( self ):
         """ Returns the number of items in the associated facet value.
         """
+        if self.object is None:
+            return 0
+
         return len( getattr( self.object, self.name ) )
 
 
@@ -1744,7 +1747,7 @@ class GridAdapter ( HasPrivateFacets ):
         return self.color_for( self._result_for( name, row, column ) )
 
 
-    def _result_for ( self, name, row, column, value = None ):
+    def _result_for ( self, name, row, column, value = Undefined ):
         """ Returns/Sets the value of the specified *name* attribute for the
             specified *object.facet[row].column* item.
         """
