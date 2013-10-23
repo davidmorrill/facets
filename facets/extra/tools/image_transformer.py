@@ -54,7 +54,7 @@ class ImageTransformer ( Tool ):
     derived_image = Instance( HLSADerivedImage, connect = 'from' )
 
     # The encoding of the current derived image:
-    encoded = Str
+    encoded = Str( connect = 'from: HLSA encoding' )
 
     # The background color used for the ImageZoomEditors:
     bg_color = Color( 0x303030 )

@@ -18,8 +18,8 @@ from os.path \
     import isfile, dirname, join, splitext
 
 from facets.api \
-    import List, Instance, Enum, Theme, Property, Any, File, Button, View, \
-           HToolbar, UItem, property_depends_on, on_facet_set, spring
+    import Str, List, Instance, Enum, Theme, Property, Any, File, Button, \
+           View, HToolbar, UItem, property_depends_on, on_facet_set, spring
 
 from facets.ui.editors.light_table_editor \
     import LightTableEditor, LightTableAnimator, GridLayout, ThemedImage, \
@@ -125,6 +125,9 @@ class LightTable ( Tool ):
     # The current selected image:
     selected = Any( connect = 'from: selected image' )
 
+    # The HLSA encoding to apply to all images:
+    encoded = Str( connect = 'to: HLSA encoding' )
+
     # The list of ThemedImages being displayed:
     themed_images = List
 
@@ -198,11 +201,15 @@ class LightTable ( Tool ):
                         if splitext( name )[1] in ImageTypes ]
 
 
-    @on_facet_set( 'images, themed_image' )
+    @on_facet_set( 'images, themed_image, encoded' )
     def _themed_images_modified ( self ):
         selected, self.selected = self.selected, None
         ti                      = self.themed_image
-        self.themed_images      = [ ti( image ) for image in self.images ]
+        encoded                 = self.encoded
+        if encoded != '':
+            encoded = '?' + encoded
+        self.themed_images      = [ ti( image + encoded )
+                                    for image in self.images ]
         self.selected           = selected
 
 
