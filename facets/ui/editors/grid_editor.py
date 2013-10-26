@@ -800,7 +800,10 @@ class _GridEditor ( Editor ):
         if self.selected is None:
             self._set_ui_rows_selection( [] )
         else:
-            self._set_ui_rows_selection( [ self.selected ] )
+            rows = self._set_ui_rows_selection( [ self.selected ] )
+            if len( rows ) == 1:
+                self.gui_scroll_to( rows[0] )
+
 
     def _set_ui_rows_selection ( self, selected = None ):
         """ Set the ui selection from an editor row list selection.
@@ -844,6 +847,9 @@ class _GridEditor ( Editor ):
 
         self.gui_select_rows( rows )
 
+        return rows
+
+
     def _set_ui_column_selection ( self ):
         """ Set the ui selection from a single editor column selection.
         """
@@ -851,6 +857,7 @@ class _GridEditor ( Editor ):
             self._set_ui_columns_selection( [] )
         else:
             self._set_ui_columns_selection( [ self.selected ] )
+
 
     def _set_ui_columns_selection ( self, selected = None ):
         """ Set the ui selection from an editor column list selection.
@@ -868,10 +875,12 @@ class _GridEditor ( Editor ):
             [ reverse_map[ column ] for column in selected ]
         )
 
+
     def _set_ui_cell_selection ( self ):
         """ Set the ui selection from a single editor cell selection.
         """
         raise NotImplementedError
+
 
     def _set_ui_cells_selection ( self ):
         """ Set the ui selection from an editor cell list selection.
