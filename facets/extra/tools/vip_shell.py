@@ -11,16 +11,33 @@ Defines the VIP (Visual Interactive Python) shell tool.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, Any, Instance, Event, View, Item, VIPShellEditor
+    import Str, Any, Instance, Event, Property, View, Item, VIPShellEditor, \
+           Handler
 
 from facets.extra.helper.has_payload \
     import HasPayload
+
+from facets.ui.ui_info \
+    import UIInfo
 
 from facets.ui.vip_shell.items.api \
     import ShellItem
 
 from tools \
     import Tool
+
+#-------------------------------------------------------------------------------
+#  'VIPShellHandler' class:
+#-------------------------------------------------------------------------------
+
+class VIPShellHandler ( Handler ):
+    """ Custom handler class for a VIPShell instance view.
+    """
+
+    def init_info ( self, info ):
+        """ Informs the handler what the UIInfo object for a View will be.
+        """
+        info.ui.context[ 'object' ].info = info
 
 #-------------------------------------------------------------------------------
 #  'VIPShell' class:
@@ -60,6 +77,12 @@ class VIPShell ( Tool ):
     # Event fired when the user executes a command in the shell:
     executed = Event
 
+    # The UIInfo object associated with the shell's view:
+    info = Instance( UIInfo )
+
+    # A reference to the VIPShellEditor associated with the shell's view:
+    shell = Property
+
     #-- Facets View Definitions ------------------------------------------------
 
     def default_facets_view ( self ):
@@ -77,9 +100,15 @@ class VIPShell ( Tool ):
                       executed = 'executed'
                   )
             ),
-            title = 'VIP Shell',
-            id    = 'facets.extra.tools.vip_shell.' + self.name
+            title   = 'VIP Shell',
+            id      = 'facets.extra.tools.vip_shell.' + self.name,
+            handler = VIPShellHandler
         )
+
+    #-- Property Implementations -----------------------------------------------
+
+    def _get_shell ( self ):
+        return self.info.values
 
     #-- Facet Event Handlers ---------------------------------------------------
 

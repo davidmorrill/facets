@@ -163,6 +163,9 @@ select_theme_action      = Action( name   = 'Select theme...',
 display_shell_action     = Action( name   = 'VIP Shell',
                                    action = 'on_display_shell' )
 
+display_content_action   = Action( name   = 'View content',
+                                   action = 'on_display_content' )
+
 display_workbench_action = Action( name   = 'Workbench',
                                    action = 'on_display_workbench' )
 
@@ -676,6 +679,7 @@ class DockWindow ( HasPrivateFacets ):
                             Separator(),
                             Menu(
                                 display_shell_action,
+                                display_content_action,
                                 display_workbench_action,
                                 display_monitor_action,
                                 display_tools_action,
@@ -898,12 +902,17 @@ class DockWindow ( HasPrivateFacets ):
     def on_display_shell ( self, action ):
         """ Displays a VIP Shell window.
         """
-        from facets.extra.tools.vip_shell import VIPShell
+        self._create_vip_shell().edit_facets()
+        self._object = None
 
-        VIPShell(
-            name   = 'Developer VIP Shell',
-            values = { 'object': self._object }
-        ).edit_facets()
+
+    def on_display_content ( self, action ):
+        """ Displays a VIP Shell window with information about the content of
+            the current DockWindow item.
+        """
+        shell = self._create_vip_shell()
+        shell.edit_facets()
+        shell.shell.debug_info_for( self._object.control )
         self._object = None
 
 
@@ -1357,6 +1366,17 @@ class DockWindow ( HasPrivateFacets ):
             from facets.tools.image_tool import ImageTool
 
             ImageTool().image = image
+
+
+    def _create_vip_shell ( self ):
+        """ Returns a new VIP Shell object.
+        """
+        from facets.extra.tools.vip_shell import VIPShell
+
+        return VIPShell(
+            name   = 'Developer VIP Shell',
+            values = { 'object': self._object }
+        )
 
 #-------------------------------------------------------------------------------
 #  'FakeEvent' class:

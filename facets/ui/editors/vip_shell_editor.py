@@ -2844,6 +2844,31 @@ class vipShellEditor ( UIEditor ):
         """
         self.result = self.locals[ '_' ] = result
 
+
+    def debug_info_for ( self, control ):
+        """ Shows the user selected debug information gleaned from the control
+            specified by *control*.
+        """
+        if self.show_control:
+            self.debug.debug( 'Control', control )
+
+        editor = control.editor
+        if editor is None:
+            for child in control.children:
+                editor = child.editor
+                if editor is not None:
+                    break
+
+        if editor not in ( None, self ):
+            if self.show_editor:
+                self.debug.debug( 'Editor', editor )
+
+            if self.show_object and (editor.object is not self):
+                self.debug.debug( 'Object', editor.object )
+
+            if self.show_value and (editor.value is not self):
+                self.debug.debug( "Value of '%s'" % editor.name, editor.value )
+
     #-- Facet Default Values ---------------------------------------------------
 
     def _code_item_default ( self ):
@@ -3031,19 +3056,7 @@ class vipShellEditor ( UIEditor ):
     def _grabbed_control_set ( self, control ):
         """ Handles the 'grabbed_control' facet being modified.
         """
-        if self.show_control:
-            self.debug.debug( 'Control', control )
-
-        editor = control.editor
-        if editor not in ( None, self ):
-            if self.show_editor:
-                self.debug.debug( 'Editor', editor )
-
-            if self.show_object and (editor.object is not self):
-                self.debug.debug( 'Object', editor.object )
-
-            if self.show_value and (editor.value is not self):
-                self.debug.debug( "Value of '%s'" % editor.name, editor.value )
+        self.debug_info_for( control )
 
 
     def _dropped_value_set ( self, value ):
