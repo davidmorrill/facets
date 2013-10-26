@@ -16,7 +16,7 @@ from os \
     import getcwd, mkdir
 
 from os.path \
-    import abspath, dirname, exists, isdir, join
+    import abspath, dirname, exists, isdir, join, splitext
 
 from string \
     import lowercase, uppercase, ascii_uppercase
@@ -269,6 +269,13 @@ def verify_path ( path ):
             pass
 
     return path
+
+
+def file_with_ext ( file_name, ext ):
+    """ Returns a copy of the specified *file_name* with its current (if any)
+        extension set to *ext*.
+    """
+    return ('%s.%s' % ( splitext( file_name )[0], ext.lstrip( '.' ) ))
 
 
 def get_module_name ( level = 2 ):
