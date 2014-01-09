@@ -190,6 +190,17 @@ class Text ( Drawable ):
         # fixme: implement this...
         return None
 
+
+    def text_size ( self, g ):
+        """ Returns the minimum size needed to display the current text using
+            the current font for the graphics context *g*.
+        """
+        old_font, g.font = g.font, self.font
+        result           = g.text_size( self.text )
+        g.font           = old_font
+
+        return result
+
 #-------------------------------------------------------------------------------
 #  'ThemedText' class:
 #-------------------------------------------------------------------------------
@@ -568,6 +579,7 @@ class DrawableCanvas ( Drawable ):
         """
         for item in removed:
             item.owner = None
+            item.halt_animated_facets()
 
         for item in added:
             item.owner = self
