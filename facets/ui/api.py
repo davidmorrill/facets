@@ -95,15 +95,15 @@ from core_editors \
            DirectoryEditor, DNDEditor, DrawableCanvasEditor, DropEditor,       \
            EnumEditor, FileEditor, FileStackEditor, FileSystemEditor,          \
            FilmStripEditor, FilteredSetEditor, FontEditor, FontFacet,          \
-           GridEditor, HistoryEditor, HLSColorEditor, HTMLBrowserEditor,       \
-           HTMLEditor, ImageEditor, ImageEnumEditor, ImageZoomEditor,          \
-           InstanceEditor, KeyBindingEditor, LightTableEditor, ListEditor,     \
-           ListStrEditor, ListViewEditor, MultipleInstanceEditor,              \
-           NotebookEditor, NullEditor, PopupEditor, ProgressBarEditor,         \
-           PropertyListEditor, PropertySheetEditor, RangeEditor,               \
-           RangeSliderEditor, RGBColorFacet, ScrubberEditor, SetEditor,        \
-           ShellEditor, SlideshowEditor, StackEditor, StringGridEditor,        \
-           TemplateEditor, TextEditor, ThemedButtonEditor,                     \
+           GridEditor, HistogramEditor, HistoryEditor, HLSColorEditor,         \
+           HTMLBrowserEditor, HTMLEditor, ImageEditor, ImageEnumEditor,        \
+           ImageZoomEditor, InstanceEditor, KeyBindingEditor,                  \
+           LightTableEditor, ListEditor, ListStrEditor, ListViewEditor,        \
+           MultipleInstanceEditor, NotebookEditor, NullEditor, PopupEditor,    \
+           ProgressBarEditor, PropertyListEditor, PropertySheetEditor,         \
+           RangeEditor, RangeSliderEditor, RGBColorFacet, ScrubberEditor,      \
+           SetEditor, ShellEditor, SlideshowEditor, StackEditor,               \
+           StringGridEditor, TemplateEditor, TextEditor, ThemedButtonEditor,   \
            ThemedCheckboxEditor, ThemedSliderEditor, ThemedTextEditor,         \
            VerticalNotebookEditor, TitleEditor, ToolbarEditor, TreeEditor,     \
            TupleEditor, ValueEditor, VIPShellEditor

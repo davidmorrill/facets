@@ -196,7 +196,7 @@ class HistogramCanvas ( DrawableCanvas ):
 
         n        = int( round( (y_max - y_min) / y_incr ) )
         label_dy = float( dy - 1 ) / n
-        tdx      = dx - 2
+        tdx      = dx - 5
         tdy      = self.label_height + 2
         dy2      = self.label_height / 2.0
         yt       = y_last = y + dy - 1.0
@@ -233,8 +233,8 @@ class HistogramCanvas ( DrawableCanvas ):
 
         # Add the y-axis line:
         items.append( Line(
-            p0         = ( x + max_dx + 2, y ),
-            p1         = ( x + max_dx + 2, y + dy - 1 ),
+            p0         = ( x + max_dx + 5, y ),
+            p1         = ( x + max_dx + 5, y + dy - 1 ),
             pen        = self.factory.label_color,
             anti_alias = False
         ) )
@@ -247,7 +247,7 @@ class HistogramCanvas ( DrawableCanvas ):
         self.y_ticks = y_ticks
 
         # Return the actual width of the y_axis:
-        return (max_dx + 3)
+        return (max_dx + 6)
 
 
     def _create_x_axis ( self, x, y, dx, dy, label_x, label_dx ):
@@ -520,76 +520,5 @@ class HistogramEditor ( BasicEditorFactory ):
 
     # Should the histogram be animated?
     animate = Bool( False )
-
-#-- Test Case ------------------------------------------------------------------
-
-if __name__ == '__main__':
-
-    from facets.api \
-        import HasFacets, View, HGroup, VSplit, UItem, Button, spring
-
-    from random \
-         import random, randint
-
-    class HistogramTest ( HasFacets ):
-
-        data1 = List
-        data2 = List
-        data3 = List
-        reset = Button( 'Reset' )
-
-        view = View(
-            VSplit(
-                UItem( 'data1',
-                       label  = 'Histogram 1',
-                       editor = HistogramEditor(
-                           title     = 'Animated Histogram',
-                           subtitle  = '30 data points',
-                           spacing   = 0.15,
-                           bar_color = 0xFF5656,
-                           animate   = True
-                       ),
-                       dock = 'tab'
-                ),
-                UItem( 'data2',
-                       label  = 'Histogram 2',
-                       editor = HistogramEditor(
-                           title   = 'Normal Histogram',
-                           spacing = 0.15,
-                           x_units = ' px',
-                           y_units = '%'
-                       ),
-                       dock = 'tab'
-                ),
-                UItem( 'data3',
-                       label  = 'Histogram 3',
-                       editor = HistogramEditor(
-                           spacing   = -1,
-                           bar_color = 0xC0C0C0
-                       ),
-                       dock = 'tab'
-                ),
-                id = 'splitter'
-            ),
-            HGroup( spring, UItem( 'reset' ) ),
-            id     = 'temp.histogram_test',
-            width  = 0.50,
-            height = 0.67
-        )
-
-        def _data1_default ( self ):
-            return [ randint( 1, 100 ) for i in xrange( 30 ) ]
-
-        def _data2_default ( self ):
-            return [ 2500.0 * random() for i in xrange( 15 ) ]
-
-        def _data3_default ( self ):
-            return [ random() for i in xrange( 50 ) ]
-
-        def _reset_set ( self ):
-            del self.data1
-            del self.data2
-
-    HistogramTest().edit_facets()
 
 #-- EOF ------------------------------------------------------------------------

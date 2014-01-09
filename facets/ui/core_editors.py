@@ -220,6 +220,14 @@ def GridEditor ( *args, **facets ):
     return toolkit().grid_editor( *args, **facets )
 
 
+def HistogramEditor ( *args, **facets ):
+    """ Displays a series of values as a histogram plot.
+    """
+    from facets.ui.editors.histogram_editor import HistogramEditor
+
+    return HistogramEditor( *args, **facets )
+
+
 def HistoryEditor ( *args, **facets ):
     """ Displays a text field with a history of prior values.
     """
