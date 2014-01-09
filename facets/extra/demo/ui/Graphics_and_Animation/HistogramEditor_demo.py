@@ -6,7 +6,7 @@ in a histogram plot format.
 #-- Imports --------------------------------------------------------------------
 
 from facets.api \
-    import HasFacets, List, Button, View, HGroup, VSplit, UItem, \
+    import HasFacets, Any, List, Button, View, HGroup, VSplit, UItem, \
            HistogramEditor, spring
 
 from random \
@@ -18,7 +18,7 @@ class HistogramEditorDemo ( HasFacets ):
 
     data1 = List
     data2 = List
-    data3 = List
+    data3 = Any
     reset = Button( 'Reset' )
 
     view = View(
@@ -47,8 +47,9 @@ class HistogramEditorDemo ( HasFacets ):
             UItem( 'data3',
                    label  = 'Histogram 3',
                    editor = HistogramEditor(
-                       spacing   = -1,
-                       bar_color = 0xC0C0C0
+                       spacing    = -1,
+                       bar_color  = 0xC0C0C0,
+                       format_str = '%0.3f'
                    ),
                    dock = 'tab'
             ),
@@ -68,7 +69,9 @@ class HistogramEditorDemo ( HasFacets ):
         return [ 2500.0 * random() for i in xrange( 15 ) ]
 
     def _data3_default ( self ):
-        return [ random() for i in xrange( 50 ) ]
+        import numpy
+
+        return numpy.histogram( numpy.random.random( 1000 ), 10, normed = True )
 
     def _reset_set ( self ):
         del self.data1

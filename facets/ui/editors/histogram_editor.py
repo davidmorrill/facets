@@ -435,13 +435,13 @@ class _HistogramEditor ( _DrawableCanvasEditor ):
 
         n = len( data )
         if len( labels ) == (n + 1):
-            labels = [ (labels[ i + 1 ] - labels[ i ]) / 2.0
+            labels = [ (labels[ i + 1 ] + labels[ i ]) / 2.0
                        for i in xrange( n ) ]
 
         for i in xrange( n ):
             label = labels[ i ]
             if not isinstance( label, basestring ):
-                label[ i ] = self.string_value( label )
+                labels[ i ] = self.string_value( label )
 
         x_units = self.factory.x_units
         if x_units != '':
