@@ -27,8 +27,8 @@ class HistogramEditorDemo ( HasFacets ):
                    label  = 'Histogram 1',
                    editor = HistogramEditor(
                        title     = 'Animated Histogram',
-                       subtitle  = '30 data points',
-                       spacing   = 0.15,
+                       subtitle  = '30 data points %s',
+                       spacing   = 0.5,
                        bar_color = 0xFF5656,
                        animate   = True
                    ),
@@ -47,10 +47,13 @@ class HistogramEditorDemo ( HasFacets ):
             UItem( 'data3',
                    label  = 'Histogram 3',
                    editor = HistogramEditor(
-                       spacing    = -1,
-                       bar_color  = 0xC0C0C0,
-                       format_str = '%0.3f'
-                   ),
+                       spacing      = -1,
+                       bar_color    = 0xC0C0C0,
+                       format_str   = '%0.3f',
+                       show_tooltip = False,
+                       show_cursor  = False,
+                       animate      = True
+                  ),
                    dock = 'tab'
             ),
             id = 'splitter'
@@ -71,11 +74,12 @@ class HistogramEditorDemo ( HasFacets ):
     def _data3_default ( self ):
         import numpy
 
-        return numpy.histogram( numpy.random.random( 1000 ), 10, normed = True )
+        return numpy.histogram( numpy.random.random( 10000 ), 25 )
 
     def _reset_set ( self ):
         del self.data1
         del self.data2
+        del self.data3
 
 #-- Create the demo ------------------------------------------------------------
 

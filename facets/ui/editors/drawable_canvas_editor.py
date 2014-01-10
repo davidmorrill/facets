@@ -144,6 +144,13 @@ class DrawableCanvasControl ( ThemedWindow ):
         """
         return (inn( self.canvas ).item_at( x, y ) or self.canvas)
 
+    #-- Facet Event Handlers ---------------------------------------------------
+
+    @on_facet_set( 'canvas:tooltip' )
+    def _tooltip_modified ( self, tooltip ):
+        """ Handles the canvas's 'tooltip' facet being changed.
+        """
+        self.control.tooltip = tooltip
 #-------------------------------------------------------------------------------
 #  '_DrawableCanvasEditor' class:
 #-------------------------------------------------------------------------------

@@ -428,6 +428,14 @@ class Rectangle ( Penable ):
         """
         x0, y0 = self.origin
         dx, dy = self.size
+        if dx < 0:
+            x0 += dx
+            dx  = -dx
+
+        if dy < 0:
+            y0 += dy
+            dy  = -dy
+
         if not ((x0 <= x < (x0 + dx)) and (y0 <= y < (y0 + dy))):
             return None
 
@@ -533,6 +541,9 @@ class DrawableCanvas ( Drawable ):
 
     # The list of drawable objects:
     content = List # ( Drawable objects )
+
+    # The tooltip for the canvas:
+    tooltip = Str
 
     # The current display bounds of the canvas:
     bounds = Tuple( Int, Int, Int, Int )

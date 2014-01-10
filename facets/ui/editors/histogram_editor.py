@@ -3,6 +3,11 @@ Defines an editor for plotting histograms.
 """
 
 #-------------------------------------------------------------------------------
+#  todo: Add (optional) mouse drag cursor
+#  todo: Tooltips showing current data values (value, label, index)
+#-------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------
 #  Imports:
 #-------------------------------------------------------------------------------
 
@@ -26,6 +31,53 @@ from facets.animation.api \
     import RampTweener, EaseIn
 
 #-------------------------------------------------------------------------------
+#  'HistogramBar' class:
+#-------------------------------------------------------------------------------
+
+class HistogramBar ( Rectangle ):
+
+    #-- Facet Definitions ------------------------------------------------------
+
+    # The value associated with the histogram bar:
+    value = Any
+
+    # The label associated with the histogram bar:
+    label = Str
+
+    # The index of the value within the data set:
+    index = Int
+
+    # The tooltip for the histogram bar:
+    tooltip = Str
+
+    #-- Facet Default Values ---------------------------------------------------
+
+    def _tooltip_default ( self ):
+        return 'Value: %s\nLabel: %s\nIndex: %d' % (
+            self.value, self.label, self.index
+        )
+
+    #-- Mouse Event Handlers ---------------------------------------------------
+
+    def motion ( self, x, y ):
+        owner = self.owner
+        if self.value is not None:
+            tooltip  = self.tooltip
+            subtitle = owner.subtitle
+            if subtitle is not None:
+                subtitle.text = owner.factory.subtitle % (
+                    '(%s)' % tooltip.replace( '\n', ', ' )
+                )
+            else:
+                owner.tooltip = tooltip
+
+        cursor = owner.cursor
+        if cursor is not None:
+            x0, x1    = cursor.p0[0], cursor.p1[0]
+            cursor.p0 = ( x0, y )
+            cursor.p1 = ( x1, y )
+
+#-------------------------------------------------------------------------------
 #  'HistogramCanvas' class:
 #-------------------------------------------------------------------------------
 
@@ -46,6 +98,12 @@ class HistogramCanvas ( DrawableCanvas ):
 
     # Dummy Text object used for text size calculations:
     text = Instance( Text )
+
+    # The Line representing the mouse cursor:
+    cursor = Instance( Line )
+
+    # The ThemedText used for the subtitle if it contains a '%s':
+    subtitle = Instance( ThemedText )
 
     # The graphics context to use for drawing/calculations:
     graphics = Any # Instance( Graphics )
@@ -105,6 +163,7 @@ class HistogramCanvas ( DrawableCanvas ):
         x, y, dx, dy = self.bounds
         factory      = self.factory
 
+        # Create the title (if requested):
         titles = []
         title  = factory.title
         if title != '':
@@ -119,16 +178,22 @@ class HistogramCanvas ( DrawableCanvas ):
             y  += tdy
             dy -= tdy
 
+        # Create the subtitle (if requested):
         subtitle = factory.subtitle
         if subtitle != '':
             tdy = self.label_height + 4
-            titles.append( ThemedText(
+            subtitle_item = ThemedText(
                 text      = subtitle,
                 alignment = 'center',
                 origin    = ( x, y + dy - tdy ),
                 size      = ( dx, tdy ),
                 theme     = Theme( '@xform:bg?L27', content = ( 5, 5, 2, 0 ) )
-            ) )
+            )
+            titles.append( subtitle_item )
+            if subtitle.find( '%s' ) >= 0:
+                self.subtitle      = subtitle_item
+                subtitle_item.text = subtitle % ''
+
             dy -= tdy
 
         # Add and animate any titles:
@@ -165,7 +230,9 @@ class HistogramCanvas ( DrawableCanvas ):
         ) )
 
         # Create the y-axis tick marks:
-        self._create_ticks( x + y_axis_dx + 4, dx - y_axis_dx - 10 )
+        x_tick    = x + y_axis_dx + 4
+        x_tick_dx = dx - y_axis_dx - 10
+        self._create_ticks( x_tick, x_tick_dx )
 
         # Create the histogram bars:
         label_x, label_dx = self._create_bars(
@@ -178,6 +245,16 @@ class HistogramCanvas ( DrawableCanvas ):
             x + y_axis_dx + 3, y + y_top + y_axis_dy - 1,
             dx - y_axis_dx - 9, x_axis_dy, label_x, label_dx
         )
+
+        # Create the Line used for the mouse cursor (if requested):
+        if factory.show_cursor:
+            self.cursor = Line(
+                p0         = ( x_tick, -1000 ),
+                p1         = ( x_tick + x_tick_dx - 1, -1000 ),
+                pen        = 0xFF0000,
+                anti_alias = False
+            )
+            self.content.append( self.cursor )
 
 
     def _create_y_axis ( self, x, y, dx, dy ):
@@ -305,17 +382,25 @@ class HistogramCanvas ( DrawableCanvas ):
             y0              = y + dy
             brush           = factory.bar_color
             ibar_dx         = int( round( bar_dx ) )
-            for value in data:
+            labels          = self.labels
+            show_tooltip    = factory.show_tooltip
+            for i, value in enumerate( data ):
                 bar_dy = int( round( ((value - y_min) * dy) / y_range ) )
                 if bar_dy > 0:
                     bars.append(
-                        Rectangle(
+                        HistogramBar(
                             origin     = ( int( round( xc ) ), y0 - bar_dy ),
                             size       = ( ibar_dx, bar_dy + 1 ),
                             brush      = brush,
                             anti_alias = False
                         )
                     )
+                    if show_tooltip:
+                        bars[-1].set(
+                            value = value,
+                            label = labels[ i ],
+                            index = i
+                        )
 
                 xc += bdx
 
@@ -517,6 +602,12 @@ class HistogramEditor ( BasicEditorFactory ):
 
     # The theme to use for displaying the content:
     theme = ATheme( facet_value = True )
+
+    # Should a tooltip be shown when mousing over histogram bars?
+    show_tooltip = Bool( True )
+
+    # Should a horizontal mouse cursor track mousing over histogram bars?
+    show_cursor = Bool( True )
 
     # Should the histogram be animated?
     animate = Bool( False )
