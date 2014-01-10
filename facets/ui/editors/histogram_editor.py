@@ -3,11 +3,6 @@ Defines an editor for plotting histograms.
 """
 
 #-------------------------------------------------------------------------------
-#  todo: Add (optional) mouse drag cursor
-#  todo: Tooltips showing current data values (value, label, index)
-#-------------------------------------------------------------------------------
-
-#-------------------------------------------------------------------------------
 #  Imports:
 #-------------------------------------------------------------------------------
 
@@ -181,7 +176,7 @@ class HistogramCanvas ( DrawableCanvas ):
         # Create the subtitle (if requested):
         subtitle = factory.subtitle
         if subtitle != '':
-            tdy = self.label_height + 4
+            tdy           = self.label_height + 4
             subtitle_item = ThemedText(
                 text      = subtitle,
                 alignment = 'center',

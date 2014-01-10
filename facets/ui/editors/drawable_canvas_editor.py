@@ -151,6 +151,7 @@ class DrawableCanvasControl ( ThemedWindow ):
         """ Handles the canvas's 'tooltip' facet being changed.
         """
         self.control.tooltip = tooltip
+
 #-------------------------------------------------------------------------------
 #  '_DrawableCanvasEditor' class:
 #-------------------------------------------------------------------------------
