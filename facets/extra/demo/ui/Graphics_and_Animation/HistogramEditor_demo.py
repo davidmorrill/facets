@@ -47,9 +47,11 @@ class HistogramEditorDemo ( HasFacets ):
             UItem( 'data3',
                    label  = 'Histogram 3',
                    editor = HistogramEditor(
-                       spacing      = -1,
-                       bar_color    = 0xC0C0C0,
-                       format_str   = '%0.3f',
+                       spacing      = -1.5,
+                       bar_color    = 0xFACA0A,
+                       bg_color     = 0x606060,
+                       label_color  = 0xFFFFFF,
+                       format_str   = '%0.2f',
                        show_tooltip = False,
                        show_cursor  = False,
                        animate      = True
@@ -59,6 +61,7 @@ class HistogramEditorDemo ( HasFacets ):
             id = 'splitter'
         ),
         HGroup( spring, UItem( 'reset' ) ),
+        title  = 'HistogramEditor Demo',
         id     = 'facets.extra.demo.ui.Graphics_and_Animation.'
                  'HistogramEditor_demo.HistogramDemo',
         width  = 0.50,

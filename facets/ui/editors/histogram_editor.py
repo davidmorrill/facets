@@ -365,13 +365,14 @@ class HistogramCanvas ( DrawableCanvas ):
             bar_dx = ((1.0 - spacing) * dx) / (spacing + n)
             gap    = (spacing * bar_dx) / (1.0 - spacing)
         else:
-            bar_dx = (( dx - spacing ) / n) - spacing
+            #bar_dx = (( dx - spacing ) / n) - spacing
+            bar_dx = (dx - (2 * abs( spacing )) - ((n - 1) * spacing)) / n
             gap    = spacing
 
         bdx = bar_dx + gap
         if dy > 0:
             bars            = []
-            xc              = x + gap
+            xc              = x + abs( gap )
             y_min, y_max, _ = self.y_range
             y_range         = y_max - y_min
             y0              = y + dy
@@ -402,7 +403,7 @@ class HistogramCanvas ( DrawableCanvas ):
             self._animate_bars( bars )
             self.content.extend( bars )
 
-        return ( x + gap + (bar_dx / 2.0), bdx )
+        return ( x + abs( gap ) + (bar_dx / 2.0), bdx )
 
 
     def _create_ticks ( self, x, dx ):
