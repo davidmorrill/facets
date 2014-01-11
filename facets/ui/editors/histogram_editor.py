@@ -365,7 +365,6 @@ class HistogramCanvas ( DrawableCanvas ):
             bar_dx = ((1.0 - spacing) * dx) / (spacing + n)
             gap    = (spacing * bar_dx) / (1.0 - spacing)
         else:
-            #bar_dx = (( dx - spacing ) / n) - spacing
             bar_dx = (dx - (2 * abs( spacing )) - ((n - 1) * spacing)) / n
             gap    = spacing
 
