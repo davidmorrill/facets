@@ -87,6 +87,7 @@ class RangeEditorDemo ( HasFacets ):
                       label        = 'Normal',
                       enabled_when = 'enabled',
                       editor       = RangeEditor(
+                          label_width  = 50,
                           low          = SyncValue( self, 'low' ),
                           high         = SyncValue( self, 'high' ),
                           increment    = SyncValue( self, 'increment' ),
@@ -101,6 +102,7 @@ class RangeEditorDemo ( HasFacets ):
                       style        = 'readonly',
                       enabled_when = 'enabled',
                       editor       = RangeEditor(
+                          label_width  = 50,
                           low          = SyncValue( self, 'low' ),
                           high         = SyncValue( self, 'high' ),
                           increment    = SyncValue( self, 'increment' ),

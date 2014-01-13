@@ -35,6 +35,9 @@ from facets.ui.graphics_text \
 from facets.ui.ui_facets \
     import ATheme
 
+from facets.ui.theme \
+    import CENTER
+
 from editor \
     import Editor
 
@@ -48,6 +51,9 @@ from range_slider_editor \
 
 # The themes used when a range slider is in an error state (created on demand):
 ErrorThemes = None
+
+# The theme used for drawing end labels on an editor:
+label_theme = None
 
 #-------------------------------------------------------------------------------
 #  '_RangeEditor' class:
@@ -337,7 +343,7 @@ class _RangeEditor ( Editor ):
         """ Calculates the size of the slider tip for the specified theme and
             text.
         """
-        text, extra = self.value_text, 6
+        text, extra = self.value_text.text, 6
         if self.factory.show_value != 'Tip':
             text, extra = None, 4
 
@@ -370,35 +376,55 @@ class _RangeEditor ( Editor ):
         g        = control.graphics.graphics_buffer()
         wdx, wdy = control.client_size
 
+        # Draw the range labels at the ends (if requested):
+        tx  = factory.label_width
+        tdx = wdx - (2 * tx)
+        if tx > 0:
+            global label_theme
+
+            if label_theme is None:
+                label_theme = Theme( '@xform:bg?l5', content = ( 3, 0 ) )
+
+            label_theme.fill( g, 0, 0, tx, wdy )
+            label_theme.fill( g, wdx - tx, 0, tx, wdy )
+            label_theme.draw_text(
+                g, self.string_value( self.low ), CENTER, 0, 0, tx, wdy
+            )
+            label_theme.draw_text(
+                g, self.string_value( self.high ), CENTER, wdx - tx, 0, tx, wdy
+            )
+
         # Draw the slider track:
-        self.track_theme.fill( g, 0, 0, wdx, wdy )
+        self.track_theme.fill( g, tx, 0, tdx, wdy )
 
         # Calculate the sizes of the slider tip:
         self._tsz = tsz = max( self._tsz, self._tip_size( g ) )
 
         # Calculate the available slider range (the slider tip is not
         # included):
-        self._adx = adx = wdx - tsz - 1
+        self._adx = adx = tdx - tsz - 1
 
         # Calculate the coordinate of the right side of the slider range:
         self._rx = rx = int( ((self.value - self.low) * float( adx )) /
                              (self.high - self.low) ) + 1
 
         # Draw the slider:
-        self.middle_theme.fill( g, 1, 0, rx - 1, wdy )
-        self.right_theme.fill( g, rx, 0, tsz, wdy )
+        self.middle_theme.fill( g, tx + 1, 0, rx - 1, wdy )
+        self.right_theme.fill( g, tx + rx, 0, tsz, wdy )
 
         # Draw the current text value (if requested):
         if factory.show_value != 'None':
             g.font = control.font
             if factory.show_value == 'Tip':
                 self._text_color( g, factory.tip_style )
-                self.right_theme.draw_graphics_text( g, self.value_text,
-                                                     rx - 1, 1, tsz, wdy )
+                self.right_theme.draw_text(
+                    g, self.value_text.text, CENTER, tx + rx - 1, 1, tsz, wdy
+                )
             else:
                 self._text_color( g, factory.body_style or factory.tip_style )
-                self.middle_theme.draw_graphics_text( g, self.value_text,
-                                                      1, 1, rx, wdy )
+                self.middle_theme.draw_text(
+                    g, self.value_text.text, CENTER, tx + 1, 1, rx, wdy
+                )
 
         # Copy the buffer to the display:
         g.copy()
@@ -602,11 +628,15 @@ class _RangeEditor ( Editor ):
         """ Handles the factory 'tip_style' facet being changed.
         """
         style            = self.factory.tip_style
-        self.right_theme = Theme( image   = '@facets:slider_right_%d'  % style,
-                                  content = 0 )
+        self.right_theme = Theme(
+            image   = '@facets:slider_right_%d'  % style,
+            content = 0
+        )
+
         if self.factory.body_style == 0:
             self.middle_theme = Theme(
-                                    image = '@facets:slider_middle_%d' % style )
+                image = '@facets:slider_middle_%d' % style
+            )
 
         self._refresh()
 
@@ -615,9 +645,10 @@ class _RangeEditor ( Editor ):
     def _factory_body_style_modified ( self ):
         """ Handles the factory 'body_style' facet being changed.
         """
-        self.middle_theme = Theme( image = '@facets:slider_middle_%d' %
-                           (self.factory.body_style or self.factory.tip_style) )
-
+        self.middle_theme = Theme(
+            image = '@facets:slider_middle_%d' % (self.factory.body_style or
+                                                  self.factory.tip_style)
+        )
         self._refresh()
 
 
@@ -625,9 +656,9 @@ class _RangeEditor ( Editor ):
     def _factory_track_style_modified ( self ):
         """ Handles the factory 'track_style' facet being changed.
         """
-        self.track_theme = Theme( image = '@facets:slider_track_%d' %
-                                          self.factory.track_style )
-
+        self.track_theme = Theme(
+            image = '@facets:slider_track_%d' % self.factory.track_style
+        )
         self._refresh()
 
 
@@ -664,6 +695,10 @@ class RangeEditor ( BasicEditorFactory ):
 
     # The smallest allowed increment:
     increment = Float( facet_value = True )
+
+    # The width of the low/high range labels displayed on the left and right
+    # ends of the editor (a value of 0 means no labels are displayed):
+    label_width = Range( 0, 300, facet_value = True )
 
     # Where should the value be displayed:
     show_value = Enum( 'Tip', 'Body', 'None', facet_value = True )
