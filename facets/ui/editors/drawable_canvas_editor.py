@@ -129,12 +129,21 @@ class DrawableCanvasControl ( ThemedWindow ):
         """
         if item is not None:
             name, event.name = event.name, name
-            self._route_event(
+            handled = self._route_event(
                 self._handler_for(
                     item, getattr( item, 'state', 'normal' ), event.name
                 ),
                 event
             )
+            if not handled:
+                item = self.canvas
+                self._route_event(
+                    self._handler_for(
+                        item, getattr( item, 'state', 'normal' ), event.name
+                    ),
+                    event
+                )
+
             event.name = name
 
 

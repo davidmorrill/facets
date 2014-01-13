@@ -493,12 +493,17 @@ class ThemedWindow ( HasPrivateFacets ):
         if handler is not None:
             args = handler.im_func.func_code.co_argcount - 1
             if args == 1:
-                handler( event )
+                result = handler( event )
             else:
                 x = y = 0
                 if event.name not in NoXYData:
                     x, y = event.x, event.y
 
-                handler( *( ( x, y, event )[ : args ]) )
+                result = handler( *( ( x, y, event )[ : args ]) )
+
+            if result:
+                return True
+
+        return False
 
 #-- EOF ------------------------------------------------------------------------
