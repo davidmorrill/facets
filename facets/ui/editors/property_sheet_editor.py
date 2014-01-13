@@ -27,7 +27,7 @@ from facets.core.facet_base \
     import user_name_for
 
 from facets.ui.property_sheet_adapter \
-    import PropertySheetAdapter, EditMode
+    import PropertySheetAdapter, EditMode, ChangeMode
 
 from facets.ui.grid_adapter \
     import GridAdapter
@@ -251,6 +251,9 @@ class PropertySheetItemBase ( PropertySheetBase ):
 
     # The editing mode to use for this item's value:
     mode = EditMode
+
+    # The editing change mode to use for this item's value:
+    change_mode = ChangeMode
 
     # The editor to use when editing this item's value:
     editor = Instance( EditorFactory )
@@ -477,6 +480,10 @@ class PropertySheetGridAdapter ( GridAdapter ):
             mode = mode( self.item )
 
         return ModeMap.get( mode, mode )
+
+
+    def PropertySheetItemBase_value_change_mode ( self ):
+        return self.item.change_mode
 
 
     def PropertySheetItemBase_value_can_edit ( self ):
@@ -793,13 +800,14 @@ class _PropertySheetEditor ( UIEditor ):
                 klass = PropertySheetEventItem
 
             return [ klass(
-                object  = object,
-                name    = name,
-                adapter = adapter,
-                label   = label,
-                mode    = mode,
-                editor  = editor,
-                indent  = depth * INDENT
+                object      = object,
+                name        = name,
+                adapter     = adapter,
+                label       = label,
+                mode        = mode,
+                change_mode = adapter.get_change_mode( object, name ),
+                editor      = editor,
+                indent      = depth * INDENT
             ) ]
 
         # The 'name' is a developer specified group consisting of the group
@@ -892,9 +900,10 @@ class _PropertySheetEditor ( UIEditor ):
             items.append( owner )
             depth += 1
 
-        editor = adapter.get_editor( object, name )
-        labels = adapter.get_labels( object, name )
-        mode   = 'readonly'
+        editor      = adapter.get_editor( object, name )
+        labels      = adapter.get_labels( object, name )
+        change_mode = adapter.get_change_mode( object, name )
+        mode        = 'readonly'
         if not self.factory.readonly:
             mode = adapter.get_mode( object, name )
 
@@ -918,16 +927,17 @@ class _PropertySheetEditor ( UIEditor ):
                                           strict   = True )
 
             items.append( PropertySheetIndexedItem(
-                object    = object,
-                name      = name,
-                adapter   = adapter,
-                label     = label,
-                index     = index,
-                value     = value,
-                editor    = item_editor,
-                mode      = item_mode,
-                indent    = depth * INDENT,
-                owner     = owner
+                object      = object,
+                name        = name,
+                adapter     = adapter,
+                label       = label,
+                index       = index,
+                value       = value,
+                editor      = item_editor,
+                mode        = item_mode,
+                change_mode = change_mode,
+                indent      = depth * INDENT,
+                owner       = owner
             ) )
 
         return items

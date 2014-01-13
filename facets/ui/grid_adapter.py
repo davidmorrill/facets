@@ -14,9 +14,9 @@ from facets.api \
     import SingletonHasPrivateFacets, HasFacets, HasPrivateFacets, Color, Str, \
            Int, Float, Enum, List, Dict, Bool, Instance, Callable, Any, Font,  \
            ATheme, Theme, Event, Image, Property, Interface, DelegatesTo,      \
-           on_facet_set, property_depends_on, implements, TextEditor,          \
-           Disallow, View, HGroup, VGroup, Item, InstanceEditor,               \
-           ThemedButtonEditor, ThemedCheckboxEditor, Undefined, implements,    \
+           implements, Theme, Disallow, View, HGroup, VGroup, Item,            \
+           TextEditor, InstanceEditor, ThemedButtonEditor,                     \
+           ThemedCheckboxEditor, Undefined, implements, on_facet_set,          \
            property_depends_on
 
 from facets.core.facet_base \
@@ -76,6 +76,9 @@ Operators = {
 
 # The ColumnFilter operators that can be used with a range ('..'):
 RangeOperators = ( '', '!' )
+
+# The theme used when creating popup gri cell editors:
+PopupTheme = Theme( '@xform:b?L40', content = 5 )
 
 #-------------------------------------------------------------------------------
 #  'GridEventHandler' class:
@@ -694,6 +697,12 @@ class GridAdapter ( HasPrivateFacets ):
     # Can a cell be edited?
     can_edit = Bool( True )
 
+    # The editing mode used for changing cell values. The possible values are:
+    # - 'live':  Changes are made 'live' while the editor is active.
+    # - 'defer': Changes are made only when the editor is closed.
+    # - 'save':  Changes are made only when the user clicks the 'OK' button.
+    change_mode = Enum( 'live', 'defer', 'save' )
+
     # The value to be dragged for a cell:
     drag = Property
 
@@ -1149,6 +1158,15 @@ class GridAdapter ( HasPrivateFacets ):
         return self._result_for( 'get_can_edit', row, column )
 
 
+    def get_change_mode ( self, row, column ):
+        """ Returns the change mode used editing the specified row:column item:
+            - 'live':  Changes are made live while the editor is active.
+            - 'defer': Changes are made only when the editor is closed.
+            - 'save':  Changes are made only when user clicks the 'OK' button.
+        """
+        return self._result_for( 'get_change_mode', row, column )
+
+
     def get_drag ( self, row, column ):
         """ Returns the 'drag' value for a specified row:column item. A result
             of *None* means that the item cannot be dragged.
@@ -1504,7 +1522,7 @@ class GridAdapter ( HasPrivateFacets ):
 
 
     def popup_for ( self, view = None, object = None, name = None,
-                          kind = None ):
+                          kind = None, change_mode = None ):
         """ Displays a popup editor using the specified view for the specified
             object. If object is not specified, it defaults to the current
             'item'. The view can either be None, a View object or a ViewElement
@@ -1530,7 +1548,7 @@ class GridAdapter ( HasPrivateFacets ):
             if view.name == '':
                 view.name = name
 
-            view = VGroup( view, group_theme = '@std:popup' )
+            view = VGroup( view, group_theme = PopupTheme )
 
         if isinstance( view, basestring ):
             view = object.facet_view( view )
@@ -1544,6 +1562,25 @@ class GridAdapter ( HasPrivateFacets ):
         if kind in PopupTypes:
             view.popup_bounds = self.bounds
 
+        handler = None
+        buttons = []
+        if change_mode is None:
+            change_mode = self.get_change_mode( self.row, self.column )
+
+        if change_mode != 'live':
+            from facets.ui.editors.grid_editor import DeferredEditHandler
+
+            if change_mode == 'save':
+                view.buttons = [ 'OK', 'Cancel' ]
+                kind         = 'popout'
+
+            handler = DeferredEditHandler(
+                target_object = object
+            ).set(
+                target_name   = name
+            )
+            object = handler.defer_object
+
         context = {
             'object':  object,
             'adapter': self
@@ -1555,7 +1592,8 @@ class GridAdapter ( HasPrivateFacets ):
             view    = view,
             kind    = kind,
             parent  = self.grid_editor.adapter,
-            context = context
+            context = context,
+            handler = handler
         )
 
 
@@ -1598,12 +1636,14 @@ class GridAdapter ( HasPrivateFacets ):
         filter = self.grid_filter.filters.get( self.column )
         search = self.grid_search.filters.get( self.column )
         if search is None:
-            self.popup_for( '', filter )
+            self.popup_for( '', filter, change_mode = 'live' )
         elif filter is None:
-            self.popup_for( '', search )
+            self.popup_for( '', search, change_mode = 'live' )
         else:
-            self.popup_for( '',  FilterSearch( filter = filter,
-                                               search = search ) )
+            self.popup_for(
+                '',  FilterSearch( filter = filter, search = search ),
+                change_mode = 'live'
+            )
 
     #-- Facets Default Values --------------------------------------------------
 

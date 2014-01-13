@@ -27,7 +27,7 @@ from facets.api \
     import Property, Int, ViewElement
 
 from facets.ui.editors.grid_editor \
-    import _GridEditor, GridEditor
+    import _GridEditor, GridEditor, DeferredEditHandler
 
 from facets.ui.menu \
     import Menu
@@ -553,10 +553,11 @@ class _QtGridEditor ( _GridEditor ):
         """ Returns the editor widget to use for editing a specified cell's
             value.
         """
-        self.cell_row = self.data_row_for( row )
+        self.cell_row = cell_row = self.data_row_for( row )
+        grid_adapter  = self.grid_adapter
 
         # Get the editor factory to use. If none, exit (read-only cell):
-        editor_factory = self.grid_adapter.get_editor( self.cell_row, column )
+        editor_factory = grid_adapter.get_editor( cell_row, column )
         if editor_factory is None:
             return None
 
@@ -564,11 +565,23 @@ class _QtGridEditor ( _GridEditor ):
         # Note: We save the editor reference so that the editor doesn't get
         # garbage collected too soon.
         self.cell_column = column
-        object, name     = self.grid_adapter.get_alias(  self.cell_row, column )
-        editor           = editor_factory.simple_editor(
-                               self.ui, object, name, '' ).set(
-                               item        = self.item,
-                               object_name = '' )
+        object, name     = grid_adapter.get_alias( cell_row, column )
+        handler          = None
+        if grid_adapter.get_change_mode( cell_row, column ) != 'live':
+            handler = DeferredEditHandler(
+                target_object  = object,
+                defer_modified = True
+            ).set(
+                target_name   = name
+            )
+            object = handler.defer_object
+
+        editor = editor_factory.simple_editor(
+            self.ui, object, name, ''
+        ).set(
+            item        = self.item,
+            object_name = ''
+        )
 
         # Tell the editor to actually build the editing widget:
         editor.prepare( control_adapter( parent ) )
@@ -582,7 +595,8 @@ class _QtGridEditor ( _GridEditor ):
             control.setLayout( layout )
             layout.setContentsMargins( 5, 0, 5, 0 )
 
-        control._editor = editor
+        control._editor  = editor
+        control._handler = handler
 
         header       = self.control.horizontalHeader()
         column_width = header.sectionSize( column )
@@ -729,8 +743,14 @@ class _QtGridEditor ( _GridEditor ):
         """ Handles an in-cell edit being completed.
         """
         # Clean up the cell editor (if necessary):
+        handler = getattr( control, '_handler', None )
+        if handler is not None:
+            del control._handler
+            handler.closed( None, True )
+
         editor = getattr( control, '_editor', None )
         if editor is not None:
+            del control._editor
             editor.dispose()
 
         grid = self.control

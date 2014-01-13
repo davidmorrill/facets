@@ -12,8 +12,8 @@ with facets to the PropertySheetEditor.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import HasPrivateFacets, HasFacets, Instance, Bool, Any, Str, Callable, \
-           Either, Property, Disallow, Event, ATheme, ViewElement
+    import HasPrivateFacets, HasFacets, Instance, Bool, Enum, Any, Str, \
+           Callable, Either, Property, Disallow, Event, ATheme, ViewElement
 
 from facets.core.facet_base \
     import user_name_for
@@ -25,7 +25,11 @@ from facets.ui.ui_facets \
 #  Facet Definitions:
 #-------------------------------------------------------------------------------
 
+# The editing mode to use when editing property sheet values:
 EditMode = Either( Str, Callable, Instance( ViewElement ), default = 'inline' )
+
+# The change mode to use when editing property sheet values:
+ChangeMode = Enum( 'live', 'defer', 'save' )
 
 #-------------------------------------------------------------------------------
 #  'PropertySheetAdapter' class:
@@ -51,6 +55,9 @@ class PropertySheetAdapter ( HasPrivateFacets ):
 
     # The editing mode to use for the current item:
     mode = EditMode
+
+    # The editing change mode to use for the current item:
+    change_mode = ChangeMode
 
     # The editor to use for editing the current item:
     editor = Property
@@ -154,6 +161,13 @@ class PropertySheetAdapter ( HasPrivateFacets ):
             facet name.
         """
         return self._result_for( 'mode', object, name )
+
+
+    def get_change_mode ( self, object, name ):
+        """ Returns the editing change mode to use for the specified object and
+            facet name.
+        """
+        return self._result_for( 'change_mode', object, name )
 
 
     def get_editor ( self, object, name ):

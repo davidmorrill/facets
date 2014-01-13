@@ -12,9 +12,9 @@ of objects, etc).
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, Int, Enum, List, Bool, Instance, Any, Tuple, Dict, Callable,  \
-           Either, Property, Event, Editor, BasicEditorFactory, on_facet_set, \
-           property_depends_on
+    import HasFacets, Str, Int, Enum, List, Bool, Instance, Any, Tuple, Dict, \
+           Callable, Either, Property, Event, Editor, BasicEditorFactory,     \
+           Handler, on_facet_set, property_depends_on
 
 from facets.ui.i_filter \
     import IFilter
@@ -57,6 +57,57 @@ AlignmentMap = {
     'cell right':  CELL | RIGHT,
     'cell center': CELL | CENTER
 }
+
+#-------------------------------------------------------------------------------
+#  'DeferredEditHandler' class:
+#-------------------------------------------------------------------------------
+
+class DeferredEditHandler ( Handler ):
+    """ Handles editing changes made while editing a grid cell that uses a
+        popup editor whose change mode is 'defer' or 'save'.
+    """
+
+    #-- Facet Definitions ------------------------------------------------------
+
+    # The dummy object used to defer editing:
+    defer_object = Instance( HasFacets, () )
+
+    # Has the facet being edited on the dummy defer object been modified?
+    defer_modified = Bool( False )
+
+    # The actual target object being edited:
+    target_object = Instance( HasFacets )
+
+    # The name of the target object facet being edited:
+    target_name = Str
+
+    #-- Handler Method Overrides -----------------------------------------------
+
+    def setattr ( self, info, object, name, value ):
+        """ Handles an object facet being modified by a view editor.
+        """
+        super( DeferredEditHandler, self ).setattr( info, object, name, value )
+
+        self.defer_modified = True
+
+
+    def closed ( self, info, is_ok ):
+        """ Handles the user closing a dialog view.
+        """
+        if is_ok and self.defer_modified:
+            name = self.target_name
+            setattr(
+                self.target_object, name, getattr( self.defer_object, name )
+            )
+
+    #-- Facet Event Handlers ---------------------------------------------------
+
+    def _target_name_set ( self, name ):
+        """ Handles the 'target_name' facet being changed.
+        """
+        defer, target = self.defer_object, self.target_object
+        defer.add_facet( name, Any )
+        setattr( defer, name, getattr( target, name ) )
 
 #-------------------------------------------------------------------------------
 #  '_GridEditor' class:
