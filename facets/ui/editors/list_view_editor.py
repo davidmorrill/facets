@@ -17,9 +17,10 @@ element.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import HasFacets, HasPrivateFacets, Bool, Str, Unicode, Int, Long, Float, \
-           Range, Callable, Any, Instance, List, Enum, Tuple, Theme, ATheme,  \
-           UI, Property, View, HGroup, Item, UItem, TextEditor, on_facet_set
+    import HasFacets, HasPrivateFacets, Bool, Str, Unicode, Int, Long, Float,  \
+           Range, Callable, Any, Instance, List, Enum, Tuple, Theme, ATheme,   \
+           UI, Property, View, HGroup, Item, UItem, TextEditor, EditorFactory, \
+           on_facet_set
 
 from facets.core.facet_base \
     import inn, invoke
@@ -185,6 +186,9 @@ class ListViewItem ( HasPrivateFacets ):
     # The height to use for new items (0 = default):
     height = Int
 
+    # The editor to use when editing a float item contained in a list:
+    float_editor = Instance( EditorFactory )
+
     #-- Public Methods ---------------------------------------------------------
 
     def __init__ ( self, item = None, **facets ):
@@ -241,10 +245,7 @@ class ListViewItem ( HasPrivateFacets ):
                         facet = Instance( value.__class__ )
                         style = 'custom'
                 elif facet is Float:
-                    editor = TextEditor(
-                        evaluate    = float,
-                        format_func = short_float
-                    )
+                    editor = self.float_editor
 
                 label = labels[ i % n ]
                 name  = 'value_%d' % i
@@ -390,6 +391,10 @@ class ListViewItem ( HasPrivateFacets ):
 
         return str( label if label is not None else
                     '[%d]' % self.owner.index_for( self ) )
+
+
+    def _float_editor_default ( self ):
+        return TextEditor( evaluate = float, format_func = short_float )
 
     #-- Property Implementations -----------------------------------------------
 
