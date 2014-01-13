@@ -11,7 +11,8 @@ from math \
 
 from facets.api \
     import Any, Color, Enum, List, Tuple, Bool, Int, Float, Str, Instance, \
-           Theme, ATheme, Font, BasicEditorFactory, on_facet_set
+           PrototypedFrom, Theme, ATheme, Font, View, VGroup, Item, \
+           HLSColorEditor, RangeEditor, BasicEditorFactory, on_facet_set
 
 from facets.core.facet_base \
     import xgetattr
@@ -54,13 +55,22 @@ class HistogramBar ( Rectangle ):
 
     #-- Mouse Event Handlers ---------------------------------------------------
 
+    def left_up ( self ):
+        """ Handles the user clicking this histogram bar.
+        """
+        self.owner.selected = self.index
+
+
     def motion ( self, x, y ):
-        owner = self.owner
+        """ Handles the mouse moving within this histogram bar.
+        """
+        owner         = self.owner
+        owner.hovered = self.index
         if self.value is not None:
             tooltip  = self.tooltip
-            subtitle = owner.subtitle
+            subtitle = owner.themed_subtitle
             if subtitle is not None:
-                subtitle.text = owner.factory.subtitle % (
+                subtitle.text = owner.subtitle % (
                     '(%s)' % tooltip.replace( '\n', ', ' )
                 )
             else:
@@ -82,6 +92,15 @@ class HistogramCanvas ( DrawableCanvas ):
 
     #-- Facet Definitions ------------------------------------------------------
 
+    # The _HistogramEditor this canvas is associated with:
+    editor = Any # Instance( _HistogramEditor )
+
+    # The index of the most recently hovered histogram bar (if any):
+    hovered = Int( -1 )
+
+    # The index of the selected histogram bar (if any):
+    selected = Int( -1 )
+
     # The sequence of data values to create the histogram from:
     data = Any # List, Tuple, numpy array
 
@@ -91,6 +110,39 @@ class HistogramCanvas ( DrawableCanvas ):
     # The editor factory containing the histogram attributes to use:
     factory = Any # Instance( EditorFactory )
 
+    # Histogram title (optional):
+    title = PrototypedFrom( 'factory' )
+
+    # Histogram subtitle (optional):
+    subtitle = PrototypedFrom( 'factory' )
+
+    # The color to use for the histogram bars:
+    bar_color = PrototypedFrom( 'factory' )
+
+    # The color to use for selected histogram bars:
+    selected_color = PrototypedFrom( 'factory' )
+
+    # The background color for the histogram plot:
+    bg_color = PrototypedFrom( 'factory' )
+
+    # The axis and label colors:
+    label_color = PrototypedFrom( 'factory' )
+
+    # The color used to draw tick lines:
+    line_color = PrototypedFrom( 'factory' )
+
+    # The amount of space between two histogram bars:
+    spacing = PrototypedFrom( 'factory' )
+
+    # Should a tooltip be shown when mousing over histogram bars?
+    show_tooltip = PrototypedFrom( 'factory' )
+
+    # Should a horizontal mouse cursor track mousing over histogram bars?
+    show_cursor = PrototypedFrom( 'factory' )
+
+    # Should the histogram be animated?
+    animate = PrototypedFrom( 'factory' )
+
     # Dummy Text object used for text size calculations:
     text = Instance( Text )
 
@@ -98,7 +150,7 @@ class HistogramCanvas ( DrawableCanvas ):
     cursor = Instance( Line )
 
     # The ThemedText used for the subtitle if it contains a '%s':
-    subtitle = Instance( ThemedText )
+    themed_subtitle = Instance( ThemedText )
 
     # The graphics context to use for drawing/calculations:
     graphics = Any # Instance( Graphics )
@@ -144,7 +196,9 @@ class HistogramCanvas ( DrawableCanvas ):
         """
         if len( self.content ) == 0:
             self.graphics = g
+            animate, self.animate = self.animate, self.animate and self._animate
             self._create_histogram()
+            self.animate, self._animate = animate, False
             self.graphics = None
 
         super( HistogramCanvas, self ).paint( g )
@@ -160,7 +214,7 @@ class HistogramCanvas ( DrawableCanvas ):
 
         # Create the title (if requested):
         titles = []
-        title  = factory.title
+        title  = self.title
         if title != '':
             tdy = self.label_height + 12
             titles.append( ThemedText(
@@ -174,7 +228,7 @@ class HistogramCanvas ( DrawableCanvas ):
             dy -= tdy
 
         # Create the subtitle (if requested):
-        subtitle = factory.subtitle
+        subtitle = self.subtitle
         if subtitle != '':
             tdy           = self.label_height + 4
             subtitle_item = ThemedText(
@@ -185,9 +239,10 @@ class HistogramCanvas ( DrawableCanvas ):
                 theme     = Theme( '@xform:bg?L27', content = ( 5, 5, 2, 0 ) )
             )
             titles.append( subtitle_item )
+            self.themed_subtitle = None
             if subtitle.find( '%s' ) >= 0:
-                self.subtitle      = subtitle_item
-                subtitle_item.text = subtitle % ''
+                self.themed_subtitle = subtitle_item
+                subtitle_item.text   = subtitle % ''
 
             dy -= tdy
 
@@ -209,7 +264,7 @@ class HistogramCanvas ( DrawableCanvas ):
             origin     = ( x, y ),
             size       = ( dx, dy ),
             pen        = None,
-            brush      = factory.bg_color,
+            brush      = self.bg_color,
             anti_alias = False
         ) )
 
@@ -220,7 +275,7 @@ class HistogramCanvas ( DrawableCanvas ):
         self.content.append( Line(
             p0         = ( x + dx - 6, y + y_top ),
             p1         = ( x + dx - 6, y + y_top + y_axis_dy - 1 ),
-            pen        = factory.label_color,
+            pen        = self.label_color,
             anti_alias = False
         ) )
 
@@ -242,7 +297,7 @@ class HistogramCanvas ( DrawableCanvas ):
         )
 
         # Create the Line used for the mouse cursor (if requested):
-        if factory.show_cursor:
+        if self.show_cursor:
             self.cursor = Line(
                 p0         = ( x_tick, -1000 ),
                 p1         = ( x_tick + x_tick_dx - 1, -1000 ),
@@ -307,7 +362,7 @@ class HistogramCanvas ( DrawableCanvas ):
         items.append( Line(
             p0         = ( x + max_dx + 5, y ),
             p1         = ( x + max_dx + 5, y + dy - 1 ),
-            pen        = self.factory.label_color,
+            pen        = self.label_color,
             anti_alias = False
         ) )
 
@@ -331,7 +386,7 @@ class HistogramCanvas ( DrawableCanvas ):
         self.content.append( Line(
             p0         = ( x, y ),
             p1         = ( x + dx - 1, y ),
-            pen        = self.factory.label_color,
+            pen        = self.label_color,
             anti_alias = False
         ) )
 
@@ -360,7 +415,7 @@ class HistogramCanvas ( DrawableCanvas ):
         factory = self.factory
         data    = self.data
         n       = len( data )
-        spacing = factory.spacing
+        spacing = self.spacing
         if 0.0 < spacing < 1.0:
             bar_dx = ((1.0 - spacing) * dx) / (spacing + n)
             gap    = (spacing * bar_dx) / (1.0 - spacing)
@@ -375,27 +430,26 @@ class HistogramCanvas ( DrawableCanvas ):
             y_min, y_max, _ = self.y_range
             y_range         = y_max - y_min
             y0              = y + dy
-            brush           = factory.bar_color
+            brush           = self.bar_color
+            selected_brush  = self.selected_color
             ibar_dx         = int( round( bar_dx ) )
             labels          = self.labels
-            show_tooltip    = factory.show_tooltip
+            show_tooltip    = self.show_tooltip
+            selected        = self.selected
             for i, value in enumerate( data ):
                 bar_dy = int( round( ((value - y_min) * dy) / y_range ) )
                 if bar_dy > 0:
                     bars.append(
                         HistogramBar(
-                            origin     = ( int( round( xc ) ), y0 - bar_dy ),
-                            size       = ( ibar_dx, bar_dy + 1 ),
-                            brush      = brush,
+                            origin = ( int( round( xc ) ), y0 - bar_dy ),
+                            size   = ( ibar_dx, bar_dy + 1 ),
+                            brush  = brush if i != selected else selected_brush,
+                            index  = i,
                             anti_alias = False
                         )
                     )
                     if show_tooltip:
-                        bars[-1].set(
-                            value = value,
-                            label = labels[ i ],
-                            index = i
-                        )
+                        bars[-1].set( value = value, label = labels[ i ] )
 
                 xc += bdx
 
@@ -408,13 +462,13 @@ class HistogramCanvas ( DrawableCanvas ):
     def _create_ticks ( self, x, dx ):
         """ Creates the y-axis tick marks/lines.
         """
-        pen   = self.factory.line_color
+        pen   = self.line_color
         x1    = x + dx - 1
         lines = [
             Line( p0 = ( x, y), p1 = ( x1, y), pen = pen, anti_alias = False )
             for y in self.y_ticks
         ]
-        lines[-1].pen = self.factory.label_color
+        lines[-1].pen = self.label_color
 
         # Add and animate the tick marks/lines:
         self._animate_items( lines )
@@ -431,7 +485,7 @@ class HistogramCanvas ( DrawableCanvas ):
         text_item = Text(
             text  = text,
             font  = self.factory.font,
-            color = self.factory.label_color
+            color = self.label_color
         )
 
         return ( text_item, text_item.text_size( self.graphics )[0] )
@@ -440,7 +494,7 @@ class HistogramCanvas ( DrawableCanvas ):
     def _animate_bars ( self, bars ):
         """ Sets up the animation for histogram *bars*.
         """
-        if self.factory.animate:
+        if self.animate:
             scale = 0.6 / len( bars )
             for i, bar in enumerate( bars ):
                 bdx, bdy   = bar.size
@@ -457,14 +511,14 @@ class HistogramCanvas ( DrawableCanvas ):
     def _animate_items ( self, items ):
         """ Sets up the animation for drawable graphics *items*.
         """
-        if self.factory.animate:
+        if self.animate:
             for item in items:
                 item.opacity = 0.0
                 item.animate_facet( 'opacity', 1.5, 1.0 )
 
     #-- Facet Event handlers ---------------------------------------------------
 
-    @on_facet_set( 'data, labels' )
+    @on_facet_set( 'labels, bar_color, selected_color, bg_color, label_color, line_color, spacing, show_cursor, show_tooltip, title, subtitle' )
     def _histogram_modified ( self ):
         """ Handles any of the facets affecting the content of the histogram
             being modified.
@@ -480,6 +534,75 @@ class HistogramCanvas ( DrawableCanvas ):
 
         super( HistogramCanvas, self )._bounds_set( bounds )
 
+
+    def _data_set ( self ):
+        """ Handles the 'data' facet being changed.
+        """
+        self.hovered  = self.selected = -1
+        self._animate = True
+        self._histogram_modified()
+
+
+    def _hovered_set ( self, index ):
+        """ Handles the 'hovered' facet being changed.
+        """
+        self.editor.hovered = index
+
+
+    def _selected_set ( self, index ):
+        """ Handles the 'selected' facet being changed.
+        """
+        self.editor.selected = index
+        self._histogram_modified()
+
+    #-- Mouse Event Handlers ---------------------------------------------------
+
+    def right_up ( self, event ):
+        """ Handles the user right clicking on the canvas.
+        """
+        editor = HLSColorEditor()
+        self.edit_facets(
+            View(
+                VGroup(
+                    Item( 'title', ),
+                    Item( 'subtitle', ),
+                    '_',
+                    Item( 'bar_color',
+                          editor = editor,
+                          width  = -315
+                    ),
+                    Item( 'selected_color',
+                          editor = editor
+                    ),
+                    Item( 'bg_color',
+                          label  = 'Background color',
+                          editor = editor
+                    ),
+                    Item( 'label_color',
+                          editor = editor
+                    ),
+                    Item( 'line_color',
+                          editor = editor
+                    ),
+                    '_',
+                    Item( 'spacing',
+                          editor = RangeEditor(
+                              low       = 0.0,
+                              high      = 1.0,
+                              increment = 0.01
+                          )
+                    ),
+                    '_',
+                    Item( 'show_cursor', ),
+                    Item( 'show_tooltip' ),
+                    Item( 'animate', ),
+                    group_theme = '@xform:b?L35'
+                ),
+                kind         = 'popout',
+                popup_bounds = ( event.screen_x - 140, event.screen_y, 1, 1 )
+            )
+        )
+
 #-------------------------------------------------------------------------------
 #  '_HistogramEditor' class:
 #-------------------------------------------------------------------------------
@@ -493,17 +616,29 @@ class _HistogramEditor ( _DrawableCanvasEditor ):
     # Indicate the editor is scrollable:
     scrollable = True
 
+    # The index of the histogram bar the user most recently hovered over:
+    hovered = Int( -1 )
+
+    # The index of the histogram bar the user most recently selected:
+    selected = Int( -1 )
+
     #-- Public Methods ---------------------------------------------------------
 
     def update_editor ( self ):
         """ Updates the editor when the object facet changes external to the
             editor.
         """
+        factory = self.factory
         if self._control.canvas is None:
-            self._control.canvas = HistogramCanvas()
+            self._control.canvas = HistogramCanvas( editor = self )
+
+            # Set up the hover/selection listeners (if necessary):
+            self.sync_value( factory.hovered,  'hovered',  'to' )
+            self.sync_value( factory.selected, 'selected', 'to' )
+
 
         canvas = self._control.canvas
-        labels = self.factory.labels
+        labels = factory.labels
         data   = self.value
         if (len( data ) == 2) and (labels is None):
             data, labels = data
@@ -527,7 +662,7 @@ class _HistogramEditor ( _DrawableCanvasEditor ):
         if x_units != '':
             labels = [ '%s%s' % ( label, x_units ) for label in labels ]
 
-        canvas.set( data = data, labels = labels, factory = self.factory )
+        canvas.set( data = data, labels = labels, factory = factory )
         self._control.refresh()
 
 #-------------------------------------------------------------------------------
@@ -570,6 +705,9 @@ class HistogramEditor ( BasicEditorFactory ):
     # - 0xEEA85C = an orange
     bar_color = Color( 0x6DADDD )
 
+    # The color to use for the selected histogram bar:
+    selected_color = Color( 0xCBC689 )
+
     # The background color for the histogram plot:
     bg_color = Color( 0xEAEAEA )
 
@@ -597,6 +735,14 @@ class HistogramEditor ( BasicEditorFactory ):
 
     # The theme to use for displaying the content:
     theme = ATheme( facet_value = True )
+
+    # The extended facet name of the index of the histogram bar the user most
+    # recently hovered over:
+    hovered = Str
+
+    # The extended facet name of the index of the histogram bar the user most
+    # recently selected:
+    selected = Str
 
     # Should a tooltip be shown when mousing over histogram bars?
     show_tooltip = Bool( True )
