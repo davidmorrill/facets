@@ -165,7 +165,6 @@ class Messages ( HasFacets ):
 
     view = View(
         UItem( 'messages', editor = MessagesEditor() ),
-        title  = 'Welcome to Facets!',
         width  = 0.67,
         height = 0.67
     )
