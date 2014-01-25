@@ -232,7 +232,7 @@ class DefaultCustomControlEditor ( Editor ):
         if self.extended_name != 'None':
             object = self.context_object
             name   = self.extended_name
-            if control.facet( 'value' ) is None:
+            if not hasattr( control, 'value' ):
                 if isinstance( object, BaseEditor ) and (name == 'value'):
                     # FIXME: Handle the special case of an Editor's 'value'
                     # facet, which is a property, which doesn't work well as is,
