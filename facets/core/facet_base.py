@@ -538,7 +538,7 @@ def normalized_color ( color, has_alpha = False, as_int = True ):
     """ Returns the value of *color* as a normalized color tuple of the form:
         ( red, green, blue [, alpha] ), where reg, green, blue and alpha are
         integers in the range 0..255 if *as_int* is True and are floats in the
-        range 0.0..1.0 otherwise If *has_alpha* is True, the result will have
+        range 0.0..1.0 otherwise. If *has_alpha* is True, the result will have
         four elements; otherwise it will have three.
 
         The *color* value can be:
