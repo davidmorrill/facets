@@ -40,8 +40,18 @@ from retrograde_tweener \
 from bounce_tweener \
     import BounceTweener
 
-from path \
-    import Path, LinearPath, Linear
+from bool_path \
+    import BoolPath, Boolean
+
+from bounds_path \
+    import BoundsPath
+
+from color_path \
+    import ColorPath, HLSAColorPath, HColorPath, LColorPath, SColorPath, \
+           AColorPath
+
+from enum_path \
+    import EnumPath
 
 from linear_int_path \
     import LinearIntPath, LinearInt
@@ -52,8 +62,14 @@ from linear_2d_int_path \
 from manhattan_2d_int_path \
     import Manhattan2DIntPath
 
-from spiral_2d_int_path \
-    import Spiral2DIntPath
+from overshoot_2d_int_path \
+    import Overshoot2DIntPath
+
+from path \
+    import Path, LinearPath, Linear
+
+from poly_path \
+    import PolyPath
 
 from ricochet_2d_int_path \
     import Ricochet2DIntPath
@@ -61,20 +77,11 @@ from ricochet_2d_int_path \
 from snake_2d_int_path \
     import Snake2DIntPath
 
-from overshoot_2d_int_path \
-    import Overshoot2DIntPath
-
-from poly_path \
-    import PolyPath
-
-from bounds_path \
-    import BoundsPath
+from spiral_2d_int_path \
+    import Spiral2DIntPath
 
 from text_path \
     import TextPath
-
-from enum_path \
-    import EnumPath
 
 from base_animation \
     import BaseAnimation
