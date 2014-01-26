@@ -29,7 +29,7 @@ from cPickle \
 from facets.api \
     import HasPrivateFacets, List, Any, Instance, View, Item, NotebookEditor
 
-from facets.extra.tools.tools \
+from facets.extra.helper.generated_tool \
     import Connection
 
 from facets.extra.tools.file_stack \
