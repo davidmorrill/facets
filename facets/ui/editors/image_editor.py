@@ -11,7 +11,7 @@ Facets UI 'display only' image editor.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Instance, BasicEditorFactory, ATheme
+    import Bool, Instance, BasicEditorFactory, ATheme
 
 from facets.ui.ui_facets \
     import Image
@@ -44,11 +44,13 @@ class _ImageEditor ( Editor ):
         """ Finishes initializing the editor by creating the underlying toolkit
             widget.
         """
+        factory = self.factory
         self.adapter = self.image_control.set(
-            image   = self.factory.image or self.value,
-            theme   = self.factory.theme,
-            padding = 0,
-            parent  = parent
+            image      = factory.image or self.value,
+            auto_scale = factory.facet_value( 'auto_scale' ),
+            theme      = factory.theme,
+            padding    = 0,
+            parent     = parent
         )()
         self.adapter.size_policy = ( 'expanding', 'expanding' )
 
@@ -79,6 +81,9 @@ class ImageEditor ( BasicEditorFactory ):
     # specified, the editor's object value is used as the ImageResource to
     # display):
     image = Image
+
+    # Should images automatically be scaled to fit the control size?
+    auto_scale = Bool( True, facet_value = True )
 
     # The optional theme to display as the background for the image:
     theme = ATheme

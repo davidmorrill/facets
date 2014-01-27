@@ -12,7 +12,7 @@ values iconically.
 #-------------------------------------------------------------------------------
 
 from facets.core_api \
-    import Event, Bool, Range
+    import Event, Bool, Range, on_facet_set
 
 from facets.ui.ui_facets \
     import Image
@@ -51,7 +51,7 @@ class ImageControl ( ThemedWindow ):
     padding = Range( 0, 50, 10 )
 
     # Should images automatically be scaled to fit the control size?
-    auto_scale = Bool( True )
+    auto_scale = Bool( True, facet_value = True )
 
     # Event fired when the control is clicked:
     clicked = Event
@@ -99,9 +99,11 @@ class ImageControl ( ThemedWindow ):
             control.refresh()
 
 
-    def _image_set ( self ):
-        """ Handles the 'image' facet being changed.
+    @on_facet_set( 'image, auto_scale' )
+    def _image_modified ( self ):
+        """ Handles the 'image' or 'auto_scale' facet being changed.
         """
+        self._draw_image = None
         if self.control is not None:
             self.control.refresh()
 
@@ -168,24 +170,28 @@ class ImageControl ( ThemedWindow ):
             wx, wy, wdx, wdy = self.theme.bounds( wx, wx, wdx, wdy )
 
         draw_image = image = self.image
-        idx, idy   = image.width, image.height
-        if (wdx > 0) and (wdy > 0):
-            if (idx > wdx) or (idy > wdy):
-                rdx, rdy = float( idx ) / wdx, float( idy ) / wdy
-                if rdx >= rdy:
-                    ddx, ddy = wdx, int( round( idy / rdx ) )
+        if image is not None:
+            idx, idy   = image.width, image.height
+            if (wdx > 0) and (wdy > 0):
+                if ((idx > wdx) or
+                    (idy > wdy) or
+                    (self.auto_scale and ((idx != wdx) or (idy != wdy)))):
+                    rdx, rdy = float( idx ) / wdx, float( idy ) / wdy
+                    if rdx >= rdy:
+                        ddx, ddy = wdx, int( round( idy / rdx ) )
+                    else:
+                        ddx, ddy = int( round( idx / rdy ) ), wdy
+
+                    draw_image = self._draw_image
+                    idx, idy   = ddx, ddy
+                    if (draw_image is None) or (ddx != draw_image.width):
+                        self._draw_image = draw_image = \
+                            image.scale( ( ddx, ddy ) )
                 else:
-                    ddx, ddy = int( round( idx / rdy ) ), wdy
+                    self._draw_image = None
 
-                draw_image = self._draw_image
-                idx, idy   = ddx, ddy
-                if (draw_image is None) or (ddx != draw_image.width):
-                    self._draw_image = draw_image = image.scale( ( ddx, ddy ) )
-            else:
-                self._draw_image = None
-
-            g.draw_bitmap( draw_image.bitmap,
-                           wx + (wdx - idx) / 2, wy + (wdy - idy) / 2 )
+                g.draw_bitmap( draw_image.bitmap,
+                               wx + (wdx - idx) / 2, wy + (wdy - idy) / 2 )
 
         wxdx = wx + wdx
         wydy = wy + wdy

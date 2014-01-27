@@ -53,6 +53,7 @@ Image
     Image Tiler:          facets.extra.tools.image_tiler.ImageTiler
     Image Transformer:    facets.extra.tools.image_transformer.ImageTransformer
     Image Zoomer:         facets.extra.tools.image_zoomer.ImageZoomer
+    Image Viewer:         facets.extra.tools.image_viewer.ImageViewer
     Light Table:          facets.extra.tools.light_table.LightTable
     Theme Editor:         facets.extra.tools.theme_editor.ThemeEditor
     Theme Layout:         facets.extra.tools.theme_layout.ThemeLayout
