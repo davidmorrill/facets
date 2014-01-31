@@ -32,8 +32,8 @@ class ImageZoomer ( Tool ):
     name = 'Image Zoomer'
 
     # The channel data to display:
-    channel = Enum( 'value', [ 'none', 'red', 'green', 'blue', 'alpha',
-                               'hue', 'saturation', 'value' ],
+    channel = Enum( 'hue', [ 'none', 'red', 'green', 'blue', 'alpha',
+                             'hue', 'lightness', 'saturation' ],
                     save_state = True )
 
     # Should delta information be displayed:
