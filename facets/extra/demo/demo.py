@@ -19,18 +19,28 @@ from os \
 from os.path \
     import join, isdir, split, splitext, dirname, abspath
 
+from glob \
+    import glob
+
 from facets.api \
-    import HasFacets, HasPrivateFacets, DelegatesTo, Str, Instance, Property, \
-           Any, Bool, Code, Button, HTML, TreeEditor, ObjectTreeNode,         \
-           TreeNodeObject, View, Item, UItem, HSplit, VSplit, Tabbed, VGroup, \
-           HGroup, Heading, Handler, UIInfo, InstanceEditor, HTMLEditor,      \
-           Include, spring, on_facet_set, inn
+    import HasFacets, HasPrivateFacets, DelegatesTo, Str, Instance, Any, Bool, \
+           List, Code, Button, HTML, Image, Theme, TreeEditor, ObjectTreeNode, \
+           Property, TreeNodeObject, View, Item, UItem, HSplit, VSplit,        \
+           Tabbed, VGroup, HGroup, Heading, Handler, UIInfo, InstanceEditor,   \
+           ImageEditor, HTMLEditor, SlideshowEditor, Include, spring,          \
+           on_facet_set, inn
+
+from facets.core.facet_base \
+    import file_with_ext
 
 from facets.extra.helper.source_xref \
     import SourceXRef, RefFile
 
 from facets.extra.tools.text_file \
     import TextFile
+
+from facets.ui.pyface.timer.api \
+    import do_later
 
 #-------------------------------------------------------------------------------
 #  Global data:
@@ -41,6 +51,9 @@ exec_str =  """from facets.core_api \
     import *
 
 """
+
+# The background theme used by DemoPath instances:
+background_theme = Theme( '@tiles:TexturedCeiling1.jpg?s10', content = 25 )
 
 #-------------------------------------------------------------------------------
 #  Useful Helper Functions:
@@ -95,40 +108,14 @@ class DemoFileHandler ( Handler ):
         # Save the reference to the current 'info' object:
         self.info = info
 
-        # Set up the 'print' logger:
-        df         = info.object
-        df.log     = ''
-        #sys.stdout = sys.stderr = self
-
-        # Read in the demo source file:
-        df.description, df.source = parse_source( df.path )
-
-        # Try to run the demo source file:
-        locals = df.parent.init_dic.copy()
-        locals[ '__name__' ] = '___main___'
-        sys.modules[ '__main__' ].__file__ = df.path
-        try:
-            execfile( df.path, locals, locals )
-            df.demo = df.demo_for( locals )
-        except Exception, excp:
-            df.demo = DemoError( msg = str( excp ) )
-
 
     def closed ( self, info, is_ok ):
         """ Closes the view.
         """
         object = info.object
         inn( object.demo, 'dispose' )()
-        object.demo = None
+        del object.demo
 
-    #-- Handles 'print' Output -------------------------------------------------
-
-    def write ( self, text ):
-        self.info.object.log += text
-
-
-    def flush ( self ):
-        pass
 
 # Create a singleton instance:
 demo_file_handler = DemoFileHandler()
@@ -209,11 +196,35 @@ class DemoTreeNodeObject ( TreeNodeObject ):
 
     #-- Facet Definitions ------------------------------------------------------
 
+    # The parent of this object:
+    parent = Any
+
+    # The name of the file system path to this object:
+    path = Str
+
+    # The name of the object:
+    name = Str
+
+    # The UI form of the 'name':
+    nice_name = Str
+
+    # The owner of this object:
+    owner = Property
+
     # Cached result of 'tno_has_children':
     _has_children = Any
 
     # Cached result of 'tno_get_children':
     _get_children = Any
+
+    #-- Property Implementations -----------------------------------------------
+
+    def _get_owner ( self ):
+        parent = self.parent
+        if isinstance( parent, Demo ):
+            return parent
+
+        return parent.owner
 
     #-- Public Methods ---------------------------------------------------------
 
@@ -277,18 +288,6 @@ class DemoFile ( DemoTreeNodeObject ):
 
     #-- Facet Definitions ------------------------------------------------------
 
-    # Parent of this file:
-    parent = Any
-
-    # Name of file system path to this file:
-    path = Property
-
-    # Name of the file:
-    name = Str
-
-    # UI form of the 'name':
-    nice_name = Property
-
     # Files don't allow children:
     allows_children = Bool( False )
 
@@ -347,14 +346,36 @@ class DemoFile ( DemoTreeNodeObject ):
             UItem( 'context.execute', tooltip = 'Reload the demo' )
         ] )
 
-    #-- Property Implementations -----------------------------------------------
 
-    def _get_path ( self ):
+    def _path_default ( self ):
         return join( self.parent.path, self.name + '.py' )
 
 
-    def _get_nice_name ( self ):
+    def _nice_name_default ( self ):
         return user_name_for( self.name )
+
+
+    def _demo_default ( self ):
+        handles = sys.stdout, sys.stderr
+        try:
+            sys.stdout = sys.stderr = self
+
+            # Read in the demo source file:
+            path = self.path
+            self.description, self.source = parse_source( path )
+
+            # Try to run the demo source file:
+            locals = self.parent.init_dic.copy()
+            locals[ '__name__' ] = '___main___'
+            sys.modules[ '__main__' ].__file__ = path
+            try:
+                execfile( path, locals, locals )
+
+                return self.demo_for( locals )
+            except Exception, excp:
+                return DemoError( msg = str( excp ) )
+        finally:
+            sys.stdout, sys.stderr = handles
 
     #-- Public Methods ---------------------------------------------------------
 
@@ -424,6 +445,15 @@ class DemoFile ( DemoTreeNodeObject ):
 
         return None
 
+    #-- Handles 'print' Output -------------------------------------------------
+
+    def write ( self, text ):
+        self.log += text
+
+
+    def flush ( self ):
+        pass
+
 #-------------------------------------------------------------------------------
 #  'DemoPath' class:
 #-------------------------------------------------------------------------------
@@ -432,26 +462,14 @@ class DemoPath ( DemoTreeNodeObject ):
 
     #-- Facet Definitions ------------------------------------------------------
 
-    # Parent of this package:
-    parent = Any
-
-    # Name of file system path to this package:
-    path = Property
-
-    # Name of the directory:
-    name = Str
-
-    # UI form of the 'name':
-    nice_name = Property
-
     # Description of the contents of the directory:
-    description = Property( HTML )
+    description = HTML
 
     # Source code contained in the '__init__.py' file:
-    source = Property( Code )
+    source = Code
 
     # Dictionary containing symbols defined by the path's '__init__.py' file:
-    init_dic = Property
+    init_dic = Any
 
     # Should .py files be included?
     use_files = Bool( True )
@@ -459,51 +477,72 @@ class DemoPath ( DemoTreeNodeObject ):
     # Paths do allow children:
     allows_children = Bool( True )
 
+    # An image to display:
+    image = Image
+
+    # The images to make a slide show from:
+    images = List
+
+    # The demo image currently selected by the user:
+    selected = Any
+
     #-- Facet View Definitions -------------------------------------------------
 
-    view = View(
-        Tabbed(
-            UItem( 'description',
-                   label  = 'Description',
-                   style  = 'readonly',
-                   editor = HTMLEditor( format_text = True )
-            ),
-            UItem( 'source',
-                   label = 'Source',
-                   style = 'custom'
-            ),
-            dock   = 'tab',
-            export = 'DockWindowShell',
-            id     = 'tabbed'
-        ),
-        id = 'facets.ui.demos.demo.path_view'
-    )
+    def facets_view ( self ):
+        global background_theme
 
-    #-- Property Implementations -----------------------------------------------
+        self._init_description()
+        if self.use_files:
+            items = [
+                UItem( 'description',
+                       label  = 'Description',
+                       style  = 'readonly',
+                       editor = HTMLEditor( format_text = True )
+                ),
+                UItem( 'source',
+                       label = 'Source',
+                       style = 'custom'
+                )
+            ]
+            if len( self.images ) > 0:
+                items.insert( 0,
+                    UItem( 'images',
+                           editor = SlideshowEditor(
+                               selected         = 'selected',
+                               theme            = background_theme,
+                               transitions      = 'down, left, up, right',
+                               transition_order = 'shuffle',
+                               image_order      = 'shuffle'
+                           )
+                    )
+                )
 
-    def _get_path ( self ):
+            return View(
+                Tabbed( *items,
+                    dock   = 'tab',
+                    export = 'DockWindowShell',
+                    id     = 'tabbed'
+                ),
+                id = 'facets.ui.demos.demo.path_view'
+            )
+
+        return View(
+            UItem( 'image',
+                   editor = ImageEditor( theme = background_theme )
+            )
+        )
+
+    #-- Facet Default Values ---------------------------------------------------
+
+    def _path_default ( self ):
         return join( self.parent.path, self.name )
 
 
-    def _get_nice_name ( self ):
+    def _nice_name_default ( self ):
         return user_name_for( self.name )
 
 
-    def _get_description ( self ):
-        if self._description is None:
-            self._get_init()
-
-        return self._description
-
-
-    def _get_source ( self ):
-        if self._source is None:
-            self._get_init()
-
-        return self._source
-
-
-    def _get_init_dic ( self ):
+    def _init_dic_default ( self ):
         init_dic = {}
         description, source = parse_source( join( self.path, '__init__.py' ) )
         exec (exec_str + source) in init_dic
@@ -580,20 +619,28 @@ class DemoPath ( DemoTreeNodeObject ):
 
     #-- Private Methods --------------------------------------------------------
 
-    def _get_init ( self ):
-        """ Initializes the description and source from the path's
-            '__init__.py' file.
+    def _init_description ( self ):
+        """ Initializes the description or image for the directory.
         """
         if self.use_files:
             # Read in the '__init__.py' source file (if any):
-            self._description, source = parse_source(
-                                              join( self.path, '__init__.py' ) )
+            self.description, source = parse_source(
+                join( self.path, '__init__.py' )
+            )
+            self.source = exec_str + source
+            self.images = glob( join( self.path, '*.png' ) )
         else:
-            image_name = join( self.path, 'demo.jpg' ).replace( '\\', '/' )
-            self._description = ( '<img src="%s">' % image_name )
-            source = ''
+            self.image = join( self.path, 'demo.png' )
 
-        self._source = exec_str + source
+    #-- Facet Event Handlers ---------------------------------------------------
+
+    def _selected_set ( self ):
+        """ Handles the 'selected' facet being changed.
+        """
+        do_later(
+            self.owner.set,
+            selected = self.find( file_with_ext( self.selected.name, 'py' ) )
+        )
 
 #-------------------------------------------------------------------------------
 #  Defines the demo tree editor:
@@ -683,18 +730,28 @@ class Demo ( HasPrivateFacets ):
         """
         self.root.parent = self
 
-#-- Function to run the demo ---------------------------------------------------
+#-- Function to create and optionally run the demo -----------------------------
 
-def demo ( root = None ):
-    """ Runs the demo contained in the specified root directory.
+def demo ( root = None, run = True ):
+    """ Creates a Demo object corresponding to the demo contained in the
+        specified *root* directory. If *root* is not specified, it uses the path
+        to the 'facets.extra.demo.ui' user interface demo. If *run* is True, it
+        immediately launches the resulting demo UI.
+
+        Returns the Demo object for the specified demo.
     """
     if root is None:
         root = dirname( abspath( sys.argv[0] ) )
 
     path, name = split( root )
-    Demo( path = path,
-          root = DemoPath( name = name, use_files = False )
-    ).edit_facets()
+    demo       = Demo(
+        path = path,
+        root = DemoPath( name = name, use_files = False )
+    )
+    if run:
+        demo.edit_facets()
+
+    return demo
 
 #-- Run the Facets UI demo (if invoked from the command line -------------------
 
