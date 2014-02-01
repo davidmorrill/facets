@@ -493,6 +493,7 @@ class DemoPath ( DemoTreeNodeObject ):
 
         self._init_description()
         if self.use_files:
+            id    = 'facets.ui.demos.demo.path_view'
             items = [
                 UItem( 'description',
                        label  = 'Description',
@@ -505,6 +506,7 @@ class DemoPath ( DemoTreeNodeObject ):
                 )
             ]
             if len( self.images ) > 0:
+                id += '_ss'
                 items.insert( 0,
                     UItem( 'images',
                            editor = SlideshowEditor(
@@ -523,7 +525,7 @@ class DemoPath ( DemoTreeNodeObject ):
                     export = 'DockWindowShell',
                     id     = 'tabbed'
                 ),
-                id = 'facets.ui.demos.demo.path_view'
+                id = id
             )
 
         return View(
