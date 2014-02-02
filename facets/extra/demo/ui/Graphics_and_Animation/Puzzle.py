@@ -41,9 +41,12 @@ unspecified) for the <b>Puzzle</b> constructor in the
 from random \
     import shuffle, choice
 
+from math \
+    import floor
+
 from facets.api \
     import HasFacets, Tuple, Int, List, Image, Instance, Range, Bool, \
-           Property, Button, View, Item, UItem, HGroup, ScrubberEditor, \
+           Property, Button, Theme, View, Item, UItem, HGroup, ScrubberEditor, \
            spring, on_facet_set, property_depends_on
 
 from facets.ui.custom_control_editor \
@@ -80,20 +83,21 @@ class PuzzlePiece ( HasFacets ):
 
 class Puzzle ( HasFacets ):
 
-    image     = Image
-    rows      = Range( 4, 25, 8 )
-    columns   = Range( 4, 25, 8 )
-    count     = Range( 1, None, 5 )
-    force     = Range( 0.0, 1.0, .15 )
-    time      = Range( 0.1, 10.0, 1.9 )
-    paths     = List( PuzzlePaths )
+    base_image = Image
+    image      = Image
+    rows       = Range( 4, 25, 8 )
+    columns    = Range( 4, 25, 8 )
+    count      = Range( 1, None, 5 )
+    force      = Range( 0.0, 1.0, .15 )
+    time       = Range( 0.1, 10.0, 1.9 )
+    paths      = List( PuzzlePaths )
 
-    pieces    = List( PuzzlePiece )
-    unsolved  = List
-    size      = Tuple( Int, Int )
-    frame     = Int
-    animation = Instance( ConcurrentAnimation )
-    running   = Bool( False )
+    pieces     = List( PuzzlePiece )
+    unsolved   = List
+    size       = Tuple( Int, Int )
+    frame      = Int
+    animation  = Instance( ConcurrentAnimation )
+    running    = Bool( False )
 
     def _image_set ( self, image ):
         rows, columns = self.rows, self.columns
@@ -178,15 +182,31 @@ class _PuzzleEditor ( ControlEditor ):
     virtual_size = ( 10, 10 )
 
     def paint_content ( self, g ):
-        puzzle            = self.value
+        x, y, dx, dy  = self.content_bounds
+        puzzle        = self.value
+        columns, rows = puzzle.columns, puzzle.rows
+        if puzzle.image is None:
+            base_image = image = puzzle.base_image
+            bidx, bidy = image.width, image.height
+            pdx, pdy   = bidx / columns, bidy / rows
+
+            # The constant 0.9 provides some margin around the expanded image:
+            incr = int( floor( min( float( (0.95 * dx) - bidx ) / columns,
+                                    float( (0.95 * dy) - bidy ) / rows ) ) )
+            if incr != 0:
+                image = base_image.scale( ( bidx + (incr * columns),
+                                            bidy + (incr * rows) ) )
+
+            puzzle.image = image
+
         g.brush           = None
         image             = puzzle.image
         bdx, bdy          = self.theme.bounds()
         self.virtual_size = ( image.width + bdx, image.height + bdy )
         pdx, pdy          = puzzle.size
-        bitmap, idx, idy  = image.bitmap, image.width, image.height
-        x, y, dx, dy      = self.content_bounds
-        x0, y0            = x + ((dx - idx) / 2), y + ((dy - idy) / 2)
+        bitmap            = image.bitmap
+        x0                = x + ((dx - (pdx * columns)) / 2)
+        y0                = y + ((dy - (pdy * rows))    / 2)
         unsolved          = []
 
         for piece in self.value.pieces:
@@ -207,12 +227,17 @@ class _PuzzleEditor ( ControlEditor ):
     def _needs_update ( self ):
         self.refresh()
 
+    def _value_set ( self ):
+        self.virtual_size = ( 10, 10 )
+
+        super( _PuzzleEditor, self )._value_set()
+
 #-- PuzzleEditor class ---------------------------------------------------------
 
 class PuzzleEditor ( CustomControlEditor ):
 
     klass = _PuzzleEditor
-    theme = '@xform:b?L10'
+    theme = '@tiles:FibreBoard1.jpg?s10L7'
 
 #-- PuzzleSolver class ---------------------------------------------------------
 
@@ -252,13 +277,12 @@ class PuzzleSolver ( HasFacets ):
 
     def _create_puzzle ( self ):
         self.puzzle = Puzzle(
-            rows    = 16,
-            columns = 16,
-            count   = 1,
-            force   = 0.0,
-            time    = self.time
-        ).set(
-            image   = choice( Images )
+            rows       = 16,
+            columns    = 16,
+            count      = 1,
+            force      = 0.0,
+            time       = self.time,
+            base_image = choice( Images )
         )
 
         return self.puzzle
