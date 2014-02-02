@@ -1,5 +1,7 @@
 """
-This demo shows you how to space editors horizontally using 'springs'.
+# Using Spring Items #
+
+This demo shows you how to space editors horizontally using *springs*.
 
 It illustrates several different combinations, including a normal, non-spring,
 example.

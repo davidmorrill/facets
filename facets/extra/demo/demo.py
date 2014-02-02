@@ -39,6 +39,9 @@ from facets.extra.helper.source_xref \
 from facets.extra.tools.text_file \
     import TextFile
 
+from facets.extra.markdown.markdown \
+    import MarkdownEditor
+
 from facets.ui.pyface.timer.api \
     import do_later
 
@@ -211,11 +214,25 @@ class DemoTreeNodeObject ( TreeNodeObject ):
     # The owner of this object:
     owner = Property
 
+    # A description of the object:
+    description = Str
+
+    # The editor used to display the description:
+    description_editor = Any # HTMLEditor or MarkdownEditor
+
     # Cached result of 'tno_has_children':
     _has_children = Any
 
     # Cached result of 'tno_get_children':
     _get_children = Any
+
+    #-- Facet Default Values ---------------------------------------------------
+
+    def _description_editor_default ( self ):
+        if self.description.lstrip().startswith( '#' ):
+            return MarkdownEditor()
+
+        return HTMLEditor( format_text = True )
 
     #-- Property Implementations -----------------------------------------------
 
@@ -291,9 +308,6 @@ class DemoFile ( DemoTreeNodeObject ):
     # Files don't allow children:
     allows_children = Bool( False )
 
-    # Description of what the demo does:
-    description = HTML
-
     # Source code for the demo:
     source = DelegatesTo( 'text_file', 'text' )
 
@@ -311,33 +325,37 @@ class DemoFile ( DemoTreeNodeObject ):
 
     #-- Facet View Definitions -------------------------------------------------
 
-    view = View(
-        Tabbed(
-            UItem( 'demo',
-                   style     = 'custom',
-                   label     = 'Demo',
-                   resizable = True
+    def facets_view ( self ):
+        # Force the 'demo' object to be initialized:
+        self.demo
+
+        return View(
+            Tabbed(
+                UItem( 'demo',
+                       style     = 'custom',
+                       label     = 'Demo',
+                       resizable = True
+                ),
+                UItem( 'description',
+                       label  = 'Description',
+                       style  = 'readonly',
+                       editor = self.description_editor
+                ),
+                UItem( 'text_file',
+                       style = 'custom',
+                       label = 'Source'
+                ),
+                UItem( 'log',
+                       style = 'readonly',
+                       label = 'Log'
+                ),
+                dock   = 'tab',
+                export = 'DockWindowShell',
+                id     = 'tabbed'
             ),
-            UItem( 'description',
-                   label  = 'Description',
-                   style  = 'readonly',
-                   editor = HTMLEditor( format_text = True )
-            ),
-            UItem( 'text_file',
-                   style = 'custom',
-                   label = 'Source'
-            ),
-            UItem( 'log',
-                   style = 'readonly',
-                   label = 'Log'
-            ),
-            dock   = 'tab',
-            export = 'DockWindowShell',
-            id     = 'tabbed'
-        ),
-        id      = 'facets.ui.demos.demo.file_view',
-        handler = demo_file_handler
-    )
+            id      = 'facets.ui.demos.demo.file_view',
+            handler = demo_file_handler
+        )
 
     #-- Facet Default Values ---------------------------------------------------
 
@@ -498,7 +516,7 @@ class DemoPath ( DemoTreeNodeObject ):
                 UItem( 'description',
                        label  = 'Description',
                        style  = 'readonly',
-                       editor = HTMLEditor( format_text = True )
+                       editor = self.description_editor
                 ),
                 UItem( 'source',
                        label = 'Source',
