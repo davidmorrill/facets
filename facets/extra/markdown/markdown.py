@@ -35,26 +35,20 @@ from facets.extra.api \
 MarkdownExtras = [ 'code-friendly', 'cuddled-lists', 'fenced-code-blocks' ]
 
 # The HTML template used to create a web page from the converted markdown text:
-HTMLTemplate = """
+HTMLTemplate = ("""
 <html>
   <head>
     <title>Markdown</title>
-      %s
+    <link rel="stylesheet" type="text/css" href="file:///%s">
+    %%s
   </head>
   <body>
-%s  </body>
+%%s  </body>
 </html>
-"""[1:-1]
-
-# The CSS <link> template to use when a CSS file is provided:
-CSSLinkTemplate = '<link rel="stylesheet" type="text/css" href="file:///%s">'
+"""[1:-1]) % get_resource( 'default.css' )
 
 # The CSS <style> template to use when CSS rules are provided:
 CSSStyleTemplate = '<style type="text/css">\n%s\n</style>'
-
-# The default CSS to use if none is provided:
-DefaultCSS = ('<link rel="stylesheet" type="text/css" href="file:///%s">' %
-              get_resource( 'default.css' ))
 
 #-------------------------------------------------------------------------------
 #  'Markdown' facet definition:
@@ -87,7 +81,7 @@ class _MarkdownEditor ( UIEditor ):
     html = Str
 
     # The current CSS rules used to style the generated HTML:
-    css = Str( DefaultCSS )
+    css = Str
 
     # The most recently read contents of a markdown file:
     markdown = Str
@@ -153,7 +147,7 @@ class _MarkdownEditor ( UIEditor ):
         """
         css = self.factory.css.strip()
         if css == '':
-            self.css = DefaultCSS
+            self.css = ''
         elif css[-4:].lower() == '.css':
             css = abspath( css )
             if self.css_file != css:
@@ -170,7 +164,7 @@ class _MarkdownEditor ( UIEditor ):
         """ Handles the current .css file being updated in some way.
         """
         css      = read_file( css_file )
-        self.css = (DefaultCSS if css is None else (CSSStyleTemplate % css))
+        self.css = ('' if css is None else (CSSStyleTemplate % css))
 
 
     def _update_markdown_file ( self, markdown_file ):
