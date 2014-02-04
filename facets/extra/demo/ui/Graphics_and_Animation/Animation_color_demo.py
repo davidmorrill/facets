@@ -1,42 +1,41 @@
 """
-Another demonstration of using a custom <i>tweener</i> class with the Facets
-animation system. Refer to the main <i>Animation_demo.py</i> module for a more
-in depth discussion of Facets animation support, and to the
-<i>Animation_tweener_demo.py</i> module for additional discussion of creating
-custom <i>tweener</i> classes.
+# Animation Color Demo #
 
-In this demo, the main <b>AnimationColorDemo</b> class has an
-<b>HLSADerivedImage</b> object assigned to its <i><b>image</b></i> facet, which
-is displayed using an <b>ImageZoomEditor</b>.
+Another demonstration of using a custom *tweener* class with the Facets
+animation system. Refer to the main *Animation_demo.py* module for a more in
+depth discussion of Facets animation support, and to the
+*Animation_tweener_demo.py* module for additional discussion of creating
+custom *tweener* classes.
 
-When the <i>Start</i> button is clicked, each of the <i><b>hue</b></i>,
-<i><b>lightness</b></i> and <i><b>saturation</b></i> facets of the
-HLSADerivedImage object's <i><b>transform</b></i> facet's <b>HLSATransform</b>
-object is animated through a range of values, with the ImageZoomEditor
-displaying the changes.
+In this demo, the main **AnimationColorDemo** class has an
+**HLSADerivedImage** object assigned to its ***image*** facet, which is
+displayed using an **ImageZoomEditor**.
 
-You can cancel the current animation at any time by clicking the <i>Stop</i>
-button.
+When the *Start* button is clicked, each of the ***hue***, ***lightness*** and
+***saturation*** facets of the HLSADerivedImage object's ***transform*** facet's
+**HLSATransform** object is animated through a range of values, with the
+ImageZoomEditor displaying the changes.
 
-The demo uses a custom <b>Cycler</b> <i>tweener</i> class to control the
-animation of each value. The Cycler class has a single parameter,
-<i><b>n</b></i>, which defines the number of times the animation cycles back and
-forth between its start and end values. When the <i>Start</i> button is clicked,
-each animated facet is set up to use a Cycler tweener with a different number of
-cycles specified.
+You can cancel the current animation at any time by clicking the *Stop* button.
 
-The heart of the Cycler tweener is the <i><b>at</b></i> method:
+The demo uses a custom **Cycler** *tweener* class to control the animation of
+each value. The Cycler class has a single parameter, ***n***, which defines the
+number of times the animation cycles back and forth between its start and end
+values. When the *Start* button is clicked, each animated facet is set up to use
+a Cycler tweener with a different number of cycles specified.
 
-  def at ( self, t ):
-      v = fmod( t * self.n, 1.0 )
-      if v >= 0.50:
-          v = 1.0 - v
+The heart of the Cycler tweener is the ***at*** method:
 
-      return (2.0 * v)
+    def at ( self, t ):
+        v = fmod( t * self.n, 1.0 )
+        if v >= 0.50:
+            v = 1.0 - v
 
-The method converts the current time value <i><b>t</b></i> into a new time value
-which represents the mapping from the main animation cycle into the current
-Cycler cycle.
+        return (2.0 * v)
+
+The method converts the current time value ***t*** into a new time value which
+represents the mapping from the main animation cycle into the current Cycler
+cycle.
 
 Note that the ImageZoomEditor still performs its normal functions while the
 demo animation is running. Try zooming into the image with the mouse wheel and

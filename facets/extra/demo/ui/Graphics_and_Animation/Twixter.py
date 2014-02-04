@@ -1,11 +1,14 @@
 """
-A fairly complex demo reminiscent of a cross between the old <b>Twix</b> arcade
-game, a <b>Slinky</b> and a <b>Spirograph</b>.
+# Twixter #
+
+A fairly complex demo reminiscent of a cross between the old **Twix** arcade
+game, a **Slinky** and a **Spirograph**.
 
 The demo consists of three editable triangles:
- - A start triangle.
- - An end triangle.
- - A center triangle.
+
+- A start triangle.
+- An end triangle.
+- A center triangle.
 
 When you mouse over the main part of the demo view, the editable triangles will
 appear drawn in red, with a series of drag handles appearing at their vertex and
@@ -14,32 +17,32 @@ any of the lines, or drag the center point to translate the entire triangle.
 
 The demo works by drawing a series of intermediate triangles between the start
 triangle and the end triangle, rotating the end points of the intermediate
-triangles around the <i>current</i> point on the center triangle.
+triangles around the *current* point on the center triangle.
 
-There are also a series of animation settings accessed by clicking the
-<i>gear</i> icon near the bottom right corner of the view. This displays a
-pop-up view containing all of the animation controls.
+There are also a series of animation settings accessed by clicking the *gear*
+icon near the bottom right corner of the view. This displays a pop-up view
+containing all of the animation controls.
 
 Please experiment with the various controls to get a better feel for how the
 demo operates (that's half the fun).
 
 The code implementing the demo illustrates several important Facets features and
 techniques:
- - Creating a custom control using the UI <i>abstraction layer</i>
-   (<b>LinesEditor</b>).
- - Creating a custom editor based an a custom control using the
-   <b>CustomControlEditor</b> <i>editor factory</i>.
- - Creating a custom <b>Handler</b> class to exercise more control over a
-   <b>View</b>'s life cycle (<b>TwixterHandler</b>).
- - Use of <b>Property</b>-based facets to simplify model design
-   (<b>Tracker.<i>point</i></b> and <b>Line.<i>center</i></b>).
- - Use of the <i>animate_facet</i> and <i>halt_animated_facets</i> methods to
-   create and control animated behavior.
- - Creating custom <b>Group</b> and <b>Item</b> classes by subclassing and
-   overriding facet default values in order to simplify <b>View</b> creation
-   (<b>BevelGroup</b> and <b>RangeItem</b>).
- - Creating a custom facet definition to simplify and better document a design
-   (<b>Point</b>).
+
+- Creating a custom control using the UI *abstraction layer* (**LinesEditor**).
+- Creating a custom editor based an a custom control using the
+  **CustomControlEditor** *editor factory*.
+- Creating a custom **Handler** class to exercise more control over a **View**'s
+  life cycle (**TwixterHandler**).
+- Use of **Property**-based facets to simplify model design (**Tracker.*point***
+  and **Line.*center***).
+- Use of the *animate_facet* and *halt_animated_facets* methods to create and
+  control animated behavior.
+- Creating custom **Group** and **Item** classes by subclassing and overriding
+  facet default values in order to simplify **View** creation (**BevelGroup**
+  and **RangeItem**).
+- Creating a custom facet definition to simplify and better document a design
+  (**Point**).
 
 The code is fairly long, but there are a lot of useful techniques to learn
 through careful study. Have fun exploring the code and demo!

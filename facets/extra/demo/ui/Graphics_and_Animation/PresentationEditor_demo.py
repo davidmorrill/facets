@@ -1,5 +1,7 @@
 """
-Demonstrates using the PresentationEditor, an editor which converts a text
+# PresentationEditor Demo #
+
+Demonstrates using the **PresentationEditor**, an editor which converts a text
 string into a series of one or more animated slides suitable for giving
 presentations.
 

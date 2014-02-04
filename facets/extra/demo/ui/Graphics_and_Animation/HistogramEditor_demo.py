@@ -1,6 +1,8 @@
 """
-A few simple examples of using the HistogramEditor to display a series of values
-in a histogram plot format.
+# HistogramEditor Demo #
+
+A few simple examples of using the **HistogramEditor** to display a series of
+values in a histogram plot format.
 """
 
 #-- Imports --------------------------------------------------------------------

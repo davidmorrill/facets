@@ -1,25 +1,27 @@
 """
-This demo illustrates some simple uses of a <b>DrawableCanvas</b> and its
-associated <b>DrawableCanvasEditor</b>. In particular, the demo illustrates
-several ways in which <b>DrawableCanvas</b> items can easily be animated to
-produce interesting visual effects.
+# Drawable Canvas Editor Demo #
 
-A <b>DrawableCanvas</b> is basically a container for <i>drawable</i> items. The
-order of the items in the canvas's <b><i>content</i></b> facet determines the
-order in which the item's are drawn. The first item in the list is drawn first
-and the last item is drawn last.
+This demo illustrates some simple uses of a **DrawableCanvas** and its
+associated **DrawableCanvasEditor**. In particular, the demo illustrates several
+ways in which **DrawableCanvas** items can easily be animated to produce
+interesting visual effects.
+
+A **DrawableCanvas** is basically a container for *drawable* items. The order of
+the items in the canvas's ***content*** facet determines the order in which the
+item's are drawn. The first item in the list is drawn first and the last item is
+drawn last.
 
 The demo is set up so that initially a single randomly selected demo is
 displayed. Several different demos are available and the current demo can be
-changed by selecting a different item from the <i>Demo</i> dropdown located
-in the bottom right corner of the display.
+changed by selecting a different item from the *Demo* dropdown located in the
+bottom right corner of the display.
 
-You can create additional demo instances by clicking the <i>plus</i> icon in the
+You can create additional demo instances by clicking the *plus* icon in the
 bottom right corner. This adds a new instance with a randomly selected demo to
 the display. You can use the standard drag and splitter controls to adjust the
 size and position of the new demo. You can change the demo by selecting the
 demo's tab and then selecting a new demo using the dropdown selector. Click any
-demo tab's <i>close</i> icon to remove the demo from the display.
+demo tab's *close* icon to remove the demo from the display.
 """
 
 #-- Imports --------------------------------------------------------------------

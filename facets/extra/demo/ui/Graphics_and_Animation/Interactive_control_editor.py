@@ -1,112 +1,114 @@
 """
-This is the fourth in a series of increasingly more elaborate demonstrations
-of creating custom control editors using the special <b>CustomControlEditor</b>
-<i>editor factory</i>.
+# Interactive Control Editor #
 
-This demonstration builds upon the <i>Themed_control_editor.py</i> demo by
-showing how to add mouse event handling to a custom control editor using the
-<b>ThemedWindow</b> class's <i>state</i>-based event handling methods.
+This is the fourth in a series of increasingly more elaborate demonstrations
+of creating custom control editors using the special **CustomControlEditor**
+*editor factory*.
+
+This demonstration builds upon the *Themed_control_editor.py* demo by showing
+how to add mouse event handling to a custom control editor using the
+**ThemedWindow** class's *state*-based event handling methods.
 
 The demo is a simple drawing program which allows you to create, delete, drag
 and edit simple themed boxes containing some content text and an optional label.
 
 You create a themed box by clicking (and optionally dragging) anywhere in the
 drawing area. The themed box will be created using the current contents of the
-<i>label</i> and <i>content</i> fields at the bottom of the view. Creating a
-new item leaves it in the <i>selected</i> state. You can continue to make
-changes to the <i>label</i> and <i>content</i> fields and see those changes
-reflected in the item you just created.
+*label* and *content* fields at the bottom of the view. Creating a new item
+leaves it in the *selected* state. You can continue to make changes to the
+*label* and *content* fields and see those changes reflected in the item you
+just created.
 
-You can delete an existing item simply by <i>right clicking</i> on it. If you
+You can delete an existing item simply by *right clicking* on it. If you
 right-click on an empty area, any currently selected item will be deselected.
 
-You select an existing item by <i>clicking</i> on it. You move an item by
-<i>click-dragging</i> it. Selecting an item also copies it current label and
-content values back into the text entry fields at the bottom of the view,
-allowing you to make editing changes if desired.
+You select an existing item by *clicking* on it. You move an item by
+*click-dragging* it. Selecting an item also copies it current label and content
+values back into the text entry fields at the bottom of the view, allowing you
+to make editing changes if desired.
 
 The demo code is divided into three model classes:
- - <b>CanvasItem</b>: A single themed box.
- - <b>Canvas</b>: The drawing canvas.
- - <b>InteractiveControl</b>: The main demo class.
 
-The custom control editor is defined by the <b>CanvasEditor</b> class. It
-occupies the major portion of the view, and its purpose is to allow creating,
-deleting, dragging and editing the <b>CanvasItems</b> contained within the
-<b>Canvas</b> object it is editing.
+- **CanvasItem**: A single themed box.
+- **Canvas**: The drawing canvas.
+- **InteractiveControl**: The main demo class.
 
-The <b>InteractiveControl</b> class defines a <b><i>canvas</i></b> facet,
-containing a <b>Canvas</b> instance, which is edited using the custom
-<b>CustomControlEditor</b> using the <b>CanvasEditor</b> class to implement the
-editing control.
+The custom control editor is defined by the **CanvasEditor** class. It occupies
+the major portion of the view, and its purpose is to allow creating, deleting,
+dragging and editing the **CanvasItems** contained within the **Canvas** object
+it is editing.
 
-As with some of the other custom control editor demos, the <b>CanvasEditor</b>
+The **InteractiveControl** class defines a ***canvas*** facet, containing a
+**Canvas** instance, which is edited using the custom **CustomControlEditor**
+using the **CanvasEditor** class to implement the editing control.
+
+As with some of the other custom control editor demos, the **CanvasEditor**
 is scrollable. In this case it uses a fixed document size of 5000 x 5000 pixels,
-as specified by its <b><i>virtual_size</i></b> facet value.
+as specified by its ***virtual_size*** facet value.
 
 To help keep this description relatively short, we will not go into any detail
-about the drawing or <i>theme</i>-related code, referring you instead to the
-<i>Themed_control_editor.py</i> demo for more information about those topics.
+about the drawing or *theme*-related code, referring you instead to the
+*Themed_control_editor.py* demo for more information about those topics.
 
 Instead we will focus on the event handling code contained in the
-<b>CanvasEditor</b> class.
+**CanvasEditor** class.
 
-The <b>ThemedWindow</b> class, which is a superclass of <b>CanvasEditor</b>,
-defines a flexible mechanism for handling mouse events based upon a
-<i>finite state machine</i> mechanism implemented using its <b><i>state</i></b>
-facet, which contains a string defining the object's current <i>state</i>.
+The **ThemedWindow** class, which is a superclass of **CanvasEditor**, defines a
+flexible mechanism for handling mouse events based upon a *finite state machine*
+mechanism implemented using its ***state*** facet, which contains a string
+defining the object's current *state*.
 
-The initial, default value for <b><i>state</i></b> is <i>"normal"</i>. When a
-mouse event (such as a left mouse button down event) occurs, the class looks for
-a handler with a name of the form: <i>state_event</i> (e.g.
-<b><i>normal_left_down</i></b>, where <b><i>normal</b></i> is the current
-state, and <b><i>left_down</i></b> is the name of the event.
+The initial, default value for ***state*** is *"normal"*. When a mouse event
+(such as a left mouse button down event) occurs, the class looks for a handler
+with a name of the form: *state_event* (e.g. ***normal_left_down***, where
+***normal*** is the current state, and ***left_down*** is the name of the event.
 
 If the method is found, it is called with the type of event information it
 requests. The requested information is determined by the number of arguments
 defined for the method, as shown below:
- - <i>method( self )</i>
- - <i>method( self, event )</i>
- - <i>method( self, x, y )</i>
- - <i>method( self, x, y, event )</i>
-where <b><i>x</i></b> and <b><i>y</i></b> are the mouse coordinates associated
-with the event, and <b><i>event</i></b> is an <b>Event</b> object containing
-detailed information about the event.
 
-The use of the <b><i>state</i></b> facet provides a simple mechanism for
-writing the logic of a control without having to maintain or use a lot of other
-internal state information. Simply setting <b><i>state</i></b> to a new value
-causes future mouse events to be routed to the appropriate method automatically.
+- *method( self )*
+- *method( self, event )*
+- *method( self, x, y )*
+- *method( self, x, y, event )*
 
-If no method matching the combined state/event name is found, the default
-action for that event is taken. Thus, all you have to do to handle a specific
-event in a specific state is to write a method for handling that event using
-the above naming and argument conventions.
+where ***x*** and ***y*** are the mouse coordinates associated with the event,
+and ***event*** is an **Event** object containing detailed information about the
+event.
 
-Another point worth mentioning is how all of the <b>CanvasEditor</b> refresh
-logic is automatically handled by the Facets notification system. In particular,
-the:
-  @on_facet_set( 'value:items.refresh' )
+The use of the ***state*** facet provides a simple mechanism for writing the
+logic of a control without having to maintain or use a lot of other internal
+state information. Simply setting ***state*** to a new value causes future mouse
+events to be routed to the appropriate method automatically.
+
+If no method matching the combined state/event name is found, the default action
+for that event is taken. Thus, all you have to do to handle a specific event in
+a specific state is to write a method for handling that event using the above
+naming and argument conventions.
+
+Another point worth mentioning is how all of the **CanvasEditor** refresh logic
+is automatically handled by the Facets notification system. In particular, the:
+
+    @on_facet_set( 'value:items.refresh' )
 
 decorator ensures that the editor is refreshed whenever any items are added to
-or deleted from the canvas, or when the <b><i>refresh</i></b> event is fired on
-any item contained in the canvas. In conjunction with this, note how the
-<b><i>refresh</i></b> event on a <b>CanvasItem</b> is automatically fired
-whenever any of the facets affecting the visual appearance of an item are
-changed, courtesy of the <b><i>event</i></b> metadata attached to their facet
-definitions.
+or deleted from the canvas, or when the ***refresh*** event is fired on any item
+contained in the canvas. In conjunction with this, note how the ***refresh***
+event on a **CanvasItem** is automatically fired whenever any of the facets
+affecting the visual appearance of an item are changed, courtesy of the
+***event*** metadata attached to their facet definitions.
 
 There are lots of other interesting Facets programming style nuggets buried in
 this demo, which we will leave interested readers to discover on their own.
 
-Finally, to illustrate the power of the Facets <i>model-based</i> approach,
-the demo view defines two tabs, each displaying the same <b>Canvas</b> model
-but using different copies of the <b>CanvasEditor</b>. Try dragging one of the
-tabs so that you have two side-by-side canvas views.
+Finally, to illustrate the power of the Facets *model-based* approach, the demo
+view defines two tabs, each displaying the same **Canvas** model but using
+different copies of the **CanvasEditor**. Try dragging one of the tabs so that
+you have two side-by-side canvas views.
 
 Notice how both views of the canvas remain completely in sync, due to the fact
-that they are both editing the same <b>Canvas</b> model. Each view can be
-scrolled independently, but the contents for both are always identical.
+that they are both editing the same **Canvas** model. Each view can be scrolled
+independently, but the contents for both are always identical.
 """
 
 #-- Imports --------------------------------------------------------------------

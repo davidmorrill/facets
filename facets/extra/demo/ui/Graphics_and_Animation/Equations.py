@@ -1,106 +1,110 @@
 """
+# Equations #
+
 I must admit that I wrote this demo because I thought it would be fun to do so,
 and it was. And I am pretty happy with the result. One other fun fact that I
 hope will inspire you is that the entire program, including this documentation,
 was written in under 24 hours, spread across two Starbucks visits and a few
 hours in the evening spent half-coding, half-channel hopping TV.
 
-The program is a simple lab for experimenting with animated <i>parametric
-equations</i>. Parametric equations are formulas that allow you to express
-one set of values in term of another set of values (the parameters).
+The program is a simple lab for experimenting with animated *parametric
+equations*. Parametric equations are formulas that allow you to express one set
+of values in term of another set of values (the parameters).
 
 In this case, the values we wish to express are (x,y) points on a 2D plane
-described in terms of a single parameter, <i>t</i>.
+described in terms of a single parameter, *t*.
 
 The program works as follows:
- - There are two formulas: <i>x(t)</i> and <i>y(t)</i> displayed in the top half
-   of the view.
- - The formulas appear as text fields containing numeric expressions written in
-   Python (e.g. <b><i>a*sin(b*2*pi*t)</i></b>).
- - You are free to change the formulas as you like. The only restrictions are
-   that the formulas can only reference <i>t</i> (the <i>parameter</i>), and the
-   five constants: <i>a</i>, <i>b</i>, <i>c</i>, <i>d</i> and <i>e</i>.
- - When writing a formula, you have full access to the entire contents of the
-   <b><i>numpy</i></b> module, which provides many common numeric functions
-   (e.g. <i>sin</i> and <i>cos</i>) and constants (e.g. <i>pi</i>).
- - The values for the five constants, <i>a</i>, <i>b</i>, <i>c</i>, <i>d</i> and
-   <i>e</i>, can be entered using the sliders located above the forumula.
+
+- There are two formulas: *x(t)* and *y(t)* displayed in the top half of the
+  view.
+- The formulas appear as text fields containing numeric expressions written in
+  Python (e.g. ***a*sin(b*2*pi*t)***).
+- You are free to change the formulas as you like. The only restrictions are
+  that the formulas can only reference *t* (the *parameter*), and the five
+  constants: *a*, *b*, *c*, *d* and *e*.
+- When writing a formula, you have full access to the entire contents of the
+  ***numpy*** module, which provides many common numeric functions (e.g. *sin*
+  and *cos*) and constants (e.g. *pi*).
+- The values for the five constants, *a*, *b*, *c*, *d* and *e*, can be entered
+  using the sliders located above the forumula.
 
 That's most of what you need to know about creating formulas. Next up is what
 the program does with the formulas you have entered.
 
-The program creates a set of <i>(x,y)</i> points by evaluating both formulas for
-a range of values of the parameter <i>t</i>. The range is determined by the
-<i>range slider</i> labeled <i>t</i>. The number of points to create is
-specified by the value of the field labeled <i>Steps</i>.
+The program creates a set of *(x,y)* points by evaluating both formulas for a
+range of values of the parameter *t*. The range is determined by the
+*range slider* labeled *t*. The number of points to create is specified by the
+value of the field labeled *Steps*.
 
-The program then plots the set of points calculated using the <i>x(t)</i> and
-<i>y(t)</i> formulas over the range of values for <i>t</i>. One plot displays
-individual points, while the other draws lines connecting consecutive points.
+The program then plots the set of points calculated using the *x(t)* and *y(t)*
+formulas over the range of values for *t*. One plot displays individual points,
+while the other draws lines connecting consecutive points.
 
-The fun starts when the <i>animation</i> feature is turned on (or off) by
-clicking the small play/stop button located halfway down the right side of the
-view. When the program starts, the animation is already running in order to
-give you an immediate sense of what the program does.
+The fun starts when the *animation* feature is turned on (or off) by clicking
+the small play/stop button located halfway down the right side of the view. When
+the program starts, the animation is already running in order to give you an
+immediate sense of what the program does.
 
-The animation is controlled by each of the ten constants: <i>a</i>, <i>b</i>,
-<i>c</i>, <i>d</i> and <i>e</i> for the <i>x(t)</i> and <i>y(t)</i> formulas.
-As you'll notice, each constant is not a single value, but a range of values.
-Initially, each constant is locked, allowing you to easily slide the value up
-or down. By clicking the padlock icon located to the right of a slider, you
-can unlock the range of the constant. Once unlocked, each end of the constant's
-range can be individually adjusted by either dragging or mouse wheel scrolling
-while the pointer is over one of the slider ends. The entire range can be
-shifted by dragging or mouse wheel scrolling the middle region of the slider.
-Clicking the padlock icon again will lock the range, meaning that you can
-drag or mouse wheel scroll over any part of the slider to adjust the entire
-range, but you can cannot adjust the endpoints of the range separately.
+The animation is controlled by each of the ten constants: *a*, *b*, *c*, *d* and
+*e* for the *x(t)* and *y(t)* formulas. As you'll notice, each constant is not a
+single value, but a range of values. Initially, each constant is locked,
+allowing you to easily slide the value up or down. By clicking the padlock icon
+located to the right of a slider, you can unlock the range of the constant. Once
+unlocked, each end of the constant's range can be individually adjusted by
+either dragging or mouse wheel scrolling while the pointer is over one of the
+slider ends. The entire range can be shifted by dragging or mouse wheel
+scrolling the middle region of the slider. Clicking the padlock icon again will
+lock the range, meaning that you can drag or mouse wheel scroll over any part of
+the slider to adjust the entire range, but you can cannot adjust the endpoints
+of the range separately.
 
 The animation system looks for any constants which have different end point
 values and animates the value of the constant over the specified range. Once the
-animation reaches the end of the range it reverses and goes back to the start
-of the range, and so on until the animation is stopped. The amount of time it
-takes to go from one end of the range to the other is specified using the
-<i>time scrubber</i> located to the right of the constant value slider.
+animation reaches the end of the range it reverses and goes back to the start of
+the range, and so on until the animation is stopped. The amount of time it takes
+to go from one end of the range to the other is specified using the
+*time scrubber* located to the right of the constant value slider.
 
-At every <i>frame</i> of the animation, each constant with an animated range is
-evaluated. Then each of the <i>x(t)</i> and <i>y(t)</i> formulas are evaluated
-for each value in the <i>t</i> range using the current frame's constant values.
-The resulting set of points are then plotted as described previously. The net
-effect is a smooth animation of the formulas using the animated constant values.
+At every *frame* of the animation, each constant with an animated range is
+evaluated. Then each of the *x(t)* and *y(t)* formulas are evaluated for each
+value in the *t* range using the current frame's constant values. The resulting
+set of points are then plotted as described previously. The net effect is a
+smooth animation of the formulas using the animated constant values.
 
 Some additional things to note are:
- - You can change the formulas while an animation is running. You may notice the
-   text entry field turning red while you type. This indicates that the formula
-   currently has a syntax error. Just correct the error to continue. At other
-   times the animation may appear to stop while the text entry field appears
-   normal. This indicates that the formula is synactically valid, but references
-   undefined values. Find the invalid value and correct it, and the animation
-   will continue with the new formula in effect.
- - If you change a constant's <i>time</i> value while an animation is running,
-   the program will wait for a brief interval, then restart the animation using
-   the new time value.
- - You can change the value of any non-animated constant while an animation is
-   running and see the effect immediately in the animation.
- - You can change the <i>t</i> parameter range or <i>Steps</i> value while an
-   animation is running and see the effect immediately.
- - The animated plots at the bottom of the view use a <i>dynamic bounds</i>
-   mechanism that automatically keep all plotted points and lines in view. You
-   can reset the bounds at any time simply by clicking anywhere in the plot.
-   This can be handy if you make some changes to the formulas or constants that
-   make the plotted points and lines occupy a much smaller region than they did
-   previously.
- - You can enter specific values into a slider or scrubber field by clicking on
-   the field and then typing in the numeric value you want. For a range slider,
-   separate the numeric values with a comma. Press <i>Enter</i> when done.
- - You can increase or decrease the mouse wheel scrolling sensitivity for a
-   slider or scrubber by pressing the <i>Shift</i> key (to increase the rate) or
-   <i>Control</i> key (to decrease the rate) while scrolling the mouse wheel.
- - You have to stop the animation to change an animated constant's current
-   range. Basically, the animation system <i>owns</i> the constant's value while
-   the animation is running.
- - Try setting a small value for <i>Steps</i> (e.g. <i>10</i>) for an
-   entertaining change of pace.
+
+- You can change the formulas while an animation is running. You may notice the
+  text entry field turning red while you type. This indicates that the formula
+  currently has a syntax error. Just correct the error to continue. At other
+  times the animation may appear to stop while the text entry field appears
+  normal. This indicates that the formula is synactically valid, but references
+  undefined values. Find the invalid value and correct it, and the animation
+  will continue with the new formula in effect.
+- If you change a constant's *time* value while an animation is running, the
+  program will wait for a brief interval, then restart the animation using the
+  new time value.
+- You can change the value of any non-animated constant while an animation is
+  running and see the effect immediately in the animation.
+- You can change the *t* parameter range or *Steps* value while an animation is
+  running and see the effect immediately.
+- The animated plots at the bottom of the view use a *dynamic bounds* mechanism
+  that automatically keep all plotted points and lines in view. You can reset
+  the bounds at any time simply by clicking anywhere in the plot. This can be
+  handy if you make some changes to the formulas or constants that make the
+  plotted points and lines occupy a much smaller region than they did
+  previously.
+- You can enter specific values into a slider or scrubber field by clicking on
+  the field and then typing in the numeric value you want. For a range slider,
+  separate the numeric values with a comma. Press *Enter* when done.
+- You can increase or decrease the mouse wheel scrolling sensitivity for a
+  slider or scrubber by pressing the *Shift* key (to increase the rate) or
+  *Control* key (to decrease the rate) while scrolling the mouse wheel.
+- You have to stop the animation to change an animated constant's current range.
+  Basically, the animation system *owns* the constant's value while the
+  animation is running.
+- Try setting a small value for *Steps* (e.g. *10*) for an entertaining change
+  of pace.
 
 Overall, I think you'll find that this little program is a real treasure trove
 of useful techniques, and I hope that you'll have as much fun running it and

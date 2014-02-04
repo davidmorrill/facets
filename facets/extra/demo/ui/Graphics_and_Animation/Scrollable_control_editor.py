@@ -1,52 +1,52 @@
 """
+# Scrollable Control Editor #
+
 A simple demonstration of creating a scrollable custom control that can be used
-as a Facets <i>editor</i> using the special <b>CustomControlEditor</b> <i>editor
-factory</i>. For an example of creating a simple, <i>non-scrollable</i> custom
-control, refer to the <i>Basic_control_editor.py</i> demo.
+as a Facets *editor* using the special **CustomControlEditor** *editor factory*.
+For an example of creating a simple, *non-scrollable* custom control, refer to
+the *Basic_control_editor.py* demo.
 
-The <b>ScrollableEditor</b> class creates a custom control that simply draws its
-<b><i>value</i></b> facet as text using the editor's font. It draws the text
-repeatedly (along with the current line number) until a total vertical height
-of 4000 pixels is reached (to give the control some scrollable content).
+The **ScrollableEditor** class creates a custom control that simply draws its
+***value*** facet as text using the editor's font. It draws the text repeatedly
+(along with the current line number) until a total vertical height of 4000
+pixels is reached (to give the control some scrollable content).
 
-The <b>ScrollableControl</b> class defines a <b><i>text</i></b> facet which is
-edited using both the default text editor and a custom
-<b>CustomControlEditor</b> using the <b>ScrollableEditor</b> class to implement
-the editing control.
+The **ScrollableControl** class defines a ***text*** facet which is edited using
+both the default text editor and a custom **CustomControlEditor** using the
+**ScrollableEditor** class to implement the editing control.
 
 Try modifying the contents of the text entry field at the top of the view and
-watch the custom <b>ScrollableEditor</b>-based editor below it automatically
+watch the custom **ScrollableEditor**-based editor below it automatically
 reflect the changes made to the value.
 
-The <b>ScrollableEditor</b> class subclasses the <b>ControlEditor</b> class,
-which allows a control to be used with the  <b>CustomControlEditor</b> editor
-factory class.
+The **ScrollableEditor** class subclasses the **ControlEditor** class, which
+allows a control to be used with the  **CustomControlEditor** editor factory
+class.
 
-In particular, a control which is a subclass of <b>ControlEditor</b> has a facet
-called <b><i>value</i></b> which the associated <b>Editor</b> instance created
-by the <b>CustomControlEditor</b> editor factory keeps in sync with the object
-facet being edited (<b><i>text</i></b> in this case).
+In particular, a control which is a subclass of **ControlEditor** has a facet
+called ***value*** which the associated **Editor** instance created by the
+**CustomControlEditor** editor factory keeps in sync with the object facet being
+edited (***text*** in this case).
 
-Also, in the case of a scrollable custom control, the <b><i>virtual_size</i></b>
-facet of the <b>ControlEditor</b> subclass must be given a default value which
-is a tuple of the form: (<i>initial_width</i>, <i>initial_height</i>), which
-indicates that the control supports a <i>virtual size</i> which may be
-different than the physical size of the control. For this demo, the default
-value is set to (10, 10). Normally, the default value for this facet is
-<b>(-1, -1)</b>, which indicates that the control does not support a virtual
-size different than its physical size.
+Also, in the case of a scrollable custom control, the ***virtual_size*** facet
+of the **ControlEditor** subclass must be given a default value which is a tuple
+of the form: (*initial_width*, *initial_height*), which indicates that the
+control supports a *virtual size* which may be different than the physical size
+of the control. For this demo, the default value is set to (10, 10). Normally,
+the default value for this facet is **(-1, -1)**, which indicates that the
+control does not support a virtual size different than its physical size.
 
-The net result is that, along with an automatic <i>refresh</i> performed when
-<b><i>value </i></b> changes, the only additional code needed in this example is
-to override the <b>ThemedWindow</b> class's default <b><i>paint</i></b> method
-to customize the drawing behavior of the editor control. Note how at the end of
-the <b><i>paint</i></b> method, the <b><i>virtual_size</i></b> facet is set to
-a new tuple value indicating the actual size of the content just drawn.
+The net result is that, along with an automatic *refresh* performed when
+***value *** changes, the only additional code needed in this example is to
+override the **ThemedWindow** class's default ***paint*** method to customize
+the drawing behavior of the editor control. Note how at the end of the
+***paint*** method, the ***virtual_size*** facet is set to a new tuple value
+indicating the actual size of the content just drawn.
 
-Of course, in a more complex editor control, additional methods would need to
-be defined and overridden to handle mouse and keyboard events. You might want to
-refer to the <i>twixter.py</i> demo for a more sophisticated example of defining
-a custom editor control.
+Of course, in a more complex editor control, additional methods would need to be
+defined and overridden to handle mouse and keyboard events. You might want to
+refer to the *twixter.py* demo for a more sophisticated example of defining a
+custom editor control.
 """
 
 #-- Imports --------------------------------------------------------------------

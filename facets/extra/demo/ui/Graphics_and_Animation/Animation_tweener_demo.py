@@ -1,38 +1,39 @@
 """
-A demonstration of creating a custom <i>tweener</i> class for use with the
-Facets UI animation system. Refer to the main <i>Animation_demo.py</i> module
-for a more in depth discussion of Facets animation support.
+# Animation Tweener Demo #
 
-In this demo, the main <b>Demo</b> class defines a number of identical
-<b>Range</b> facets with values in the range from 0.0 to 1.0. When the
-<i>Start</i> button is clicked, each of the facets is animated between its low
-and high values, with the associated <b>RangeEditor</b> tracking the changes.
-You can cancel the current animation at any time by clicking the <i>Stop</i>
-button.
+A demonstration of creating a custom *tweener* class for use with the Facets UI
+animation system. Refer to the main *Animation_demo.py* module for a more in
+depth discussion of Facets animation support.
 
-To make the demo more interesting, we define a custom <b>Cycler</b>
-<i>tweener</i> class to control the animation of each value. The Cycler class
-has a single control, <i><b>n</b></i>, which defines the number of times the
-animation should cycle back and forth between its start and end values. When the
-<i>Start</i> button is clicked, each animated facet is set to use a Cycler
-tweener with an increasing number of cycles specified.
+In this demo, the main **Demo** class defines a number of identical **Range**
+facets with values in the range from 0.0 to 1.0. When the *Start* button is
+clicked, each of the facets is animated between its low and high values, with
+the associated **RangeEditor** tracking the changes. You can cancel the current
+animation at any time by clicking the *Stop* button.
 
-The heart of the Cycler tweener is the <i><b>at</b></i> method:
+To make the demo more interesting, we define a custom **Cycler** *tweener* class
+to control the animation of each value. The Cycler class has a single control,
+***n***, which defines the number of times the animation should cycle back and
+forth between its start and end values. When the *Start* button is clicked, each
+animated facet is set to use a Cycler tweener with an increasing number of
+cycles specified.
 
-  def at ( self, t ):
-      v = fmod( t * self.n, 1.0 )
-      if v >= 0.50:
-          v = 1.0 - v
+The heart of the Cycler tweener is the ***at*** method:
 
-      return (((tanh( (10.0 * v) - 2.5 ) / tanh( 2.5 )) + 1.0) / 2.0)
+    def at ( self, t ):
+        v = fmod( t * self.n, 1.0 )
+        if v >= 0.50:
+            v = 1.0 - v
 
-The first few lines of the method convert the current time value <i><b>t</b></i>
-into a new time value <i><b>v</b></i> which represents the mapping from the main
-animation cycle into the current Cycler cycle.
+        return (((tanh( (10.0 * v) - 2.5 ) / tanh( 2.5 )) + 1.0) / 2.0)
 
-The final <i>return</i> statement performs an <i>ease-in/ease-out</i>
-calculation that slows the animation down as the value approaches either the
-start or end point, and speeds it up at positions in between.
+The first few lines of the method convert the current time value ***t*** into a
+new time value ***v*** which represents the mapping from the main animation
+cycle into the current Cycler cycle.
+
+The final *return* statement performs an *ease-in/ease-out* calculation that
+slows the animation down as the value approaches either the start or end point,
+and speeds it up at positions in between.
 """
 
 #-- Imports --------------------------------------------------------------------

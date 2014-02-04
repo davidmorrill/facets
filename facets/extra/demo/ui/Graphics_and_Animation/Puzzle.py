@@ -1,39 +1,43 @@
 """
-Demonstrates another use of some of the various animation <b>Tweener</b> and
-<b>Path</b> classes, in this case creating a simple "puzzle-like" animation that
+# Puzzle #
+
+Demonstrates another use of some of the various animation **Tweener** and
+**Path** classes, in this case creating a simple "puzzle-like" animation that
 takes a random image, divides it up into a grid of smaller "pieces", scrambles
 the pieces to form a new grid, and then animates the motion of each of the
 pieces back to its original position using a randomly chosen animation path.
 
 The demo uses three of the available 2D integer path animation classes:
- - <b>Linear2DIntPath</b>: Moves a piece in a straight line from its starting
-   position to its ending position.
- - <b>Manhattan2DIntPath</b>: Moves a piece horizontally, then vertically, from
-   its starting position to its ending position.
- - <b>Spiral2DIntPath</b>: Moves a piece in a circular 180 degree arc from its
-   starting position to its ending position rotating around the center point
-   halfway between the starting and ending points.
 
-The demo also uses a custom <i>tweener</i> to animate the motion of each piece
-by <i>composing</i> two standard <b>Tweener</b> subclasses:
- - <b>EaseInTweener</b>: Motions starts quickly then slows downs as its nears
-   the ending position.
- - <b>RampTweener</b>: Slows down the motion at the beginning and ends of the
-   path using a linear <i>ramp</i>.
+- **Linear2DIntPath**: Moves a piece in a straight line from its starting
+  position to its ending position.
+- **Manhattan2DIntPath**: Moves a piece horizontally, then vertically, from
+  its starting position to its ending position.
+- **Spiral2DIntPath**: Moves a piece in a circular 180 degree arc from its
+  starting position to its ending position rotating around the center point
+  halfway between the starting and ending points.
+
+The demo also uses a custom *tweener* to animate the motion of each piece by
+*composing* two standard **Tweener** subclasses:
+
+- **EaseInTweener**: Motions starts quickly then slows downs as its nears the
+  ending position.
+- **RampTweener**: Slows down the motion at the beginning and ends of the path
+  using a linear *ramp*.
 
 The images displayed are randomly chosen from the list of images contained in
-the facets UI demo's <i>demo.zip</i> image library.
+the facets UI demo's *demo.zip* image library.
 
-You can specify the length of the animation by adjusting the <b><i>Time</i></b>
-scrubber setting in the lower right hand corner of the view <i>prior</i> to
-starting a new animation by clicking the <b><i>Start</i></b> button next to it.
+You can specify the length of the animation by adjusting the ***Time*** scrubber
+setting in the lower right hand corner of the view *prior* to starting a new
+animation by clicking the ***Start*** button next to it.
 
-If you read the code for the <b>Puzzle</b> class closely you will see that it is
+If you read the code for the **Puzzle** class closely you will see that it is
 actually over-engineered for this demo and supports a number of additional
-<i>puzzle-solving</i> abailities not used by the demo. The interested reader is
-urged to experiment with changing some of the arguments specified (and
-unspecified) for the <b>Puzzle</b> constructor in the
-<b><i>_create_puzzle</i></b> method near the end of the code.
+*puzzle-solving* abailities not used by the demo. The interested reader is urged
+to experiment with changing some of the arguments specified (and unspecified)
+for the **Puzzle** constructor in the ***_create_puzzle*** method near the end
+of the code.
 """
 
 #-- Imports --------------------------------------------------------------------

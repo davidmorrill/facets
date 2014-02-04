@@ -1,5 +1,7 @@
 """
-Another example of using the <b>CustomControlEditor</b> and <b>ControlEditor</b>
+# LED Control #
+
+Another example of using the **CustomControlEditor** and **ControlEditor**
 classes to create a custom editor and control.
 
 In this example, we create a graphical editor for displaying numeric values
@@ -9,29 +11,26 @@ display based on the control size.
 
 We also make use of the Facets animation system to animate the demo by having
 them continuously count different facet values up and down so that you can see
-the <b>LEDEditor</b> automatically update the display as the associated facets
+the **LEDEditor** automatically update the display as the associated facets
 change value.
 
-The <b>_LEDEditor</b> class also makes use of the facets <i>led</i> image
-library, which contains images of each the various LED digits, an empty LED and
-a minus sign. The control automatically scales the images up or down as needed
-when the control changes size using the <b>AnImageResource</b> class's
-<b><i>scale</i></b> method.
+The **_LEDEditor** class also makes use of the facets *led* image library, which
+contains images of each the various LED digits, an empty LED and a minus sign.
+The control automatically scales the images up or down as needed when the
+control changes size using the **AnImageResource** class's ***scale*** method.
 
-If you look at the images in the <i>led</i> image library, you'll notice that
-each LED image is actually monochromatic. The green LED color is applied when
-the images are loaded using an encoded <b><i>HLSA</i></b> image transform (see
-the string following the '?' character in the <b><i>image_for</i></b> call).
-This is a very powerful technique that can be used to transform images as
-needed.
+If you look at the images in the *led* image library, you'll notice that each
+LED image is actually monochromatic. The green LED color is applied when the
+images are loaded using an encoded ***HLSA*** image transform (see the string
+following the '?' character in the ***image_for*** call). This is a very
+powerful technique that can be used to transform images as needed.
 
-To make sure the animation is stopped correctly, the <b>LEDControl</b> class
-uses the custom <b>LEDHandler</b> <i>handler</i> class to stop the animation
-when the view is closed.
+To make sure the animation is stopped correctly, the **LEDControl** class uses
+the custom **LEDHandler** *handler* class to stop the animation when the view is
+closed.
 
-Finally, note the use of the <b>PrototypedFrom</b> facet in the
-<b>_LEDEditor</b> class to create an alias to its <i>factory</i> object's
-<b><i>digits</i></b> value.
+Finally, note the use of the **PrototypedFrom** facet in the **_LEDEditor**
+class to create an alias to its *factory* object's ***digits*** value.
 """
 
 #-- Imports --------------------------------------------------------------------

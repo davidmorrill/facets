@@ -1,4 +1,6 @@
 """
+# Hello World 3 #
+
 Another Hello World style demo, this one showing a simple use of Facets
 property and animation capabilities.
 """

@@ -60,18 +60,22 @@ background_theme = Theme( '@tiles:TexturedCeiling1.jpg?s10', content = 25 )
 
 # The CSS overrides to use when using the MarkdownEditor:
 demo_css = """
+html {
+  background-image: -webkit-repeating-linear-gradient( top, #F7F5F0 0px,
+    #F7F5F0 12px, #DDDAD1 12px, #DDDAD1 24px );
+}
+
 body {
   font-family: Arial Helvetica sans-serif;
+  margin: 30px;
+  border: 1px solid #A0A0A0;
+  background-color: #F7F5F0;
+  -webkit-border-radius: 7px;
+  -webkit-box-shadow: 0px 0px 11px rgba( 0, 0, 0, 0.5 );
 }
 
 h1 {
   font-weight: bold;
-  -webkit-animation: fadeIn 1.75s;
-}
-
-@-webkit-keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
 }
 """[1:-1]
 

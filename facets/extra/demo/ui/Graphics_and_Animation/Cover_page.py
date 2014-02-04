@@ -1,22 +1,23 @@
 """
-A simple demonstration combining the creation of a <b>CustomControlEditor</b>
+# Cover Page #
+
+A simple demonstration combining the creation of a **CustomControlEditor**
 with some animation to create a themed control with variable sized text that
 could be used in a presentation or for a video clip title.
 
-You can enter the <b><i>Label</i></b> and <b><i>Content</i></b> for the cover
-page in the designated text entry fields. Note that you can enter "\n" in the
-content text field to insert a carriage return into the displayed text.
+You can enter the ***Label*** and ***Content*** for the cover page in the
+designated text entry fields. Note that you can enter "\n" in the content text
+field to insert a carriage return into the displayed text.
 
-You can use the <b><i>Size</i></b> scrubber to increase or decrease the size of
-the displayed text, and you can selected a different background color for the
-page using the color editor in the bottom-right corner of the view. Note that
-you can <i>right-click</i> the color editor to cycle through the various color
-properties (i.e. <i>hue</i>, <i>saturation</i> and <i>lightness</i>). The
-control defaults to editing the <i>lightness</i> of the background color.
+You can use the ***Size*** scrubber to increase or decrease the size of the
+displayed text, and you can selected a different background color for the page
+using the color editor in the bottom-right corner of the view. Note that you can
+*right-click* the color editor to cycle through the various color properties
+(i.e. *hue*, *saturation* and *lightness*). The control defaults to editing the
+*lightness* of the background color.
 
-Finally, you can click the <i>animate</i> icon located next to the color editor
-to animate the text going from a very small size to the size currently
-specified.
+Finally, you can click the *animate* icon located next to the color editor to
+animate the text going from a very small size to the size currently specified.
 
 In terms of the code, this example doesn't really cover any new ground not
 already covered in other demos in this section. But it does provide another
@@ -24,9 +25,9 @@ illustration of what is possible, and is provided with the belief that more
 examples are better than fewer examples.
 
 The only new technique worth mentioning is the ability to specify in the
-<b>CustomControlEditor</b> editor factory class (i.e. <b>CoverPageEditor</b>)
-the value of the <b><i>refresh</i></b> facet, which is a string describing what
-external changes should trigger a refresh of the custom control:
+**CustomControlEditor** editor factory class (i.e. **CoverPageEditor**) the
+value of the ***refresh*** facet, which is a string describing what external
+changes should trigger a refresh of the custom control:
 
   refresh = 'factory:[label, bg_color, size]'
 

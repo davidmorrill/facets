@@ -1,10 +1,12 @@
 """
+# Hello World 2 #
+
 This is a variation on the Hello World program using a <b>GridEditor</b> and
 <b>GridAdapter</b>.
 
 This example is purposely kept short. For a more detailed, and realistic,
-example of the use of the <b>GridEditor</b> and <b>GridAdapter</b>, refer to the
-<i>Grid editor demo</i> in the <i>Advanced</i> section.
+example of the use of the **GridEditor** and **GridAdapter**, refer to the
+*Grid editor demo* in the *Advanced* section.
 """
 
 #-- Imports --------------------------------------------------------------------

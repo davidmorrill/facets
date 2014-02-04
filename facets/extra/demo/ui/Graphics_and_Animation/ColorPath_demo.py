@@ -1,37 +1,38 @@
 """
-Provides a simple demonstration of the Facets animation system's
-<b>ColorPath</b> class, which allows animating color changes in the HLSA (Hue,
-Lightness, Saturation, Alpha) color space.
+# ColorPath Demo #
+
+Provides a simple demonstration of the Facets animation system's **ColorPath**
+class, which allows animating color changes in the HLSA (Hue, Lightness,
+Saturation, Alpha) color space.
 
 The demo animates four different colors using four different paths through HLSA
 color space:
 
- - <b>HLSPath</b>: Animates between <i>begin_color</i> and <i>end_color</i>
-   along the hue, lightness and saturation axes.
- - <b>HPath</b>: Animates between <i>begin_color</i> and <i>end_color</i> only
-   along the hue axis.
- - <b>LPath</b>: Animates between <i>begin_color</i> and <i>end_color</i> only
-   along the lightness axis.
- - <b>SPath</b>: Animates between <i>begin_color</i> and <i>end_color</i> only
-   along the saturation axis.
+- **HLSPath**: Animates between *begin_color* and *end_color* along the hue,
+  lightness and saturation axes.
+- **HPath**: Animates between *begin_color* and *end_color* only along the hue
+  axis.
+- **LPath**: Animates between *begin_color* and *end_color* only along the
+  lightness axis.
+- **SPath**: Animates between *begin_color* and *end_color* only along the
+  saturation axis.
 
-Select a new <i>Begin color</i> and/or <i>End color</i> value to update the
-animation begin and end colors. Note that for all paths other than
-<b>HLSPath</b>, the end color of the animation may not be the same as the end
-color selected, since the path only follows one of the possible HLS axes from
-the begin color to the end color.
+Select a new *Begin color* and/or *End color* value to update the animation
+begin and end colors. Note that for all paths other than **HLSPath**, the end
+color of the animation may not be the same as the end color selected, since the
+path only follows one of the possible HLS axes from the begin color to the end
+color.
 
-You can also change the cycle time for the animation by adjusting the
-<i>Time</i> value up or down.
+You can also change the cycle time for the animation by adjusting the *Time*
+value up or down.
 
-Note that the demo imports four predefined color paths (i.e.
-<b>HLSColorPath</b>, <b>HColorPath</b>, <b>LColorPath</b> and
-<b>SColorPath</b>), but you can also create custom color paths by importing the
-<b>ColorPath</b> class and setting a custom value for its <i>hlsa</i> facet
-(e.g. <i>ColorPath( hlsa = 'hs' )</i> for animating along the hue and saturation
-axes). Using <b>ColorPath</b>, you can also animate along the 'a' (i.e. alpha)
-axis, which may affect the alpha (i.e. opacity) of the color value being
-animated.
+Note that the demo imports four predefined color paths (i.e. **HLSColorPath**,
+**HColorPath**, **LColorPath** and **SColorPath**), but you can also create
+custom color paths by importing the **ColorPath** class and setting a custom
+value for its *hlsa* facet (e.g. *ColorPath( hlsa = 'hs' )* for animating along
+the hue and saturation axes). Using **ColorPath**, you can also animate along
+the 'a' (i.e. alpha) axis, which may affect the alpha (i.e. opacity) of the
+color value being animated.
 """
 
 from facets.api \

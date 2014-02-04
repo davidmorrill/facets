@@ -1,39 +1,39 @@
 """
+# Basic Control Editor #
+
 A very simple demonstration of creating a custom control that can be used as a
-Facets <i>editor</i> using the special <b>CustomControlEditor</b> <i>editor
-factory</i>.
+Facets *editor* using the special **CustomControlEditor** *editor factory*.
 
-The <b>BasicControlEditor</b> class creates a custom control that simply draws
-its <b><i>value</i></b> facet as text using the default font, and then adds a
-red overstrike.
+The **BasicControlEditor** class creates a custom control that simply draws its
+***value*** facet as text using the default font, and then adds a red
+overstrike.
 
-The <b>BasicControl</b> class defines a <b><i>name</i></b> facet which is edited
-using both the default text editor and a custom <b>CustomControlEditor</b> using
-the <b>BasicControlEditor</b> class to implement the editing control.
+The **BasicControl** class defines a ***name*** facet which is edited using both
+the default text editor and a custom **CustomControlEditor** using the
+**BasicControlEditor** class to implement the editing control.
 
-Try modifying the contents of the <i>Name</i> field and watch the custom
-<b>BasicControlEditor</b>-based editor below it automatically reflect the
-changes made to the value.
+Try modifying the contents of the *Name* field and watch the custom
+**BasicControlEditor**-based editor below it automatically reflect the changes
+made to the value.
 
-The <b>BasicControlEditor</b> class subclasses the <b>ControlEditor</b> class,
-which allows a control to be used with the <b>CustomControlEditor</b> editor
-factory class. <b>ControlEditor</b> is a subclass of the <b>ThemedWindow</b>
-class.
+The **BasicControlEditor** class subclasses the **ControlEditor** class, which
+allows a control to be used with the **CustomControlEditor** editor factory
+class. **ControlEditor** is a subclass of the **ThemedWindow** class.
 
-In particular, the <b>ControlEditor</b> class defines a facet called
-<b><i>value</i></b> which the associated <b>Editor</b> instance created by the
-<b>CustomControlEditor</b> editor factory keeps in sync with the object facet
-being edited (<b><i>name</i></b> in this case).
+In particular, the **ControlEditor** class defines a facet called ***value***
+which the associated **Editor** instance created by the **CustomControlEditor**
+editor factory keeps in sync with the object facet being edited (***name*** in
+this case).
 
-As a result, along with an automatic <i>refresh</i> performed when
-<b><i>value </i></b> changes, the only additional code needed in this example is
-to override the <b>ThemedWindow</b> class's default <b><i>paint</i></b> method
-to customize the drawing behavior of the editor control.
+As a result, along with an automatic *refresh* performed when ***value ***
+changes, the only additional code needed in this example is to override the
+**ThemedWindow** class's default ***paint*** method to customize the drawing
+behavior of the editor control.
 
 Of course, in a more complex editor control, additional methods would need to
 be defined and overridden to handle mouse and keyboard events. Please refer to
-the <i>Twixter.py</i> demo for a more sophisticated example of defining an
-editor control.
+the *Twixter.py* demo for a more sophisticated example of defining an editor
+control.
 """
 
 #-- Imports --------------------------------------------------------------------
