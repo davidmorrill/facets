@@ -58,6 +58,23 @@ exec_str =  """from facets.core_api \
 # The background theme used by DemoPath instances:
 background_theme = Theme( '@tiles:TexturedCeiling1.jpg?s10', content = 25 )
 
+# The CSS overrides to use when using the MarkdownEditor:
+demo_css = """
+body {
+  font-family: Arial Helvetica sans-serif;
+}
+
+h1 {
+  font-weight: bold;
+  -webkit-animation: fadeIn 1.75s;
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+"""[1:-1]
+
 #-------------------------------------------------------------------------------
 #  Useful Helper Functions:
 #-------------------------------------------------------------------------------
@@ -229,8 +246,10 @@ class DemoTreeNodeObject ( TreeNodeObject ):
     #-- Facet Default Values ---------------------------------------------------
 
     def _description_editor_default ( self ):
+        global demo_css
+
         if self.description.lstrip().startswith( '#' ):
-            return MarkdownEditor()
+            return MarkdownEditor( css = demo_css )
 
         return HTMLEditor( format_text = True )
 
