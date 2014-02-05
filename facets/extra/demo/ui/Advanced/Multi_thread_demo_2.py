@@ -1,25 +1,27 @@
 """
+# Multi-thread Demo 2 #
+
 This demo shows a simple user interface being updated by a dynamic number of
 threads.
 
-When the <b>Create Threads</b> button is pressed, the <b>count</b> method is
-dispatched on a new thread. It then creates a new <b>Counter</b> object and
-adds it to the <b>counters</b> list (which causes the <b>Counter</b> to appear
-in the user interface. It then counts by incrementing the <b>Counter</b>
-object's <b>count</b> facet (which again causes a user interface update each
+When the *Create Threads* button is pressed, the *count* method is
+dispatched on a new thread. It then creates a new **Counter** object and
+adds it to the *counters* list (which causes the Counter to appear
+in the user interface. It then counts by incrementing the Counter
+object's *count* facet (which again causes a user interface update each
 time the counter is incremented). After it reaches its maximum count, it
-removes the <b>Counter</b> from the <b>counter</b> list (causing the counter
+removes the Counter from the *counter* list (causing the counter
 to be removed from the user interface) and exits (terminating the thread).
 
-Note that repeated clicking of the <b>Create Thread</b> button will create
+Note that repeated clicking of the *Create Thread* button will create
 additional threads.
 
-Also note the use of the 'allow_tabs = False' option in the NotebookEditor.
-This ensures that each new thread appears as a separate, resizable item in the
-notebook view, and also allows the NotebookEditor to automatically lay out all
-of the items when a new thread is created. Without this option, each new
-thread would simply appear as a new tab within a single tab group in the
-NotebookEditor view.
+Also note the use of the *'allow_tabs = False'* option in the
+**NotebookEditor**. This ensures that each new thread appears as a separate,
+resizable item in the notebook view, and also allows the NotebookEditor to
+automatically lay out all of the items when a new thread is created. Without
+this option, each new thread would simply appear as a new tab within a single
+tab group in the NotebookEditor view.
 """
 
 #-------------------------------------------------------------------------------

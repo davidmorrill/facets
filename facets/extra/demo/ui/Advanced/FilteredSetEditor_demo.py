@@ -1,7 +1,9 @@
 """
-Demonstrates use of the FilteredSetEditor. A FilteredSetEditor is based on the
-SetEditor, but adds an end user specified match string and ordering criteria
-to help organize the presentation and selection of set items.
+# FilteredSetEditor Demo #
+
+Demonstrates use of the **FilteredSetEditor**. A FilteredSetEditor is based on
+the **SetEditor**, but adds an end user specified match string and ordering
+criteria to help organize the presentation and selection of set items.
 
 This can be useful in cases where the number of available set items is large,
 which can make selecting items using the normal SetEditor tedious. By using the
@@ -11,11 +13,11 @@ easier.
 
 The editor has a number of supported customizations, including the ability to
 specify a custom key function that can tailor the matching process to the
-application. The demo illustrates this by using a custom 'test_key' function
+application. The demo illustrates this by using a custom *test_key* function
 which ranks matches in the last name higher than matches in the first name.
 
 The user can also exclude matching items by changing the ordering criteria for
-matches from 'First' to 'Last'. When set to 'Last', set items are displayed in
+matches from *First* to *Last*. When set to *Last*, set items are displayed in
 reverse order, placing matching items after non-matching items.
 """
 

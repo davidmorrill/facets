@@ -1,5 +1,7 @@
 """
-Demonstrates one possible approach to writing Model/View/Controller
+# MVC Demo #
+
+Demonstrates one possible approach to writing *Model/View/Controller*
 (i.e. MVC) based applications using Facets.
 """
 

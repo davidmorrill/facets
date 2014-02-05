@@ -1,5 +1,7 @@
 """
-Demonstrates the HLSColorEditor, an editor which allows the user to select a
+# HLSColorEditor Demo #
+
+Demonstrates the **HLSColorEditor**, an editor which allows the user to select a
 color using a flexible HLSA (Hue, Lightness, Saturation, Alpha) based palette.
 """
 

@@ -1,12 +1,14 @@
 """
+# Multi-thread Demo #
+
 This demo shows a simple user interface being updated by multiple threads.
 
-When the <b>Start Threads</b> button is pressed, the program starts three
-independent threads running. Each thread counts from 0 to 199, updating its
-own thread-specific facet, and performs a sleep of a thread-specific duration
+When the *Start Threads* button is pressed, the program starts three independent
+threads running. Each thread counts from 0 to 199, updating its own
+thread-specific facet, and performs a sleep of a thread-specific duration
 between each update.
 
-The <b>Start Threads</b> button is disabled while the threads are running, and
+The *Start Threads* button is disabled while the threads are running, and
 becomes active again once all threads have finished running.
 """
 

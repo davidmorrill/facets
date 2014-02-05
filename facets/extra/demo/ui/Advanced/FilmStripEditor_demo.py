@@ -1,20 +1,22 @@
 """
-This demonstrates use of the FilmStripEditor and creating a simple custom
-FilmStripAdapter. It also showcases the ControlGrabberEditor, the
-ImageZoomEditor, and the use of the Control 'image' facet and the 'scale' method
-of an AnImageResource object.
+# FilmStripEditor Demo #
+
+This demonstrates use of the **FilmStripEditor** and creating a simple custom
+**FilmStripAdapter**. It also showcases the **ControlGrabberEditor**, the
+**ImageZoomEditor**, and the use of the **Control** *image* facet and the
+*scale* method of an **AnImageResource** object.
 
 The demo consists of a FilmStripEditor, a ControlGrabberEditor and an
 ImageZoomEditor. Click-drag on the ControlGrabberEditor (represented by the
 question mark icon) and release the mouse pointer over another part of the demo
-(e.g. the tree view). The ControlGrabberEditor will set its value (the 'control'
+(e.g. the tree view). The ControlGrabberEditor will set its value (the *control*
 facet of the FilmStripDemo object) to the Control the mouse pointer is over at
 the time that the mouse button is released.
 
-The demo code responds by creating a "screen capture" of the control's contents
-using the 'image' facet of the control. It then creates a series of thumbnail
+The demo code responds by creating a *screen capture* of the control's contents
+using the *image* facet of the control. It then creates a series of thumbnail
 images in the FilmStripEditor using each of the different image filters
-supported by AnImageResource object's 'scale' method. The label for each
+supported by AnImageResource object's *scale* method. The label for each
 thumbnail is the name of the filter used to create it.
 
 Finally, selecting any item in the FilmStripEditor by clicking on it will

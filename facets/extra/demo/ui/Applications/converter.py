@@ -1,17 +1,19 @@
 """
+# Converter #
+
 This program converts length measurements from one unit system to another.
 
-<p>Select the input and output units using the drop down combo-boxes in the
-<b>Input:</b> and <b>Output:</b> sections respectively. Type the input quantity
+Select the input and output units using the drop down combo-boxes in the
+*Input* and *Output* sections respectively. Type the input quantity
 to convert into the left most text box. The output value corresponding to the
-current input value will automatically be updated in the <b>Output:</b>
-section.</p>
+current input value will automatically be updated in the *Output*
+section.
 
-<p>Use the <b>Undo</b> and <b>ReDo</b> buttons to undo and redo changes you
-have made to any of the input fields.</p>
+Use the *Undo* and *ReDo* buttons to undo and redo changes you have made to any
+of the input fields.
 
-<p>Note that other than the 'output_amount' property implementation, the rest
-of the code is simply declarative.</p>
+Note that other than the *output_amount* property implementation, the rest
+of the code is simply declarative.
 """
 
 #-------------------------------------------------------------------------------
@@ -29,12 +31,12 @@ ViewHelp = """
 This program converts length measurements from one unit system to another.
 
 <p>Select the input and output units using the drop down combo-boxes in the
-<b>Input:</b> and <b>Output:</b> sections respectively. Type the input quantity
+**Input:** and **Output:** sections respectively. Type the input quantity
 to convert into the left most text box. The output value corresponding to the
-current input value will automatically be updated in the <b>Output:</b>
+current input value will automatically be updated in the **Output:**
 section.</p>
 
-<p>Use the <b>Undo</b> and <b>ReDo</b> buttons to undo and redo changes you
+<p>Use the **Undo** and **ReDo** buttons to undo and redo changes you
 have made to any of the input fields.</p>
 """
 

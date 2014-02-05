@@ -1,5 +1,7 @@
 """
-Demonstrates how to set up an EnumEditor that is updated dynamically.
+# Dynamic EnumEditor Demo #
+
+Demonstrates how to set up an **EnumEditor** that is updated dynamically.
 
 The scenario is a restaurant that at the beginning of the day has a menu list
 of entrees based upon a fully stocked kitchen. However, as the day progresses,
@@ -20,18 +22,19 @@ As entrees are checked on or off from the Kitchen tab, the customer's Entree
 drop-down is dynamically updated with the current list of available entrees.
 
 Notes:
- - The key point of the demo is the use of the 'name' facet in the EnumEditor
-   definition, which links the list of available entrees from the
-   KitchenCapabilities object to the OrderMenu object's entree EnumEditor.
 
- - The design will work with any number of active OrderMenu objects, since they
-   all share a common KitchenCapabilities object. As the KitchenCapabilities
-   object is updated, all OrderMenu UI's will automatically update their
-   associated Entree's drop-down list.
+- The key point of the demo is the use of the 'name' facet in the EnumEditor
+  definition, which links the list of available entrees from the
+  KitchenCapabilities object to the OrderMenu object's entree EnumEditor.
 
- - A careful reader will also observe that this example contains only
-   declarative code. No imperative code is required to handle the automatic
-   updating of the Entree list.
+- The design will work with any number of active OrderMenu objects, since they
+  all share a common KitchenCapabilities object. As the KitchenCapabilities
+  object is updated, all OrderMenu UI's will automatically update their
+  associated Entree's drop-down list.
+
+- A careful reader will also observe that this example contains only
+  declarative code. No imperative code is required to handle the automatic
+  updating of the Entree list.
 """
 
 #-------------------------------------------------------------------------------

@@ -1,19 +1,21 @@
 """
+# ToDo MVC #
+
 Demonstrates a version of the commonly implemented Javascript To Do list
-MVC-based application using Facets' ListViewEditor.
+MVC-based application using Facets' **ListViewEditor**.
 
 While not identical in every aspect to the typically web-based implementations,
 this version does provide the following features:
 
-  - Check an item to mark it as completed.
-  - Completed items automatically move down the list, leaving uncompleted items
-    at the top of the list.
-  - New items are created by clicking the "dot" at the left side of any item.
-    The new item is a duplicate of the original item clicked.
-  - Items are deleted using a "long press click" on the dot of any item.
-    Alternatively, you can also alt-click an item to delete it immediately.
-  - Items can be manually re-ordered by dragging an item's dot up or down in the
-    list.
+- Check an item to mark it as completed.
+- Completed items automatically move down the list, leaving uncompleted items
+  at the top of the list.
+- New items are created by clicking the *dot* at the left side of any item. The
+  new item is a duplicate of the original item clicked.
+- Items are deleted using a "long press click" on the dot of any item.
+  Alternatively, you can also alt-click an item to delete it immediately.
+- Items can be manually re-ordered by dragging an item's dot up or down in the
+  list.
 """
 
 #-- Imports --------------------------------------------------------------------

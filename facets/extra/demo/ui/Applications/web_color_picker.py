@@ -1,13 +1,16 @@
 """
-Defines a tool for picking 'web' style colors and placing the color in the
+# Web Color Picker #
+
+Defines a tool for picking *web* style colors and placing the color in the
 system clipboard for easy pasting into other applications. It supports HTML
 style (i.e. #RRGGBB), CSS style (i.e. rgb(R,G,B)) and Hex (i.e. 0xRRGGBB)
 formats.
 
 Demonstrates use of:
- - The HLSColorEditor.
- - The NotebookEditor
- - Accessing the system clipboard object via <b>toolkit().clipboard()</b>.
+
+ - The **HLSColorEditor**.
+ - The **NotebookEditor**.
+ - Accessing the system clipboard object via *toolkit().clipboard()*.
 
 Multiple color pickers can be created by clicking the plus icon located in the
 lower right hand corner of the main view. This creates a clone of the currently

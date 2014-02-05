@@ -1,6 +1,8 @@
 """
-Demonstrates creating a hierarchical grid using the GridEditor in conjunction
-with the HierarchicalGridAdapter.
+# Hierarchical GridEditor Demo #
+
+Demonstrates creating a hierarchical grid using the **GridEditor** in
+conjunction with the **HierarchicalGridAdapter**.
 """
 
 #-------------------------------------------------------------------------------

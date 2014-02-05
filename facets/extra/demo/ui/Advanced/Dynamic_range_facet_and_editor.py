@@ -1,4 +1,6 @@
 """
+# Dynamic Range Facet and Editor #
+
 This program demonstrates defining and visualizing dynamic ranges.
 
 A dynamic range is a range whose low or high limit can be modified dynamically
@@ -33,19 +35,19 @@ year and the current fuel cost. There is also a button to allow more guests to
 be added to the hotel.
 
 Notes:
-    - The dynamic range facet is the 'temperature' facet in the Guest class. It
-      depends upon facets defined both in the Guest instance as well as in the
-      containing Hotel object.
 
-    - As with most facets code and examples, observe how much of the code is
-      'declarative' versus 'imperative'. Note also the use of properties and
-      'depends_on' metadata, as well as 'cached_property' and 'on_facet_set'
-      method decorators.
+- The dynamic range facet is the *temperature* facet in the **Guest** class. It
+  depends upon facets defined both in the Guest instance as well as in the
+  containing Hotel object.
 
-    - Try dragging the guest tabs around so that you can see multiple guests
-      simultaneously, and then watch the behavior of the guest's 'temperature'
-      slider as you adjust the hotel 'season', 'fuel cost' and each guest's
-      'plan'.
+- As with most facets code and examples, observe how much of the code is
+  *declarative* versus *imperative*. Note also the use of properties and
+  *depends_on* metadata, as well as *cached_property* and *on_facet_set* method
+  decorators.
+
+- Try dragging the guest tabs around so that you can see multiple guests
+  simultaneously, and then watch the behavior of the guest's *temperature*
+  slider as you adjust the hotel *season*, *fuel cost* and each guest's *plan*.
 """
 
 #-------------------------------------------------------------------------------

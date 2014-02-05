@@ -1,4 +1,6 @@
 """
+# Display Variables #
+
 A mock application that demonstrates several advanced Facets UI techniques.
 
 The scenario is as follows...
@@ -8,51 +10,52 @@ variables, each of which will have a value for each of some number of sample
 points. We wish to display a table containing a column for each variable in the
 experiment, and a row for each sample point.
 
-We will use the <b>MVC</b> (Model/View/Controller) design pattern to implement
+We will use the *MVC* (Model/View/Controller) design pattern to implement
 this application. The model will consist of:
 
- - <b>Experiment</b>: Defines the experiment, the set of variables, and the
-   number of sample points.
+- **Experiment**: Defines the experiment, the set of variables, and the
+  number of sample points.
 
- - <b>Variable</b>: Defines a single experimental variable: its name, units,
-   description and the set of values for each experimental sample point.
+- **Variable**: Defines a single experimental variable: its name, units,
+  description and the set of values for each experimental sample point.
 
 Techniques worth studying:
 
- - Use of MVC (The <b>Experiment</b> and <b>Variable</b> model classes contain
-   no UI code).
- - The main UI class (i.e. <b>ExperimentView</b>) is almost 100% declarative.
-   Most of the UI logic is in the <b>VariableAdapter</b> class, which adapts
-   the non-tabular model objects into a tabular format.
- - Use of the <i>dock</i> facet to allow the user to reorganize the UI.
- - Use of the <i>export</i> facet to allow the user to drag sub-views out of
-   the main window to make optimum use of all available screen real estate.
- - Use of themes to enhance UI appearance.
- - Use of the <b>VerticalNotebookEditor</b> to allow easy access to the various
-   <b>Variable</b> parameters.
- - Definition of the <b>Slider</b> class to simplify <b>View</b> creation.
- - The use of the <b>Controller</b> class to bind the model and view classes.
- - The <i>on_facet_set</i> decorator preceding the <i>_calculate_values</i>
-   method. It allows multiple events to trigger the same event handler.
- - The <i>on_facet_set decorator</i> preceding the <i>_register_variables</i>
-   method. It provides a simpler form of event handling for list events.
- - The <i>columns</i> property of the <b>VariableAdapter</b> class. It allows
-   the <b>VariableAdapter</b> class to dynamically adapt to the number of
-   variables in the <b>Experiment</b> model.
+- Use of MVC (The **Experiment** and **Variable** model classes contain
+  no UI code).
+- The main UI class (i.e. **ExperimentView**) is almost 100% declarative.
+  Most of the UI logic is in the **VariableAdapter** class, which adapts
+  the non-tabular model objects into a tabular format.
+- Use of the *dock* facet to allow the user to reorganize the UI.
+- Use of the *export* facet to allow the user to drag sub-views out of the main
+  window to make optimum use of all available screen real estate.
+- Use of themes to enhance UI appearance.
+- Use of the **VerticalNotebookEditor** to allow easy access to the various
+  **Variable** parameters.
+- Definition of the **Slider** class to simplify **View** creation.
+- The use of the **Controller** class to bind the model and view classes.
+- The *on_facet_set* decorator preceding the *_calculate_values* method. It
+  allows multiple events to trigger the same event handler.
+- The *on_facet_set decorator* preceding the *_register_variables* method. It
+  provides a simpler form of event handling for list events.
+- The *columns* property of the **VariableAdapter** class. It allows the
+  **VariableAdapter** class to dynamically adapt to the number of variables in
+  the **Experiment** model.
 
 Notes:
- - This demo requires the <b>numpy</b> package.
- - Try commenting out the line <i>multiple_open = True</i>, which allows more
-   than one <b>Variable</b> object to be open at once.
- - Try dragging the handles along the top part of each view to reorganize the
-   view layout. Whatever changes you make will be persisted from one invocation
-   of the program to another. The persistence is enabled through the use of the
-   <i>id</i> facets in the <b>View</b> and <b>Group</b> objects. The ability to
-   rearrange the views is enabled via the <i>dock</i> facet set in several of
-   the <b>Group</b> objects.
- - Try dragging a view completely out of the Facets UI demo program window and
-   dropping it on your desktop. This feature is enabled via the <i>export</i>
-   facet set in several of the <b>Group</b> objects.
+
+- This demo requires the *numpy* package.
+- Try commenting out the line *multiple_open = True*, which allows more
+  than one **Variable** object to be open at once.
+- Try dragging the handles along the top part of each view to reorganize the
+  view layout. Whatever changes you make will be persisted from one invocation
+  of the program to another. The persistence is enabled through the use of the
+  *id* facets in the **View** and **Group** objects. The ability to
+  rearrange the views is enabled via the *dock* facet set in several of
+  the **Group** objects.
+- Try dragging a view completely out of the Facets UI demo program window and
+  dropping it on your desktop. This feature is enabled via the *export*
+  facet set in several of the **Group** objects.
 """
 
 #-------------------------------------------------------------------------------

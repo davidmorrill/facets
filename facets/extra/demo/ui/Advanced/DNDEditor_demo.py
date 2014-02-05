@@ -1,6 +1,8 @@
 """
-Demonstrates use of the DNDEditor (drag and drop editor), which allows the value
-of an object facet to be used as a drag source or drop target or both.
+# DNDEditor Demo #
+
+Demonstrates use of the **DNDEditor** (drag and drop editor), which allows the
+value of an object facet to be used as a drag source or drop target or both.
 
 In this demonstration, the DNDEditor appears as a down pointing blue arrow icon
 in the top-left corner of the view. Dragging and dropping one or more objects

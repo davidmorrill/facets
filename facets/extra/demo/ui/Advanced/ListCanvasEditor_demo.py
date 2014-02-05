@@ -1,6 +1,8 @@
 """
+# ListCanvasEditor Demo #
+
 This demo is currently just a pastiche of some of the very basic capabilities
-of the ListCanvasEditor.
+of the **ListCanvasEditor**.
 """
 
 #-------------------------------------------------------------------------------

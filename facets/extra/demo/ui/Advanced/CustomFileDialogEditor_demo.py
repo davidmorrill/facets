@@ -1,56 +1,55 @@
 """
-Demonstrates using the <b>CustomFileDialogEditor</b> to display a developer
+# CustomFileDialogEditor Demo #
+
+Demonstrates using the **CustomFileDialogEditor** to display a developer
 customizable file dialog.
 
 For this demo the view is split into two tabs:
- - <i>Custom File Dialog Editor</i>: Shows the <i>file_name</i> facet of the
-   main demo instance being edited using <b>CustomFileDialogEditor</b> instance.
- - <i>Universal Inspector</i>: Shows a <b>UniversalInspector</b> tool instance
-   whose <i>item</i> facet is set to the current file name each time a new file
-   is selected. The <b>UniversalInspector</b> attempts to display the contents
-   of each selected file in a new tab. The demo is configured to allow the
-   contents of up to three files to be displayed at once. Change the value of
-   the <i>max_inspectors</i> key to a different value if you want to see more or
-   less items.
 
-The <b>CustomFileDialogEditor</b> has three points of customization:
-  - <b>FSitem</b>: You can create custom subclasses to allow the user to select
-    file and folders from a <i>virtual file system</i> of your own design.
-  - <b>FSExt</b>: You can create custom subclasses to allow displaying or
-    prompting the user for additional information about a selected file. In the
-    demo, we use this to display previews of any image or Python source file
-    the user selects.
-  - <b>FSFilter</b>: You can create custom subclasses or instances to allow the
-    user to filter the set of files displayed in the currently selected
-    directory. In the demo, we use several <b>FSTypeFilter</b> instances to
-    allow the user to view: all files, Python source files or various image
-    files. Using custom subclasses you can also filter on criteria other than
-    file extension.
+- *Custom File Dialog Editor*: Shows the *file_name* facet of the main demo
+  instance being edited using **CustomFileDialogEditor** instance.
+- *Universal Inspector*: Shows a **UniversalInspector** tool instance whose
+  *item* facet is set to the current file name each time a new file is selected.
+  The **UniversalInspector** attempts to display the contents of each selected
+  file in a new tab. The demo is configured to allow the contents of up to three
+  files to be displayed at once. Change the value of the *max_inspectors* key to
+  a different value if you want to see more or less items.
 
-There is also a <b>CustomFileDialog</b> class which uses the
-<b>CustomFileDialogEditor</b> to display a modal file selection dialog similar
-to the file selection dialog supported in most operating systems, but with the
+The **CustomFileDialogEditor** has three points of customization:
+
+- **FSitem**: You can create custom subclasses to allow the user to select file
+  and folders from a *virtual file system* of your own design.
+- **FSExt**: You can create custom subclasses to allow displaying or prompting
+  the user for additional information about a selected file. In the demo, we use
+  this to display previews of any image or Python source file the user selects.
+- **FSFilter**: You can create custom subclasses or instances to allow the user
+  to filter the set of files displayed in the currently selected directory. In
+  the demo, we use several **FSTypeFilter** instances to allow the user to view:
+  all files, Python source files or various image files. Using custom subclasses
+  you can also filter on criteria other than file extension.
+
+There is also a **CustomFileDialog** class which uses the
+**CustomFileDialogEditor** to display a modal file selection dialog similar to
+the file selection dialog supported in most operating systems, but with the
 added ability to use any of the customizations supported by the
-<b>CustomFileDialogEditor</b>. You can see an example of this by clicking on the
-<i>Add file...</i> button located in the lower right corner of the <i>Universal
-Inspector</i> tab.
+**CustomFileDialogEditor**. You can see an example of this by clicking on the
+*Add file...* button located in the lower right corner of the *Universal
+Inspector* tab.
 
-This <i>Custom File Dialog Editor</i> tab uses an <i>inline</i>
-<b>CustomFileDialogEditor</b> view rather than a pop-up dialog. The <i>mode</i>
-facet of the <b>CustomFileDialogEditor</b> instance is set to <i>accept</i>,
-which replaces the normal <i>Open</i> or <i>Save</i> button with an
-<i>Accept</i> button used to assign the currently selected file to the
-underlying editor facet (<i>file_name</i> in this case). To use this in the
-demo, select a file in the <b>CustomFileDialogEditor</b> view then click the
-<i>Accept</i> button to notify the application. Repeat these steps to select
-other files for display in the <b>UniversalInspector</b>.
+This *Custom File Dialog Editor* tab uses an *inline*
+**CustomFileDialogEditor** view rather than a pop-up dialog. The *mode* facet of
+the **CustomFileDialogEditor** instance is set to *accept*, which replaces the
+normal *Open* or *Save* button with an *Accept* button used to assign the
+currently selected file to the underlying editor facet (*file_name* in this
+case). To use this in the demo, select a file in the **CustomFileDialogEditor**
+view then click the *Accept* button to notify the application. Repeat these
+steps to select other files for display in the **UniversalInspector**.
 
 Also note that when Python source files or image files are selected, the
-<b>CustomFileDialogEditor</b> and <b>CustomFileDialog</b> both show a preview of
-the selected file in the bottom half of the view, courtesy of the
-<b>ImageExt</b> and <b>TextExt</b> subclasses of <b>FSExt</b> defined by the
-demo and passed to the <b>CustomFileDialogEditor</b> and <b>CustomFileDialog</b>
-instances.
+**CustomFileDialogEditor** and **CustomFileDialog** both show a preview of the
+selected file in the bottom half of the view, courtesy of the **ImageExt** and
+**TextExt** subclasses of **FSExt** defined by the demo and passed to the
+**CustomFileDialogEditor** and **CustomFileDialog** instances.
 """
 
 #-------------------------------------------------------------------------------

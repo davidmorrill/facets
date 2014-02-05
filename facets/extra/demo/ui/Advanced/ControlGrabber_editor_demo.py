@@ -1,23 +1,26 @@
 """
-A ControlGrabberEditor demo.
+# ControlGrabberEditor Demo #
 
-To use the demo, simply position the mouse pointer over the ControlGrabberEditor
-icon in the top-left corner of the view, then click and drag the mouse pointer
-over any Facets control and see the view update with information about the
-control the mouse pointer is over. You can tell when the ControlGrabberEditor is
-active because the mouse pointer changes to a question mark.
+To use the demo, simply position the mouse pointer over the
+**ControlGrabberEditor** icon in the top-left corner of the view, then click and
+drag the mouse pointer over any Facets control and see the view update with
+information about the control the mouse pointer is over. You can tell when the
+ControlGrabberEditor is active because the mouse pointer changes to a question
+mark.
 
-The 'Mouse Over Control' section of the view displays information about the
-control currently being dragged over, while the 'Selected Control' section shows
+The *Mouse Over Control* section of the view displays information about the
+control currently being dragged over, while the *Selected Control* section shows
 information about the most recent control the mouse pointer was over when the
 left mouse button was released.
 
 Note also how the ControlGrabberEditor icon changes to indicate its current
 status:
- - Red:    Inactive.
- - Yellow: Mouse is hovering over the icon but the mouse button in not pressed.
- - Green:  Active but not positioned over a Facets control.
- - Window: Active and over a Facets control.
+
+- **Red**:    Inactive.
+- **Yellow**: Mouse is hovering over the icon but the mouse button in not
+  pressed.
+- **Green**:  Active but not positioned over a Facets control.
+- **Window**: Active and over a Facets control.
 """
 
 #-------------------------------------------------------------------------------

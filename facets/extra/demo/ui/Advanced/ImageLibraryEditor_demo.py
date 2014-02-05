@@ -1,16 +1,19 @@
 """
-Demonstrates use of the ImageLibraryEditor. The ImageLibraryEditor is a
+# ImageLibraryEditor Demo #
+
+Demonstrates use of the **ImageLibraryEditor**. The ImageLibraryEditor is a
 specialized editor that allows a user to browse and select images from the
-singleton Facets ImageLibrary object.
+singleton Facets **ImageLibrary** object.
 
 The editor is divided into two drop-down lists:
- - Volumes: Lists all of the the image volumes contained in the ImageLibrary.
- - Image: Lists all of the images contained in the currently selected image
-   volume.
+
+- **Volumes**: Lists all of the the image volumes contained in the ImageLibrary.
+- **Image**: Lists all of the images contained in the currently selected image
+  volume.
 
 In the demo, the currently selected image in the ImageLibraryEditor at the top
-of the view is used to create an HLSADerivedImage, which is then edited using
-the HLSADerivedImageEditor displayed in the bottom part of the view.
+of the view is used to create an **HLSADerivedImage**, which is then edited
+using the **HLSADerivedImageEditor** displayed in the bottom part of the view.
 """
 
 #-------------------------------------------------------------------------------

@@ -1,19 +1,20 @@
 """
-This demo shows a combination of the <b>DirectoryEditor</b>, the
-<b>GridEditor</b> and the <b>CodeEditor</b> used to create a simple Python
-source browser:
+# Python Source Browser #
 
- - Use the <b>DirectoryEditor</b> on the left to navigate to and select
-   directories containing Python source files.
- - Use the <b>GridEditor</b> on the top-right to view information about and
-   to select Python source files in the currently selected directory.
- - View the currently selected Python source file's contents in the
-   <b>CodeEditor</b> in the bottom-right.
+This demo shows a combination of the **DirectoryEditor**, the **GridEditor** and
+the **CodeEditor** used to create a simple Python source browser:
 
-As an extra <i>feature</i>, the <b>Grid</b> also displays a:
+- Use the **DirectoryEditor** on the left to navigate to and select directories
+  containing Python source files.
+- Use the **GridEditor** on the top-right to view information about and to
+  select Python source files in the currently selected directory.
+- View the currently selected Python source file's contents in the
+  **CodeEditor** in the bottom-right.
 
- - Red ball if the file size > 64KB.
- - Blue ball if the file size > 16KB.
+As an extra *feature*, the **Grid** also displays a:
+
+- Blue ball if the file size > 16KB.
+- Red ball if the file size > 64KB.
 """
 
 #-------------------------------------------------------------------------------

@@ -1,10 +1,12 @@
 """
+# List Editors Demo #
+
 This shows three different types of editor that can be applied to a list of
 objects:
 
- - Grid
- - List
- - Tabbed Notebook
+- Grid
+- List
+- Tabbed Notebook
 
 Each editor style is editing the exact same list of objects. Note that any
 changes made in one editor are automatically reflected in the others.

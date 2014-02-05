@@ -1,14 +1,16 @@
 """
-This program demonstrates the use of editors that support <i>history</i>. A
-history is a persistent record of the last 'n' values the user has entered or
-selected for a particular facet.
+# History Demo #
 
-In order for the history to be recorded correctly, you must specify an <i>id</i>
-for both the Item containing the history editor and the View containing the
-Item.
+This program demonstrates the use of editors that support *history*. A history
+is a persistent record of the last *n* values the user has entered or selected
+for a particular facet.
+
+In order for the history to be recorded correctly, you must specify an *id*
+for both the **Item** containing the history editor and the **View** containing
+the Item.
 
 The maximum number of history entries recorded is specified by the value of
-the history editor's <i>entries</i> facet. If <i>entries</i> is less than or
+the history editor's *entries* facet. If *entries* is less than or
 equal to 0, then a normal, non-history, version of the editor will be used.
 
 A history editor also attempts to restore the last value set as the current

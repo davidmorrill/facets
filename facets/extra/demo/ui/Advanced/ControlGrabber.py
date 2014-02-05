@@ -1,18 +1,18 @@
 """
-This demonstrates using the <b>ControlGrabberEditor</b> in concert with the
-<b>HLSADerivedImageEditor</b>.
+# ControlGrabber #
 
-Click-drag on the <b>ControlGrabberEditor</b> (represented by the question mark
+This demonstrates using the **ControlGrabberEditor** in concert with the
+**HLSADerivedImageEditor**.
+
+Click-drag on the **ControlGrabberEditor** (represented by the question mark
 icon) and release the mouse pointer over another part of the demo (e.g. the tree
-view). The <b>ControlGrabberEditor</b> will set its value (the
-<b><i>control</i></b> facet of the <b>ControlGrabberDemo</b> object) to the
-<i>Control</i> the mouse pointer is over at the time that the mouse button is
-released.
+view). The **ControlGrabberEditor** will set its value (the ***control*** facet
+of the **ControlGrabberDemo** object) to the *Control* the mouse pointer is over
+at the time that the mouse button is released.
 
-The demo code responds by creating a <i>screen capture>/i> of the control's
-contents using the <b></i>image</i></b> facet of the control, which is assigned
-to the demo's <b><i>image</i></b> facet, which is edited using an
-<b>HLSADerivedImageEditor</i>.
+The demo code responds by creating a *screen capture>/i> of the control's
+contents using the ***image*** facet of the control, which is assigned to the
+demo's ***image*** facet, which is edited using an **HLSADerivedImageEditor*.
 """
 
 #-------------------------------------------------------------------------------

@@ -19,7 +19,7 @@ The program works as follows:
 - There are two formulas: *x(t)* and *y(t)* displayed in the top half of the
   view.
 - The formulas appear as text fields containing numeric expressions written in
-  Python (e.g. ***a*sin(b*2*pi*t)***).
+  Python (e.g. ***a x sin(b x 2 x pi x t)***).
 - You are free to change the formulas as you like. The only restrictions are
   that the formulas can only reference *t* (the *parameter*), and the five
   constants: *a*, *b*, *c*, *d* and *e*.

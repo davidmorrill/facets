@@ -1,5 +1,7 @@
 """
-Simple demonstration of the ListStrEditor, which can be used for editing and
+# ListStrEditor Demo #
+
+Simple demonstration of the **ListStrEditor**, which can be used for editing and
 displaying lists of strings, or other data that can be logically mapped to a
 list of strings.
 """

@@ -1,6 +1,8 @@
 """
-A demo of the ColorPaletteEditor which allows the user to pick colors using a
-user customizable color palette.
+# ColorPaletteEditor Demo #
+
+A demo of the **ColorPaletteEditor** which allows the user to pick colors using
+a user customizable color palette.
 """
 
 #-------------------------------------------------------------------------------

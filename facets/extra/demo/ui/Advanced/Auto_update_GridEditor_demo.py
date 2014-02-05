@@ -1,14 +1,17 @@
 """
-Demonstrates using a GridEditor with the 'monitor' feature enabled, which
-allows the grid editor to automatically update itself when the content of
-any object in the list associated with the editor is modified.
+# Auto Update GridEditor Demo #
+
+Demonstrates using a **GridEditor** with the *monitor* feature enabled, which
+allows the grid editor to automatically update itself when the content of any
+object in the list associated with the editor is modified.
 
 To interact with the demo:
-  - Select an employee from the list.
-  - Adjust their salary increase.
-  - Click the <b>Give raise</b> button.
-  - Observe that the table automatically updates to reflect the employees new
-    salary.
+
+- Select an employee from the list.
+- Adjust their salary increase.
+- Click the **Give raise** button.
+- Observe that the table automatically updates to reflect the employees new
+  salary.
 """
 
 #-------------------------------------------------------------------------------

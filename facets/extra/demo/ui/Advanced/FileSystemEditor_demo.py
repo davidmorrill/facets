@@ -1,31 +1,34 @@
 """
-Demonstrates use of the FileSystemEditor, which displays a hierarchical grid
+# FileSystemEditor Demo #
+
+Demonstrates use of the **FileSystemEditor**, which displays a hierarchical grid
 view of a specified portion of the file system.
 
 The FileSystemEditor allows you to specify or determine:
- - The root of the file system to display.
- - One or more 'glob' patterns to use when matching files. More than one glob
-   pattern can be specified by separating the individual patterns with commas
-   (e.g. '*.png,*.jpg,*.gif').
- - The file system path the user most recently double-clicked.
- - The interval (in milliseconds) the editor's contents are refreshed at.
- - Whether files and directories, or only directories, are displayed.
- - Whether files and directories, or only files, can be selected.
- - Which columns of file system information to display. The default is to show
-   all columns:
-   - 'size': File size
-   - 'type': File type
-   - 'modified': File last modified time
-   - 'created': File creation time
+
+- The root of the file system to display.
+- One or more *glob* patterns to use when matching files. More than one glob
+  pattern can be specified by separating the individual patterns with commas
+  (e.g. '\*.png,\*.jpg,\*.gif').
+- The file system path the user most recently double-clicked.
+- The interval (in milliseconds) the editor's contents are refreshed at.
+- Whether files and directories, or only directories, are displayed.
+- Whether files and directories, or only files, can be selected.
+- Which columns of file system information to display. The default is to show
+  all columns:
+  - **size**: File size
+  - **type**: File type
+  - **modified**: File last modified time
+  - **created**: File creation time
 
 The demo allows you to modify the root of the file system to display and the
 list of glob patterns used to determine which files to display. If you want
 to use more than one glob pattern, separate each pattern with a comma. Also,
-make sure to press the Enter key after entering the final glob pattern to update
-the file system display.
+make sure to press the *Enter* key after entering the final glob pattern to
+update the file system display.
 
 Clicking a file in the file system view displays the contents of the selected
-file in the UniversalInspector view located below the file system view.
+file in the **UniversalInspector** view located below the file system view.
 """
 
 #-------------------------------------------------------------------------------

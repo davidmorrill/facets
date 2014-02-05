@@ -1,19 +1,21 @@
 """
-This is a fun little demo illustrating use of the Handler base class and the
-FilmStripEditor and ImageZoomEditor editors.
+# Control Capture Demo #
 
-The first thing to note is that the main Demo class derives from UIView instead
-of HasFacets. This means the Demo class automatically has its 'ui_info'
-attribute set to the view's UIInfo object when the view is opened, providing it
-with access to the view's main Control object.
+This is a fun little demo illustrating use of the **Handler** base class and the
+**FilmStripEditor** and **ImageZoomEditor** editors.
 
-Each time the Refresh button is clicked, we use the UIInfo object to get a
+The first thing to note is that the main **Demo** class derives from **UIView**
+instead of **HasFacets**. This means the Demo class automatically has its
+*ui_info* attribute set to the view's **UIInfo** object when the view is opened,
+providing it with access to the view's main **Control** object.
+
+Each time the *Refresh* button is clicked, we use the UIInfo object to get a
 reference to the view's Control object. From this we create a list of all of the
 non-overlapping controls contained in the entire application, using the
-control's 'root_parent' property to obtain a reference to the topmost Control of
+control's *root_parent* property to obtain a reference to the topmost Control of
 the window.
 
-Finally, we use each resulting Control's 'image' property to obtain a current
+Finally, we use each resulting Control's *image* property to obtain a current
 screen capture of the control's contents and use the images to populate the
 FilmStripEditor displayed in the left-hand part of the view.
 
@@ -27,7 +29,7 @@ the demo does not capture some parts of the application view, such as
 DockWindow tabs, since these are part of a DockWindow control, which contains
 (and overlaps with) all of the control it manages.
 
-A careful reader may also note the use of 'do_after' in the 'facets_init'
+A careful reader may also note the use of *do_after* in the *facets_init*
 method. This is done to schedule an initial image capture after the demo has had
 a chance to appear on the screen.
 """

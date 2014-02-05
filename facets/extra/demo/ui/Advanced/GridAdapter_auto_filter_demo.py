@@ -1,14 +1,17 @@
 """
-Demonstrates how to define a GridAdapter that automatically supports filtering
-and searching GridEditor column values using the <i>auto_filter</i> and
-<i>auto_search</i> adapter attributes.
+# GridAdapter Auto Filter Demo #
 
-In this demo, we use a GridEditor to display a list of Person objects with
+Demonstrates how to define a **GridAdapter** that automatically supports
+filtering and searching **GridEditor** column values using the *auto_filter* and
+*auto_search* adapter attributes.
+
+In this demo, we use a GridEditor to display a list of **Person** objects with
 four columns:
- - First name (has column auto-filter)
- - Last name (has both column auto-filter and auto-search)
- - Age (has column auto-filter)
- - Gender (has column auto-search)
+
+- **First name** (has column auto-filter)
+- **Last name** (has both column auto-filter and auto-search)
+- **Age** (has column auto-filter)
+- **Gender** (has column auto-search)
 
 A grid column that only supports auto-filter is indicated by a filter icon that
 appears to the left of the label in the grid column header. In this case, the
@@ -18,23 +21,23 @@ A grid column that only supports auto-search is indicated by a search icon that
 appears to the left of the label in the grid column header. In this case, the
 Gender column onlys support auto-search.
 
-Auto-filter is enabled for a column by making its 'auto_filter' attribute True
-(the default is False). For this demo, we turn on auto-filter for all columns
-using the following definition in the PersonAdapter class:
+Auto-filter is enabled for a column by making its *auto_filter* attribute *True*
+(the default is *False*). For this demo, we turn on auto-filter for all columns
+using the following definition in the **PersonAdapter** class:
 
-  auto_filter = Bool( True )
+    auto_filter = Bool( True )
 
 We override this default value and turn off auto-filter for the Gender column
 using the definition:
 
-  gender_auto_column = Bool( False )
+    gender_auto_column = Bool( False )
 
-Auto-search is enabled for a column by making its 'auto_search' attribute True
-(the default is False). For this demo, we turn on auto-search for both the
+Auto-search is enabled for a column by making its *auto_search* attribute *True*
+(the default is *False*). For this demo, we turn on auto-search for both the
 Gender and Last columns with the definitions:
 
-  gender_auto_search = Bool( True )
-  last_auto_search   = Bool( True )
+    gender_auto_search = Bool( True )
+    last_auto_search   = Bool( True )
 
 Any column can support auto-filter, auto-search or both. If both auto-filter and
 auto-search are enabled for a particular column, a question mark column icon is
@@ -42,12 +45,13 @@ displayed (refer to the Last column in the demo), and the pop-up contains both
 filter and search fields.
 
 A column with auto-filter or auto-search enabled can be in one of two states:
- - <b>Inactive</b>: The icon is dimmed and no filtering or searching is
-    performed.
- - <b>Active</b>: The icon is bright and the current filter appears in square
-   brackets to the right of the column label (e.g. 'Age [>40]'). In the case of
-   a search, the current search string appears in parenthesis (e.g.
-   'Gender (f)').
+
+- **Inactive**: The icon is dimmed and no filtering or searching is
+   performed.
+- **Active**: The icon is bright and the current filter appears in square
+  brackets to the right of the column label (e.g. 'Age [>40]'). In the case of
+  a search, the current search string appears in parenthesis (e.g.
+  'Gender (f)').
 
 If auto-filter or auto-search is enabled for a column,, clicking its column
 header displays a pop-up text entry field where you can enter your filter or
@@ -55,21 +59,22 @@ search text. Moving the mouse away from the text entry field closes the pop-up.
 
 The text entered into the filter or search text pop-up can be preceded with one
 of the following optional filter operators:
- - <b>=</b> (equals)
- - <b>!=</b> (not equals)
- - <b><</b> (less than)
- - <b><=</b> (less than or equal to)
- - <b>></b> (greater than)
- - <b>>=</b> (greater than or equal to)
- - <b>!</b> (does not contain)
+
+- **=** (equals)
+- **!=** (not equals)
+- **<** (less than)
+- **<=** (less than or equal to)
+- **>** (greater than)
+- **>=** (greater than or equal to)
+- **!** (does not contain)
 
 If the filter or search string does not start with one of these operators, the
-default <i>contains</i> operator is used.
+default *contains* operator is used.
 
 You can also define a range of values to check for by separating the low and
-high ends of the range by '..' (e.g. '10..20' means all values between 10 and
-20). If the first character of the text is '!', the test becomes <i>not in
-range</i> (e.g. '!10..20' means all values not in the range from 10 to 20).
+high ends of the range by *'..'* (e.g. *'10..20'* means all values between 10
+and 20). If the first character of the text is *'!'*, the test becomes *not in
+range* (e.g. *'!10..20'* means all values not in the range from 10 to 20).
 
 Text comparisons can be either case sensitive or case insensitive. You change
 the style of comparison by clicking the icon to the left of the text field. You
@@ -78,11 +83,11 @@ icon at the beginning of the line.
 
 If a grid cell value is numeric, the comparison is performed using the numeric
 value of the filter or search text (or 0.0 if the text does not form a valid
-number). The 'contains' and 'does not contain' operators are treated as 'equals'
-and 'not equals' for numeric grid cell values.
+number). The *contains* and *does not contain* operators are treated as *equals*
+and *not equals* for numeric grid cell values.
 
-For example, if you click the Age column header and enter '>40' into the
-filter pop-up text field, the grid only displays rows where the 'age' value is
+For example, if you click the Age column header and enter *>40* into the
+filter pop-up text field, the grid only displays rows where the *age* value is
 greater than 40. If you click the header again, then click the pop-up's filter
 icon, the filter is cleared and all rows are displayed.
 
@@ -194,7 +199,7 @@ def random_person ( ):
         age    = randint( 0, 99 ),
         gender = choice( [ 'Male', 'Female' ] )
     )
-    
+
 #-- Create the demo ------------------------------------------------------------
 
 demo = Demo( people = [ random_person() for i in xrange( 200 ) ] )

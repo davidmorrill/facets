@@ -1,5 +1,7 @@
 """
-A demo showing how to use a GridEditor to create a multi-select list box.
+# Multi-select String List #
+
+A demo showing how to use a **GridEditor** to create a multi-select list box.
 """
 
 #-------------------------------------------------------------------------------
@@ -56,7 +58,7 @@ class MultiSelect ( HasPrivateFacets ):
 
 #-- Create the demo ------------------------------------------------------------
 
-demo = MultiSelect( 
+demo = MultiSelect(
     choices = [ 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
                 'nine', 'ten'
 ] )

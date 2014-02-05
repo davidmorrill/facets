@@ -1,5 +1,7 @@
 """
-A demonstration of KeyBinding, KeyBindings and the KeyBindingEditor.
+# KeyBindings Demo #
+
+A demonstration of **KeyBinding**, **KeyBindings** and the **KeyBindingEditor.**
 
 A KeyBinding represents a mapping from a keyboard key sequence (such as Ctrl-u)
 to a named object method which performs some action. A single KeyBinding object
@@ -16,9 +18,10 @@ the KeyBinding objects contained in a single KeyBindings object.
 Visually, the KeyBindingEditor appears as a list with one entry for each
 KeyBinding object in the associated KeyBindings object. Each entry has three
 fields:
- - The primary key sequence.
- - The secondary (i.e. alternate) key sequence.
- - A description of the action associated with the binding.
+
+- The primary key sequence.
+- The secondary (i.e. alternate) key sequence.
+- A description of the action associated with the binding.
 
 To change a key sequence assignment, click on either the primary or secondary
 key sequence field of an entry and then press the key sequence you want to
@@ -36,8 +39,9 @@ the application's persisted state.
 In the demo, the view is divided into a CodeEditor at the top, and a
 KeyBindingEditor at the bottom. The CodeEditor provides two custom
 actions:
- - Uppercasing the current line (initially Ctrl-u).
- - Lowercasing the current line (initially Ctrl-y).
+
+- Uppercasing the current line (initially Ctrl-u).
+- Lowercasing the current line (initially Ctrl-y).
 
 You can use the associated KeyBindingEditor at the bottom of the view to
 customize which key sequences invoke these editor actions.

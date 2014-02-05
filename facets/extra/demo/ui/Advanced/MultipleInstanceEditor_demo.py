@@ -1,27 +1,30 @@
 """
-Demonstrates use of the MultipleInstanceEditor, which allows you to edit the
-facets of multiple HasFacets objects simultaneously using a single editor view,
-rather than a separate view or editor for each object.
+# MultipleInstanceEditor Demo #
+
+Demonstrates use of the **MultipleInstanceEditor**, which allows you to edit the
+facets of multiple **HasFacets** objects simultaneously using a single editor
+view, rather than a separate view or editor for each object.
 
 In this example we are simulating an airport flight board showing flight origin
 and destination cities, as well as the current flight status, which can be
-either: On time, Delayed or Cancelled.
+either: *On time*, *Delayed* or *Cancelled*.
 
 Since bad weather may affect all flights into or out of a city, it would be
 useful to be able to update the flight status for multiple affected flights
 simultaneously, which is where the MultipleInstanceEditor comes in.
 
-The demo is divided into two regions, with the top using a GridEditor to display
-all current flight information, and the bottom using a MultipleInstanceEditor
-to update the flight status of all currently selected flights.
+The demo is divided into two regions, with the top using a **GridEditor** to
+display all current flight information, and the bottom using a
+MultipleInstanceEditor to update the flight status of all currently selected
+flights.
 
 To use the demo, select one or more flights in the top part of the demo view
-(using the Shift or Control keys to aid in the selection process if necessary).
-After making a selection, the field labeled Status at the bottom of the view
-(which is part of the MultipleInstanceEditor) will display the current flight
-status of the first flight selected. When you modify the value displayed in the
-Status field, all of the selected flight's status values will be updated at the
-same time.
+(using the *Shift* or *Control* keys to aid in the selection process if
+necessary). After making a selection, the field labeled *Status* at the bottom
+of the view (which is part of the MultipleInstanceEditor) will display the
+current flight status of the first flight selected. When you modify the value
+displayed in the *Status* field, all of the selected flight's status values will
+be updated at the same time.
 
 Of course, if you really enjoy playing airport manager, you can use the column
 sorting capabilities of the GridEditor to make selecting all flights into or

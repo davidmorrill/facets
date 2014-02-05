@@ -1,41 +1,41 @@
 """
-A grid editor demo.
+# GridEditor Demo #
 
 This example defines three classes:
 
- - <b>Person</b>: A single person.
- - <b>MarriedPerson</b>: A married person (subclass of Person).
- - <b>Report</b>: Defines a report based on a list of single and married people.
+- **Person**: A single person.
+- **MarriedPerson**: A married person (subclass of Person).
+- **Report**: Defines a report based on a list of single and married people.
 
 It creates a grid display of 10,000 single and married people showing the
 following information:
 
- - Name of the person.
- - Age of the person.
- - The person's address.
- - The name of the person's spouse (if any).
+- Name of the person.
+- Age of the person.
+- The person's address.
+- The name of the person's spouse (if any).
 
 In addition:
 
- - It uses a Courier 10 point font for each line in the table.
- - It displays age column right, instead of left, justified.
- - If the person is a minor (age < 18) and married, it displays a red flag
-   image in the age column.
- - If the person is married, it makes the background color for that row a light
-   blue.
+- It uses a Courier 10 point font for each line in the table.
+- It displays age column right, instead of left, justified.
+- If the person is a minor (age < 18) and married, it displays a red flag image
+  in the age column.
+- If the person is married, it makes the background color for that row a light
+  blue.
 
 This example demonstrates:
 
- - How to set up a <b>GridEditor</b>.
- - The display speed of the <b>GridEditor</b>.
- - How to create a <b>GridAdapter</b> that meets each of the specified
-   display requirements.
+- How to set up a **GridEditor**.
+- The display speed of the **GridEditor**.
+- How to create a **GridAdapter** that meets each of the specified display
+  requirements.
 
 Additional notes:
 
- - You can change the current selection using the up and down arrow keys.
- - You can move a selected row up and down in the table using the left and
-   right arrow keys.
+- You can change the current selection using the up and down arrow keys.
+- You can move a selected row up and down in the table using the left and right
+  arrow keys.
 """
 
 #-------------------------------------------------------------------------------

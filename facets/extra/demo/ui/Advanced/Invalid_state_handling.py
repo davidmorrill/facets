@@ -1,4 +1,6 @@
 """
+# Invalid State Handling #
+
 Sometimes the inputs to a model are not correlated. That is, any valid model
 input produces a corresponding valid model state. However, in other cases, some
 or all of the model inputs are correlated. That is, there may exist one or more
@@ -16,12 +18,12 @@ whether or not the model is in a valid state, and then communicating that
 information to the user via the user interface.
 
 This demonstration provides an example of doing this using the FacetEditor's
-'invalid' facet. Each facet editor has an 'invalid' facet which can be set
+*invalid* facet. Each facet editor has an *invalid* facet which can be set
 equal to the name of a facet in the user interface context which contains a
 boolean value reflecting whether or not the user interface (and underlying
-model) are in a invalid state or not. A True value for the facet indicates that
-the editor's current value produces an invalid model state. By associating the
-same 'invalid' facet with one or more editors in the user interface, the
+model) are in a invalid state or not. A *True* value for the facet indicates
+that the editor's current value produces an invalid model state. By associating
+the same *invalid* facet with one or more editors in the user interface, the
 resulting user interface can indicate to the user which combination of input
 values is producing the invalid state.
 
@@ -32,24 +34,24 @@ should not exceed a certain threshold. If it does, the user should be warned
 so that they can reduce either or both of the system mass and velocity back down
 to a safe level.
 
-In the model, an 'error' property is defined which is True whenever the
+In the model, an *error* property is defined which is *True* whenever the
 kinetic energy level of the system exceeds the safety threshold. This facet is
-then synchronized with the user interface's 'mass', velocity' and 'status'
+then synchronized with the user interface's *mass*, *velocity* and *status*
 editors, turning them red whenever the model enters an invalid state.
 
-The 'status' facet is another property, based on the 'error' facet, which
+The *status* facet is another property, based on the *error* facet, which
 provides a human readable description of the current system state.
 
-Note that in this example, we synchronize the 'error' facet with the user
-interface using 'sync_to_view' metadata, whose value is a list of user
-interface editor facets the facet should be synchronized 'to' (i.e. changes to
-the 'error' facet will be copied to the corresponding facet in the editor, but
-not vice versa). We could also have explicitly set the 'invalid' facet of each
-corresponding editor in the view definition to 'error' as well.
+Note that in this example, we synchronize the *error* facet with the user
+interface using *sync_to_view* metadata, whose value is a list of user
+interface editor facets the facet should be synchronized *to* (i.e. changes to
+the *error* facet will be copied to the corresponding facet in the editor, but
+not vice versa). We could also have explicitly set the *invalid* facet of each
+corresponding editor in the view definition to *error* as well.
 
-To use the demo, simply use the 'mass' and 'velocity' sliders and observe the
-changes to the 'kinetic_energy' of the system. When the kinetic energy exceeds
-50,000, notice how the 'mass', 'velocity' and 'status' fields turn red, and
+To use the demo, simply use the *mass* and *velocity* sliders and observe the
+changes to the *kinetic_energy* of the system. When the kinetic energy exceeds
+50,000, notice how the *mass*, *velocity* and *status* fields turn red, and
 that when the kinetic energy drops below 50,000, the fields return to their
 normal color.
 """

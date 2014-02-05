@@ -1,20 +1,22 @@
 """
-Demonstrates the ImageZoomEditor, an editor which allows zooming into and out
-of an ImageResource image.
+# ImageZoomEditor Demo #
+
+Demonstrates the **ImageZoomEditor**, an editor which allows zooming into and
+out of an **ImageResource** image.
 
 The editor supports the following operations:
 
- - Ctrl-drag the mouse to pan the image being edited around the view.
+- Ctrl-drag the mouse to pan the image being edited around the view.
 
- - Use the mouse wheel to zoom into and out of the image. The image zooms around
-   the current mouse position.
+- Use the mouse wheel to zoom into and out of the image. The image zooms around
+  the current mouse position.
 
- - Ctrl-middle mouse button drag up and down to zoom into and out of the image.
-   The image zooms around the original point under the pointer when the middle
-   mouse button was pressed.
+- Ctrl-middle mouse button drag up and down to zoom into and out of the image.
+  The image zooms around the original point under the pointer when the middle
+  mouse button was pressed.
 
- - Right click the view to reset the image back to its original starting
-   position in the top-left hand corner of the view with a 1:1 scale.
+- Right click the view to reset the image back to its original starting
+  position in the top-left hand corner of the view with a 1:1 scale.
 """
 
 #-------------------------------------------------------------------------------
