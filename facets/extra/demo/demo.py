@@ -66,16 +66,25 @@ html {
 }
 
 body {
-  font-family: Arial Helvetica sans-serif;
   margin: 30px;
   border: 1px solid #A0A0A0;
+  color: #404040;
   background-color: #F7F5F0;
   -webkit-border-radius: 7px;
   -webkit-box-shadow: 0px 0px 11px rgba( 0, 0, 0, 0.5 );
 }
 
 h1 {
+  font-family: Arial Helvetica sans-serif;
   font-weight: bold;
+  font-size: 18px;
+  color: #767367;
+  background-color: #DDDAD1;
+  border: 3px solid #B9B3A1;
+}
+
+pre {
+  border-color: #B9B3A1;
 }
 """[1:-1]
 

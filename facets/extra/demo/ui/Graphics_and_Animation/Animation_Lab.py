@@ -4,29 +4,29 @@
 A laboratory environment for trying out the various animation system
 *tweeners* and *paths*.
 
-The Facets *animation* system consists mainly of ***Tweener***, ***Path*** and
-***Animation*** objects. In this demo we focus on the behavior of the different
+The Facets *animation* system consists mainly of **Tweener**, **Path** and
+**Animation** objects. In this demo we focus on the behavior of the different
 standard **Tweener** and **Path** classes available by creating a simple
 environment for you to try them out in. There are also options to have a hand at
 creating and trying out your own custom paths and tweeners.
 
 The demo is divided into five main sections:
- - ***Animation Lab***: This is where you try out the various paths and tweeners
+ - **Animation Lab**: This is where you try out the various paths and tweeners
    available.
- - ***Custom Path***: This tab allows you to create your own custom **Path**
+ - **Custom Path**: This tab allows you to create your own custom **Path**
    class by modifying a code template.
- - ***Custom Tweener***: This tab allows you to create a custom **Tweener**
+ - **Custom Tweener**: This tab allows you to create a custom **Tweener**
    class by modifying the provided code template.
- - ***Path Graphs***: This tabs shows you two views of the current **Path** you
+ - **Path Graphs**: This tabs shows you two views of the current **Path** you
    have selected. One view shows you the raw path data, while the other shows
    you the path data after having applied the current composite tweener.
- - ***Tweener Graphs***: Similar to the ***Path Graphs*** tab, but showing the
-   graphs for the individual tweeners as well as the final tweener resulting
-   from compositing the three individual tweeners.
+ - **Tweener Graphs**: Similar to the *Path Graphs* tab, but showing the graphs
+   for the individual tweeners as well as the final tweener resulting from
+   compositing the three individual tweeners.
 
-The main ***Animation Lab*** tab is occupied by a canvas containing two animated
+The main *Animation Lab* tab is occupied by a canvas containing two animated
 boxes. The boxes simply animate from their location to the location of the other
-box using the ***Path*** and ***Tweener*** objects you select and modify in the
+box using the **Path** and **Tweener** objects you select and modify in the
 column on the left.
 
 The objects in this column are selected using the drop-down lists which show the
@@ -53,17 +53,16 @@ is limited to three, which are composed as follows:
 Be sure to experiment with combining different tweeners in different orders to
 see what types of new animation effects you can come up with.
 
-This demo includes the standard Facets *animation*, **Path** and **Tweener**
+This demo includes the standard Facets animation **Path** and **Tweener**
 classes. However it also allows you to create and try out custom **Path** and
-**Tweener** classes using the ***Custom Path*** and ***Custom Tweener*** tabs.
-Each tab contains a text editor that is initialized with a basic template for
-defining a **Path** or **Tweener** subclass. You can modify the code then click
-the *gear* icon in the bottom right corner of the view to load the code into the
-demo.
+**Tweener** classes using the *Custom Path* and *Custom Tweener* tabs. Each tab
+contains a text editor that is initialized with a basic template for defining a
+**Path** or **Tweener** subclass. You can modify the code then click the *gear*
+icon in the bottom right corner of the view to load the code into the demo.
 
 If there are no syntax errors, you can try out your custom **Path** or
-**Tweener** by selecting ***Custom*** from the appropriate drop-down list in the
-***Animation Tab***. The animation will be automatically updated to use your
+**Tweener** by selecting *Custom* from the appropriate drop-down list in the
+*Animation Tab*. The animation will be automatically updated to use your
 custom class.
 
 For more advanced experimentation, you can try adding one or more parameters to
@@ -71,26 +70,26 @@ your custom class to allow varying its behavior. Simply define the required
 *facets* in the code template and reference them in your code. Some additional
 things to keep in mind when doing this:
 
-- Add ***event = 'modified'*** metadata to each facet you add to your class.
+- Add *event = 'modified'* metadata to each facet you add to your class.
   This will allow the demo to automatically update the *path* or *tweener*
   graphs whenever you modify the parameter.
-- Be sure to update the ***view*** for your class to include the new facets you
+- Be sure to update the *view* for your class to include the new facets you
   added. Doing so will allow you to edit your custom class in the main
-  ***Animation Lab*** tab. If the new facet is an integer range, you can simply
-  add an ***IRange*** item to the view. If it is a float range, use an
-  ***FRange*** item instead. For example:
+  *Animation Lab* tab. If the new facet is an integer range, you can simply
+  add an **IRange** item to the view. If it is a float range, use an
+  **FRange** item instead. For example:
 
   ```
   view = View( IRange( 'cycles' ), FRange( 'amplitude' ) )
   ```
 
 Creating new classes is actually fairly simple, since there is only a single
-***at*** method that needs to be overridden for each **Path** or **Tweener**
+*at* method that needs to be overridden for each **Path** or **Tweener**
 class. If interested, please look at the *facets.animation.py* package or some
 of the other demos in this section for more information and examples on how to
 create your own custom **Path** and **Tweener** classes.
 
-Also, don't forget that the individual tabs can be dragged into new arragments
+Also, don't forget that the individual tabs can be dragged into new arrangements
 to allow you to see more than one view at a time if desired.
 """
 

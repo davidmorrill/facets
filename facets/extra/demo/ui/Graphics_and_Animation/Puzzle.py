@@ -2,8 +2,8 @@
 # Puzzle #
 
 Demonstrates another use of some of the various animation **Tweener** and
-**Path** classes, in this case creating a simple "puzzle-like" animation that
-takes a random image, divides it up into a grid of smaller "pieces", scrambles
+**Path** classes, in this case creating a simple *puzzle-like* animation that
+takes a random image, divides it up into a grid of smaller *pieces*, scrambles
 the pieces to form a new grid, and then animates the motion of each of the
 pieces back to its original position using a randomly chosen animation path.
 
