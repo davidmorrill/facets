@@ -1,22 +1,26 @@
 """
-Demo to redefine legal values of one attribute based on another via GUI.
+# Dynamic Selector #
 
-Code sample showing a simple implementation of the dynamic
-redefining of a facet attribute's legal values on the basis of another
-facet attribute's assigned value.
+This example shows how to redefine the legal values of one facet based on the
+value of another within a user interface.
 
-Demo class "Address" has a simple set of attributes: 'street_address',
-'st' and 'city'.  The values of 'st' and 'city' are to be chosen
-from enumerated lists; however, the user does not want to see every
-city in the U.S. on the list, but only those for the chosen state.
+The code's **Address** class has a simple set of attributes:
 
-Various implementations of the dynamic data retrieval are possible, but
-should allow for run-time changes to the lists of permitted values.
-We have chosen a dictionary for this simple example.
+- *street_address*
+- *st* (i.e. state)
+- *city*
 
-Note that 'city' is simply defined as a facet of type Str.  The values
-that appear in the enumerated list of the GUI are determined by the
-argument to the Enum constructor.
+The values of *st* and *city* are to be chosen from enumerated lists; however,
+the user does not want to choose from every U.S. city in the list, but only from
+those within the currently chosen state.
+
+Various techniques for dynamic data retrieval are possible, but each should
+allow for run-time changes to the lists of permitted values. In this example we
+use a dictionary.
+
+Note that *city* is simply defined as a facet of type *Str*. The values that
+appear in the enumerated list of the user interface are specified by the
+argument to the *Enum* facet.
 """
 
 #-------------------------------------------------------------------------------

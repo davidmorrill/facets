@@ -1,9 +1,11 @@
 """
-Demonstrates how to set up a range-based facet whose high and low range end
-values can be modified at run-time.
+# Dynamic Range Editor #
 
-The top-most 'value' facet can have its range end points changed dynamically by
-modifying the 'low' and 'high' sliders below it.
+This example demonstrates how to set up a range-based facet whose high and low
+range end values can be modified at run-time.
+
+The top-most *value* facet can have its range end points changed dynamically by
+modifying the *low* and *high* sliders below it.
 
 This demo also illustrates how the range value location and formatting can also
 be specified if desired.

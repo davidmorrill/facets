@@ -1,22 +1,22 @@
 """
-Demo of the dynamic restructuring of an interface using InstanceEditor
+# Dynamic Forms Using Instances #
 
-This code sample shows a simple implementation of the dynamic
-restructuring of a View on the basis of some facet attribute's
-assigned value.
+This is a demo of the dynamic restructuring of an user interface that can be
+accomplished using the **InstanceEditor**.
 
-The demo class "Person" has attributes that apply to all instances
-('first_name', 'last_name', 'age') and a single attribute 'misc'
-referring to another object whose facets are specific to age
-group (AdultSpec for adults 18 and over, ChildSpec for children
-under 18).  The 'misc' attribute is re-assigned to a new instance
-of the appropriate type when a change to 'age' crosses the range
-boundary.
+This code sample shows a simple implementation of the dynamic restructuring of a
+**View** on the basis of some facet attribute's assigned value.
 
-The multi-attribute instance assigned to 'misc' is edited by means
-of a single InstanceEditor, which is displayed in the 'custom' style
-so that the dynamic portion of the interface is displayed in a panel
-rather than a separate window.
+The demo class **Person** has attributes that apply to all instances
+(*first_name*, *last_name*, *age*) and a single attribute *misc* referring to
+another object whose facets are specific to age group (*AdultSpec* for adults 18
+and over, *ChildSpec* for children under 18).  The *misc* attribute is
+re-assigned to a new instance of the appropriate type when a change to the value
+of *age* crosses the range boundary.
+
+The multi-attribute instance assigned to *misc* is edited by means of a single
+InstanceEditor, which is displayed using the *custom* style so that the dynamic
+portion of the interface is displayed in a panel rather than a separate window.
 """
 
 #-------------------------------------------------------------------------------

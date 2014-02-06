@@ -1,20 +1,18 @@
 """
-Demo of dynamic enabling and disabling of facet editors in an interface.
+# Simple Enabled When #
 
-Code sample showing a simple implementation of the dynamic
-enabling and disabling of facet attribute editor interfaces
-on the basis of another facet attribute's assigned value.
+This example illustrates the dynamic enabling and disabling of facet editors
+based on other facet values in the same user interface.
 
-Demo class "Person" has attributes that apply to all instances
-('first_name', 'last_name', 'age') and attributes that are
-specific to age group ('marital_status' and 'registered_voter'
-for adults, 'legal_guardian' for children.)  The adult-specific
-attributes are disabled if 'age' is less than 18; otherwise
-'legal_guardian' is disabled.
+The **Person** class has facets that apply to all instances: *first_name*,
+*last_name* and *age*, and facets that are specific to an age group:
+*marital_status* and *registered_voter* for adults, and *legal_guardian* for
+children. The adult specific facets are disabled if *age* is less than 18;
+otherwise the child specific facets are disabled.
 
-(NOTE: The 'enabled_when' expression for a given attribute must
-be a condition on some attribute, e.g. 'object.age >= 18' so
-that the evaluation is triggered by its facet handler.)
+Note: The *enabled_when* expression for a given **Item** must be a condition
+involving one or more facets (e.g. *'age >= 18'*) so that the evaluation of the
+expression is triggered by one of the referenced facets changing value.
 """
 
 #-------------------------------------------------------------------------------

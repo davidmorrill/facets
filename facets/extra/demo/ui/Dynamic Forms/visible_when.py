@@ -1,16 +1,15 @@
 """
-Demo of the dynamic restructuring of an interface using 'visible_when'.
+# Visible When #
 
-This code sample shows a simple implementation of the dynamic
-restructuring of a View on the basis of some facet attribute's
-assigned value.
+This example shows a simple implementation of the dynamic updating of the
+visible contents of a **View** on the basis of some facet's assigned value.
 
-The demo class "Person" has a set of attributes that apply to all instances
-('first_name', 'last_name', 'age'), a set of attributes that apply only
-to children (Persons whose age is under 18), and a set of attributes that
+The **Person** class has a set of attributes that apply to all instances:
+*first_name*, *last_name* and *age*, a set of attributes that apply only
+to children (i.e. persons whose age is under 18), and a set of attributes that
 apply only to adults.  The view for the Person object is defined in such
-a way that the visible fields change accordingly when the 'age' attribute
-crosses the boundary.
+a way that the set of visible fields changes accordingly as the value of the
+*age* facet crosses the boundary between child and adult.
 """
 
 #-------------------------------------------------------------------------------
