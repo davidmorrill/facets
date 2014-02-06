@@ -700,10 +700,11 @@ class DemoPath ( DemoTreeNodeObject ):
 
 demo_tree_editor = TreeEditor(
     nodes = [
-        ObjectTreeNode( node_for = [ DemoPath ],
-                        label    = 'nice_name' ),
-        ObjectTreeNode( node_for = [ DemoFile ],
-                        label    = 'nice_name' )
+        ObjectTreeNode( node_for  = [ DemoPath ],
+                        label     = 'nice_name' ),
+        ObjectTreeNode( node_for  = [ DemoFile ],
+                        label     = 'nice_name',
+                        icon_item = '@facets:facets' )
     ],
     selected = 'selected',
     editable = False
