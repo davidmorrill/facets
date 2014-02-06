@@ -1,5 +1,7 @@
 """
-A demonstration of how the GridEditor can be used to display (large) NumPy
+# NumPy Array GridEditor Demo #
+
+A demonstration of how the **GridEditor** can be used to display (large) *NumPy*
 arrays, in this case 100,000 random 3D points from a unit cube.
 
 In addition to showing the coordinates of each point, it also displays the

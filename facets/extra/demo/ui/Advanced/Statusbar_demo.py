@@ -1,4 +1,6 @@
 """
+# Statusbar Demo #
+
 This program demonstrates adding and using a status bar in a Facets UI window.
 
 A status bar may contain one or more fields, and each field can be of a fixed
@@ -10,23 +12,26 @@ The content of a status bar field is specified via the extended facet name of
 the object attribute that will contain the status bar information.
 
 In this example, there are two status bar fields:
- - The current length of the text input data (variable width)
- - The current time (fixed width, updated once a second).
 
-Note that there is actually nothing special about a status bar. A StatusBar is
-simply a specialized type of Group that:
- - Performs horizontal layout.
- - Suppresses item labels.
- - Uses a special item theme.
+- The current length of the text input data (variable width)
+- The current time (fixed width, updated once a second).
 
-Similarly, a Status item is a specialized type of Item that:
- - Is read-only.
- - Has a default width of 0.1 (making it stretchable).
- - Has reduced padding to allow adjacent status items to fit more tightly
-   together.
+Note that there is actually nothing special about a status bar. A **StatusBar**
+is simply a specialized type of **Group** that:
 
-Although a status bar would normally be the last thing added to a View, there
-is nothing preventing you from placing it wherever you want with a View.
+- Performs horizontal layout.
+- Suppresses item labels.
+- Uses a special item theme.
+
+Similarly, a **Status** item is a specialized type of **Item** that:
+
+- Is read-only.
+- Has a default width of 0.1 (making it stretchable).
+- Has reduced padding to allow adjacent status items to fit more tightly
+  together.
+
+Although a status bar would normally be the last thing added to a **View**,
+there is nothing preventing you from placing it wherever you want with a View.
 """
 
 #-------------------------------------------------------------------------------

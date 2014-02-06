@@ -1,6 +1,8 @@
 """
-Demonstrates using the VIPShellEditor, which provides a Visual Interactive
-Python shell.
+# VIPShellEditor Demo #
+
+This example demonstrates using the **VIPShellEditor**, which provides a
+*Visual Interactive Python* shell.
 """
 
 #-------------------------------------------------------------------------------

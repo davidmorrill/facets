@@ -1,13 +1,16 @@
 """
-Demonstrates use of the ValueEditor, which displays a tree-structured view of
-an arbitrary Python object. The ValueEditor is useful mainly as a debugging
-aid, since it allows the user to interactively explore the contents of an
-object. It is not as useful for more generaL application use since it does not
-provide any means for filtering or formatting the object values displayed.
+# ValueEditor Demo #
+
+This example demonstrates use of the **ValueEditor**, which displays a
+tree-structured view of an arbitrary Python object. The ValueEditor is useful
+mainly as a debugging aid, since it allows the user to interactively explore the
+contents of an object. It is not as useful for more generaL application use
+since it does not provide any means for filtering or formatting the object
+values displayed.
 
 In this demo, a ValueEditor is used to display the contents of the singleton
-ImageLibrary object, which contains information about the various image volumes
-available to a Facets application.
+**ImageLibrary** object, which contains information about the various image
+volumes available to a Facets application.
 """
 
 #-------------------------------------------------------------------------------

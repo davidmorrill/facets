@@ -1,12 +1,14 @@
 """
-This shows a simple example of using the PropertyListEditor to display and edit
-a list of specified object facets using a property sheet style editor.
+# PropertyListEditor Demo #
 
-The PropertyListEditor is a subclass of the PropertySheetEditor, but differs
+This shows a simple example of using the **PropertyListEditor** to display and
+edit a list of specified object facets using a property sheet style editor.
+
+The PropertyListEditor is a subclass of the **PropertySheetEditor**, but differs
 in how it specifies the object facets to display and edit. Whereas the
-PropertySheetEditor edits a specified HasFacets instance and is provided with
-a custom PropertySheetAdapter subclass that defines what object facets are
-included in the property sheet, the PropertyListEditor edits a list of item,
+PropertySheetEditor edits a specified **HasFacets** instance and is provided
+with a custom **PropertySheetAdapter** subclass that defines what object facets
+are included in the property sheet, the PropertyListEditor edits a list of item,
 each of which describes a particular object facet to be included in the property
 sheet.
 
@@ -16,16 +18,17 @@ the form:
     ( HasFacets_object, name [, label] [, editor] [, mode] )
 
 where:
-    HasFacets_object: A HasFacets instance.
-    name:             The name of the 'HasFacet_object' facet to edit.
-    label:            The UI label to display (defaults to using 'name').
-    editor:           The Editor used to edit the facet (defaults to the
-                      default editor for 'HasFacets_object.name').
-    mode:             The editing mode to use (defaults to 'inline'). Refer to
-                      the PropertySheetAdapter for more information.
 
-As an alternative to using the simple tuple form, instances of PropertyListItem
-can also be used:
+- *HasFacets_object*: A HasFacets instance.
+- *name*: The name of the *HasFacet_object* facet to edit.
+- *label*: The UI label to display (defaults to using *name*).
+- *editor*: The editor used to edit the facet (defaults to the default editor
+  for *HasFacets_object.name*).
+- *mode*: The editing mode to use (defaults to *inline*). Refer to the
+  PropertySheetAdapter for more information.
+
+As an alternative to using the simple tuple form, instances of
+**PropertyListItem** can also be used:
 
     PropertyListItem(
         object                = Instance( HasFacets ),
@@ -54,9 +57,9 @@ simple tuple, but can be somewhat more verbose. Note that internal to the
 PropertyListEditor, all items are represented using PropertyListItem instances.
 
 In this demo, we use a PropertyListEditor to edit a list of object facets
-selected from a Person and Address instance. Two identical property sheets are
-displayed, with the only difference being that the bottom list's fields are all
-read-only.
+selected from a **Person** and **Address** instance. Two identical property
+sheets are displayed, with the only difference being that the bottom list's
+fields are all read-only.
 """
 
 #-- Imports --------------------------------------------------------------------

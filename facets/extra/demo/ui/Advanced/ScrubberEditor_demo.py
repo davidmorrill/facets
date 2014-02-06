@@ -1,13 +1,15 @@
 """
+# ScrubberEditor Demo #
+
 This example demonstrates several different variations on using the
-ScrubberEditor. A 'scrubber' is a type of widget often seen in certain types
+**ScrubberEditor**. A *scrubber* is a type of widget often seen in certain types
 of applications, such as video editing, image editing, 3D graphics and
 animation.
 
 These types of programs often have many parameters defined over various ranges
 that the user can tweak to get varying effects or results. Because the number
 of parameters is typically fairly large, and the amount of screen real estate is
-fairly limited, these program often use 'scrubbers' to allow the user to adjust
+fairly limited, these program often use *scrubbers* to allow the user to adjust
 the parameter values.
 
 A scrubber often looks like a simple text field. The user can type in new
@@ -26,63 +28,63 @@ than a full-fledged slider in space limited applications.
 
 The Facets UI ScrubberEditor works as follows:
 
-  - When the mouse pointer moves over the scrubber, the cursor pointer changes
-    shape to indicate that the field has some additional control behavior.
+- When the mouse pointer moves over the scrubber, the cursor pointer changes
+  shape to indicate that the field has some additional control behavior.
 
-  - The control may optionally change color as well, to visually indicate that
-    the control is 'live'.
+- The control may optionally change color as well, to visually indicate that
+  the control is *live*.
 
-  - If you simply click on the scrubber, an active text entry field is
-    displayed, where you can type a new value for the facet, then press the
-    Enter key.
+- If you simply click on the scrubber, an active text entry field is
+  displayed, where you can type a new value for the facet, then press the
+  Enter key.
 
-  - If you click and drag while over the scrubber, the value of the facet is
-    modified based on the direction you move the mouse. Right and/or up
-    increases the value, left and/or down decreases the value. Holding the
-    Shift key down while scrubbing causes the value to change by 10 times its
-    normal amount. Holding the Control key down while scrubbing changes the
-    value by 0.1 times its normal amount.
+- If you click and drag while over the scrubber, the value of the facet is
+  modified based on the direction you move the mouse. Right and/or up
+  increases the value, left and/or down decreases the value. Holding the
+  Shift key down while scrubbing causes the value to change by 10 times its
+  normal amount. Holding the Control key down while scrubbing changes the
+  value by 0.1 times its normal amount.
 
-  - Scrubbing is not limited to the area of the scrubber control. You can drag
-    as far as you want in any direction, subject to the maximum limits imposed
-    by the facet or ScrubberEditor definition.
+- Scrubbing is not limited to the area of the scrubber control. You can drag
+  as far as you want in any direction, subject to the maximum limits imposed
+  by the facet or ScrubberEditor definition.
 
 The ScrubberEditor also supports several different style and functional
 variations:
 
-  - The visual default is to display only the special scrubber pointer to
-    indicate to the user that 'scrubber' functionality is available.
+- The visual default is to display only the special scrubber pointer to
+  indicate to the user that *scrubber* functionality is available.
 
-  - By specifying a 'hover_color' value, you can also have the editor change
-    color when the mouse pointer is over it.
+- By specifying a *hover_color* value, you can also have the editor change color
+  when the mouse pointer is over it.
 
-  - By specifying an 'active_color' value, you can have the editor change color
-    while the user is scrubbing.
+- By specifying an *active_color* value, you can have the editor change color
+  while the user is scrubbing.
 
-  - By specifying a 'border_color' value, you can display a solid border around
-    the editor to mark it as something other than an ordinary text field.
+- By specifying a *border_color* value, you can display a solid border around
+  the editor to mark it as something other than an ordinary text field.
 
-  - By specifying an 'increment' value, you can tell the editor what the normal
-    increment value for the scrubber should be. Otherwise, the editor will
-    calculate the increment value itself. Explicitly specifying an increment
-    can be very useful in cases where the underlying facet has an unbounded
-    value, which makes it difficult for the editor to determine what a
-    reasonable increment value might be.
+- By specifying an *increment* value, you can tell the editor what the normal
+  increment value for the scrubber should be. Otherwise, the editor will
+  calculate the increment value itself. Explicitly specifying an increment
+  can be very useful in cases where the underlying facet has an unbounded
+  value, which makes it difficult for the editor to determine what a reasonable
+  increment value might be.
 
-  - The editor will also correctly handle facets with dynamic ranges (i.e.
-    ranges whose high and low limits are defined by other facets). Besides
-    correctly handling the range limits, the editor will also adjust the
-    default tooltip to display the current range of the scrubber.
+- The editor will also correctly handle facets with dynamic ranges (i.e. ranges
+  whose high and low limits are defined by other facets). Besides correctly
+  handling the range limits, the editor will also adjust the default tooltip to
+  display the current range of the scrubber.
 
 In this example, several of the variations described above are shown:
 
-  - A simple integer range with default visual cues.
+- A simple integer range with default visual cues.
 
-  - A float range with both 'hover_color' and 'active_color' values specified.
+- A float range with both *hover_color* and *active_color values specified.
 
-  - An unbounded range with a 'border_color' value specified.
+- An unbounded range with a *border_color* value specified.
 
-  - A dynamic range using an Item theme. This consists of three scrubbers: one
+- A dynamic range using an **Item** theme. This consists of three scrubbers: one
     to control the low end of the range, one to control the high end, and one
     that uses the high and low values to determine its range.
 

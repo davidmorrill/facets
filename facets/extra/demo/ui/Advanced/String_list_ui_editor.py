@@ -1,7 +1,9 @@
 """
-Another demo showing how to use a GridEditor to create a multi-select list
-box. This demo creates a reusable StringListEditor class and uses that instead
-of defining the editor as part of the demo class.
+# String List UI Editor #
+
+Another demo showing how to use a **GridEditor** to create a multi-select list
+box. This demo creates a reusable **StringListEditor** class and uses that
+instead of defining the editor as part of the demo class.
 
 This approach greatly simplifies the actual demo class and shows how to
 construct a reusable Facets UI-based editor that can be used in other

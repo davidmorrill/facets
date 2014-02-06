@@ -1,35 +1,37 @@
 """
-A simple demonstration using the <b>StackEditor</b> to display a selectable and
+# StackEditor Demo #
+
+A simple demonstration using the **StackEditor** to display a selectable and
 filterable list of text strings.
 
 This demonstration illustrates:
- - Using a custom <b>IStackItem</b> implementation subclassing
-   <b>StrStackItem</b> (used to add selection behavior).
- - Selecting (and displaying) an item in the <b>StackEditor</b> (by clicking an
-   item in the editor).
- - Filtering the contents of the editor (using the <i>filter</i> control and an
-   <b>IFilter</b> implementation subclassing <b>Filter</b>).
- - Dynamically changing the items displayed by the <b>StackEditor</b> (using the
-   <i>count</i> control).
 
-Note that changing the <i>count</i> value only indirectly updates the list of
-items displayed. When <i>count</i> changes value, an <i>update</i> event is
-scheduled for a later time. The <i>items</i> list is a property that depends on
-the <i>update</i> event, and so will define a new list, using the current value
-of <i>count</i>, when the i>update</i> event fires.
+- Using a custom **IStackItem** implementation subclassing **StrStackItem**
+  (used to add selection behavior).
+- Selecting (and displaying) an item in the **StackEditor** (by clicking an item
+  in the editor).
+- Filtering the contents of the editor (using the *filter* control and an
+  **IFilter** implementation subclassing **Filter**).
+- Dynamically changing the items displayed by the **StackEditor** (using the
+  *count* control).
 
-It is possible to make the <i>items</i> property depend directly on the value of
-<i>count</i>. However, this can result in slow display updates since the
-<i>items</i> list would be reconstructed on each change to <i>count</i>, which
-could in turn make the <i>count</i> field's <b>ScrubberEditor</b> appear to
-update slowly, especially for large values of <i>count</i>. By decoupling
-changes to <i>count</i> from the rebuilding of the <i>items</i> list, it allows
-the user interface to be much more responsive to changes in the <i>count</i>
-value.
+Note that changing the *count* value only indirectly updates the list of items
+displayed. When *count* changes value, an *update* event is scheduled for a
+later time. The *items* list is a property that depends on the *update* event,
+and so will define a new list, using the current value of *count*, when the
+*update* event fires.
 
-You can verify this for yourself by changing the <i>@property_depends_on</i>
-decorator for the <i><b>_get_items</b></i> property getter from 'update' to
-'count', and then re-running the demo.
+It is possible to make the *items* property depend directly on the value of
+*count*. However, this can result in slow display updates since the *items* list
+would be reconstructed on each change to *count*, which could in turn make the
+*count* field's **ScrubberEditor** appear to update slowly, especially for large
+values of *count*. By decoupling changes to *count* from the rebuilding of the
+*items* list, it allows the user interface to be much more responsive to changes
+in the *count* value.
+
+You can verify this for yourself by changing the *@property_depends_on*
+decorator for the ***_get_items*** property getter from 'update' to 'count', and
+then re-running the demo.
 """
 
 #-------------------------------------------------------------------------------

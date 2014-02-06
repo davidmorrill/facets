@@ -1,28 +1,30 @@
 """
-This demo shows the proper way to create a <b>Property</b> whose value is a
-list, especially when the value of the <b>Property</b> will be used in a user
-interface, such as with the <b>GridEditor</b>.
+# Property List Demo #
+
+This demo shows the proper way to create a **Property** whose value is a list,
+especially when the value of the **Property** will be used in a user interface,
+such as with the **GridEditor**.
 
 Most of the demo is just the machinery to set up the example. The key thing to
-note is the declaration of the <i>people</i> facet:
+note is the declaration of the *people* facet:
 
     people = Property( List, depends_on = 'ticker' )
 
-In this case, by defining the <b>Property</b> as having a value of type
-<b>List</b>, you are ensuring that the computed value of the property will be
-validated using the <b>List</b> type, which in addition to verifying that the
-value is indeed a list, also guarantees that it will be converted to a
-<b>FacetListObject</b>, which is necessary for correct interaction with various
-Facets UI editors in a user interface.
+In this case, by defining the **Property** as having a value of type **List**,
+you are ensuring that the computed value of the property will be validated using
+the **List** type, which in addition to verifying that the value is indeed a
+list, also guarantees that it will be converted to a **FacetListObject**, which
+is necessary for correct interaction with various Facets UI editors in a user
+interface.
 
-Note also the use of the <i>depends_on</i> metadata to trigger a facet property
-change whenever the <i>ticker</i> facet changes (in this case, it is changed
-every three seconds by a background thread).
+Note also the use of the *depends_on* metadata to trigger a facet property
+change whenever the *ticker* facet changes (in this case, it is changed every
+three seconds by a background thread).
 
-Finally, the use of the <i>@cached_property</i> decorator simplifies the
-implementation of the property by allowing the <b>_get_people</b> <i>getter</i>
-method to perform the expensive generation of a new list of people only when
-the <i>ticker</i> event fires, not every time it is accessed.
+Finally, the use of the *@cached_property* decorator simplifies the
+implementation of the property by allowing the *_get_people getter* method to
+perform the expensive generation of a new list of people only when the *ticker*
+event fires, not every time it is accessed.
 """
 
 #-------------------------------------------------------------------------------

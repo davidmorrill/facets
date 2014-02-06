@@ -1,15 +1,17 @@
 """
-This shows how the currently active notebook tab of a NoteboookEditor can be
-controlled using the NotebookEditor's 'selected' facet.
+# NotebookEditor Selection Demo #
 
-Note the interaction between the spinner control (for the 'index' facet) and
+This shows how the currently active notebook tab of a **NoteboookEditor** can be
+controlled using the NotebookEditor's *selected* facet.
+
+Note the interaction between the spinner control (for the *index* facet) and
 the currently selected notebook tab. Try changing the spinner value, then try
 clicking on various notebook tabs.
 
 Also note that rearranging the notebook tabs (using drag and drop) does not
 affect the correspondence between the index value and its associated notebook
-tab. The correspondence is determined by the contents of the 'people' facet,
-and not by the physical layout of the notebook tabs.
+tab. The correspondence is determined by the contents of the *people* facet, and
+not by the physical layout of the notebook tabs.
 
 Finally, note that the NotebookEditor will automatically scroll the tabs to make
 the selected tab completely visible.

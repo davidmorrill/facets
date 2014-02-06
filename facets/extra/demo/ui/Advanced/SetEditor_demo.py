@@ -1,12 +1,14 @@
 """
-Demonstration of the <b>SetEditor</b> and the various combinations of the
-editor's <i>ordering</i> and <i>separate</i> facets, which control how the
-visual elements of the editor are ordered and whether the included set elements
-are kept visually separate from the currently excluded elements.
+# SetEditor Demo #
 
-A <b>SetEditor</b> can be used to edit <i>sets</i>, <i>lists</i> and
-<i>tuples</i> whose elements are unique (i.e. only occur one time in the value)
-and which are taken from a well-defined set of values.
+This example demonstrates the **SetEditor** and the various combinations of the
+editor's *ordering* and *separate* facets, which control how the visual elements
+of the editor are ordered and whether the included set elements are kept
+visually separate from the currently excluded elements.
+
+A **SetEditor** can be used to edit *sets*, *lists* and *tuples* whose elements
+are unique (i.e. only occur one time in the value) and which are taken from a
+well-defined set of values.
 
 The editor displays both the currently included elements of the set being edited
 and the currently excluded elements. Excluded elements are those items from the
@@ -22,26 +24,24 @@ new state of all dragged over elements.
 
 The demo illustrates two facets which affect how the editor behaves:
 
- - <b>ordering</b>: Specifies how elements are visually ordered in the editor.
- - <b>separate</b>: Specifies whether included elements are kept visually
-   separate from excluded elements.
+- *ordering*: Specifies how elements are visually ordered in the editor.
+- *separate*: Specifies whether included elements are kept visually separate
+  from excluded elements.
 
-The possible values for <i>ordering</i> are:
+The possible values for *ordering* are:
 
- - <i>'sort'</i>: Elements should appear in sort order (the default). You can
-   modify the default sort order by specifying one or both of the editor's
-   <i>compare</i> and <i>key</i> facets.
- - <i>'user'</i>: The user can change the order of the included and excluded
-   elements by dragging the icon displayed on the right side of all elements up
-   or down within the editor list.
- - <i>'value'</i>: The elements are displayed in the order they appear in the
-   set value. If the value is a <i>set</i> object, the implicit order defined
-   the set is used.
+- *sort*: Elements should appear in sort order (the default). You can modify the
+  default sort order by specifying one or both of the editor's *compare* and
+  *key* facets.
+- *user*: The user can change the order of the included and excluded elements by
+  dragging the icon displayed on the right side of all elements up or down
+  within the editor list.
+- *value*: The elements are displayed in the order they appear in the set value.
+  If the value is a *set* object, the implicit order defined the set is used.
 
-If the <i>separate</i> editor facet is <b><i>True</i></b> (the default), the
-included elements are displayed before all excluded elements. If <i>separate</i>
-is <b><i>False</i></b>, the included and excluded elements can appear intermixed
-in the editor list.
+If the *separate* editor facet is *True* (the default), the included elements
+are displayed before all excluded elements. If *separate* is *False*, the
+included and excluded elements can appear intermixed in the editor list.
 """
 
 #-------------------------------------------------------------------------------

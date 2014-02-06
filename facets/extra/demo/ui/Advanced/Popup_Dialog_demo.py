@@ -1,27 +1,32 @@
 """
+# Popup Dialog Demo #
+
 Demonstrates using a popup view within another view.
 
-Try changing the gender of the person from 'Male' to 'Female' using the
+Try changing the gender of the person from *Male* to *Female* using the
 drop-down list. When the person's gender is changed, a pop-up dialog is
-displayed immediately below the gender field providing you with the
-opportunity to cancel the gender change.
+displayed immediately below the gender field providing you with the opportunity
+to cancel the gender change.
 
-If you click the Cancel button, the person's gender will return to its previous
-value. If you click anywhere else outside of the pop-up dialog, the pop-up
-dialog will simply disappear, leaving the person's new gender value as is.
+If you click the *Cancel* button, the person's gender will return to its
+previous value. If you click anywhere else outside of the pop-up dialog, the
+pop-up dialog will simply disappear, leaving the person's new gender value as
+is.
 
 The main items of interest in this demo are:
- - The: kind = 'popup' facet set in the PersonHandler View which marks the view
-   as being a popup view.
- - The parent = info.gender.control value passed to the edit_facets method
-   when the popup dialog is created in the object_gender_changed method. This
-   value specifies the control that the popup dialog should be positioned near.
+
+- The *kind = 'popup'* facet set in the **PersonHandler View** which marks the
+  view as being a popup view.
+- The *parent = info.gender.control* value passed to the *edit_facets* method
+  when the popup dialog is created in the *object_gender_changed* method. This
+  value specifies the control that the popup dialog should be positioned near.
 
 Notes:
- - Facets UI will automatically position the popup dialog near the specified
-   control in such a way that the pop-up dialog will not overlay the control
-   and will be entirely on the screen (as long as these two conditions do not
-   conflict).
+
+- Facets UI will automatically position the popup dialog near the specified
+  control in such a way that the pop-up dialog will not overlay the control
+  and will be entirely on the screen as long as these two conditions do not
+  conflict.
 """
 
 #-------------------------------------------------------------------------------
