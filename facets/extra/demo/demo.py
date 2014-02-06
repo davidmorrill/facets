@@ -63,15 +63,17 @@ demo_css = """
 html {
   background-image: -webkit-repeating-linear-gradient( top, #F7F5F0 0px,
     #F7F5F0 12px, #DDDAD1 12px, #DDDAD1 24px );
+  padding: 30px;
 }
 
 body {
-  margin: 30px;
+  margin: 0 auto;
   border: 1px solid #A0A0A0;
   color: #404040;
   background-color: #F7F5F0;
   -webkit-border-radius: 7px;
   -webkit-box-shadow: 0px 0px 11px rgba( 0, 0, 0, 0.5 );
+  max-width: 800px;
 }
 
 h1 {
