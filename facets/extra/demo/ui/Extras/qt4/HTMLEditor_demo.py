@@ -1,6 +1,8 @@
 """
-Demonstrates the use of the HTMLEditor available when using the Qt4 Facets UI
-back-end.
+# HTMLEditor Demo #
+
+Demonstrates the use of the **HTMLEditor**, which is available when using the
+Qt4 Facets UI back-end.
 """
 
 #-------------------------------------------------------------------------------
@@ -29,7 +31,7 @@ web_page = """
 class Demo ( HasFacets ):
 
     # The URL and HTML to display:
-    url  = Str( 'http://dmorrill.com' )
+    url  = Str( 'http://google.com' )
     html = Str( web_page )
 
     # The facets UI view used by the editor:

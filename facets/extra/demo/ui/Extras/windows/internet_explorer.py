@@ -1,5 +1,8 @@
 """
-Demo showing how to use the Windows specific Internet Explorer editor.
+# Internet Explorer #
+
+This demo shows how to use the Windows specific **IEHTMLEditor** class for
+displaying web pages using Internet Explorer.
 """
 
 #-------------------------------------------------------------------------------
@@ -20,7 +23,7 @@ from facets.api \
 class WebPage ( HasFacets ):
 
     # The URL to display:
-    url = Str( 'http://dmorrill.com' )
+    url = Str( 'http://google.com' )
 
     # The page title:
     title = Str

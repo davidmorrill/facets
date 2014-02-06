@@ -1,5 +1,8 @@
 """
-Demo showing how to use the Windows specific Flash editor.
+# Flash #
+
+This demo shows how to use the Windows specific **FlashEditor** for displaying
+Flash-based *.swf* files.
 """
 
 #-------------------------------------------------------------------------------
