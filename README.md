@@ -85,3 +85,13 @@ Videos
 
 There are a number of Facets related videos available at:
 <http://www.youtube.com/user/FacetsTV>
+
+And here are a couple just to get you started:
+
+<a href="https://www.youtube.com/watch?v=_aPjWSbYDS8">
+  <img src="https://img.youtube.com/vi/_aPjWSbYDS8/0.jpg">
+</a>
+
+<a href="https://www.youtube.com/watch?v=vz0AThZB0J8">
+  <img src="https://img.youtube.com/vi/vz0AThZB0J8/0.jpg">
+</a>
