@@ -1,19 +1,21 @@
 """
+# File Open With Multiple Extensions #
+
 This demonstrates using the Facets file dialog with multiple file dialog
-extensions, in this case, the <b>FileInfo</b>, <b>TextInfo</b> and
-<b>ImageInfo</b> extensions.
+extensions, in this case, the **FileInfo**, **TextInfo** and **ImageInfo**
+extensions.
 
 For more information about why you would want to use the Facets file dialog
-over the standard OS file dialog, select the <b>File Open</b> demo. For a
+over the standard OS file dialog, select the *File Open* demo. For a
 demonstration of writing a custom file dialog extension, select the
-<b>File Open with Custom Extension</b> demo.
+*File Open with Custom Extension* demo.
 
 Suggestion: Try resizing the dialog and dragging the various file dialog
 extensions around to create a better arrangement than the rather cramped
-default vertical arrangement. Close the dialog, then re-open it to see that
-your new arrangement has been correctly restored. Try a different file dialog
-demo to verify that the customizations are not affected by any of the other
-demos because this demo specifies a custom id when invoking the file dialog.
+default vertical arrangement. Close the dialog, then re-open it to see that your
+new arrangement has been correctly restored. Try a different file dialog demo to
+verify that the customizations are not affected by any of the other demos
+because this demo specifies a custom id when invoking the file dialog.
 """
 
 #-------------------------------------------------------------------------------

@@ -1,10 +1,12 @@
 """
+# File Open With Custom Extension #
+
 This demonstrates using the Facets file dialog with a custom written file
-dialog extension, in this case an extension called <b>LineCountInfo</b>, which
+dialog extension, in this case an extension called **LineCountInfo**, which
 displays the number of text lines in the currently selected file.
 
-For more information about why you would want to use the Facets file dialog
-over the standard OS file dialog, select the <b>File Open</b> demo.
+For more information about why you would want to use the Facets file dialog over
+the standard OS file dialog, select the *File Open* demo.
 """
 
 #-------------------------------------------------------------------------------

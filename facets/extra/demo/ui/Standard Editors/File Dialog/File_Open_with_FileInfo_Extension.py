@@ -1,17 +1,19 @@
 """
+# File Open With FileInfo Extension #
+
 This demonstrates using the Facets file dialog with a file dialog extension,
-in this case, the <b>FileInfo</b> extension, which displays information about
-the currently selected file, such as:
+in this case, the **FileInfo** extension, which displays information about the
+currently selected file, such as:
 
- - File size.
- - Date and time last accessed.
- - Date and time last modified.
- - Date and time last created.
+- File size.
+- Date and time last accessed.
+- Date and time last modified.
+- Date and time last created.
 
-For more information about why you would want to use the Facets file dialog
-over the standard OS file dialog, select the <b>File Open</b> demo. For a
-demonstration of writing a custom file dialog extension, select the
-<b>File Open with Custom Extension</b> demo.
+For more information about why you would want to use the Facets file dialog over
+the standard OS file dialog, select the *File Open* demo. For a demonstration of
+writing a custom file dialog extension, select the
+*File Open with Custom Extension* demo.
 """
 
 #-------------------------------------------------------------------------------
