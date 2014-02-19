@@ -1,7 +1,9 @@
 """
-Implementation of a ColorEditor demo plugin for Facets UI demo program.
+# ColorEditor Demo #
 
-This demo shows each of the four styles of the ColorEditor
+This examples demonstrates using the various styles of the **ColorEditor**,
+which is a color picker used for editing facets with a color value, such as one
+defined using the Color type.
 """
 
 #-------------------------------------------------------------------------------

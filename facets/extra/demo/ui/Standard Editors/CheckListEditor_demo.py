@@ -1,8 +1,12 @@
 """
-Implementation of a CheckListEditor demo plugin for the Facets UI demo program.
+# CheckListEditor Demo #
 
-For each of three CheckListEditor column formations, this demo shows
-each of the four styles of the CheckListEditor.
+This examples demonstrates using the various styles of the **CheckListEditor**,
+which can be used as a type of *set* editor for facets whose values are lists
+of unique values chosen from a specified universe of possible values.
+
+For example, you could use a CheckListEditor to select a jury from a specified
+pool of possible jurors.
 """
 
 #-------------------------------------------------------------------------------

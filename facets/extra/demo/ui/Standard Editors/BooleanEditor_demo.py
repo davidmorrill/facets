@@ -1,7 +1,10 @@
 """
-Implementation of a BooleanEditor demo plugin for Facets UI demo program.
+# BooleanEditor Demo #
 
-This demo shows each of the four styles of the BooleanEditor
+This example demonstrates using each of the four styles of the
+**BooleanEditor**, which can be used to edit facets with boolean true or false
+values. In other environments, this is commonly known as a *checkbox*, but since
+it is commonly used here with Boolean facets, it is called a BooleanEditor.
 """
 
 #-------------------------------------------------------------------------------

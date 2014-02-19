@@ -1,7 +1,12 @@
 """
-Implementation of a CodeEditor demo plugin for Facets UI demo program.
+# CodeEditor Demo #
 
-This demo shows each of the four styles of the CodeEditor
+This example demonstrates the various styles of the **CodeEditor**, which is
+a small, but powerful, multi-line text editor used for editing string values,
+such as facets defined using the *Str* or *Code* type.
+
+It is intended mainly for editing various types of source code, but can also be
+used for editing any multi-line text value.
 """
 
 #-------------------------------------------------------------------------------
