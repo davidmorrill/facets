@@ -1,7 +1,14 @@
 """
-Implementation of an ImageEnumEditor demo plugin for the Facets UI demo program.
+# ImageEnumEditor Demo #
 
-This demo shows each of the four styles of the ImageEnumEditor.
+This examples demonstrates using the various styles of the **ImageEnumEditor**,
+which allows a user to select a facet value from a finite set of legal values.
+This is simiar to the **EnumEditor**, but allows the user to select values using
+images representing each legal value rather than text.
+
+For example, if the legal facet values are *"up"*, *"down"*, *"left"* and
+*"right"*, the images displayed by the editor might be arrows pointing in each
+of the four valid directions.
 """
 
 #-------------------------------------------------------------------------------

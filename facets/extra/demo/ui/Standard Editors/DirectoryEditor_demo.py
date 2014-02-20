@@ -1,7 +1,9 @@
 """
-Implementation of a DirectoryEditor demo plugin for Facets UI demo program.
+# DirectoryEditor Demo #
 
-This demo shows each of the four styles of the DirectoryEditor
+This example demonstrates using the various styles of the **DirectoryEditor**,
+which is a file picker which only allows existing file system directories to be
+selected.
 """
 
 #-------------------------------------------------------------------------------

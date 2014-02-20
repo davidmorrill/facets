@@ -1,7 +1,9 @@
 """
-Implemention of a ListEditor demo plugin for Facets UI demo program
+# ListEditor Demo #
 
-This demo shows each of the four styles of ListEditor
+This example demonstrates using the various styles of the **ListEditor**, which
+allows the user to add, delete and update values for a facet whose value is a
+list of strings.
 """
 
 #-------------------------------------------------------------------------------

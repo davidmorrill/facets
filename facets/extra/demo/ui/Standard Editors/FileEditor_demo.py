@@ -1,7 +1,8 @@
 """
-Implementation of a FileEditor demo plugin for Facets UI demo program.
+# FileEditor Demo #
 
-This demo shows each of the four styles of the FileEditor
+This example demonstrates using the various styles of the **FileEditor**, which
+is a file system file picker.
 """
 
 #-------------------------------------------------------------------------------

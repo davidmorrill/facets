@@ -1,7 +1,8 @@
 """
-Implementation of a FontEditor demo plugin for Facets UI demo program.
+# FontEditor Demo #
 
-This demo shows each of the four styles of the FontEditor
+This example demonstrates using the various styles of the **FontEditor**, which
+allows a user to select a font from one of the available operating system fonts.
 """
 
 #-------------------------------------------------------------------------------

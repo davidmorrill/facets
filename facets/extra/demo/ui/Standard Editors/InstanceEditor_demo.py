@@ -1,10 +1,19 @@
 """
-Implementation of an InstanceEditor demo plugin for the Facets UI demo program.
+# InstanceEditor Demo #
 
-This demo shows each of the four styles of the InstanceEditor
+This example demonstrates using the various styles of the **InstanceEditor**,
+which allows the user to edit a facet whose value is an object that derives from
+**HasFacets**.
 
-Fixme: This version of the demo only shows the old-style InstanceEditor
-capabilities.
+This is a very powerful and flexible editor with which you can:
+
+- Dynamically display a custom user interface for a referenced object. Changing
+  the object reference will automatically update the view with the user
+  interface for the new object reference.
+- Allow the user to choose an object value from a set of existing objects.
+- Allow the user to create a new object value using a factory (i.e.
+  constructor).
+- Use any combination of the above.
 """
 
 #-------------------------------------------------------------------------------

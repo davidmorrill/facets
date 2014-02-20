@@ -1,9 +1,13 @@
 """
-Implementation of a RangeEditor demo plugin for the Facets UI demo program.
+# RangeEditor Demo #
 
-This demo shows each of the four styles of the RangeEditor. Variations for
-a small integer range, a medium-sized integer range, a large integer range
-and a float range are demonstrated on separate tabs.
+This example demonstrates using the various styles of the **RangeEditor**, which
+allows the user to select a value within a specified integer or floating point
+range of values using a graphical slider.
+
+The **RangeEditor** is the default editor for *Range* facets, but can also be
+used with facets having *Int* or *Float* values by explicitly specifying the
+range of valid values the editor should use.
 """
 
 #-------------------------------------------------------------------------------

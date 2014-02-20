@@ -1,9 +1,9 @@
 """
-Implementation of an EnumEditor demo for Facets UI
+# EnumEditor Demo #
 
-This demo shows each of the four styles of the EnumEditor
-
-Fixme: This only shows the capabilities of the old-style EnumEditor
+This example provides some very basic demonstrations of using the various styles
+of the **EnumEditor**, which allows a user to select a facet value from one of a
+finite set of legal values.
 """
 
 #-------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 """
 # ColorEditor Demo #
 
-This examples demonstrates using the various styles of the **ColorEditor**,
+This example demonstrates using the various styles of the **ColorEditor**,
 which is a color picker used for editing facets with a color value, such as one
 defined using the Color type.
 """

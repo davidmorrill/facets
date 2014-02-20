@@ -1,7 +1,13 @@
 """
-Implementation of a CompoundEditor demo plugin for Facets UI demo program.
+# CompoundEditor Demo #
 
-This demo shows each of the four styles of the CompoundEditor
+This example demonstrates using the various styles of the **CompoundEditor**,
+which is the default editor used for *compound* facets.
+
+A *compound* facet is created when several facets are combined to form a new
+facet which accepts any value which is valid for at least one of the component
+facets. The CompoundEditor synthesizes a editor for such a facet by combining
+the default editors for each of the component facets.
 """
 
 #-------------------------------------------------------------------------------
