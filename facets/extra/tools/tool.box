@@ -43,6 +43,7 @@ Image
     Collage:              facets.extra.tools.collage.Collage
     Image Browser:        facets.extra.tools.image_browser.ImageBrowser
     Image Collector:      facets.extra.tools.image_collector.ImageCollector
+    Image Cut:            facets.extra.tools.image_cut.ImageCut
     Image Knife:          facets.extra.tools.image_knife.ImageKnife
     Image Library Selector: facets.extra.tools.image_library_selector.ImageLibrarySelector
     Image Library Viewer: facets.extra.tools.image_library_viewer.ImageLibraryViewer
