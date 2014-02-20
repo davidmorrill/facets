@@ -21,8 +21,8 @@ from threading \
     import Thread
 
 from facets.api \
-    import Any, Enum, Bool, Image, List, SyncValue, View, HGroup, VGroup, \
-           Item, UItem, ImageZoomEditor, spring
+    import Any, Enum, Bool, Color, Image, List, SyncValue, View, HGroup, \
+           VGroup, Item, UItem, ImageZoomEditor, HLSColorEditor, spring
 
 from facets.ui.pyface.i_image_resource \
     import AnImageResource
@@ -49,6 +49,9 @@ class SubImage ( Tool ):
     # Should delta information be displayed:
     delta = Bool( False, save_state = True )
 
+    # The background color to use for the ImageZoomEditor:
+    bg_color = Color( 0x303030, save_state = True )
+
     # The image from which the subimage regions are being extracted from:
     image = Image( cache = False )
 
@@ -64,9 +67,10 @@ class SubImage ( Tool ):
         return View(
             UItem( 'image',
                    editor = ImageZoomEditor(
-                                channel    = SyncValue( self, 'channel' ),
-                                delta      = SyncValue( self, 'delta'   ),
-                                overlays   = SyncValue( self, 'regions' ),
+                                channel    = SyncValue( self, 'channel'  ),
+                                delta      = SyncValue( self, 'delta'    ),
+                                overlays   = SyncValue( self, 'regions'  ),
+                                bg_color   = SyncValue( self, 'bg_color' ),
                                 allow_drop = True )
             )
         )
@@ -77,6 +81,14 @@ class SubImage ( Tool ):
             HGroup(
                 Item( 'channel' ),
                 Item( 'delta', label = 'Show delta' ),
+                Item( 'bg_color',
+                      label  = 'Background color',
+                      width  = -350,
+                      editor = HLSColorEditor(
+                          edit  = 'lightness',
+                          cells = 15
+                      )
+                ),
                 spring
             ),
             group_theme = '#themes:tool_options_group'
