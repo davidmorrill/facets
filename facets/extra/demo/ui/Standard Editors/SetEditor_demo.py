@@ -1,12 +1,13 @@
 """
-Implementation of a SetEditor demo plugin for the Facets UI demo program.
+# SetEditor Demo #
 
-The four tabs of this demo show variations on the interface as follows:
+This example demonstrates using the various styles of the **SetEditor**, which
+allows the user to select a set of values from among a finite set of possible
+legal values.
 
-   Unord I:  Creates an alphabetized subset, has no "move all" options
-   Unord II: Creates an alphabetized subset, has "move all" options
-   Ord I:    Creates a set whose order is specified by the user, no "move all"
-   Ord II:   Creates a set whose order is specifed by the user, has "move all"
+Typically, a **SetEditor** is used to edit a list of values which must be
+constrained to contain a unique (non-duplicated) collection of values chosen
+from a known universe of statically or dynamically specified values.
 """
 
 #-------------------------------------------------------------------------------

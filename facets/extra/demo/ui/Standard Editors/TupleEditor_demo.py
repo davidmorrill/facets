@@ -1,7 +1,23 @@
 """
-Implementation of a TupleEditor demo plugin for Facets UI demo program.
+# TupleEditor Demo #
 
-This demo shows each of the four styles of the TupleEditor
+This example demonstrates using the **TupleEditor**, which, as its name implies,
+allows editing facets whose values are Python *tuples*.
+
+Each element of an edited tuple has its own specific sub-editor, based on the
+element's data type. Since Python tuples are immutable, changing any tuple
+element's value causes a new tuple containing the changed value to be assigned
+to the facet being edited.
+
+In this example, the edited tuple has the type:
+
+    Tuple( Color, Range( 1, 10 ), Str )
+
+which defines a tuple whose:
+
+- First value is a color.
+- Second value is an integer in the range from 1 to 10.
+- Third value is an arbitrary string.
 """
 
 #-------------------------------------------------------------------------------
@@ -13,32 +29,17 @@ This demo shows each of the four styles of the TupleEditor
 from facets.api \
     import HasFacets, Tuple, Color, Range, Str, Item, Group, View
 
-#-- Demo Class -----------------------------------------------------------------
+#-- TupleEditorDemo Class ------------------------------------------------------
 
 class TupleEditorDemo ( HasFacets ):
-    """ Defines the TupleEditor demo class.
-    """
 
-    # Define a facet to view:
-    tuple = Tuple( Color, Range( 1, 4 ), Str )
-
-    # Display specification (one Item per editor style):
-    tuple_group = Group(
-        Item( 'tuple', style = 'simple',   label = 'Simple' ),
-        Item( '_' ),
-        Item( 'tuple', style = 'custom',   label = 'Custom' ),
-        Item( '_' ),
-        Item( 'tuple', style = 'text',     label = 'Text' ),
-        Item( '_' ),
-        Item( 'tuple', style = 'readonly', label = 'ReadOnly' )
-    )
+    # Define a tuple-based facet to edit:
+    tuple = Tuple( Color, Range( 1, 10 ), Str )
 
     # Demo view:
     view = View(
-        tuple_group,
-        title     = 'TupleEditor',
-        buttons   = [ 'OK' ],
-        resizable = True
+        Item( 'tuple' ),
+        title = 'TupleEditor',
     )
 
 #-- Create the demo ------------------------------------------------------------

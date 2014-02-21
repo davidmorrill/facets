@@ -1,8 +1,11 @@
 """
-Implementation of a TextEditor demo plugin for the Facets UI demo program.
+# TextEditor Demo #
 
-For each of three data types for which TextEditor is used, this demo shows
-each of the four styles of the TextEditor.
+This example demonstrates using the various styles of the **TextEditor**, which
+allows the user to enter text into a single or multi-line text entry control.
+
+In addition, the **TextEditor** can also be configured to display a *read-only*
+text value, or perform validation on values entered by the user.
 """
 
 #-------------------------------------------------------------------------------

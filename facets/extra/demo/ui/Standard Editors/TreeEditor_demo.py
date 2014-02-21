@@ -1,12 +1,17 @@
 """
-Demonstrates using the TreeEditor to display a hierarchically organized data
-structure.
+# TreeEditor Demo #
 
-In this case, the tree has the following hierarchy:
-  - Partner
-    - Company
-      - Department
-        - Employee
+This example demonstrates using a **TreeEditor**, which is typically used for
+displaying, selecting and editing collections of values which can be organized
+hierarchically.
+
+In this example, we are displaying a tree representing the organization of a
+small company:
+
+    - Partner
+      - Company
+        - Department
+          - Employee
 """
 
 #-------------------------------------------------------------------------------
@@ -113,21 +118,21 @@ class Partner ( HasFacets ):
 
 #-- Create an example data structure -------------------------------------------
 
-jason  = Employee( name  = 'Jason',
-                   title = 'Senior Engineer',
-                   phone = '536-1057' )
-mike   = Employee( name  = 'Mike',
-                   title = 'Senior Engineer',
-                   phone = '536-1057' )
-dave   = Employee( name  = 'Dave',
-                   title = 'Senior Software Developer',
-                   phone = '536-1057' )
-martin = Employee( name  = 'Martin',
-                   title = 'Senior Engineer',
-                   phone = '536-1057' )
-duncan = Employee( name  = 'Duncan',
-                   title = 'Consultant',
-                   phone = '526-1057' )
+dave    = Employee( name  = 'Dave',
+                    title = 'Senior Software Developer',
+                    phone = '536-1053' )
+martine = Employee( name  = 'Martine',
+                    title = 'Senior Engineer',
+                    phone = '536-1054' )
+ralph   = Employee( name  = 'Ralph',
+                    title = 'Consultant',
+                    phone = '526-1055' )
+dilbert = Employee( name  = 'Dilbert',
+                    title = 'Senior Engineer',
+                    phone = '536-1051' )
+mike    = Employee( name  = 'Mike',
+                    title = 'Senior Engineer',
+                    phone = '536-1052' )
 
 #-- Create the demo ------------------------------------------------------------
 
@@ -135,15 +140,15 @@ demo = Partner(
     name    = 'Acme, Inc.',
     company = Company(
         name        = 'Acme',
-        employees   = [ dave, martin, duncan, jason, mike ],
+        employees   = [ dave, martine, ralph, dilbert, mike ],
         departments = [
             Department(
                 name      = 'Business',
-                employees = [ jason, mike ]
+                employees = [ dilbert, mike ]
             ),
             Department(
-                name      = 'Scientific',
-                employees = [ dave, martin, duncan ]
+                name      = 'Advertising',
+                employees = [ dave, martine, ralph ]
             )
         ]
     )

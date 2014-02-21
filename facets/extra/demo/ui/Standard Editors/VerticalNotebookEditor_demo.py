@@ -1,6 +1,18 @@
 """
-Demonstrates the use of the VerticalNotebookEditor, which allows a list of
-objects to be displayed using a vertical notebook style.
+# VerticalNotebookEditor Demo #
+
+This example demonstrates the use of the **VerticalNotebookEditor**, which
+allows a list of objects to be displayed and edited using a vertical notebook
+style.
+
+Each element in the list is displayed in its own separate notebook *page*. The
+pages are organized vertically, and each page can be collapsed or expanded to
+hide or show an element's content.
+
+The editor also supports a number of options, such as:
+
+- Whether only a single or multiple elements can be open at the same time.
+- Whether a single or double mouse click is used to open or close pages.
 """
 
 #-------------------------------------------------------------------------------

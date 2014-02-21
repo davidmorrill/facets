@@ -1,20 +1,20 @@
 """
-Demonstrates the use of the TitleEditor.
+# TitleEditor Demo #
 
-A TitleEditor can be used to dynamically label sections of a user interface.
-The text displayed by the TitleEditor is specified by a facet associated with
-the view.
+This example demonstrates using the **TitleEditor**, which is a special
+*display-only* editor often used for displaying dynamically updated string
+values used to label sections of a user interface.
 
-This demonstration shows three variations of using a TitleEditor:
+This demonstration shows three variations of using a **TitleEditor**:
 
- * In the first example, the TitleEditor values are supplied by an Enum facet.
-   Simply select a new value for the title from the drop-down list to cause the
-   title to change.
- * In the second example, the TitleEditor values are supplied by a Str facet.
-   Simply type a new value into the title field to cause the title to change.
- * In the third example, the TitleEditor values are supplied by a Property
-   whose value is derived from a calculation on a Float facet. Type a number
-   into the value field to cause the title to changed.
+- In the first example, the TitleEditor values are supplied by an *Enum* facet.
+  Simply select a new value for the title from the drop-down list to cause the
+  title to change.
+- In the second example, the TitleEditor values are supplied by a *Str* facet.
+  Simply type a new value into the title field to cause the title to change.
+- In the third example, the TitleEditor values are supplied by a *Property*
+  whose value is derived from a calculation on a *Float* facet. Type a number
+  into the value field to cause the title to changed.
 """
 
 #-------------------------------------------------------------------------------

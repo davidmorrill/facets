@@ -344,7 +344,7 @@ class VerticalNotebook ( HasPrivateFacets ):
 
     # The theme to use for 'closed' notebook pages:
     closed_theme = ATheme( Theme( '@facets:tab_gradient7?H55l2S14',
-                                  label = ( 5, 5, 1, 0 ) ) )
+                                  content = 5, label = ( 5, 5, 1, 0 ) ) )
 
     # The theme to use for 'open' notebook pages:
     open_theme = ATheme( Theme( '@xform:nb?L14~L40s|H44',
