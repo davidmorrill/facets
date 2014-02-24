@@ -12,10 +12,7 @@ Facets image library.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Image, Str, View, UItem
-
-from facets.extra.editors.image_library_editor \
-    import ImageLibraryEditor
+    import Image, Str, View, UItem, ImageLibraryEditor
 
 from tools \
     import Tool

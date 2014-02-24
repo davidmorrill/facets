@@ -22,7 +22,8 @@ from cStringIO \
 from facets.api \
     import HasPrivateFacets, Instance, Any, Int, Str, Code, List, Range,   \
            Theme, Property, Image, SyncValue, View, HGroup, VGroup, UItem, \
-           NotebookEditor, ValueEditor, CodeEditor, ImageZoomEditor, spring
+           NotebookEditor, ValueEditor, CodeEditor, ImageZoomEditor,       \
+           PresentationEditor, spring
 
 from facets.core.facet_base \
     import read_file
@@ -391,8 +392,6 @@ class PresentationInspector ( MarkdownInspector ):
     #-- Facets View Definitions-----------------------------------------------------
 
     def default_facets_view ( self ):
-        from facets.extra.editors.presentation_editor import PresentationEditor
-
         return View(
             TTitle( 'file' ),
             UItem(  'presentation',

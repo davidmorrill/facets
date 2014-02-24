@@ -121,10 +121,7 @@ base image to use with the editor.
 
 from facets.api \
     import HasFacets, Str, Image, Color, SyncValue, Theme, View, VGroup, \
-           HGroup, Item, HLSColorEditor
-
-from facets.extra.editors.hlsa_derived_image_editor \
-    import HLSADerivedImageEditor
+           HGroup, Item, HLSColorEditor, HLSADerivedImageEditor
 
 #-- Demo Class -----------------------------------------------------------------
 

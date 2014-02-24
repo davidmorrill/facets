@@ -15,16 +15,14 @@ from os.path \
     import dirname
 
 from facets.api \
-    import HasFacets, Str, File, Instance, View, UItem, SyncValue
+    import HasFacets, Str, File, Instance, View, UItem, PresentationEditor, \
+           SyncValue
 
 from facets.core.facet_base \
     import read_file
 
 from facets.ui.pyface.timer.api \
     import do_after
-
-from facets.extra.editors.presentation_editor \
-    import PresentationEditor
 
 from facets.extra.services.file_watch \
     import file_watch

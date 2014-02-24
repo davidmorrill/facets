@@ -14,12 +14,9 @@ To Do:
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Bool, Str, Image, Color, Range, Button, View, VGroup, HToolbar, \
-           UItem, Item, Include, SyncValue, HLSColorEditor,                \
+    import Bool, Str, Image, Color, Range, Button, View, VGroup, HToolbar,    \
+           UItem, Item, Include, SyncValue, HLSColorEditor, ImageTilerEditor, \
            ThemedCheckboxEditor, on_facet_set
-
-from facets.extra.editors.image_tiler_editor \
-    import ImageTilerEditor
 
 from facets.extra.helper.themes \
     import Scrubber

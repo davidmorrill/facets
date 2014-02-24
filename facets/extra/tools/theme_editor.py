@@ -11,10 +11,8 @@ A feature-enabled tool for editing image-based themes.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, Any, Image, Theme, ATheme, View, UItem
-
-from facets.extra.editors.theme_editor \
-    import ThemeEditor as TheThemeEditor
+    import Str, Any, Image, Theme, ATheme, View, UItem, \
+           ThemeEditor as TheThemeEditor
 
 from facets.ui.pyface.i_image_resource \
     import AnImageResource

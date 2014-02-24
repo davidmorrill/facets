@@ -40,6 +40,22 @@ def ArrayEditor ( *args, **facets ):
     return ArrayEditor( *args, **facets )
 
 
+def ArrayViewEditor ( *args, **facets ):
+    """ Allows the user to view 1-d or 2-d arrays of values.
+    """
+    from facets.ui.editors.array_view_editor import ArrayViewEditor
+
+    return ArrayViewEditor( *args, **facets )
+
+
+def ASTEditor ( *args, **facets ):
+    """ Allows the user to view the contents of a Python Abstract Syntax Tree.
+    """
+    from facets.ui.editors.ast_editor import ASTEditor
+
+    return ASTEditor( *args, **facets )
+
+
 def BooleanEditor ( *args, **facets ):
     """ Allows the user to select a true or false condition.
     """
@@ -77,6 +93,16 @@ def CodeEditor ( *args, **facets ):
     return toolkit().code_editor( *args, **facets )
 
 
+def CollageEditor ( *args, **facets ):
+    """ Allows the user to work with a collection of images using a 'collage'
+        style that allows images to be moved, scaled and selected using a
+        virtual pasteboard.
+    """
+    from facets.ui.editors.collage_editor import CollageEditor
+
+    return CollageEditor( *args, **facets )
+
+
 def ColorEditor ( *args, **facets ):
     """ Allows the user to select a color.
     """
@@ -96,21 +122,29 @@ def ColorPaletteEditor ( *args, **facets ):
 def CompoundEditor ( *args, **facets ):
     """ Allows the user to select a value based on a compound facet.
 
-    Because a compound facet is composed of multiple facet definitions, this
-    editor factory displays facet editors for each of the constituent facets.
-    For example, consider the following facet attribute, defined as a compound
-    that accepts integer values in the range of 1 to 6, or text strings
-    corresponding to those integers::
+        Because a compound facet is composed of multiple facet definitions, this
+        editor factory displays facet editors for each of the constituent
+        facets. For example, consider the following facet attribute, defined as
+        a compound that accepts integer values in the range of 1 to 6, or text
+        strings corresponding to those integers::
 
-        compound = Facet(1, Range(1, 6), 'one', 'two', 'three', 'four',
-                            'five', 'six')
+            compound = Facet( 1, Range(1, 6), 'one', 'two', 'three', 'four',
+                              'five', 'six' )
 
-    The editor displayed for this facet attribute combines editors for integer
-    ranges and for enumerations.
+        The editor displayed for this facet attribute combines editors for
+        integer ranges and for enumerations.
     """
     from facets.ui.editors.compound_editor import CompoundEditor
 
     return CompoundEditor( *args, **facets )
+
+
+def ControlGrabberEditor ( *args, **facets ):
+    """ Allows the user to 'grab' GUI toolkit neutral 'control' objects.
+    """
+    from facets.ui.editors.control_grabber_editor import ControlGrabberEditor
+
+    return ControlGrabberEditor( *args, **facets )
 
 
 def CustomEditor ( *args, **facets ):
@@ -236,6 +270,16 @@ def HistoryEditor ( *args, **facets ):
     return HistoryEditor( *args, **facets )
 
 
+def HLSADerivedImageEditor ( *args, **facets ):
+    """ Allows the user to edit an HLSADerivedImage object's mask and HLSA
+        settings.
+    """
+    from facets.ui.editors.hlsa_derived_image_editor \
+        import HLSADerivedImageEditor
+
+    return HLSADerivedImageEditor( *args, **facets )
+
+
 def HLSColorEditor ( *args, **facets ):
     """ Allows the user to select a color using an HLSA-based color picker.
     """
@@ -275,6 +319,23 @@ def ImageEnumEditor ( *args, **facets ):
     return ImageEnumEditor( *args, **facets )
 
 
+def ImageLibraryEditor ( *args, **facets ):
+    """ Allows the user to select select images contained in the Facets image
+        library.
+    """
+    from facets.ui.editors.image_library_editor import ImageLibraryEditor
+
+    return ImageLibraryEditor( *args, **facets )
+
+
+def ImageTilerEditor ( *args, **facets ):
+    """ Allows the user to tile an image over the background of a control.
+    """
+    from facets.ui.editors.image_tiler_editor import ImageTilerEditor
+
+    return ImageTilerEditor( *args, **facets )
+
+
 def ImageZoomEditor ( *args, **facets ):
     """ Allows an image to zoomed in and out.
     """
@@ -290,6 +351,14 @@ def InstanceEditor ( *args, **facets ):
     from facets.ui.editors.instance_editor import InstanceEditor
 
     return InstanceEditor( *args, **facets )
+
+
+def JSONEditor ( *args, **facets ):
+    """ Allows the user to view the contents of a Python JSON object
+    """
+    from facets.ui.editors.json_editor import JSONEditor
+
+    return JSONEditor( *args, **facets )
 
 
 def KeyBindingEditor ( *args, **facets ):
@@ -369,13 +438,22 @@ def PopupEditor ( *args, **facets ):
     return PopupEditor( *args, **facets )
 
 
+def PresentationEditor ( *args, **facets ):
+    """ Allows the user to view the contents of a string as a series of one or
+        more presentation 'slides' using a simple set of formatting rules.
+    """
+    from facets.ui.editors.presentation_editor import PresentationEditor
+
+    return PresentationEditor( *args, **facets )
+
+
 def ProgressBarEditor ( *args, **facets ):
     """ Allows the user to use a progress bar editor.
     """
     from facets.ui.editors.progress_bar_editor import ProgressBarEditor
 
     return ProgressBarEditor( *args, **facets )
-
+PresentationEditor
 
 def PropertyListEditor ( *args, **facets ):
     """ Allows the user to use a property sheet editor.
@@ -470,36 +548,57 @@ def TextEditor ( *args, **facets ):
 
 
 def ThemedButtonEditor ( *args, **facets ):
-    from facets.ui.editors.themed_button_editor \
-        import ThemedButtonEditor
+    from facets.ui.editors.themed_button_editor import ThemedButtonEditor
 
     return ThemedButtonEditor( *args, **facets )
 
 
 def ThemedCheckboxEditor ( *args, **facets ):
-    from facets.ui.editors.themed_checkbox_editor \
-        import ThemedCheckboxEditor
+    from facets.ui.editors.themed_checkbox_editor import ThemedCheckboxEditor
 
     return ThemedCheckboxEditor( *args, **facets )
 
 
+def ThemeEditor ( *args, **facets ):
+    """ Allows the user to edit the appearance of a Theme object visually.
+    """
+    from facets.ui.editors.theme_editor import ThemeEditor
+
+    return ThemeEditor( *args, **facets )
+
+
+def ThemeLayoutEditor ( *args, **facets ):
+    """ Allows the user to test what a layout using a specified theme will look
+        like visually.
+    """
+    from facets.ui.editors.theme_layout_editor import ThemeLayoutEditor
+
+    return ThemeLayoutEditor( *args, **facets )
+
+
 def ThemedSliderEditor ( *args, **facets ):
-    from facets.ui.editors.themed_slider_editor \
-        import ThemedSliderEditor
+    from facets.ui.editors.themed_slider_editor import ThemedSliderEditor
 
     return ThemedSliderEditor( *args, **facets )
 
 
 def ThemedTextEditor ( *args, **facets ):
-    from facets.ui.editors.themed_text_editor \
-        import ThemedTextEditor
+    from facets.ui.editors.themed_text_editor import ThemedTextEditor
 
     return ThemedTextEditor( *args, **facets )
 
 
+def TokenEditor ( *args, **facets ):
+    """ Allows the user to view the contents of some Python source as a list of
+        tokens.
+    """
+    from facets.ui.editors.token_editor import TokenEditor
+
+    return TokenEditor( *args, **facets )
+
+
 def ToolbarEditor ( *args, **facets ):
-    from facets.ui.editors.toolbar_editor \
-        import ToolbarEditor
+    from facets.ui.editors.toolbar_editor import ToolbarEditor
 
     return ToolbarEditor( *args, **facets )
 
@@ -508,8 +607,7 @@ def VerticalNotebookEditor ( *args, **facets ):
     """ Allows the user display a list of objects using a vertically oriented
         notebook.
     """
-    from facets.ui.editors.vertical_notebook_editor \
-        import VerticalNotebookEditor
+    from facets.ui.editors.vertical_notebook_editor import VerticalNotebookEditor
 
     return VerticalNotebookEditor( *args, **facets )
 
@@ -529,12 +627,27 @@ def TreeEditor ( *args, **facets ):
 
 
 def TupleEditor ( *args, **facets ):
+    """ Allows the user to edit the contents of a tuple with a constant number
+        of elements of known types.
+    """
     from facets.ui.editors.tuple_editor import TupleEditor
 
     return TupleEditor( *args, **facets )
 
 
+def UniversalEditor ( *args, **facets ):
+    """ Allows a user to edit/display the contents of an arbitrary Python object
+        using the most appropriate type of editor or viewer.
+    """
+    from facets.ui.editors.universal_editor import UniversalEditor
+
+    return UniversalEditor( *args, **facets )
+
+
 def ValueEditor ( *args, **facets ):
+    """ Allows the user to display a hierarchic view of an arbitrary Python
+        value.
+    """
     from facets.ui.editors.value_editor import ValueEditor
 
     return ValueEditor( *args, **facets )

@@ -32,10 +32,7 @@ bottom of the view.
 
 from facets.api \
     import HasFacets, Event, List, Any, Image, View, VGroup, Item, \
-           FilmStripEditor, ImageZoomEditor
-
-from facets.extra.editors.control_grabber_editor \
-    import ControlGrabberEditor
+           ControlGrabberEditor, FilmStripEditor, ImageZoomEditor
 
 from facets.ui.filmstrip_adapter \
     import FilmStripAdapter

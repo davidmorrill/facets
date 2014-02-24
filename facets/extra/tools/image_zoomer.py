@@ -11,8 +11,8 @@ Defines the image zoomer tool that allows zooming into and out of images.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Any, Enum, Bool, Image, SyncValue, View, VGroup, HGroup, Item, \
-           ImageZoomEditor, spring
+    import Any, Enum, Bool, Color, Image, SyncValue, View, VGroup, HGroup, \
+           Item, ImageZoomEditor, HLSColorEditor, spring
 
 from facets.ui.pyface.i_image_resource \
     import AnImageResource
@@ -39,6 +39,9 @@ class ImageZoomer ( Tool ):
     # Should delta information be displayed:
     delta = Bool( False, save_state = True )
 
+    # The background color to use for the ImageZoomEditor:
+    bg_color = Color( 0x303030, save_state = True )
+
     # The current image being zoomed:
     image = Image( cache = False )
 
@@ -52,8 +55,9 @@ class ImageZoomer ( Tool ):
             Item( 'image',
                   show_label = False,
                   editor     = ImageZoomEditor(
-                                   channel    = SyncValue( self, 'channel' ),
-                                   delta      = SyncValue( self, 'delta' ),
+                                   channel    = SyncValue( self, 'channel'  ),
+                                   delta      = SyncValue( self, 'delta'    ),
+                                   bg_color   = SyncValue( self, 'bg_color' ),
                                    allow_drop = True )
             )
         )
@@ -64,6 +68,14 @@ class ImageZoomer ( Tool ):
             HGroup(
                 Item( 'channel' ),
                 Item( 'delta', label = 'Show delta' ),
+                Item( 'bg_color',
+                      label  = 'Background color',
+                      width  = -350,
+                      editor = HLSColorEditor(
+                          edit  = 'lightness',
+                          cells = 15
+                      )
+                ),
                 spring
             ),
             group_theme = '#themes:tool_options_group'

@@ -15,10 +15,7 @@ the PresentationEditor tab.
 #-- Imports --------------------------------------------------------------------
 
 from facets.api \
-    import HasFacets, Str, Code, View, Tabbed, UItem
-
-from facets.extra.editors.presentation_editor \
-    import PresentationEditor
+    import HasFacets, Str, Code, View, Tabbed, UItem, PresentationEditor
 
 from facets.ui.pyface.timer.api \
     import do_after

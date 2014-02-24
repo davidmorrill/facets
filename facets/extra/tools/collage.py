@@ -14,13 +14,13 @@ using a virtual pasteboard.
 
 from facets.api \
     import List, Range, Enum, Image, Instance, Theme, ATheme, View, Item, \
-           UItem, HToolbar, SyncValue, on_facet_set, spring
+           UItem, HToolbar, SyncValue, CollageEditor, on_facet_set, spring
 
 from facets.extra.helper.themes \
     import Scrubber
 
-from facets.extra.editors.collage_editor \
-    import CollageEditor, CollageItem
+from facets.ui.editors.collage_editor \
+    import CollageItem
 
 from tools \
     import Tool

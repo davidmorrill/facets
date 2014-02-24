@@ -11,10 +11,7 @@ A feature-enabled tool for editing themes stored in the Facets image library.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, View, Item
-
-from facets.extra.editors.theme_editor \
-    import ThemeEditor
+    import Str, View, Item, ThemeEditor
 
 from facets.extra.helper.image_library_editor \
     import ImageLibraryEditor, ImageLibraryItem

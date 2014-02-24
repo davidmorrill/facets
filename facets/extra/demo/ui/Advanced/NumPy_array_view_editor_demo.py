@@ -50,10 +50,7 @@ from numpy.random \
     import random
 
 from facets.api \
-    import HasFacets, Array, View, Item
-
-from facets.extra.editors.array_view_editor \
-    import ArrayViewEditor
+    import HasFacets, Array, View, Item, ArrayViewEditor
 
 #-- NumpyArrayDemo class -------------------------------------------------------
 

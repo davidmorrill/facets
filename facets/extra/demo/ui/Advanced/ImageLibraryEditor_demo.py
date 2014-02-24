@@ -23,16 +23,11 @@ using the **HLSADerivedImageEditor** displayed in the bottom part of the view.
 #-- Imports --------------------------------------------------------------------
 
 from facets.api \
-    import HasFacets, Image, Theme, View, VGroup, Item
-
-from facets.extra.editors.hlsa_derived_image_editor \
-    import HLSADerivedImageEditor
+    import HasFacets, Image, Theme, View, VGroup, Item, ImageLibraryEditor, \
+           HLSADerivedImageEditor
 
 from facets.extra.helper.image \
     import HLSADerivedImage
-
-from facets.extra.editors.image_library_editor \
-    import ImageLibraryEditor
 
 #-- Demo Class -----------------------------------------------------------------
 

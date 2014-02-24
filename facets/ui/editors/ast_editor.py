@@ -34,7 +34,7 @@ def xrepr ( value ):
    if len( result ) <= 50:
        return result
 
-   return '%s...%s' % ( result[:25], result[-25:] )
+   return ('%s...%s' % ( result[:25], result[-25:] ))
 
 #-------------------------------------------------------------------------------
 #  'ASTAdapter' class:

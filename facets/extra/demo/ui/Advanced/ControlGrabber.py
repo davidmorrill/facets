@@ -22,13 +22,8 @@ demo's ***image*** facet, which is edited using an **HLSADerivedImageEditor*.
 #-- Imports --------------------------------------------------------------------
 
 from facets.api \
-    import HasFacets, Event, Image, View, VGroup, Item
-
-from facets.extra.editors.control_grabber_editor \
-    import ControlGrabberEditor
-
-from facets.extra.editors.hlsa_derived_image_editor \
-    import HLSADerivedImageEditor
+    import HasFacets, Event, Image, View, VGroup, Item, ControlGrabberEditor, \
+           HLSADerivedImageEditor
 
 #-- ControlGrabber Class -------------------------------------------------------
 

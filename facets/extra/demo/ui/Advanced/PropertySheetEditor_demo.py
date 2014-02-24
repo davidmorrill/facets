@@ -130,13 +130,10 @@ unusable state if you are not careful about which Control you are working with.
 
 from facets.api \
     import List, Str, Bool, Instance, Control, View, HGroup, VGroup, Item, \
-           Handler, PropertySheetEditor, spring
+           Handler, PropertySheetEditor, ControlGrabberEditor, spring
 
 from facets.ui.property_sheet_adapter \
     import PropertySheetAdapter
-
-from facets.extra.editors.control_grabber_editor \
-    import ControlGrabberEditor
 
 #-- Control PropertySheetAdapter class -----------------------------------------
 

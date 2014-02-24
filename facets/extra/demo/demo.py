@@ -432,7 +432,7 @@ class DemoFile ( DemoTreeNodeObject ):
     #-- Public Methods ---------------------------------------------------------
 
     def demo_for ( self, locals ):
-        """ Returns the demo object found within the spwcified *locals*
+        """ Returns the demo object found within the specified *locals*
             dictionary.
         """
         demo = self._get_object( 'modal_popup', locals )

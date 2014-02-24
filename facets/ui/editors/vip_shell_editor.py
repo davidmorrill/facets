@@ -41,10 +41,11 @@ from facets.api                                                                \
            Code, List, Instance, Property, Event, Callable, RGBInt, Font,      \
            File, Constant, DelegatesTo, Button, View, Tabbed, VGroup, VSplit,  \
            HGroup, Item, UItem, Handler, BasicEditorFactory, UIEditor,         \
-           PropertySheetEditor, RangeEditor, RangeSliderEditor, StackEditor,   \
-           HLSColorEditor, NotebookEditor, GridEditor, DNDEditor, spring,      \
-           property_depends_on, toolkit, Undefined, push_exception_handler,    \
-           pop_exception_handler, on_facet_set
+           ControlGrabberEditor, PropertySheetEditor, RangeEditor,             \
+           RangeSliderEditor, StackEditor, HLSColorEditor, NotebookEditor,     \
+           GridEditor, DNDEditor, spring, property_depends_on, toolkit,        \
+           Undefined, push_exception_handler, pop_exception_handler,           \
+           on_facet_set
 
 from facets.core.debug \
     import Debug
@@ -108,9 +109,6 @@ from facets.ui.vip_shell.items.api \
 
 from facets.ui.vip_shell.commands.api \
     import ShellCommand, standard_shell_commands
-
-from facets.extra.editors.control_grabber_editor \
-    import ControlGrabberEditor
 
 from facets.extra.tools.text_file \
     import TextFile

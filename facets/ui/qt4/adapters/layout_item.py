@@ -34,6 +34,7 @@ def layout_item_adapter ( layout_item ):
         manager item.
     """
     adapter = getattr( layout_item, 'adapter', None )
+    print 'layout_item_adapter:', layout_item, adapter
     if adapter is not None:
         return adapter
 

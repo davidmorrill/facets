@@ -13,10 +13,7 @@ other tools.
 
 from facets.api \
     import Instance, Str, Property, Control, View, VGroup, HGroup, Item, \
-           on_facet_set, property_depends_on
-
-from facets.extra.editors.control_grabber_editor \
-    import ControlGrabberEditor
+           ControlGrabberEditor, on_facet_set, property_depends_on
 
 from tools \
     import Tool

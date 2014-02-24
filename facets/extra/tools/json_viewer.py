@@ -12,10 +12,7 @@ input string.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, Bool, View, VGroup, Item, UItem, SyncValue
-
-from facets.extra.editors.json_editor \
-    import JSONEditor
+    import Str, Bool, View, VGroup, Item, UItem, JSONEditor, SyncValue
 
 from tools \
     import Tool

@@ -62,7 +62,6 @@ class ImageEnumEditorDemo ( HasFacets ):
         title   = 'ImageEnumEditor',
         buttons = [ 'OK' ]
     )
-d
 
 #-- Create the demo ------------------------------------------------------------
 

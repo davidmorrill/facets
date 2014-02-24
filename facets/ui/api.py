@@ -89,24 +89,27 @@ from tree_node \
            ITreeNode, ITreeNodeAdapter
 
 from core_editors \
-    import ArrayEditor, BooleanEditor, ButtonEditor, CheckListEditor,          \
-           CodeEditor, ColorEditor, ColorPaletteEditor, ColorFacet,            \
-           CompoundEditor, CustomEditor, CustomFileDialogEditor,               \
+    import ArrayEditor, ArrayViewEditor, ASTEditor, BooleanEditor,             \
+           ButtonEditor, CheckListEditor, CodeEditor, CollageEditor,           \
+           ColorEditor, ColorPaletteEditor, ColorFacet, CompoundEditor,        \
+           ControlGrabberEditor, CustomEditor, CustomFileDialogEditor,         \
            DirectoryEditor, DNDEditor, DrawableCanvasEditor, DropEditor,       \
            EnumEditor, FileEditor, FileStackEditor, FileSystemEditor,          \
            FilmStripEditor, FilteredSetEditor, FontEditor, FontFacet,          \
-           GridEditor, HistogramEditor, HistoryEditor, HLSColorEditor,         \
-           HTMLBrowserEditor, HTMLEditor, ImageEditor, ImageEnumEditor,        \
-           ImageZoomEditor, InstanceEditor, KeyBindingEditor,                  \
+           GridEditor, HistogramEditor, HistoryEditor, HLSADerivedImageEditor, \
+           HLSColorEditor, HTMLBrowserEditor, HTMLEditor, ImageEditor,         \
+           ImageEnumEditor, ImageLibraryEditor, ImageTilerEditor,              \
+           ImageZoomEditor, InstanceEditor, JSONEditor, KeyBindingEditor,      \
            LightTableEditor, ListEditor, ListStrEditor, ListViewEditor,        \
            MultipleInstanceEditor, NotebookEditor, NullEditor, PopupEditor,    \
-           ProgressBarEditor, PropertyListEditor, PropertySheetEditor,         \
-           RangeEditor, RangeSliderEditor, RGBColorFacet, ScrubberEditor,      \
-           SetEditor, ShellEditor, SlideshowEditor, StackEditor,               \
-           StringGridEditor, TemplateEditor, TextEditor, ThemedButtonEditor,   \
-           ThemedCheckboxEditor, ThemedSliderEditor, ThemedTextEditor,         \
+           PresentationEditor, ProgressBarEditor, PropertyListEditor,          \
+           PropertySheetEditor, RangeEditor, RangeSliderEditor, RGBColorFacet, \
+           ScrubberEditor, SetEditor, ShellEditor, SlideshowEditor,            \
+           StackEditor, StringGridEditor, TemplateEditor, TextEditor,          \
+           ThemedButtonEditor, ThemedCheckboxEditor, ThemedSliderEditor,       \
+           ThemedTextEditor, ThemeEditor, ThemeLayoutEditor, TokenEditor,      \
            VerticalNotebookEditor, TitleEditor, ToolbarEditor, TreeEditor,     \
-           TupleEditor, ValueEditor, VIPShellEditor
+           TupleEditor, UniversalEditor, ValueEditor, VIPShellEditor
 
 from facets.ui.adapters.cell \
     import Cell

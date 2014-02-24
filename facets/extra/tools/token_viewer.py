@@ -11,10 +11,7 @@ Defines a tool for viewing the tokens for a Python source code input string.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, View, UItem
-
-from facets.extra.editors.token_editor \
-    import TokenEditor
+    import Str, View, UItem, TokenEditor
 
 from tools \
     import Tool

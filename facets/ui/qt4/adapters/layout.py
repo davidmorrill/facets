@@ -274,12 +274,10 @@ class QtLayout ( Layout ):
     #-- Layout Property Implementations ----------------------------------------
 
     def _get_children ( self ):
-        layout   = self.layout
-        children = []
-        for i in xrange( layout.count() ):
-            children.append( layout_item_adapter( layout.itemAt( i ) ) )
-
-        return children
+        layout = self.layout
+        print 'layout.count():', layout.count()
+        return [ layout_item_adapter( layout.itemAt( i ) )
+                 for i in xrange( layout.count() ) ]
 
 
     def _get_size ( self ):

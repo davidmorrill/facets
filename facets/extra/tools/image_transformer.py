@@ -13,16 +13,13 @@ transformations on images.
 
 from facets.api \
     import Str, Any, Instance, Color, Image, Theme, SyncValue, View, HToolbar, \
-           VGroup, Item, UItem
+           VGroup, Item, UItem, HLSADerivedImageEditor
 
 from facets.ui.editors.hls_color_editor \
     import HLSColorEditor
 
 from facets.extra.helper.image \
     import HLSADerivedImage
-
-from facets.extra.editors.hlsa_derived_image_editor \
-    import HLSADerivedImageEditor
 
 from facets.ui.pyface.i_image_resource \
     import AnImageResource

@@ -13,13 +13,10 @@ A feature-enabled tool for diplaying theme-based layouts as a visualization aid.
 from facets.api                                                              \
     import Str, Range, Any, Bool, Color, Image, Theme, ATheme, View, VGroup, \
            HGroup, UItem, Item, HLSColorEditor, RangeEditor,                 \
-           ThemedCheckboxEditor, SyncValue, on_facet_set
+           ThemedCheckboxEditor, ThemeLayoutEditor, SyncValue, on_facet_set
 
 from facets.ui.pyface.i_image_resource \
     import AnImageResource
-
-from facets.extra.editors.theme_layout_editor \
-    import ThemeLayoutEditor
 
 from tools \
     import Tool

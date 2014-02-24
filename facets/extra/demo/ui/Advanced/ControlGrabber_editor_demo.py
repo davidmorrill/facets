@@ -31,10 +31,7 @@ status:
 
 from facets.api \
     import HasFacets, Property, Instance, Control, View, HGroup, VGroup, Item, \
-           InstanceEditor, property_depends_on
-
-from facets.extra.editors.control_grabber_editor \
-    import ControlGrabberEditor
+           ControlGrabberEditor, InstanceEditor, property_depends_on
 
 #-- The ControlView class (used to display information about a control) --------
 

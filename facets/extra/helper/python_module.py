@@ -21,13 +21,10 @@ from os.path \
 
 from facets.api \
     import HasPrivateFacets, List, Str, Int, Bool, Code, Tuple, Any, File, \
-           Property, property_depends_on
+           Property, ASTEditor, property_depends_on
 
 from facets.core.facet_base \
    import read_file
-
-from facets.extra.editors.ast_editor \
-    import ASTEditor
 
 #-------------------------------------------------------------------------------
 #  Constants:

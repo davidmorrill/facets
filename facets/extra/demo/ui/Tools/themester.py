@@ -36,7 +36,8 @@ from cPickle \
     import loads
 
 from facets.api \
-    import HasPrivateFacets, List, Any, Instance, View, Item, NotebookEditor
+    import HasPrivateFacets, List, Any, Instance, View, Item, NotebookEditor, \
+           ThemeEditor
 
 from facets.extra.helper.generated_tool \
     import Connection
@@ -46,9 +47,6 @@ from facets.extra.tools.file_stack \
 
 from facets.extra.tools.image_transformer \
     import ImageTransformer
-
-from facets.extra.tools.theme_editor \
-    import ThemeEditor
 
 from facets.extra.tools.theme_layout \
     import ThemeLayout

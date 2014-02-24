@@ -13,8 +13,8 @@ A custom editor for Theme objects.
 from os.path \
     import basename, splitext
 
-from facets.api                                                                \
-    import File, Instance, Button, View, HGroup, VGroup, Item, Theme,          \
+from facets.api                                                       \
+    import File, Instance, Button, View, HGroup, VGroup, Item, Theme, \
            HLSColorEditor, UIEditor, BasicEditorFactory, spring, toolkit
 
 from facets.core.facet_base \

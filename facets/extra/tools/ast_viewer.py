@@ -12,10 +12,7 @@ an input block of code.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Str, Bool, View, VGroup, Item, UItem, SyncValue
-
-from facets.extra.editors.ast_editor \
-    import ASTEditor
+    import Str, Bool, View, VGroup, Item, UItem, ASTEditor, SyncValue
 
 from tools \
     import Tool
