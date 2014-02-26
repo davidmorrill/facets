@@ -71,7 +71,7 @@ def srandint ( n1, n2 ):
 #-------------------------------------------------------------------------------
 
 class ThemedImage ( HasPrivateFacets ):
-    """ Defines an themed image that can appear on a light table.
+    """ Defines a themed image that can appear on a light table.
     """
 
     #-- Style Facet Definitions ------------------------------------------------
