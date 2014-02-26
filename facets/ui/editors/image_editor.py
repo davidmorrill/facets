@@ -48,6 +48,7 @@ class _ImageEditor ( Editor ):
         self.adapter = self.image_control.set(
             image      = factory.image or self.value,
             auto_scale = factory.facet_value( 'auto_scale' ),
+            user_zoom  = factory.facet_value( 'user_zoom' ),
             theme      = factory.theme,
             padding    = 0,
             parent     = parent
@@ -84,6 +85,9 @@ class ImageEditor ( BasicEditorFactory ):
 
     # Should images automatically be scaled to fit the control size?
     auto_scale = Bool( True, facet_value = True )
+
+    # Can the user zoom the image?
+    user_zoom = Bool( False, facet_value = True )
 
     # The optional theme to display as the background for the image:
     theme = ATheme

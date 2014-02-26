@@ -12,7 +12,7 @@ values iconically.
 #-------------------------------------------------------------------------------
 
 from facets.core_api \
-    import Event, Bool, Range, on_facet_set
+    import Event, Bool, Tuple, Float, Range, on_facet_set
 
 from facets.ui.ui_facets \
     import Image
@@ -44,19 +44,31 @@ class ImageControl ( ThemedWindow ):
     # Can the control be selected?
     selectable = Bool( False )
 
-    # The current selection state of the control:
-    selected = Bool( False )
-
     # The amount of padding to draw around the image:
     padding = Range( 0, 50, 10 )
-
-    # Should images automatically be scaled to fit the control size?
-    auto_scale = Bool( True, facet_value = True )
 
     # Event fired when the control is clicked:
     clicked = Event
 
+    # The current selection state of the control:
+    selected = Bool( False )
+
+    # Should images automatically be scaled to fit the control size?
+    auto_scale = Bool( True, facet_value = True )
+
+    # Can the user zoom the image?
+    user_zoom = Bool( False, facet_value = True )
+
     #-- Private Facet Definitions ----------------------------------------------
+
+    # Has the user zoomed the image?
+    user_zoomed = Bool( False )
+
+    # The current image scaling factor:
+    scale = Float( 1.0 )
+
+    # The origin of the scaled image relative to the control:
+    origin = Tuple( Float, Float )
 
     # Is the mouse button currently being pressed:
     _button_down = Bool( False )
@@ -104,8 +116,7 @@ class ImageControl ( ThemedWindow ):
         """ Handles the 'image' or 'auto_scale' facet being changed.
         """
         self._draw_image = None
-        if self.control is not None:
-            self.control.refresh()
+        self.refresh()
 
     #-- Control Event Handlers -------------------------------------------------
 
@@ -114,7 +125,7 @@ class ImageControl ( ThemedWindow ):
         """
         if self.selectable:
             self._mouse_over = True
-            self.control.refresh()
+            self.refresh()
 
 
     def leave ( self, event ):
@@ -122,7 +133,7 @@ class ImageControl ( ThemedWindow ):
         """
         if self._mouse_over:
             self._mouse_over = False
-            self.control.refresh()
+            self.refresh()
 
 
     def left_down ( self, event ):
@@ -130,7 +141,7 @@ class ImageControl ( ThemedWindow ):
         """
         if self.selectable:
             self.control.mouse_capture = self._button_down = True
-            self.control.refresh()
+            self.refresh()
 
 
     def left_up ( self, event ):
@@ -148,14 +159,32 @@ class ImageControl ( ThemedWindow ):
                 if not self.selected:
                     self.selected = True
                 elif need_refresh:
-                    control.refresh()
+                    self.refresh()
 
                 self.clicked = True
 
                 return
 
         if need_refresh:
-            control.refresh()
+            self.refresh()
+
+
+    def wheel ( self, event ):
+        """ Handles the mouse wheel rotating.
+        """
+        if self.user_zoom:
+            delta, scale = event.wheel_change, self.scale
+            divisor      = 50.0 if event.control_down else 5.0
+            new_scale    = max( scale * (1.0 + (delta / divisor)), 0.1 )
+            if new_scale != scale:
+                x, y             = event.x, event.y
+                ox, oy           = self.origin
+                adjust           = new_scale / scale
+                self.origin      = ( x - (adjust * (x - ox)),
+                                     y - (adjust * (y - oy)) )
+                self.scale       = new_scale
+                self.user_zoomed = True
+                self.refresh()
 
 
     def paint ( self, g ):
@@ -170,28 +199,59 @@ class ImageControl ( ThemedWindow ):
             wx, wy, wdx, wdy = self.theme.bounds( wx, wx, wdx, wdy )
 
         draw_image = image = self.image
-        if image is not None:
-            idx, idy   = image.width, image.height
-            if (wdx > 0) and (wdy > 0):
+        if (image is not None) and (wdx > 0) and (wdy > 0):
+            idx, idy = image.width, image.height
+            if self.user_zoomed:
+                ox, oy = self.origin
+                ox, oy = int( round( ox ) ), int( round( oy ) )
+                scale  = self.scale
+                if scale != self._scale:
+                    pdx      = int( round( scale * idx ) )
+                    pdy      = int( round( scale * idy ) )
+                    oxr, oyb = ox + pdx, oy + pdy
+                    wxr, wyb = wx + wdx, wy + wdy
+                    if (ox < wx) or (oy < wy) or (oxr > wxr) or (oyb > wyb):
+                        cx  = max( 0, int( round( (wx - ox) / scale ) ) )
+                        cy  = max( 0, int( round( (wy - oy) / scale ) ) )
+                        cdx = max( 0, int( (oxr - wxr) / scale ) )
+                        cdy = max( 0, int( (oyb - wyb) / scale ) )
+                        if cx > 0: ox = wx
+                        if cy > 0: oy = wy
+                        image        = image.crop( cx, cy,
+                                             idx - cx - cdx, idy - cy - cdy )
+
+                    self._scale      = scale
+                    self._origin     = ( ox, oy )
+                    self._draw_image = draw_image = image.scale( scale )
+                elif self._draw_image is not None:
+                    draw_image = self._draw_image
+                    ox, oy     = self._origin
+
+                g.draw_bitmap( draw_image.bitmap, ox, oy )
+            else:
                 if ((idx > wdx) or
                     (idy > wdy) or
                     (self.auto_scale and ((idx != wdx) or (idy != wdy)))):
-                    rdx, rdy = float( idx ) / wdx, float( idy ) / wdy
-                    if rdx >= rdy:
-                        ddx, ddy = wdx, int( round( idy / rdx ) )
+                    rdx, rdy = float( wdx ) / idx, float( wdy ) / idy
+                    if rdx <= rdy:
+                        scale    = rdx
+                        ddx, ddy = wdx, int( round( scale * idy ) )
                     else:
-                        ddx, ddy = int( round( idx / rdy ) ), wdy
+                        scale    = rdy
+                        ddx, ddy = int( round( scale * idx ) ), wdy
 
                     draw_image = self._draw_image
                     idx, idy   = ddx, ddy
                     if (draw_image is None) or (ddx != draw_image.width):
+                        self.scale       = scale
                         self._draw_image = draw_image = \
                             image.scale( ( ddx, ddy ) )
                 else:
                     self._draw_image = None
 
-                g.draw_bitmap( draw_image.bitmap,
-                               wx + (wdx - idx) / 2, wy + (wdy - idy) / 2 )
+                ox, oy      = wx + (wdx - idx) / 2, wy + (wdy - idy) / 2
+                self.origin = ( ox, oy )
+                g.draw_bitmap( draw_image.bitmap, ox, oy )
 
         wxdx = wx + wdx
         wydy = wy + wdy

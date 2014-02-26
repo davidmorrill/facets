@@ -37,6 +37,9 @@ class ImageViewerPage ( PageTool ):
     # Should images automatically be scaled to fit the control size?
     auto_scale = OwnerValue
 
+    # Can the user zoom the image?
+    user_zoom = OwnerValue
+
     # The name of the page:
     page_name = Any
 
@@ -46,6 +49,7 @@ class ImageViewerPage ( PageTool ):
         return View(
             UItem( 'image',
                    editor = ImageEditor(
+                       user_zoom  = SyncValue( self, 'user_zoom'  ),
                        auto_scale = SyncValue( self, 'auto_scale' )
                    )
             )
@@ -89,8 +93,11 @@ class ImageViewer ( MultiPageTool ):
     # Should images automatically be scaled to fit the control size?
     auto_scale = Bool( True, save_state = True )
 
+    # Can the user zoom the image?
+    user_zoom = Bool( True, save_state = True )
+
     #-- Facets View Definitions ------------------------------------------------
 
-    page_options = HGroup( Item( 'auto_scale' ) )
+    page_options = HGroup( Item( 'user_zoom' ), Item( 'auto_scale' ) )
 
 #-- EOF ------------------------------------------------------------------------

@@ -436,7 +436,7 @@ class AnImageResource ( HasPrivateFacets ):
 
 
     def trim ( self, level = 0.0 ):
-        """ Returns a new copy of the image with all external edge having alpha
+        """ Returns a new copy of the image with all external edges having alpha
             levels <= *level* trimmed off.
         """
         if isinstance( level, float ):
