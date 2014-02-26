@@ -17,19 +17,16 @@ from facets.api \
 from facets.ui.pyface.i_image_resource \
     import AnImageResource
 
-from tools \
-    import Tool
+from facets.extra.helper.multi_page_tool \
+    import MultiPageTool, PageTool, OwnerValue
 
 #-------------------------------------------------------------------------------
-#  'ImageViewer' class:
+#  'ImageViewerPage' class:
 #-------------------------------------------------------------------------------
 
-class ImageViewer ( Tool ):
+class ImageViewerPage ( PageTool ):
 
     #-- Facet Definitions ------------------------------------------------------
-
-    # The name of the tool:
-    name = 'Image Viewer'
 
     # The current image being viewed:
     image = Image( cache = False )
@@ -38,7 +35,10 @@ class ImageViewer ( Tool ):
     value = Any( connect = 'to' )
 
     # Should images automatically be scaled to fit the control size?
-    auto_scale = Bool( True, save_state = True )
+    auto_scale = OwnerValue
+
+    # The name of the page:
+    page_name = Any
 
     #-- Facets View Definitions ------------------------------------------------
 
@@ -51,15 +51,10 @@ class ImageViewer ( Tool ):
             )
         )
 
+    #-- Facet Default Values ---------------------------------------------------
 
-    options = View(
-        HGroup(
-            Item( 'auto_scale' ),
-            spring,
-            group_theme = '#themes:tool_options_group'
-        ),
-        id = 'facets.extra.tools.image_viewer.ImageViewer.options'
-    )
+    def _page_name_default ( self ):
+        return (self.image.name if self.image is not None else None)
 
     #-- Facet Event Handlers ---------------------------------------------------
 
@@ -73,5 +68,29 @@ class ImageViewer ( Tool ):
             self.image = value
         else:
             self.image = '@std:alert16'
+
+#-------------------------------------------------------------------------------
+#  'ImageViewer' class:
+#-------------------------------------------------------------------------------
+
+class ImageViewer ( MultiPageTool ):
+
+    #-- Facet Definitions ------------------------------------------------------
+
+    # The name of the tool:
+    name = 'Image Viewer'
+
+    # The page tool class this tool creates and manages:
+    page_tool_class = ImageViewerPage
+
+    # The item external tools connect to provide the image to view:
+    value = Any( connect = 'to' )
+
+    # Should images automatically be scaled to fit the control size?
+    auto_scale = Bool( True, save_state = True )
+
+    #-- Facets View Definitions ------------------------------------------------
+
+    page_options = HGroup( Item( 'auto_scale' ) )
 
 #-- EOF ------------------------------------------------------------------------

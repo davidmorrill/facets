@@ -71,20 +71,22 @@ class MultiPageTool ( Tool ):
         )
 
 
-    options = View(
-        VGroup(
-            HGroup(
-                Include( 'page_options' ),
-                Item( 'max_pages',
-                      editor     = ScrubberEditor(),
-                      width      = -30,
-                      item_theme = '#themes:ScrubberEditor'
-                ),
-                spring
+    def options ( self ):
+        hgroup = HGroup(
+            Item( 'max_pages',
+                editor     = ScrubberEditor(),
+                width      = -30,
+                item_theme = '#themes:ScrubberEditor'
             ),
-            group_theme = '#themes:tool_options_group'
+            spring
         )
-    )
+        page_options = self.facet_view( 'page_options' )
+        if isinstance( page_options, HGroup ):
+            hgroup.content[0:0] = page_options.content
+
+        return View(
+            VGroup( hgroup, group_theme = '#themes:tool_options_group' )
+        )
 
     #-- Public Methods ---------------------------------------------------------
 
