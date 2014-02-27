@@ -11,7 +11,7 @@ A custom editor for tiling an image over the background of a control.
 #-------------------------------------------------------------------------------
 
 from facets.api \
-    import Range, Color, on_facet_set
+    import Range, Color, Image, on_facet_set
 
 from facets.ui.custom_control_editor \
     import CustomControlEditor, ControlEditor
@@ -26,6 +26,11 @@ from facets.ui.pyface.i_image_resource \
 class _ImageTilerEditor ( ControlEditor ):
     """ A custom editor for tiling images.
     """
+
+    #-- Facet Definitions ------------------------------------------------------
+
+    # The editor image:
+    value = Image
 
     #-- ControlEditor Method Overrides ----------------------------------------------
 
