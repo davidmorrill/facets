@@ -103,9 +103,6 @@ class ImageZoomer ( MultiPageTool ):
     # The background color to use for the ImageZoomEditor:
     bg_color = Color( 0x303030, save_state = True )
 
-    # The value describing the image to view:
-    value = Any( connect = 'to' )
-
     #-- Facet View Definitions -------------------------------------------------
 
     page_options = HGroup(

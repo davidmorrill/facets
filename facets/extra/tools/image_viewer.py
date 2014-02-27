@@ -87,9 +87,6 @@ class ImageViewer ( MultiPageTool ):
     # The page tool class this tool creates and manages:
     page_tool_class = ImageViewerPage
 
-    # The item external tools connect to provide the image to view:
-    value = Any( connect = 'to' )
-
     # Should images automatically be scaled to fit the control size?
     auto_scale = Bool( True, save_state = True )
 

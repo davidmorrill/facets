@@ -96,7 +96,7 @@ class MultiPageTool ( Tool ):
         items = self.page_tool_class.class_facets( connect = can_connect )
         for name, facet in items.iteritems():
             if facet.connect.startswith( 'to' ):
-                #self.add_facet( name, facet )
+                self.add_facet( name, facet )
                 self.on_facet_set( self._create_page, name )
                 self.input_names.append( name )
 

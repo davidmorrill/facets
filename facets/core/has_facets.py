@@ -3778,11 +3778,8 @@ class HasFacets ( CHasFacets ):
             result.
         """
         facets = self.__base_facets__.copy()
-        for name in self.__dict__.keys():
-            if name not in facets:
-                facet = self.facet( name )
-                if facet is not None:
-                    facets[ name ] = facet
+        for name, facet in self._instance_facets().iteritems():
+            facets[ name ] = facet
 
         if len( metadata ) == 0:
             return facets

@@ -217,8 +217,8 @@ class ImageControl ( ThemedWindow ):
                         cdy = max( 0, int( (oyb - wyb) / scale ) )
                         if cx > 0: ox = wx
                         if cy > 0: oy = wy
-                        image        = image.crop( cx, cy,
-                                             idx - cx - cdx, idy - cy - cdy )
+                        image = image.crop( cx, cy,
+                                            idx - cx - cdx, idy - cy - cdy )
 
                     self._scale      = scale
                     self._origin     = ( ox, oy )
