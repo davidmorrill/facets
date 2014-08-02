@@ -63,7 +63,7 @@ class QtClipboard ( Clipboard ):
     #-- Concrete Property Implementations --------------------------------------
 
     def _get_text ( self ):
-        return str( self.clipboard.text() )
+        return unicode( self.clipboard.text() )
 
     def _set_text ( self, text ):
         self.clipboard.setText( text )
