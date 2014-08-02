@@ -24,7 +24,7 @@ class FileStack ( Tool ):
     """ Allows a user to select files using a FileStackEditor.
     """
 
-    #-- Facet Definitions ----------------------------------------------------------
+    #-- Facet Definitions ------------------------------------------------------
 
     # The name of the tool:
     name = 'File Stack'
@@ -34,6 +34,9 @@ class FileStack ( Tool ):
 
     #-- Facet View Definitions -------------------------------------------------
 
-    view = View( UItem( 'file_name', editor = FileStackEditor() ) )
+    view = View(
+        UItem( 'file_name', editor = FileStackEditor() ),
+        id = 'facets.extra.tools.file_stack.FileStack'
+    )
 
 #-- EOF ------------------------------------------------------------------------
