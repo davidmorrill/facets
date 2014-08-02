@@ -159,7 +159,8 @@ tree_editor = TreeEditor(
                   label     = 'name'
         ),
         TreeNode( node_for  = [ RefFile ],
-                  label     = 'short_name'
+                  label     = 'short_name',
+                  icon_item = '@facets:shell_pythonfile?H63S22'
         )
     ],
     editable  = False,
