@@ -636,10 +636,12 @@ class _HistogramEditor ( _DrawableCanvasEditor ):
             self.sync_value( factory.hovered,  'hovered',  'to' )
             self.sync_value( factory.selected, 'selected', 'to' )
 
+        data = self.value
+        if len( data ) < 2:
+            return
 
         canvas = self._control.canvas
         labels = factory.labels
-        data   = self.value
         if (len( data ) == 2) and (labels is None):
             data, labels = data
         elif isinstance( labels, basestring ):
