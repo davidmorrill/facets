@@ -145,7 +145,8 @@ class _FileStackEditor ( UIEditor ):
                            selected    = 'file',
                            show_titles = self.factory.filter
                        )
-                )
+                ),
+                id = 'splitter'
             )
         )
 
